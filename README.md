@@ -3,7 +3,7 @@ Tinder
 
 ### [Проект](https://www.google.com/ "project")
 
-### [Репозиторий фронтенда](https://github.com/frontend-park-mail-ru/2022_1_OnlyGroup "frontend repo")
+### [Репозиторий фронтенда](https://github.com/go-park-mail-ru/2022_1_OnlyGroup "backend repo")
 
 ### [Документация](https://www.google.com/ "doc")
 
