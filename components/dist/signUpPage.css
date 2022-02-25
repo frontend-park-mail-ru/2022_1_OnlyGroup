@@ -1,0 +1,9 @@
+.content__authorize {
+  height: 72% !important;
+}
+.content__authorize .form__button {
+  margin-bottom: 6px !important;
+}
+.content__authorize .form__login, .content__authorize .form__password {
+  margin-bottom: 14px !important;
+}

@@ -1,0 +1,278 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
+  background: radial-gradient(55.42% 55.42% at 50% 50%, #a488df 0%, #1c1738 95.11%);
+}
+.content .content__profile {
+  display: flex;
+  justify-content: center;
+  width: 380px;
+  height: 740px;
+  margin-top: 40px;
+  border-radius: 25px;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(202, 202, 202, 0.25);
+  margin-right: 30px;
+}
+.content .content__profile .profile__user {
+  display: flex;
+  justify-content: center;
+  width: 330px;
+  height: 140px;
+  margin-top: 0;
+  border-radius: 15px;
+  align-items: center;
+  flex-direction: row;
+  background-color: #fff;
+  opacity: 100%;
+}
+.content .content__profile .profile__user .user__info__block {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+.content .content__profile .profile__user .user__info__block .user__info img {
+  width: 25px;
+  height: 25px;
+}
+.content .content__profile .profile__user .user__info__block .fullname {
+  margin-bottom: 4px;
+}
+.content .content__profile .profile__user .user__info__block .info__city {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 8px;
+}
+.content .content__profile .profile__user .user__info__block .info__city img {
+  margin-left: -4px;
+  margin-right: 6px;
+}
+.content .content__profile .profile__user .user__info__block .user__settings {
+  width: 50px;
+  height: 50px;
+  margin-left: 24px;
+}
+.content .content__profile .profile__user .user__info__block .user__settings .settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  white-space: nowrap;
+}
+.content .content__profile .profile__user .user__info__block .user__settings .settings img {
+  width: 25px;
+  height: 25px;
+  margin-right: 6px;
+}
+.content .content__profile .profile__user .user__info__block .user__settings .settings a {
+  text-decoration: none;
+  color: #797979;
+}
+.content .content__profile .profile__user .user__info__block .user__settings .settings a:hover {
+  color: #474747;
+}
+.content .content__profile .profile__user .avatar__img {
+  width: 100px;
+  height: 100px;
+  border-radius: 15px;
+  margin-right: 30px;
+}
+.content .content__profile .profile__navigation {
+  width: 330px;
+  height: 410px;
+  margin-top: 15px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+.content .content__profile .profile__navigation .navigation__buttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  /* Delete later */
+}
+.content .content__profile .profile__navigation .navigation__buttons button {
+  width: 147px;
+  height: 35px;
+  border: none;
+  background-color: #fff;
+  font-size: 13px;
+}
+.content .content__profile .profile__navigation .navigation__buttons button:hover {
+  background-color: #E4E4E4;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: 500;
+}
+.content .content__profile .profile__navigation .navigation__buttons button:first-child {
+  background-color: #E4E4E4;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: 500;
+}
+.content .content__profile .profile__navigation .navigation__field {
+  width: 294px;
+  height: 344px;
+  display: flex;
+  justify-content: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  align-items: center;
+  background-color: #E4E4E4;
+  font-size: 13px;
+}
+.content .content__profile .profile__share {
+  width: 330px;
+  height: 90px;
+  margin-top: 15px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  font-size: 14px;
+}
+.content .content__profile .profile__share p {
+  margin-bottom: 8px;
+}
+.content .content__profile .profile__share a {
+  text-decoration: none;
+  margin-right: 10px;
+}
+.content .content__profile .profile__share a img {
+  width: 30px;
+  height: 30px;
+}
+.content .content__profile .profile__share a:last-child {
+  margin-right: 0;
+}
+.content .content__feed {
+  width: 930px;
+  height: 870px;
+  margin-top: 40px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(202, 202, 202, 0.25);
+}
+.content .content__feed .feed__people {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+.content .content__feed .feed__people .people__photo {
+  position: relative;
+}
+.content .content__feed .feed__people .people__photo img {
+  width: 510px;
+  height: 800px;
+}
+.content .content__feed .feed__people .people__photo .navigation__icons {
+  display: flex;
+  justify-content: center;
+  width: 510px;
+  height: 800px;
+  flex-direction: row;
+  align-items: flex-end;
+  position: absolute;
+  top: 0;
+}
+.content .content__feed .feed__people .people__photo .navigation__icons .navIcons {
+  width: 90px;
+  height: 90px;
+  margin-right: 14px;
+  margin-bottom: 25px;
+}
+.content .content__feed .feed__info {
+  width: 270px;
+  height: 740px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 30px;
+}
+.content .content__feed .feed__info .info__name .fullname {
+  font-size: 26px;
+  font-weight: 500;
+}
+.content .content__feed .feed__info .info__name .info__city {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #383838;
+}
+.content .content__feed .feed__info .info__name .info__city img {
+  width: 30px;
+  height: 30px;
+  margin-left: -4px;
+  margin-right: 6px;
+}
+.content .content__feed .feed__info .info__description {
+  margin-bottom: 15px;
+}
+.content .content__feed .feed__info .info__description .description {
+  font-size: 14px;
+  margin-bottom: 6px;
+  width: 280px;
+}
+.content .content__feed .feed__info .info__description .date, .content .content__feed .feed__info .info__description .growth, .content .content__feed .feed__info .info__description .status {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.content .content__feed .feed__info .title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.content .content__feed .feed__info .horoscopeTitle {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  margin-top: 15px;
+}
+.content .content__feed .feed__info .horoscope__description {
+  width: 220px;
+  height: 116px;
+  display: flex;
+  justify-content: center;
+  padding: 0 25px;
+  align-items: center;
+  border-radius: 12px;
+  font-size: 13px;
+  background-color: #EAEAEA;
+}
+.content .content__feed .feed__info .block {
+  width: 245px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  border-radius: 12px;
+  font-size: 13px;
+  background-color: #EAEAEA;
+  margin-bottom: 9px;
+}
