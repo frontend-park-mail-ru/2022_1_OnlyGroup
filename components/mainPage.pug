@@ -1,0 +1,24 @@
+extends pageTemplate.pug 
+
+block title 
+    title Sign in 
+
+block content 
+    .authorize__form 
+        +createP('Welcome back!', 'form__text') 
+        form
+            +createP('Email or username', 'form__text__email') 
+            +createInput('text', 'form__login')  
+            +createP('Password', 'form__text__password') 
+            +createInput('password', 'form__password') 
+        button.form__button(type="submit") Sign in
+    .form__create-new-account
+        +createP('Don\'t have account?', '')
+        a(href='#') Create account
+    .authorize__socials
+        +createP('Sign in with', '')
+        +createSocialImages(imgSrc)
+
+
+
+

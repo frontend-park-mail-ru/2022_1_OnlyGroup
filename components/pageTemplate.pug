@@ -1,0 +1,30 @@
+-  let source = '../../src/images/';
+-  let imgSrc = [source + 'vk.svg', source + 'google.svg', source + 'facebook.svg'];
+
+mixin createSocialImages(imgSrc) 
+    each iSrc in imgSrc
+        a(href="#") 
+            img(src= iSrc)
+
+mixin createInput(iType, iClass)
+    input(class= iClass, type= iType)
+
+mixin createP(text, pClass)
+    p(class= pClass) #{text}
+    
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="./mainPage.css")
+        block title
+    body 
+        .main__content
+            .overlay
+            .content__authorize 
+                .authorize__logo
+                    img.logo__img(src=`${source}logo.png`)
+                    h1.logo__text OnlySocial
+                block content

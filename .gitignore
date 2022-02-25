@@ -88,3 +88,7 @@ lerna-debug.log
 .DS_Store
 Thumbs.db
 
+package-lock.json
+.gitignore
+package.json
+

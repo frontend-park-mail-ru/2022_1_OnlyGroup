@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+@mixin displayFlex() {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin widthHeight($newWidth, $newHeight) {
+    width: $newWidth;
+    height: $newHeight;
+}
+
+@mixin marginBorder($marginTop, $borderRadius) {
+    margin-top: $marginTop;
+    border-radius: $borderRadius;
+}
+
+.content {
+    @include displayFlex();
+    @include widthHeight(100%, 100vh);
+    flex-direction: row;
+    background: radial-gradient(55.42% 55.42% at 50% 50%, #a488df 0%, #1c1738 95.11%);
+
+    .content__profile {
+        @include displayFlex();
+        @include widthHeight(380px, 740px);
+        @include marginBorder(40px, 25px);
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(202, 202, 202, 0.25);
+        margin-right: 30px;
+
+        .profile__user {
+            @include displayFlex();
+            @include widthHeight(330px, 140px);
+            @include marginBorder(0, 15px);
+            align-items: center;
+            flex-direction: row;
+            background-color: #fff;
+            opacity: 100%;
+
+            .user__info__block {
+                display: flex;
+                flex-direction: column;
+                font-size: 14px;
+
+                .user__info img {
+                    @include widthHeight(25px, 25px);
+                }
+
+                .fullname {
+                    margin-bottom: 4px;
+                }
+
+                .info__city {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    margin-bottom: 8px;
+
+                    img {
+                        margin-left: -4px;
+                        margin-right: 6px;
+                    }
+                }
+
+                .user__settings {
+                    @include widthHeight(50px, 50px);
+                    margin-left: 24px;
+    
+                    .settings {
+                        @include displayFlex();
+                        align-items: center;
+                        flex-direction: row;
+                        white-space: nowrap;
+    
+                        img {
+                            @include widthHeight(25px, 25px);
+                            margin-right: 6px;
+                        }
+
+                        a {
+                            text-decoration: none;
+                            color: #797979;
+                        }
+
+                        a:hover {
+                            color: rgb(71, 71, 71);
+                        }
+                    }
+                } 
+            }
+
+            .avatar__img {
+                @include widthHeight(100px, 100px);
+                border-radius: 15px;
+                margin-right: 30px;
+            }
+        }
+
+        .profile__navigation {
+            @include widthHeight(330px, 410px);
+            @include marginBorder(15px, 15px);
+            @include displayFlex();
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+
+            .navigation__buttons {
+                @include displayFlex();
+                flex-direction: row;
+                align-items: center;
+
+                button {
+                    @include widthHeight(147px, 35px);
+                    border: none;
+                    background-color: #fff;
+                    font-size: 13px;
+                }
+
+                button:hover {
+                    background-color: #E4E4E4;
+                    border-top-left-radius: 12px;
+                    border-top-right-radius: 12px;
+                    font-weight: 500;
+                }
+
+                /* Delete later */
+                button:first-child {
+                    background-color: #E4E4E4;
+                    border-top-left-radius: 12px;
+                    border-top-right-radius: 12px;
+                    font-weight: 500;
+                }
+            }
+
+            .navigation__field {
+                @include widthHeight(294px, 344px);
+                @include displayFlex();
+                border-bottom-left-radius: 12px;
+                border-bottom-right-radius: 12px;
+                align-items: center;
+                background-color: #E4E4E4;
+                font-size: 13px;
+            }
+        }
+
+        .profile__share {
+            @include widthHeight(330px, 90px);
+            @include marginBorder(15px, 15px);
+            @include displayFlex();
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            font-size: 14px;
+
+            p {
+                margin-bottom: 8px;
+            }
+
+            a {
+                text-decoration: none;
+                margin-right: 10px;
+
+                img {
+                    @include widthHeight(30px, 30px);
+                }
+            }
+
+            a:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .content__feed {
+        @include widthHeight(930px, 870px);
+        @include marginBorder(40px, 25px);
+        @include displayFlex();
+        flex-direction: row;
+        align-items: center;
+        background-color: rgba(202, 202, 202, 0.25);
+
+        .feed__people {
+            @include displayFlex();
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+
+            .people__photo {
+                position: relative;
+
+                img {
+                    @include widthHeight(510px, 800px);
+                }
+
+                .navigation__icons {
+                    @include displayFlex();
+                    @include widthHeight(510px, 800px);
+                    flex-direction: row;
+                    align-items: flex-end;
+                    position: absolute;
+                    top: 0;
+
+                    .navIcons {
+                        @include widthHeight(90px, 90px);
+                        margin-right: 14px;
+                        margin-bottom: 25px;
+                    }
+                }
+            }
+        }
+
+        .feed__info {
+            @include widthHeight(270px, 740px);
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 25px;
+            padding: 30px;
+
+            .info__name {
+                .fullname {
+                    font-size: 26px;
+                    font-weight: 500;
+                }
+
+                .info__city {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    margin-bottom: 15px;
+                    font-size: 18px;
+                    color: rgb(56, 56, 56);
+
+                    img {
+                        @include widthHeight(30px, 30px);
+                        margin-left: -4px;
+                        margin-right: 6px;
+                    }
+                }
+            }
+
+            .info__description {
+                margin-bottom: 15px;
+
+                .description {
+                    font-size: 14px;
+                    margin-bottom: 6px;
+                    width: 280px;
+                }
+
+                .date, .growth, .status {
+                    font-size: 14px;
+                    margin-bottom: 4px;
+                }
+            }
+
+            .title {
+                font-size: 24px;
+                font-weight: 500;
+                margin-bottom: 16px;
+            }
+
+            .horoscopeTitle {
+                font-size: 20px;
+                font-weight: 500;
+                margin-bottom: 16px;
+                margin-top: 15px;
+            }
+
+            .horoscope__description {
+                @include widthHeight(220px, 116px);
+                @include displayFlex();
+                padding: 0 25px;
+                align-items: center;
+                border-radius: 12px;
+                font-size: 13px;
+                background-color: #EAEAEA;
+            }
+
+            .block {
+                @include widthHeight(245px, 45px);
+                display: flex;
+                align-items: center;
+                padding-left: 25px;
+                border-radius: 12px;
+                font-size: 13px;
+                background-color: #EAEAEA;
+                margin-bottom: 9px;
+            }
+        }
+    }
+}
+
