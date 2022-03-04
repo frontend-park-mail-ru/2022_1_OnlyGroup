@@ -1,11 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-
-* {
-    padding: 0;
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-}
-
 @mixin displayFlex($flexDirectionProperty) {
     display: flex;
     justify-content: center;
@@ -25,10 +17,10 @@
 
 .overlay {
     @include widthHeight(100%, 100vh);
-    position: absolute;
-    z-index: 2;
     background: radial-gradient(#5a476e, #000000);
     opacity: 65%;
+    position: absolute;
+    z-index: 2;
 
     @media (max-width: 1600px) {
         background-repeat: repeat-x;
@@ -43,20 +35,20 @@
 .main__content {
     @include widthHeight(100%, 100vh);
     @include displayFlex(column);
+    z-index: 1;
     background: {
-        image: url('../../src/images/background.png');
+        image: url('../../static/images/background.png');
         repeat: no-repeat;
         size: cover;
     }
-    z-index: 1;
-
+    
     .content__authorize {
-        @include widthHeight(780px, 620px);
+        @include widthHeight(700px, 640px);
         @include displayFlex(column);
-        border-radius: 50px;
-        z-index: 3;
         background-color: #fff;
         opacity: 100%;
+        border-radius: 28px;
+        z-index: 3;
 
         @media (max-width: 1400px) {
             @include widthHeight(650px, 620px);
@@ -80,9 +72,9 @@
 
         .authorize__logo {
             @include displayFlex(column);
-
+            
             .logo__text {
-                @include fontMargin(36px, 12px);
+                @include fontMargin(36px, 0px);
                 margin-top: -12px;
                 background: linear-gradient(#000 30%, #8955fa);
                 -webkit-background-clip: text;
@@ -97,30 +89,9 @@
             }
         }
 
-        .authorize__socials {
+        .form__create-new-account, .form__sign-in {
             @include displayFlex(row);
-
-            p {
-                margin-right: 18px;
-                font-weight: 500;
-            }
-
-            a {
-                margin-right: 18px;
-            }
-
-            a:last-child {
-                margin-right: 0px;
-            }
-
-            @media (max-width: 480px) {
-                font-size: 13px;
-            }
-        }
-
-        .form__create-new-account {
-            @include displayFlex(row);
-            margin-bottom: 25px;
+            @include fontMargin(18px, 25px);
             font-weight: 500;
 
             p {
@@ -145,22 +116,32 @@
         .authorize__form {
             @include displayFlex(column);
 
+            form {
+                @include displayFlex(column);
+                margin: 14px 0;
+            }
+
             .form__text {
                 @include fontMargin(32px, 20px);
-
                 @media (max-width: 480px) {
                     @include fontMargin(26px, 18px);
                 }
             }
 
+            .form__login__error, .form__password__error {
+                color: #CF5151;
+                font-weight: 500;
+                visibility: visible;
+            }
+
             .form__login, .form__password {
-                @include fontMargin(16px, 18px);
-                @include widthHeight(535px, 52px);
+                @include widthHeight(515px, 52px);
+                @include fontMargin(18px, 10px);
                 border-radius: 15px;
                 overflow: none;
                 border: 1px solid #594c74;
                 opacity: 50%;
-                padding-left: 26px;
+                padding-left: 20px;
                 color: rgb(0, 0, 0);
 
                 @media (max-width: 1400px) {
@@ -182,9 +163,10 @@
             }
 
             .form__button {
-                @include fontMargin(18px, 16px);
-                @include widthHeight(450px, 52px);
-                margin-top: 8px;
+                @include fontMargin(22px, 8px);
+                @include widthHeight(535px, 52px);
+                @include displayFlex(row);
+                margin-top: 16px;
                 font-weight: 500;
                 overflow: none;
                 border: none;
@@ -192,6 +174,7 @@
                 color: white;
                 background: linear-gradient(45deg,#9F93E3, #8067EF, #6843FD);
                 cursor: pointer;
+                text-decoration: none;
         
                 @media (max-width: 700px) {
                     @include widthHeight(360px, 48px);
@@ -213,10 +196,10 @@
             }
 
             .form__text__email, .form__text__password {
-                @include fontMargin(16px, 10px);
+                @include fontMargin(18px, 10px);
+                margin-top: 14px;
                 font-weight: 500;
                 color: #696969;
-                margin-left: 26px;
 
                 @media (max-width: 580px) {
                     margin-left: 0;
