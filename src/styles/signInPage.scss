@@ -128,10 +128,10 @@
                 }
             }
 
-            .form__login__error, .form__password__error {
+            ._error {
                 color: #CF5151;
                 font-weight: 500;
-                visibility: visible;
+                visibility: hidden;
             }
 
             .form__login, .form__password {
