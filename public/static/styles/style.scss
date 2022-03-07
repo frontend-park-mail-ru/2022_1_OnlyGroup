@@ -1,0 +1,13 @@
+@import './signin.scss', './signup.scss', './app.scss';
+
+.main__content {
+    @include size(100%, 100vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+    background-image: url('../../images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

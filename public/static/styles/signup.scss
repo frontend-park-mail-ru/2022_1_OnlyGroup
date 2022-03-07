@@ -1,0 +1,12 @@
+$color-white: #fff;
+
+.signup__block {
+    width: 700px;
+    background-color: $color-white;
+    padding: 30px 0;
+    border-radius: 28px;
+
+    .form__login, .form__password {
+        margin-bottom: 10px;
+    }
+}

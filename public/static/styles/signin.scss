@@ -1,0 +1,221 @@
+@mixin flex-container($flexDirectionProperty) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $flexDirectionProperty;
+}
+
+@mixin text-styles($fontSize, $marginBottom) {
+    font-size: $fontSize;
+    margin-bottom: $marginBottom;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin button-inputs-style() {
+    border-radius: 15px;
+    overflow: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+$color-white: #fff;
+$font-weight-500: 500;
+$form-text-color: #696969;
+$form-error-color: #CF5151;
+$overlay-gradient: radial-gradient(#5a476e, #000000);
+$logo-text-gradient: linear-gradient(#000 30%, #8955fa);
+$form-button-gradient: linear-gradient(45deg,#9F93E3, #8067EF, #6843FD);
+$form-button-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
+
+.overlay {
+    @include size(100%, 100vh);
+    background: $overlay-gradient;
+    opacity: 65%;
+    position: absolute;
+    z-index: 2;
+
+    @media (max-width: 1600px) {
+        background-repeat: repeat-x;
+        opacity: 85%;
+    }
+
+    @media (max-width: 1150px) {
+        opacity: 95%;
+    }
+}
+
+.content__authorize {
+    @include size(700px, 640px);
+    @include flex-container(column);
+    background-color: $color-white;
+    opacity: 100%;
+    border-radius: 28px;
+    z-index: 3;
+
+    @media (max-width: 1400px) {
+        @include size(650px, 620px);
+
+        .form__login, .form__password {
+            @include size(500px, 52px);
+        }
+    }
+
+    @media (max-width: 1150px) {
+        @include size(650px, 620px);
+    }
+
+    @media (max-width: 700px) {
+        @include size(550px, 600px);
+
+        .form__login, .form__password {
+            @include size(400px, 48px);
+        }
+
+        .form__button {
+            @include size(360px, 48px);
+        }
+    }
+
+    @media (max-width: 580px) {
+        @include size(450px, 620px);
+
+        .form__login, .form__password {
+            @include size(340px, 44px);
+        }
+
+        .form__button {
+            @include size(310px, 44px);
+        }
+
+        .form__text__email, .form__text__password {
+            margin-left: 0;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        @include size(330px, 560px);
+
+        .logo__text {
+            @include text-styles(28px, 14px);
+        }
+
+        .form__create-new-account, .form__sign-in {
+            font-size: 13px;
+        }
+
+        .form__login, .form__password {
+            @include size(230px, 40px);
+            @include text-styles(14px, 14px);
+        }
+
+        .form__text {
+            @include text-styles(26px, 18px);
+        }
+
+        .form__button {
+            @include size(210px, 40px);
+            font-size: 14px;
+            margin-top: 0;
+        }
+
+        .form__text__email, .form__text__password {
+            @include text-styles(14px, 8px);
+            margin-left: 0;
+            text-align: center;
+        }
+    }
+
+    .authorize__logo {
+        @include flex-container(column);
+            
+        .logo__text {
+            @include text-styles(36px, 0px);
+            margin-top: -12px;
+            background: $logo-text-gradient;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: $font-weight-500;
+            letter-spacing: 1%;
+        }
+    }
+
+    .form__create-new-account, .form__sign-in {
+        @include flex-container(row);
+        @include text-styles(18px, 25px);
+        font-weight: $font-weight-500;
+
+        p {
+            margin-right: 12px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3300FF;
+            opacity: 75%;
+        }
+
+        a:hover {
+            opacity: 90%;
+        }
+    }
+
+    .authorize__form {
+        @include flex-container(column);
+
+        form {
+            @include flex-container(column);
+            margin: 14px 0;
+        }
+
+        .form__text {
+            @include text-styles(32px, 20px);
+        }
+
+        .form__error {
+            width: 515px;
+            text-align: center;
+            color: $form-error-color;
+            font-weight: $font-weight-500;
+            visibility: hidden;
+        }
+
+        .form__login, .form__password {
+            @include size(515px, 52px);
+            @include text-styles(18px, 10px);
+            @include button-inputs-style();
+            border: 1px solid #594c74;
+            opacity: 50%;
+            padding-left: 20px;
+            color: rgb(0, 0, 0);
+        }
+
+        .form__button {
+            @include text-styles(22px, 8px);
+            @include size(535px, 52px);
+            @include flex-container(row);
+            @include button-inputs-style();
+            margin-top: 16px;
+            font-weight: $font-weight-500;
+            border: none;
+            color: $color-white;
+            background: $form-button-gradient;
+        }
+
+        .form__button:hover {
+            background: $form-button-gradient-hover;
+        }
+
+        .form__text__email, .form__text__password {
+            @include text-styles(18px, 10px);
+            margin-top: 14px;
+            font-weight: $font-weight-500;
+            color: $form-text-color;
+        }
+    }
+}
