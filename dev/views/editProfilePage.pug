@@ -1,0 +1,107 @@
+- let source = "/static/images/";
+- let avatar = source + "avatar.png";
+- let MsgLight = source + "MsgLight.png";
+- let Matches = source + "CardsDark.png";
+- let location = source + "location.png";
+- let settings = source + "settings.png";
+- let horoscopeImg = source + "horoscope1.png";
+- let imgSrc = [source + "google.svg", source + "vk.svg", source + "facebook.svg", source + "twitter.svg"];
+- let navIcons = [source + "favorite.png", source + "like.png", source + "dislike.png"];
+- let interests = ["Music", "Reading a books", "Watching films", "Walking with friends"];
+
+mixin userInfo(fullName, age, city)
+    p(class="fullname")= fullName + age
+    .info__city
+        img(src=`${location}`) 
+        p= city
+
+mixin createSocialImages(imgSrc) 
+    each iSrc in imgSrc
+        a(href="#") 
+            img(src= iSrc)
+
+mixin createNavIcons(navIcons)
+    each iNav in  navIcons 
+        a(href="#")
+            img(src=iNav class="navIcons")
+
+mixin createBlock(buffer)
+    each iBlock in buffer 
+        .block 
+            p= iBlock
+
+mixin createMessage() 
+    .message__block
+        .avatar
+        .info 
+            p.username Username 
+            p.message Very long message 
+        .quantity__block
+            p.quantity 1
+
+.content 
+    .content__profile
+        .profile__user
+            .user__avatar 
+                img(src=avatar class="avatar__img")
+            .user__info__block
+                .user__info
+                    +userInfo("David Jones, " ,23, "New York")
+                .user__settings
+                    .settings
+                        img(src=`${settings}`)
+                        a(href="/profile/settings" class="settings__edit") Edit profile
+        .profile__navigation
+            .navigation__profile 
+                form(id="editProfile")
+                    .nameBlock
+                        .block 
+                            p.nameP Name: 
+                            input(class="nameInput form__input__require" type="text")
+                        .error
+                            p.nameInput__error._error Error
+                    .surnameBlock
+                        .block 
+                            p.surnameP Surname: 
+                            input(class="surnameInput form__input__require" type="text")
+                        .error 
+                            p.surnameInput__error._error Error
+                    .ageBlock
+                        .block 
+                            p.ageP Age: 
+                            input(class="ageInput form__input__require" type="text")
+                        .error 
+                            p.ageInput__error._error Error
+                    .cityBlock
+                        .block 
+                            p.cityP City: 
+                            input(class="cityInput form__input__require" type="text")
+                        .error 
+                            p.cityInput__error._error Error
+                    .photoBlock
+                        p.photoP Change photo: 
+                        input(class="photo" type="file")
+                    .buttonsBlock
+                        button(type="submit" class="cancel") Cancel 
+                        button(type="submit" class="save") Save changes
+    .content__feed
+        .feed__people
+            .people__photo
+                img(src=`${source}userPhoto.png`) 
+                .navigation__icons
+                    +createNavIcons(navIcons)
+        .feed__info 
+            .info__name
+                +userInfo("Sandra May, ", 23, "New York")
+            .info__description
+                p.info__title About me 
+                p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum lorem vel nibh porttitor, in fermentum nisi egestas. Maecenas pellentesque sem felis, sed iaculis neque porta ac. Sed consectetur eros sed sodales iaculis. Donec eu mattis ante. 
+            .info__interests
+                p.title Interests 
+                +createBlock(interests)
+            .info__horoscope
+                p.horoscopeTitle Horoscope compatibility
+                .horoscope__block
+                    img(src=`${horoscopeImg}`)
+                    p.horoscope__description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum lorem vel nibh porttitor, in fermentum nisi egestas. 
+
