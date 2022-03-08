@@ -1,11 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const pug = require('pug');
+import {readdir, existsSync, mkdirSync, writeFileSync} from 'fs';
+import {basename, resolve} from 'path';
+import {compileFileClient} from 'pug';
 
 const saveTo = {
-    appPage: 'appPage',
-    signInPage: 'signInPage',
-    signUpPage: 'signUpPage',
+    app: 'app',
+    signin: 'signIn',
+    signup: 'signUp',
+    editProfile: 'editProfile'
 };
 
 const correctLaunchDir = 'nodeRouter';
@@ -14,11 +15,11 @@ const templatesDir = 'views/';
 const outDir = 'public/views/';
 const componentSuffix = 'Component';
 
-const currentDir = path.basename(path.resolve('.'));
+const currentDir = basename(resolve('.'));
 
 const debug = process.argv[2] || false;
 
-fs.readdir(devRoot + templatesDir, (err, files) => {
+readdir(devRoot + templatesDir, (err, files) => {
     if (err) {
         return console.log(err);
     }
@@ -37,7 +38,7 @@ fs.readdir(devRoot + templatesDir, (err, files) => {
         const functionName = filename.slice(filename.lastIndexOf('/') + 1,
             filename.lastIndexOf('.'));
 
-        const compiledTemplate = pug.compileFileClient(
+        const compiledTemplate = compileFileClient(
             devRoot + templatesDir + filename,
             {
                 name: `x(){};\n\nexport default function ${functionName + componentSuffix}`,
@@ -55,11 +56,11 @@ fs.readdir(devRoot + templatesDir, (err, files) => {
         }
         const JSFilename = outDir + componentDir + '/' + filename + '.js';
 
-        if (!fs.existsSync(outDir + componentDir)) {
-            fs.mkdirSync(outDir + componentDir);
+        if (!existsSync(outDir + componentDir)) {
+            mkdirSync(outDir + componentDir);
         }
 
-        fs.writeFileSync(JSFilename, compiledTemplate, 'utf8',);
+        writeFileSync(JSFilename, compiledTemplate, 'utf8',);
 
         console.log(`Шаблон ${filename} преобразован в ${JSFilename}`);
     });

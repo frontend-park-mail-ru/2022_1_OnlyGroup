@@ -1,13 +1,14 @@
-import router from "./router/router.js";
-import {SignInViewClass} from "./views/signInPage/SignInViewClass.js";
-import {SignUpViewClass} from "./views/signUpPage/SignUpViewClass.js";
-import {AppPageViewClass} from "./views/appPage/AppPageViewClass.js";
-import {EditProfileViewClass} from "./views/editProfilePage/EditProfileViewClass.js";
+import router from './router/router.js';
+import {SignIn} from './views/signIn/signIn.js';
+import {SignUp} from './views/signUp/signUp.js';
+import {App} from './views/app/app.js';
+import {EditProfile}
+  from './views/editProfile/editProfile.js';
 
-router.register('/login', SignInViewClass);
-router.register("/registration", SignUpViewClass);
-router.register("/profile", AppPageViewClass);
-router.register("/profile/settings", EditProfileViewClass);
-router.register('/', SignInViewClass);
+router.register('/login', SignIn);
+router.register('/registration', SignUp);
+router.register('/profile', App);
+router.register('/profile/settings', EditProfile);
+router.register('/', SignIn);
 
 router.start();

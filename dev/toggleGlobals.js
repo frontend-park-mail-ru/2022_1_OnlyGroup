@@ -1,16 +1,16 @@
-const fs = require('fs');
-const path = require('path');
+import {readFile, writeFileSync} from 'fs';
+import {basename, resolve} from 'path';
 
 const correctLaunchDir = 'nodeRouter';
 const root = 'public';
 const targetFile = 'globals.js';
 
-const currentDir = path.basename(path.resolve('.'));
+const currentDir = basename(resolve('.'));
 
 const mode = !(process.argv[2] === 'false');
 const sw = process.argv[3] === 'sw';
 
-fs.readFile(root + '/' + targetFile, 'utf8', (err, data) => {
+readFile(root + '/' + targetFile, 'utf8', (err, data) => {
     if (err) {
         return console.log(err);
     }
@@ -24,5 +24,5 @@ fs.readFile(root + '/' + targetFile, 'utf8', (err, data) => {
         result = result.replace('disableSW = true', 'disableS = false');
     }
 
-    fs.writeFileSync(root + '/' + targetFile, result, 'utf8');
+    writeFileSync(root + '/' + targetFile, result, 'utf8');
 });
