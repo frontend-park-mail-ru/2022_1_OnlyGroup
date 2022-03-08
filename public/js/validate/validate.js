@@ -69,6 +69,14 @@ export class Validation {
         return validResult;
     };
 
+    static validatePasswordLogin = (password) => {
+        if (password === '') {
+            return emptyResult;
+        }
+
+        return validResult;
+    };
+
     /**
      * Validating passwords on equal
      * @param {string} password
@@ -94,7 +102,7 @@ export class Validation {
     static validateText = (text) => {
         if (text === '') {
             return emptyResult;
-        } 
+        }
 
         if (!textRegExp.test(text)) {
             return {
