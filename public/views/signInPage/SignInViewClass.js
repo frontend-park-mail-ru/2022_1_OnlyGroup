@@ -1,6 +1,8 @@
 import signInPageComponent from "./signInPage.pug.js";
 import router from "../../router/router.js";
 import {SignInController} from "../../js/controller/signInController.js";
+import activeUser from "../../js/api/userApi.js";
+import {userApi} from "../../js/api/api.js";
 
 const root = document.getElementById('root');
 
@@ -8,7 +10,14 @@ export class SignInViewClass {
     /**
      * Render page
      */
-    render() {
+    async render() {
+        const userId = await userApi.checkLogin()
+        if (userId !== -1){
+            activeUser.id = userId
+            router.go('/profile')
+            return
+        }
+
         root.innerHTML = signInPageComponent();
         this.setHandler();
     }

@@ -3,7 +3,7 @@ const IP = 'http://localhost:';
 
 
 export class userApi{
-    static checkLogin = async function (id) {
+    static checkLogin = async function () {
         const response = await fetch(`${IP + Port}/users`, {
             method: 'GET',
             credentials: 'include',
@@ -30,7 +30,6 @@ export class userApi{
             throw 'Error';
         }
         const fetchedUser = await response.json();
-        debugger
         return fetchedUser.id;
 
     }

@@ -5,11 +5,12 @@ import {Errors} from "../../js/modules/errors.js";
 import activeUser from "../../js/api/userApi.js";
 const root = document.getElementById('root');
 
+let vectorCandidates
+
 export class AppPageViewClass {
 
-    async render() {
+     async render() {
         let data
-        let vectorCandidates
         debugger
         try{
             data = await userApi.getShortProfile(activeUser.id)
@@ -23,7 +24,7 @@ export class AppPageViewClass {
         }
 
         try{
-            vectorCandidates = await userApi.findCandidate(activeUser.id)
+            vectorCandidates = await userApi.findCandidate()
         } catch (e){
             // Errors.setErrorVisible(passwordField, 'visible', "Not authorized");
             return;
@@ -33,11 +34,24 @@ export class AppPageViewClass {
             return;
         }
 
+        try{
+            vectorCandidates = await userApi.getLongProfile(vectorCandidates[0])
+        } catch (e){
+            // Errors.setErrorVisible(passwordField, 'visible', "Not authorized");
+            return;
+        }
+        if (vectorCandidates === false) {
+            router.go("/login");
+            return;
+        }
+
+
         let city1
         root.innerHTML = appPageComponent();
 
         city1 = document.querySelector('.info__city p');
-        city1.innerHTML = data.city;
+        city1.innerHTML = data.City;
+
         this.setHandler();
     }
 
