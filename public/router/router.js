@@ -16,7 +16,12 @@ export class Router {
      * @param {*} path
      */
     go(path) {
-        this.routes[path].render();
+        if (typeof this.routes[window.location.pathname] !== undefined) {
+            console.log(this.routes[window.location.pathname]);
+            this.routes[path].render();
+        } else {
+            this.routes['/error'].render();
+        }
     }
 
     /**
