@@ -30,7 +30,9 @@ export class userApi{
             throw 'Error';
         }
         const fetchedUser = await response.json();
+        debugger
         return fetchedUser.id;
+
     }
 
     static logUp = async function(email, password) {
@@ -75,7 +77,7 @@ export class userApi{
         return data;
     }
 
-    static shortProfile = async function(id) {
+    static getShortProfile = async function(id) {
         const response = await fetch(`${IP + Port}/profiles/${id.toString()}/short`, {
             method: 'GET',
             credentials: 'include',

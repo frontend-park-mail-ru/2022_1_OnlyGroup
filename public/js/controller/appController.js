@@ -5,7 +5,7 @@ import activeUser from "../api/userApi.js";
 // import {Router} from "../../router/router";
 // import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
-export class SignInController {
+export class AppController {
     /**
      * Event of form submit
      * @param {Event} event
@@ -13,13 +13,11 @@ export class SignInController {
     static formSubmitEvent = async (event) => {
         event.preventDefault();
 
-        let errors = SignInValidation.inputsValidate(document.querySelectorAll('.form__input__require'));
-
-        if (errors !== 0) {
-            return;
-        }
-
-        const form = document.querySelectorAll('.form__input__require');
+        // let errors = SignInValidation.inputsValidate(document.querySelectorAll('.form__input__require'));
+        //
+        // if (errors !== 0) {
+        //     return;
+        // }
 
         let emailField, passwordField;
         form.forEach(field => {
@@ -39,8 +37,6 @@ export class SignInController {
             return;
         }
         activeUser.id = userId;
-
-
 
         const button = document.querySelector('.form__button');
         button.setAttribute('onclick', "window.location.href='/profile'");
