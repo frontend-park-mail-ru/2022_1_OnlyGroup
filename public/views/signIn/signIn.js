@@ -7,6 +7,9 @@ const root = document.getElementById('root');
  * Sign in class
  */
 export class SignIn {
+  constructor(rootDiv) {
+    this.rootDiv = rootDiv;
+  }
   /**
     * Render page
     */
@@ -25,9 +28,9 @@ export class SignIn {
 
   /**
    * Set error visibility
-   * @param {*} input 
-   * @param {*} visibility 
-   * @param {*} text 
+   * @param {*} input
+   * @param {*} visibility
+   * @param {*} text
    */
   static setErrorVisible(input, visibility, text) {
     const error = document.
