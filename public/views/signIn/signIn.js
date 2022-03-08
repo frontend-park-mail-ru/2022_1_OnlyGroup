@@ -7,11 +7,15 @@ const root = document.getElementById('root');
  * Sign in class
  */
 export class SignIn {
+  constructor(root) {
+    this.root = root;
+  }
+
   /**
     * Render page
     */
   render() {
-    root.innerHTML = signInComponent();
+    this.root.innerHTML = signInComponent();
     this.setHandler();
   }
 
@@ -25,9 +29,9 @@ export class SignIn {
 
   /**
    * Set error visibility
-   * @param {*} input 
-   * @param {*} visibility 
-   * @param {*} text 
+   * @param {*} input
+   * @param {*} visibility
+   * @param {*} text
    */
   static setErrorVisible(input, visibility, text) {
     const error = document.

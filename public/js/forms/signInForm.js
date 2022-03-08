@@ -18,9 +18,6 @@ export class SignInForm {
     if (errors === 0) {
 
       router.go("/profile");
-      // const button = document.querySelector('.form__button');
-      // button.setAttribute('onclick', 'window.location.href="/profile"');
-      // button.click();
     }
   }
 }

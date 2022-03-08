@@ -1,15 +1,17 @@
 import editProfileComponent from './editProfile.pug.js';
 
-const root = document.getElementById('root');
-
 /**
  * Edit profile class
  */
 export class EditProfile {
+  constructor(root) {
+    this.root = root;
+  }
+
   /**
     * Render page
     */
   render() {
-    root.innerHTML = editProfileComponent();
+    this.root.innerHTML = editProfileComponent();
   }
 }
