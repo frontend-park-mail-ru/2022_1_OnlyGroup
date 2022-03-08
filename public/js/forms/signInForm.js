@@ -1,4 +1,5 @@
 import {SignInValidation} from '../validate/signInValidate.js';
+import router from "../../router/router.js";
 
 /**
  * Sign in events
@@ -15,9 +16,11 @@ export class SignInForm {
         inputsValidate(document.querySelectorAll('.form__input__require'));
 
     if (errors === 0) {
-      const button = document.querySelector('.form__button');
-      button.setAttribute('onclick', 'window.location.href="/profile"');
-      button.click();
+
+      router.go("/profile");
+      // const button = document.querySelector('.form__button');
+      // button.setAttribute('onclick', 'window.location.href="/profile"');
+      // button.click();
     }
   }
 }

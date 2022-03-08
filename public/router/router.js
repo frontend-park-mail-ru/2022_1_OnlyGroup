@@ -24,8 +24,9 @@ export class Router {
     * @param {*} path
     */
   go(path) {
-    window.history.pushState(null, null, path);
-    this.routes[window.location.pathname].render();
+    // window.history.pushState(null, null, path);
+    // this.routes[window.location.pathname].render();
+    this.routes[path].render();
   }
 
   /**
@@ -36,7 +37,6 @@ export class Router {
     currentView.render();
 
     window.addEventListener('click', (event) => {
-      console.log(event.target.tagName);
       if (event.target.tagName === 'A') {
         this.go(event.target.pathname);
       }
