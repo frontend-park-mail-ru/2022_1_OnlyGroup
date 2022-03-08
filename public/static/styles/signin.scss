@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 @mixin flex-container($flexDirectionProperty) {
     display: flex;
     justify-content: center;
@@ -22,15 +24,6 @@
     text-decoration: none;
 }
 
-$color-white: #fff;
-$font-weight-500: 500;
-$form-text-color: #696969;
-$form-error-color: #CF5151;
-$overlay-gradient: radial-gradient(#5a476e, #000000);
-$logo-text-gradient: linear-gradient(#000 30%, #8955fa);
-$form-button-gradient: linear-gradient(45deg,#9F93E3, #8067EF, #6843FD);
-$form-button-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
-
 .overlay {
     @include size(100%, 100vh);
     background: $overlay-gradient;
@@ -49,9 +42,9 @@ $form-button-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
 }
 
 .content__authorize {
-    @include size(700px, 640px);
+    @include size(700px, 630px);
     @include flex-container(column);
-    background-color: $color-white;
+    background-color: $bg-color-light;
     opacity: 100%;
     border-radius: 28px;
     z-index: 3;
@@ -140,7 +133,7 @@ $form-button-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: $font-weight-500;
+            font-weight: $font-weight-medium;
             letter-spacing: 1%;
         }
     }
@@ -148,7 +141,7 @@ $form-button-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
     .form__create-new-account, .form__sign-in {
         @include flex-container(row);
         @include text-styles(18px, 25px);
-        font-weight: $font-weight-500;
+        font-weight: $font-weight-medium;
 
         p {
             margin-right: 12px;
@@ -180,8 +173,8 @@ $form-button-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
         .form__error {
             width: 515px;
             text-align: center;
-            color: $form-error-color;
-            font-weight: $font-weight-500;
+            color: $error-color;
+            font-weight: $font-weight-medium;
             visibility: hidden;
         }
 
@@ -201,9 +194,9 @@ $form-button-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
             @include flex-container(row);
             @include button-inputs-style();
             margin-top: 16px;
-            font-weight: $font-weight-500;
+            font-weight: $font-weight-medium;
             border: none;
-            color: $color-white;
+            color: $bg-color-light;
             background: $form-button-gradient;
         }
 
@@ -214,7 +207,7 @@ $form-button-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
         .form__text__email, .form__text__password {
             @include text-styles(18px, 10px);
             margin-top: 14px;
-            font-weight: $font-weight-500;
+            font-weight: $font-weight-medium;
             color: $form-text-color;
         }
     }

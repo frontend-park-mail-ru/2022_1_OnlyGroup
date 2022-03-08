@@ -1,8 +1,9 @@
-$color-white: #fff;
+@import './variables.scss';
 
-.signup__block {
+.signup {
     width: 700px;
-    background-color: $color-white;
+    height: 670px;
+    background-color: $bg-color-light;
     padding: 30px 0;
     border-radius: 28px;
 

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import './variables.scss';
 
 * {
     margin: 0;
@@ -26,24 +27,6 @@
     border-radius: $borderRadius;
 }
 
-$box-shadow: 0px 0px 10px 0px rgba(139, 122, 228, 0.4);
-$input-border-color-hover: rgba(139, 122, 228, 0.3);
-$input-border-color: rgba(139, 122, 228, 0.5);
-$focus-border-color: rgba(139, 122, 228, 0.65);
-$content-bg-color: radial-gradient(55.42% 55.42% at 50% 50%, #a488df 0%, #1c1738 95.11%);
-$color-white: #fff;
-$font-weight500: 500;
-$font-weight600: 600;
-$settings-link-color: #797979;
-$light-bg-color: #DADADA;
-$button-dark-color: #9589B9;
-$message-bg-color: #ececec;
-$error-color: #CF5151;
-$text-dark-color: #504A71;
-$black-color: #000;
-$button-bg-gradient: linear-gradient(45deg,#9F93E3, #8067EF, #6843FD);
-$button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
-
 .content {
     @include flex-container();
     @include size(100%, 100vh);
@@ -63,7 +46,7 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
             @include border-style(0, 15px);
             @include alignment(row);
             margin-bottom: 10px;
-            background-color: $color-white;
+            background-color: $bg-color-light;
             opacity: 100%;
 
             .user__info {
@@ -125,7 +108,7 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
             @include border-style(15px, 15px);
             @include flex-container();
             @include alignment(column);
-            background-color: $color-white;
+            background-color: $bg-color-light;
 
             .navigation__buttons {
                 @include flex-container();
@@ -147,9 +130,9 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
 
                     .message__link {
                         text-decoration: none;
-                        color: $color-white;
+                        color: $bg-color-light;
                         font-size: 14px;
-                        font-weight: $font-weight500;
+                        font-weight: $font-weight-medium;
                         margin-left: 10px;
                     }
                 }
@@ -158,15 +141,15 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
                     @include flex-container();
                     @include size(180px, 32px);
                     align-items: center;
-                    background-color: $color-white;
+                    background-color: $bg-color-light;
                     border: none;
                     border-radius: 12px;
 
                     .matches__link {
                         text-decoration: none;
-                        color: $black-color;
+                        color: $color-dark;
                         font-size: 14px;
-                        font-weight: $font-weight500;
+                        font-weight: $font-weight-medium;
                         margin-left: 10px;
                     }
                 }
@@ -199,7 +182,7 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
 
                         .username {
                             margin-bottom: 9px;
-                            font-weight: $font-weight600;
+                            font-weight: $font-weight-semibold;
                         }
                     }
 
@@ -209,7 +192,7 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
                         align-items: center;
                         background-color: $button-dark-color;
                         border-radius: 50%;
-                        color: $color-white;
+                        color: $bg-color-light;
                         position: relative;
                         left: 154px;
                         top: 20px;
@@ -304,11 +287,11 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
                         @include size(162px, 36px);
                         @include flex-container();
                         align-items: center;
-                        font-weight: $font-weight500;
+                        font-weight: $font-weight-medium;
                         overflow: none;
                         border: none;
                         border-radius: 8px;
-                        color: $color-white;
+                        color: $bg-color-light;
                         background: $button-bg-gradient;
                         cursor: pointer;
                     }
@@ -366,7 +349,7 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
             @include size(470px, 550px);
             display: flex;
             flex-direction: column;
-            background-color: $color-white;
+            background-color: $bg-color-light;
             border-radius: 15px;
             padding: 30px;
             margin-top: -190px;
@@ -374,7 +357,7 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
             .info__name {
                 .fullname {
                     font-size: 28px;
-                    font-weight: $font-weight600;
+                    font-weight: $font-weight-semibold;
                     margin-bottom: 6px;
                 }
 
@@ -398,13 +381,13 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
 
                 .info__title {
                     font-size: 18px;
-                    font-weight: $font-weight600;
+                    font-weight: $font-weight-semibold;
                     margin-bottom: 8px;
                 }
 
                 .description {
                     font-size: 15px;
-                    font-weight: $font-weight500;
+                    font-weight: $font-weight-medium;
                     margin-bottom: 6px;
                     width: 98%;
                     color: $text-dark-color;
@@ -413,7 +396,7 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
 
             .title {
                 font-size: 18px;
-                font-weight: $font-weight600;
+                font-weight: $font-weight-semibold;
                 margin-bottom: 18px;
             }
 
@@ -432,14 +415,14 @@ $button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
 
             .horoscopeTitle {
                 font-size: 18px;
-                font-weight: $font-weight600;
+                font-weight: $font-weight-semibold;
                 margin-bottom: 18px;
                 margin-top: 15px;
             }
 
             .horoscope__description {
                 font-size: 15px;
-                font-weight: $font-weight500;
+                font-weight: $font-weight-medium;
                 color: $text-dark-color;
             }
 
