@@ -1,0 +1,36 @@
+-  let source = '../../static/images/';
+-  let imgSrc = [source + 'vk.svg', source + 'google.svg', source + 'facebook.svg'];
+
+mixin createSocialImages(imgSrc) 
+    each iSrc in imgSrc
+        a(href="#") 
+            img(src= iSrc)
+
+mixin createInput(iType, iClass)
+    input(class= iClass, type= iType)
+
+mixin createP(text, pClass)
+    p(class= pClass)= text 
+
+
+.main__content
+    .overlay
+    .content__authorize 
+        .authorize__logo
+            img.logo__img(src=`${source}logo.png`)
+            h1.logo__text OnlySocial
+        .authorize__form 
+            form(id="form" action="#")
+                +createP('Email', 'form__text__email') 
+                +createInput('text', 'form__login form__input__require')
+                .form__error
+                    +createP('Error: wrong email', 'form__login__error form__input__error')  
+                +createP('Password', 'form__text__password') 
+                +createInput('password', 'form__password form__input__require') 
+                .form__error 
+                    +createP('Error: wrong password', 'form__password__error form__input__error')
+                button.form__button(type="submit") Sign in
+        .form__create-new-account
+            +createP('Don\'t have account?', '')
+            a(href="/registration") Create account
+            
