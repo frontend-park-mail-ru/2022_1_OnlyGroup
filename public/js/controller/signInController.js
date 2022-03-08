@@ -2,7 +2,6 @@ import { SignInValidation } from '../validate/signInValidate.js';
 import {userApi} from '../api/api.js';
 import { Errors } from "../modules/errors.js"
 import activeUser from "../api/userApi.js";
-import {Router} from "../../router/router";
 // import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 export class SignInController {
@@ -40,11 +39,9 @@ export class SignInController {
         }
         activeUser.id = userId;
 
-
-
-        // const button = document.querySelector('.form__button');
-        // button.setAttribute('onclick', "window.location.href='/profile'");
-        // button.click();
+        const button = document.querySelector('.form__button');
+        button.setAttribute('onclick', "window.location.href='/profile'");
+        button.click();
     }
 }
 
