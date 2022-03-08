@@ -7,14 +7,15 @@ const root = document.getElementById('root');
  * Sign in class
  */
 export class SignIn {
-  constructor(rootDiv) {
-    this.rootDiv = rootDiv;
+  constructor(root) {
+    this.root = root;
   }
+
   /**
     * Render page
     */
   render() {
-    root.innerHTML = signInComponent();
+    this.root.innerHTML = signInComponent();
     this.setHandler();
   }
 

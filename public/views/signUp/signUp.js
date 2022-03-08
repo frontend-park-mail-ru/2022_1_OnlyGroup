@@ -7,11 +7,15 @@ const root = document.getElementById('root');
  * Sign up class
  */
 export class SignUp {
+  constructor(root) {
+    this.root = root;
+  }
+
   /**
     * Render page
     */
   render() {
-    root.innerHTML = signUpComponent();
+    this.root.innerHTML = signUpComponent();
     this.setHandler();
   }
 

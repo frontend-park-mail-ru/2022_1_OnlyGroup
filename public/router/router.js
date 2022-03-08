@@ -1,3 +1,5 @@
+const root = document.getElementById('root');
+
 /**
  * Router
  */
@@ -16,7 +18,7 @@ export class Router {
      * @return {Object}
      */
     register(path, view) {
-        this.routes[path] = new view();
+        this.routes[path] = new view(root);
     }
 
     /**
@@ -32,8 +34,12 @@ export class Router {
      * Render page
      */
     start() {
-        let currentView = this.routes[window.location.pathname];
-        currentView.render();
+        if (typeof this.routes[window.location.pathname] !== undefined) {
+            console.log(this.routes[window.location.pathname]);
+            this.routes[window.location.pathname].render();
+        } else {
+            this.go('/error');
+        }
 
         window.addEventListener('click', (event) => {
             console.log(event.target.tagName);
