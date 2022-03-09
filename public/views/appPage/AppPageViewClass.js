@@ -10,6 +10,11 @@ let vectorCandidates = [];
 
 export class AppPageViewClass {
   async render() {
+    const userId = await userApi.checkLogin();
+    if (userId === -1) {
+      router.go('/');
+      return;
+    }
     let Candidate;
     let data;
     try {
