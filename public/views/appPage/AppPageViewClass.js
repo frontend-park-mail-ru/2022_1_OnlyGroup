@@ -51,7 +51,7 @@ export class AppPageViewClass {
     root.innerHTML = appPageComponent();
     // eslint-disable-next-line prefer-const
     let name = data.FirstName + ' ' + data.LastName + ', ' + data.Birthday;
-    let candidateName = Candidate.FirstName + ' ' + Candidate.LastName + ', ' + Candidate.Birthday;
+    const candidateName = Candidate.FirstName + ' ' + Candidate.LastName + ', ' + Candidate.Birthday;
     document.querySelector('.fullname').innerHTML = name;
     document.querySelector(' .info__name p').innerHTML = candidateName;
 
@@ -64,8 +64,6 @@ export class AppPageViewClass {
 
 
   async setHandler() {
-
-
     const editProfileButton = document.querySelector('.settings__edit');
     editProfileButton.addEventListener('click', (event) => {
       event.preventDefault();

@@ -1,5 +1,6 @@
 {
   "name": "noderouter",
+  "type": "module",
   "version": "1.0.0",
   "description": "Tinder",
   "main": "server.js",
@@ -12,7 +13,9 @@
   "author": "antdenv",
   "license": "ISC",
   "dependencies": {
+    "debug": "^4.3.3",
     "express": "^4.17.3",
+    "fs": "0.0.1-security",
     "nodemon": "^2.0.15",
     "pug": "^3.0.2"
   },
