@@ -14,7 +14,6 @@ export class SignInController {
         event.preventDefault();
 
         let errors = SignInValidation.inputsValidate(document.querySelectorAll('.form__input__require'));
-
         if (errors !== 0) {
             return;
         }

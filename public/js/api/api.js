@@ -77,7 +77,7 @@ export class userApi{
     }
 
     static getShortProfile = async function(id) {
-        const response = await fetch(`${IP + Port}/profiles/${id.toString()}/short`, {
+        const response = await fetch(`${IP + Port}/profiles/${id.toString()}/shorts`, {
             method: 'GET',
             credentials: 'include',
         });

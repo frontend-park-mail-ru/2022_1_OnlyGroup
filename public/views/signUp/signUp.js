@@ -1,5 +1,6 @@
 import signUpComponent from './signUp.pug.js';
 import {SignUpForm} from '../../js/forms/signUpForm.js';
+import {SignUpController} from '../../js/controller/signUpController.js';
 
 const root = document.getElementById('root');
 
@@ -24,7 +25,7 @@ export class SignUp {
     */
   setHandler() {
     const form = document.getElementById('form');
-    form.addEventListener('submit', SignUpForm.formSubmitEvent);
+    form.addEventListener('submit', SignUpController.formSubmitEvent);
   }
 
   /**

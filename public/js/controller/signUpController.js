@@ -2,6 +2,7 @@ import { SignUpValidation } from '../validate/signUpValidate.js';
 import {userApi} from "../api/api.js";
 import {Errors} from "../modules/errors.js";
 import activeUser from "../api/userApi.js";
+import router from '../../router/router.js';
 // import {SignInValidation} from "../validate/signInValidate";
 
 export class SignUpController {
@@ -11,7 +12,7 @@ export class SignUpController {
      */
     static formSubmitEvent = async (event) => {
         event.preventDefault();
-
+        debugger;
         let errors = SignUpValidation.inputsValidate(document.querySelectorAll('.form__input__require'));
 
         if (errors !== 0) {
@@ -39,8 +40,8 @@ export class SignUpController {
         }
         activeUser.id = userId;
 
-        const button = document.querySelector('.form__button');
-        button.setAttribute('onclick', "window.location.href='/profile'");
-        button.click();
+        router.go("/profile");
+
     }
+
 }

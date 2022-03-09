@@ -10,7 +10,6 @@ let vectorCandidates = [];
 
 export class AppPageViewClass {
   async render() {
-    debugger;
     let Candidate;
     let data;
     try {

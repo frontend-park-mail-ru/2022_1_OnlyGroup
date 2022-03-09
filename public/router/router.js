@@ -46,21 +46,24 @@ export class Router {
     }
 
     window.addEventListener('click', (event) => {
+      // debugger
       // console.log(event.target.tagName);
 
       let parentElem = event.target.parentElement;
       while (parentElem) {
         if (event.target.tagName === 'A') {
+          event.preventDefault();
+
           this.go(event.target.pathname);
           break;
         }
 
-        if (event.target.tagName === 'BUTTON') {
-          if (event.target.className === 'cancel') {
-            this.go('/profile');
-            break;
-          }
-        }
+        // if (event.target.tagName === 'BUTTON') {
+        //   if (event.target.className === 'cancel') {
+        //     this.go('/profile');
+        //     break;
+        //   }
+        // }
         parentElem = parentElem.parentElement;
       }
     });

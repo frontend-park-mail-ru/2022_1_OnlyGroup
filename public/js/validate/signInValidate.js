@@ -27,15 +27,15 @@ export class SignInValidation {
         }
       }
 
-      if (input.classList.contains('form__password')) {
-        const validationResult = Validation.
-            validatePassword(input.value);
-        if (!validationResult.validationResult) {
-          SignIn.setErrorVisible(input, 'visible',
-              validationResult.validationText);
-          errors++;
-        }
-      }
+      // if (input.classList.contains('form__password')) {
+      //   const validationResult = Validation.
+      //       validatePassword(input.value);
+      //   if (!validationResult.validationResult) {
+      //     SignIn.setErrorVisible(input, 'visible',
+      //         validationResult.validationText);
+      //     errors++;
+      //   }
+      // }
     }
 
     return errors;
