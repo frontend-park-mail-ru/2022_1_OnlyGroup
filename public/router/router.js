@@ -39,25 +39,20 @@ export class Router {
      */
     start() {
         if (typeof this.routes[window.location.pathname] !== undefined) {
-            console.log(this.routes[window.location.pathname]);
             this.routes[window.location.pathname].render();
         } else {
             this.go('/error');
         }
 
         window.addEventListener('click', (event) => {
-            console.log(event.target.tagName);
-            while (event.target.parentElement) {
-                if (event.target.tagName === 'A') {
-                    this.go(event.target.pathname);
-                    break
-                }
+            let parentElem = event.target;
+            while (parentElem && parentElem.tagName !== 'A') {
+                parentElem = parentElem.parentElement;
+            }
 
-                if (event.target.tagName === 'BUTTON') {
-                    if (event.target.className === 'cancel') {
-                        this.go('/profile');
-                    }
-                }
+            if (parentElem) {
+                this.go(parentElem.pathname)
+                event.preventDefault()
             }
         });
     }

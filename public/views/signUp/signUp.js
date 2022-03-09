@@ -1,7 +1,6 @@
 import signUpComponent from './signUp.pug.js';
 import {SignUpForm} from '../../js/forms/signUpForm.js';
 
-const root = document.getElementById('root');
 
 /**
  * Sign up class
@@ -29,9 +28,9 @@ export class SignUp {
 
   /**
    * Set error visibility
-   * @param {*} input 
-   * @param {*} visibility 
-   * @param {*} text 
+   * @param {*} input
+   * @param {*} visibility
+   * @param {*} text
    */
    static setErrorVisible(input, visibility, text) {
     const error = document.

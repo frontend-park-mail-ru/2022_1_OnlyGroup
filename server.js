@@ -13,7 +13,6 @@ const server = createServer((req, res) => {
 
     const fileName = url === '/' ? '/index.html' : url;
     let filePath = `public${fileName}`
-    console.log(filePath);
     readFile(filePath, (err, file) => {
         if(err) {
             res.writeHead(302, {

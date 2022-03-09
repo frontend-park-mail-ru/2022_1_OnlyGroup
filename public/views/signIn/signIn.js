@@ -1,7 +1,6 @@
 import signInComponent from './signIn.pug.js';
 import {SignInForm} from '../../js/forms/signInForm.js';
 
-const root = document.getElementById('root');
 
 /**
  * Sign in class
