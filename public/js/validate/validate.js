@@ -4,8 +4,7 @@ const emailRegExp = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 /* Password must contain: numbers (0-9), lowercase letters (a-z),
    uppercase letters (A-Z)
    and password length must be at least 6 characters */
-const passwordRegExp =
-/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+const passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
 /* Text input can contain: lowercase letters (a-z),
    uppercase letters (A-Z) and text length
    must be at least 1 characters */
@@ -135,5 +134,3 @@ export class Validation {
     return validResult;
   }
 }
-
-

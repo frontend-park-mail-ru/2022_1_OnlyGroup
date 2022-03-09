@@ -1,5 +1,5 @@
-import {Validation} from './validate.js';
-import {SignUp} from '../../views/signUp/signUp.js';
+import { Validation } from './validate.js';
+import { SignUp } from '../../views/signUp/signUp.js';
 
 /**
  * Sign up validation
@@ -21,8 +21,11 @@ export class SignUpValidation {
       if (input.classList.contains('form__login')) {
         validationResult = Validation.validateEmail(input.value);
         if (!validationResult.validationResult) {
-          SignUp.setErrorVisible(input, 'visible',
-              validationResult.validationText);
+          SignUp.setErrorVisible(
+            input,
+            'visible',
+            validationResult.validationText,
+          );
           errors++;
         }
       }
@@ -30,19 +33,25 @@ export class SignUpValidation {
       if (input.classList.contains('form__password')) {
         validationResult = Validation.validatePassword(input.value);
         if (!validationResult.validationResult) {
-          SignUp.setErrorVisible(input, 'visible',
-              validationResult.validationText);
+          SignUp.setErrorVisible(
+            input,
+            'visible',
+            validationResult.validationText,
+          );
           errors++;
         }
       }
 
       if (input.classList.contains('form__repeat__passwords')) {
         const password = document.querySelector('.form__password');
-        validationResult = Validation.
-            validatePasswordsRepeat(password.value, input.value);
+        validationResult = Validation
+          .validatePasswordsRepeat(password.value, input.value);
         if (!validationResult.validationResult) {
-          SignUp.setErrorVisible(password, 'visible',
-              validationResult.validationText);
+          SignUp.setErrorVisible(
+            password,
+            'visible',
+            validationResult.validationText,
+          );
           errors++;
         }
       }

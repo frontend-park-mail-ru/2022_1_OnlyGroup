@@ -1,5 +1,5 @@
-import {SignUpValidation} from '../validate/signUpValidate.js';
-import router from "../../router/router.js";
+import { SignUpValidation } from '../validate/signUpValidate.js';
+import router from '../../router/router.js';
 
 /**
  * Sign up events
@@ -12,13 +12,11 @@ export class SignUpForm {
   static formSubmitEvent(event) {
     event.preventDefault();
 
-    const errors = SignUpValidation.
-        inputsValidate(document.querySelectorAll('.form__input__require'));
+    const errors = SignUpValidation
+      .inputsValidate(document.querySelectorAll('.form__input__require'));
 
     if (errors === 0) {
-
-      router.go("/profile");
-
+      router.go('/profile');
     }
   }
 }

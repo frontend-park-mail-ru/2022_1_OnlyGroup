@@ -1,10 +1,10 @@
-import {SignInValidation} from '../validate/signInValidate.js';
-import router from "../../router/router.js";
+import { SignInValidation } from '../validate/signInValidate.js';
+import router from '../../router/router.js';
 
 /**
  * Sign in events
  */
-export class SignInForm {
+export default class SignInForm {
   /**
     * Event of form submit
     * @param {Event} event
@@ -12,12 +12,11 @@ export class SignInForm {
   static formSubmitEvent(event) {
     event.preventDefault();
 
-    const errors = SignInValidation.
-        inputsValidate(document.querySelectorAll('.form__input__require'));
+    const errors = SignInValidation
+      .inputsValidate(document.querySelectorAll('.form__input__require'));
 
     if (errors === 0) {
-
-      router.go("/profile");
+      router.go('/profile');
     }
   }
 }

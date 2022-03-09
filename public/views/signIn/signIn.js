@@ -1,6 +1,5 @@
 import signInComponent from './signIn.pug.js';
-import {SignInForm} from '../../js/forms/signInForm.js';
-
+import SignInForm from '../../js/forms/signInForm.js';
 
 /**
  * Sign in class
@@ -33,8 +32,8 @@ export class SignIn {
    * @param {*} text
    */
   static setErrorVisible(input, visibility, text) {
-    const error = document.
-        querySelector(`.${input.classList.item(0)}__error`);
+    const error = document
+      .querySelector(`.${input.classList.item(0)}__error`);
     error.textContent = text;
     error.style.visibility = visibility;
   }
