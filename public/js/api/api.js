@@ -15,7 +15,7 @@ export class userApi{
             throw false;
         }
         const fetchedUser = await response.json();
-        return fetchedUser.id;
+        return fetchedUser.ID;
     }
 
     static logIn = async function (email, password) {
@@ -30,7 +30,7 @@ export class userApi{
             throw 'Error';
         }
         const fetchedUser = await response.json();
-        return fetchedUser.id;
+        return fetchedUser.ID;
 
     }
 
@@ -46,7 +46,7 @@ export class userApi{
             throw 'Error';
         }
         const fetchedUser = await response.json();
-        return fetchedUser.id;
+        return fetchedUser.ID;
     }
 
     static logOut = async function () {
