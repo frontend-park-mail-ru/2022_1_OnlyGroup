@@ -12,7 +12,6 @@ export class SignUpController {
      */
     static formSubmitEvent = async (event) => {
         event.preventDefault();
-        debugger;
         let errors = SignUpValidation.inputsValidate(document.querySelectorAll('.form__input__require'));
 
         if (errors !== 0) {

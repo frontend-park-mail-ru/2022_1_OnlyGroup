@@ -53,6 +53,8 @@ export class AppPageViewClass {
     }
 
     root.innerHTML = appPageComponent();
+
+
     // eslint-disable-next-line prefer-const
     let name = data.FirstName + ' ' + data.LastName + ', ' + data.Birthday;
     const candidateName = Candidate.FirstName + ' ' + Candidate.LastName + ', ' + Candidate.Birthday;
