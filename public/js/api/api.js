@@ -1,5 +1,5 @@
 const Port = '8080';
-const IP = 'http://localhost:';
+const IP = 'http://ubuntu@89.208.198.192';
 
 
 export class userApi{
