@@ -57,7 +57,7 @@ export default function signUpPageComponent(locals) {
     block: function() {
       pug_html = pug_html + ' ';
     },
-  }, 'password', 'form__password form__repeat__passwords _req');
+  }, 'password', 'form__password form__repeat__passwords form__input__require');
   pug_html = pug_html + '\u003Cbutton class="form__button" type="submit"\u003ESign up\u003C\u002Fbutton\u003E\u003C\u002Fform\u003E\u003C\u002Fdiv\u003E\u003Cdiv class="form__sign-in"\u003E';
   pug_mixins['createP']('Already have account?', '');
   pug_html = pug_html + '\u003Ca href="\u002Flogin"\u003ESign in\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E'; return pug_html;
