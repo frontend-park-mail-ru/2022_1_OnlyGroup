@@ -9,8 +9,6 @@ const viewsDebug = false;
 const pageDebug = false;
 const wsDebug = false;
 
-export {
-  disableSW, ajaxDebug, modalsDebug,
+export {disableSW, ajaxDebug, modalsDebug,
   fluxDebug, routerDebug, linkControllerDebug,
-  viewsDebug, pageDebug, wsDebug,
-};
+  viewsDebug, pageDebug, wsDebug};

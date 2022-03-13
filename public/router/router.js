@@ -5,19 +5,18 @@ const root = document.getElementById('root');
  */
 export class Router {
   /**
-     * Class constructor
-     */
+   * Class constructor
+   */
   constructor() {
     this.routes = {};
   }
 
   /**
-     * Redirect to page by path
-     * @param {*} path
-     */
+   * Redirect to page by path
+   * @param {*} path
+   */
   go(path) {
     if (typeof this.routes[window.location.pathname] !== undefined) {
-      console.log(this.routes[window.location.pathname]);
       this.routes[path].render();
     } else {
       this.routes['/error'].render();
@@ -25,34 +24,35 @@ export class Router {
   }
 
   /**
-     * Register path
-     * @param {string} path
-     * @param {Class} view
-     * @return {Object}
-     */
-  register(path, view) {
-    this.routes[path] = new view(root);
+   * Register path
+   * @param {string} path
+   * @param {Class} View
+   */
+  register(path, View) {
+    this.routes[path] = new View(root);
   }
 
   /**
-     * Render page
-     */
+   * Render page
+   */
   start() {
     if (typeof this.routes[window.location.pathname] !== undefined) {
-      this.routes[window.location.pathname].render();
+      this.go(window.location.pathname);
     } else {
       this.go('/error');
     }
 
     window.addEventListener('click', (event) => {
-      let parentElem = event.target;
-      while (parentElem && parentElem.tagName !== 'A') {
-        parentElem = parentElem.parentElement;
-      }
+      let parentElem = event.target.parentElement;
+      while (parentElem) {
+        if (event.target.tagName === 'A') {
+          event.preventDefault();
 
-      if (parentElem) {
-        this.go(parentElem.pathname);
-        event.preventDefault();
+          this.go(event.target.pathname);
+          break;
+        }
+
+        parentElem = parentElem.parentElement;
       }
     });
   }
