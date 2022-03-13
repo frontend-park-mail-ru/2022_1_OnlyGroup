@@ -1,12 +1,8 @@
 import * as fs from 'fs';
 import {basename, resolve} from 'path';
-
-const correctLaunchDir = 'nodeRouter';
 const root = 'public';
 const targetFile = 'globals.js';
-
-const currentDir = basename(resolve('.'));
-
+basename(resolve('.'));
 const mode = !(process.argv[2] === 'false');
 const sw = process.argv[3] === 'sw';
 

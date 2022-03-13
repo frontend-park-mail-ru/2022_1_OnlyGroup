@@ -1,11 +1,6 @@
 /* Email can contain: numbers (0-9), lowercase letters (a-z),
    uppercase letters (A-Z) and must contain '@', '.' characters */
 const emailRegExp = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-/* Password must contain: numbers (0-9), lowercase letters (a-z),
-   uppercase letters (A-Z)
-   and password length must be at least 6 characters */
-const passwordRegExp =
-/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
 /* Text input can contain: lowercase letters (a-z),
    uppercase letters (A-Z) and text length
    must be at least 1 characters */
@@ -15,9 +10,6 @@ const textRegExp = /(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{1,}/g;
 const yearOfBirth = /(?=.*[0-9])[0-9]{4,}/g;
 const invalidEmail = `Email can contain numbers, lowercase letters, 
                       letters and must contain '@', '.' characters`;
-const invalidPassword = `Password must contain numbers, lowercase 
-                         letters, uppercase letters and 
-                         must be at least 6 characters`;
 const invalidEqual = 'Paswords are not equal';
 const invalidText = `Field must contain only letters 
                      and must be at least 1 characters`;
@@ -68,12 +60,12 @@ export class Validation {
       return emptyResult;
     }
 
-    if (!passwordRegExp.test(password)) {
+    /* if (!passwordRegExp.test(password)) {
       return {
         validationResult: false,
         validationText: invalidPassword,
       };
-    }
+    }*/
 
     return validResult;
   }
@@ -117,7 +109,7 @@ export class Validation {
 
   /**
     * Validating age input with RegExp
-    * @param {string} age
+    * @param {string} year
     * @return {Object}
     */
   static validateAge(year) {

@@ -3,7 +3,7 @@ const IP = 'http://ubuntu@89.208.198.192';
 
 
 export class userApi{
-    static checkLogin = async function () {
+    static checkLogin = async function() {
         const response = await fetch(`${IP + Port}/users`, {
             method: 'GET',
             credentials: 'include',

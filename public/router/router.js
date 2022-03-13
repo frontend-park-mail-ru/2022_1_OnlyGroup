@@ -17,7 +17,6 @@ export class Router {
    */
   go(path) {
     if (typeof this.routes[window.location.pathname] !== undefined) {
-      console.log(this.routes[window.location.pathname]);
       this.routes[path].render();
     } else {
       this.routes['/error'].render();
@@ -27,11 +26,10 @@ export class Router {
   /**
    * Register path
    * @param {string} path
-   * @param {Class} view
-   * @return {Object}
+   * @param {Class} View
    */
-  register(path, view) {
-    this.routes[path] = new view(root);
+  register(path, View) {
+    this.routes[path] = new View(root);
   }
 
   /**
@@ -39,16 +37,12 @@ export class Router {
    */
   start() {
     if (typeof this.routes[window.location.pathname] !== undefined) {
-      console.log(this.routes[window.location.pathname]);
-      this.routes[window.location.pathname].render();
+      this.go(window.location.pathname);
     } else {
       this.go('/error');
     }
 
     window.addEventListener('click', (event) => {
-      // debugger
-      // console.log(event.target.tagName);
-
       let parentElem = event.target.parentElement;
       while (parentElem) {
         if (event.target.tagName === 'A') {
@@ -58,12 +52,6 @@ export class Router {
           break;
         }
 
-        // if (event.target.tagName === 'BUTTON') {
-        //   if (event.target.className === 'cancel') {
-        //     this.go('/profile');
-        //     break;
-        //   }
-        // }
         parentElem = parentElem.parentElement;
       }
     });

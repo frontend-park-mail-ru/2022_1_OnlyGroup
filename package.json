@@ -17,7 +17,8 @@
     "express": "^4.17.3",
     "fs": "0.0.1-security",
     "nodemon": "^2.0.15",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "scss": "^0.2.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",

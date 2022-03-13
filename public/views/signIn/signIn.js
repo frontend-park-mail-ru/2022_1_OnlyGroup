@@ -4,16 +4,17 @@ import {userApi} from '../../js/api/api.js';
 import activeUser from '../../js/api/userApi.js';
 import router from '../../router/router.js';
 
-const root = document.getElementById('root');
-
 /**
  * Sign in class
  */
 export class SignIn {
+  /**
+   * Sign in page constructor
+   * @param {Element} root
+   */
   constructor(root) {
     this.root = root;
   }
-
   /**
    * Render page
    */

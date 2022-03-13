@@ -6,7 +6,7 @@ import eslint from 'gulp-eslint';
  * @type {{js: string}}
  */
 const paths = {
-  js: './src/**/*.js',
+  js: './public/**/*.js',
 };
 
 /**
@@ -20,8 +20,6 @@ function testJsLint() {
       pipe(eslint.failAfterError());
 }
 
-const tests = gulp.parallel(testJsLint);
-exports.tests = tests;
+export const tests = gulp.parallel(testJsLint);
 
-export default tests;
 

@@ -42,8 +42,6 @@ export class SignInForm {
     }
     activeUser.id = userId;
     const button = document.querySelector('.form__button');
-    // button.setAttribute('onclick', "window.location.href='/profile'");
     router.go('/profile');
-    // button.click();
   }
 }

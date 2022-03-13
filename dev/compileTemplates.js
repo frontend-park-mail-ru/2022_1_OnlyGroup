@@ -8,15 +8,11 @@ const saveTo = {
   signup: 'signUp',
   editProfile: 'editProfile',
 };
-
-const correctLaunchDir = 'nodeRouter';
 const devRoot = 'dev/';
 const templatesDir = 'views/';
 const outDir = 'public/views/';
 const componentSuffix = 'Component';
-
-const currentDir = basename(resolve('.'));
-
+basename(resolve('.'));
 const debug = process.argv[2] || false;
 
 readdir(devRoot + templatesDir, (err, files) => {
@@ -41,7 +37,8 @@ readdir(devRoot + templatesDir, (err, files) => {
     const compiledTemplate = compileFileClient(
         devRoot + templatesDir + filename,
         {
-          name: `x(){};\n\nexport default function ${functionName + componentSuffix}`,
+          name: `x(){};\n\nexport default function 
+          ${functionName + componentSuffix}`,
           compileDebug: debug ? true : false,
         },
     );
@@ -61,7 +58,6 @@ readdir(devRoot + templatesDir, (err, files) => {
     }
 
     writeFileSync(JSFilename, compiledTemplate, 'utf8');
-
     console.log(`Шаблон ${filename} преобразован в ${JSFilename}`);
   });
 });
