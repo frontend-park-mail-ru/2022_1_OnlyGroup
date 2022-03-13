@@ -1,0 +1,657 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import './variables.scss';
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+@mixin flex-container() {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin alignment($flex-direction) {
+    flex-direction: $flex-direction;
+    align-items: center;
+}
+
+@mixin size($newWidth, $newHeight) {
+    width: $newWidth;
+    height: $newHeight;
+}
+
+@mixin border-style($marginTop, $borderRadius) {
+    margin-top: $marginTop;
+    border-radius: $borderRadius;
+}
+
+.content {
+    @include size(100%, 100vh);
+    @include flex-container();
+    @include alignment(row);
+    background: $content-bg-color;
+
+    .profile {
+        @include flex-container();
+        flex-direction: row;
+        align-items: flex-start;
+
+        .content__profile {
+            width: 30%;
+            display: flex;
+            justify-content: flex-start;
+            @include alignment(column);
+
+            .profile__user {
+                @include flex-container();
+                @include alignment(row);
+                width: 80%;
+                background-color: $bg-color-light;
+                border-radius: 15px;
+                margin-bottom: 5%;
+                padding: 3% 0;
+
+                .user__avatar {
+                    img {
+                        width: 100px;
+                        border-radius: 10px;
+                    }
+
+                    margin-right: 8%;
+                }
+
+                .user__info {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 14px;
+
+                    .fullname {
+                        margin-bottom: 4px;
+                    }
+
+                    .info {
+                        display: flex;
+                        flex-direction: column;
+
+                        .info__city {
+                            display: flex;
+                            @include alignment(row);
+                            margin-bottom: 8px;
+
+                            img {
+                                width: 30px;
+                                margin-left: -4%;
+                            }
+                        }
+                    }
+
+                    .settings {
+                        img {
+                            width: 30px;
+                            margin-left: -4%;
+                            margin-right: 6px;
+                        }
+
+                        .settings__link {
+                            display: flex;
+                            align-items: center;
+
+                            .settings__edit {
+                                margin-right: 14px;
+                            }
+
+                            .logout {
+                                font-weight: $font-weight-medium;
+                            }
+
+                            a {
+                                text-decoration: none;
+                                color: $settings-link-color;
+                            }
+
+                            a:hover {
+                                color: rgb(71, 71, 71);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .profile__navigation {
+                width: 80%;
+                background-color: $bg-color-light;
+                border-radius: 15px;
+                @include flex-container();
+                @include alignment(column);
+
+                .navigation__buttons {
+                    @include flex-container();
+                    @include size(92%, 50px);
+                    @include alignment(row);
+                    @include border-style(16px, 10px);
+                    background-color: $light-bg-color;
+                    margin-bottom: 2px;
+
+                    .buttons__message {
+                        @include flex-container();
+                        @include size(42%, 34px);
+                        align-items: center;
+                        margin-right: 22px;
+                        background-color: $button-dark-color;
+                        border: none;
+                        border-radius: 12px;
+
+                        .message__link {
+                            text-decoration: none;
+                            color: $bg-color-light;
+                            font-size: 14px;
+                            font-weight: $font-weight-medium;
+                            margin-left: 10px;
+                        }
+                    }
+
+                    .buttons__matches {
+                        @include flex-container();
+                        @include size(42%, 34px);
+                        align-items: center;
+                        background-color: $bg-color-light;
+                        border: none;
+                        border-radius: 12px;
+
+                        .matches__link {
+                            text-decoration: none;
+                            color: $color-dark;
+                            font-size: 14px;
+                            font-weight: $font-weight-medium;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+
+                .navigation__field {
+                    @include flex-container();
+                    @include size(87%, auto);
+                    @include alignment(column);
+                    font-size: 14px;
+                    padding: 3% 0;
+
+                    .message__block {
+                        width: 100%;
+                        display: flex;
+                        @include alignment(row);
+                        justify-content: space-between;
+                        margin-bottom: 8px;
+                        border-bottom: 1px solid $light-bg-color;
+                        padding: 13px 10px;
+
+                        .message {
+                            display: flex;
+                            flex-direction: row;
+                        }
+
+                        .avatar {
+                            @include size(70px, 70px);
+                            border-radius: 50%;
+                            background-color: $light-bg-color;
+                            margin-right: 23px;
+                        }
+
+                        .info {
+                            @include flex-container();
+                            flex-direction: column;
+
+                            .username {
+                                margin-bottom: 9px;
+                                font-weight: $font-weight-semibold;
+                            }
+                        }
+
+                        .quantity__block {
+                            @include size(24px, 24px);
+                            @include flex-container();
+                            align-items: center;
+                            background-color: $button-dark-color;
+                            border-radius: 50%;
+                            color: $bg-color-light;
+                        }
+                    }
+
+                    .message__block:hover {
+                        background-color: $message-bg-color;
+                        border-bottom: 1px solid $message-bg-color;
+                        border-radius: 10px;
+                    }
+                }
+
+                .navigation__profile {
+                    @include alignment(column);
+                    display: none;
+                    padding: 7% 0;
+
+                    p {
+                        font-size: 16px;
+                    }
+
+                    .nameBlock, .surnameBlock, .ageBlock, .cityBlock {
+                        @include alignment(column);
+                        display: flex;
+                        margin-bottom: 8px;
+
+                        .block {
+                            @include alignment(row);
+                            display: flex;
+                            margin-bottom: 6px;
+                        }
+
+                        ._error {
+                            font-size: 14px;
+                            color: $error-color;
+                            margin-left: 20px;
+                            visibility: hidden;
+                        }
+
+                        input {
+                            @include size(220px, 32px);
+                            font-size: 14px;
+                            border-radius: 8px;
+                            border: 1px solid $input-border-color;
+                            padding-left: 16px;
+                            outline: none;
+                        }
+
+                        input:hover {
+                            border: 1px solid rgba(139, 122, 228, 0.3);
+                            -webkit-box-shadow: 0px 0px 10px 0px $box-shadow;
+                            -moz-box-shadow: 0px 0px 10px 0px $box-shadow;
+                            box-shadow: 0px 0px 10px 0px $box-shadow;
+                        }
+
+                        input:focus {
+                            border: 1px solid $focus-border-color;
+                        }
+
+                        .nameP {
+                            margin-right: 57px;
+                        }
+
+                        .surnameP {
+                            margin-right: 32px;
+                        }
+
+                        .ageP {
+                            margin-right: 73px;
+                        }
+
+                        .cityP {
+                            margin-right: 73px;
+                        }
+                    }
+
+                    .photoBlock {
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 20px;
+
+                        .photoP {
+                            margin-bottom: 10px;
+                        }
+                    }
+
+                    .buttonsBlock {
+                        @include alignment(row);
+                        display: flex;
+
+                        button {
+                            @include size(162px, 36px);
+                            @include flex-container();
+                            align-items: center;
+                            font-weight: $font-weight-medium;
+                            border: none;
+                            border-radius: 8px;
+                            color: $bg-color-light;
+                            background: $button-bg-gradient;
+                            cursor: pointer;
+                        }
+
+                        button:hover {
+                            background: $button-bg-gradient-hover;
+                        }
+
+                        .cancel {
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .content__feed {
+            width: 57%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            align-items: flex-start;
+            padding-right: 3%;
+
+            .feed__people {
+                width: 50%;
+                border-radius: 5%;
+
+                .people__photo {
+                    position: relative;
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
+
+                    .navigation__icons {
+                        display: flex;
+                        align-items: center;
+                        width: 60%;
+                        position: absolute;
+                        top: 82%;
+                        left: 20%;
+
+                        a {
+                            margin-right: 3%;
+                            margin-left: 3%;
+                        }
+                    }
+                }
+            }
+
+            .feed__info::-webkit-scrollbar {
+                width: 0;
+            }
+
+            .feed__info {
+                background-color: $bg-color-light;
+                border-radius: 15px;
+                @include size(35%, 520px);
+                display: flex;
+                flex-direction: column;
+                padding: 3% 5%;
+                overflow-y: scroll;
+                scrollbar-width: none;
+
+                .info__name {
+                    .fullname {
+                        font-size: 28px;
+                        font-weight: $font-weight-semibold;
+                        margin-bottom: 6px;
+                    }
+
+                    .info__city {
+                        @include alignment(row);
+                        display: flex;
+                        margin-bottom: 25px;
+                        font-size: 18px;
+                        color: $text-dark-color;
+
+                        img {
+                            @include size(30px, 30px);
+                            margin-left: -4px;
+                            margin-right: 6px;
+                        }
+                    }
+                }
+
+                .info__description {
+                    margin-bottom: 15px;
+
+                    .info__title {
+                        font-size: 18px;
+                        font-weight: $font-weight-semibold;
+                        margin-bottom: 8px;
+                    }
+
+                    .description {
+                        font-size: 15px;
+                        font-weight: $font-weight-medium;
+                        margin-bottom: 6px;
+                        width: 98%;
+                        color: $text-dark-color;
+                    }
+                }
+
+                .title {
+                    font-size: 18px;
+                    font-weight: $font-weight-semibold;
+                    margin-bottom: 18px;
+                }
+
+                .horoscope__block {
+                    @include flex-container();
+                    flex-direction: row;
+                    width: 98%;
+
+                    img {
+                        width: 90px;
+                        height: 90px;
+                        border-radius: 50%;
+                        margin-right: 20px;
+                    }
+                }
+
+                .horoscopeTitle {
+                    font-size: 18px;
+                    font-weight: $font-weight-semibold;
+                    margin-bottom: 18px;
+                    margin-top: 15px;
+                }
+
+                .horoscope__description {
+                    font-size: 15px;
+                    font-weight: $font-weight-medium;
+                    color: $text-dark-color;
+                }
+
+                .block {
+                    display: inline-block;
+                    vertical-align: top;
+                    border-radius: 12px;
+                    padding: 8px 16px;
+                    font-size: 14px;
+                    background-color: $light-bg-color;
+                    margin-bottom: 9px;
+                    margin-right: 9px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .content {
+        .profile {
+            .content__profile {
+                .profile__user {
+                    .user__avatar {
+                        img {
+                            width: 70px;
+                        }
+                    }
+
+                    .user__info {
+                        font-size: 13px;
+                        .info {
+                            .info__city img {
+                                width: 20px;
+                                margin-left: -2px;
+                            }
+                        }
+
+                        .settings {
+                            .settings__link img {
+                                width: 20px;
+                                margin-left: -2px;
+                            }
+                        }
+                    }
+                }
+
+                .profile__navigation {
+                    .navigation__buttons {
+                        .buttons__message {
+                            .message__link {
+                                font-size: 13px;
+                            }
+                        }
+
+                        .buttons__matches {
+                            .matches__link {
+                                font-size: 13px;
+                            }
+                        }
+                    }
+
+                    .navigation__field {
+                        .message__block {
+                            .message {
+                                .avatar {
+                                    width: 50px;
+                                    height: 50px;
+                                }
+
+                                .info {
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+                    }
+
+                    .navigation__profile {
+                        .nameBlock, .surnameBlock, .ageBlock, .cityBlock {
+                            .block {
+                                input {
+                                    width: 140px;
+                                }
+
+                                p {
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+
+                        .photoBlock {
+                            p {
+                                font-size: 14px;
+                            }
+
+                            margin-left: 10px;
+                        }
+
+                        .buttonsBlock {
+                            display: flex;
+                            justify-content: center;
+                            .cancel, .save {
+                                font-size: 14px;
+                                width: 130px;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .content {
+        .profile {
+            .content__profile {
+                .profile__user {
+                    .user__avatar {
+                        img {
+                            width: 70px;
+                        }
+                    }
+
+                    .user__info {
+                        font-size: 12px;
+                        .info {
+                            .info__city img {
+                                width: 20px;
+                                margin-left: -2px;
+                            }
+                        }
+
+                        .settings {
+                            .settings__link img {
+                                width: 20px;
+                                margin-left: -2px;
+                            }
+                        }
+                    }
+                }
+
+                .profile__navigation {
+                    .navigation__buttons {
+                        .buttons__message {
+                            .message__link {
+                                font-size: 12px;
+                            }
+                        }
+
+                        .buttons__matches {
+                            .matches__link {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+
+                    .navigation__field {
+                        .message__block {
+                            .message {
+                                .avatar {
+                                    width: 50px;
+                                    height: 50px;
+                                }
+
+                                .info {
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+
+                    .navigation__profile {
+                        .nameBlock, .surnameBlock, .ageBlock, .cityBlock {
+                            .block {
+                                input {
+                                    width: 126px;
+                                }
+
+                                p {
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+
+                        .photoBlock {
+                            p {
+                                font-size: 13px;
+                            }
+
+                            margin-left: 50px;
+                        }
+
+                        .buttonsBlock {
+                            display: flex;
+                            justify-content: center;
+                            .cancel, .save {
+                                font-size: 13px;
+                                width: 112px;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
