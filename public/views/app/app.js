@@ -1,13 +1,13 @@
 import appComponent from './app.pug.js';
-import {userApi} from '../../js/api/api.js';
-import activeUser from '../../js/api/userApi.js';
+import {Api} from '../../js/api/api.js';
+import activeUser from '../../js/api/user.js';
 import router from '../../router/router.js';
-import {buttonsHandlers} from '../../js/app/appButtons.js';
 
 /**
  * App page class
  */
 export class App {
+  data;
   /**
    * App page constructor
    * @param {Element} root
@@ -19,51 +19,38 @@ export class App {
     * Render page
     */
   async render() {
-    let data;
-    try {
-      data = await userApi.getShortProfile(activeUser.id);
-    } catch (e) {
-      return;
-    }
-    if (data === false) {
-      router.go('/login');
-      return;
-    }
+    this.getUserProfile();
 
     this.root.innerHTML = appComponent();
-    this.root.innerHTML = appComponent();
-
-    const name = data.FirstName + ' ' + data.LastName + ', ' + data.Birthday;
+    const name = this.data.FirstName + ' ' + this.data.LastName + ', ' + this.data.Birthday;
     document.querySelector('.fullname').innerHTML = name;
-    document.querySelector('.info__city p').innerHTML = data.City;
+    document.querySelector('.info__city p').innerHTML = this.data.City;
 
     this.vectorCandidates = [];
-
     try {
       await this.insertCandidate();
     } catch (e) {
       return;
     }
 
-    const logout = document.querySelector('.logout');
-
-    logout.addEventListener('click', async (ev) =>{
-      ev.preventDefault();
-      ev.stopPropagation();
-      try {
-        const res = await userApi.logOut();
-        if (!res) {
-          return;
-        }
-      } catch (e) {
-        return;
-      }
-
-      activeUser.id = -1;
-      router.go('/');
-    });
-
     this.setHandlers();
+  }
+
+  /**
+   * Async function for get user profile from server
+   * @returns 
+   */
+  async getUserProfile() {
+    try {
+      this.data = await Api.getShortProfile(activeUser.id);
+    } catch (e) {
+      return;
+    }
+    
+    if (data === false) {
+      router.go('/login');
+      return;
+    }
   }
 
   /**
@@ -72,7 +59,7 @@ export class App {
    */
   async getCandidate() {
     if (this.vectorCandidates.length === 0) {
-      this.vectorCandidates = await userApi.findCandidate();
+      this.vectorCandidates = await Api.findCandidate();
 
       if (this.vectorCandidates === false) {
         return -1;
@@ -90,7 +77,7 @@ export class App {
     if (candidateId === -1) {
       router.go('/login');
     }
-    const Candidate = await userApi.getLongProfile(candidateId);
+    const Candidate = await Api.getLongProfile(candidateId);
 
     const candidateName = Candidate.FirstName + ' ' +
       Candidate.LastName + ', ' + Candidate.Birthday;
@@ -106,13 +93,50 @@ export class App {
    * Handlers for buttons on page
    */
   setHandlers() {
-    const buttons = document.querySelector('.navigation__icons');
+    const buttons = document.getElementById('navigation__icons');
+    const editProfileButton = document.getElementById('settings__edit');
+    const cancelButton = document.getElementById('cancel__button');
+    const navigationButtons = document.getElementById('navigation__buttons');
+    const navigationField = document.getElementById('navigation__field');
+    const navigationProfile = document.getElementById('navigation__profile');
+    const logout = document.getElementById('logout');
+    
     buttons.addEventListener('click', (ev) =>{
       ev.preventDefault();
       ev.stopPropagation();
       this.insertCandidate();
     });
 
-    buttonsHandlers();
+    editProfileButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      navigationButtons.style.display = 'none';
+      navigationField.style.display = 'none';
+      navigationProfile.style.display = 'flex';
+    });
+
+    cancelButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      navigationButtons.style.display = 'flex';
+      navigationField.style.display = 'flex';
+      navigationProfile.style.display = 'none';
+    });
+
+    logout.addEventListener('click', async (event) =>{
+      event.preventDefault();
+      event.stopPropagation();
+      try {
+        const result = await Api.logOut();
+        if (!result) {
+          return;
+        }
+      } catch (event) {
+        return;
+      }
+
+      activeUser.logout();
+      router.go('/');
+    });
   }
 }
