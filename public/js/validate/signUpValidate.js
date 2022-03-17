@@ -18,7 +18,7 @@ export class SignUpValidation {
       const input = inputs[index];
       SignUp.setErrorVisible(input, 'hidden');
 
-      if (input.classList.contains('form__login')) {
+      if (input.id === 'form__login') {
         validationResult = Validation.validateEmail(input.value);
         if (validationResult) {
           SignUp.setErrorVisible(input, 'visible',
@@ -27,7 +27,7 @@ export class SignUpValidation {
         }
       }
 
-      if (input.classList.contains('form__password')) {
+      if (input.id === 'form__password') {
         validationResult = Validation.validatePassword(input.value);
         if (validationResult) {
           SignUp.setErrorVisible(input, 'visible',
@@ -36,8 +36,8 @@ export class SignUpValidation {
         }
       }
 
-      if (input.classList.contains('form__repeat__passwords')) {
-        const password = document.querySelector('.form__password');
+      if (input.id === 'form__repeat__password') {
+        const password = document.querySelector('#form__password');
         validationResult = Validation.
             validatePasswordsRepeat(password.value, input.value);
         if (validationResult) {

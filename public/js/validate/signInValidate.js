@@ -16,8 +16,7 @@ export class SignInValidation {
     for (let index = 0; index < inputs.length; index++) {
       const input = inputs[index];
       SignIn.setErrorVisible(input, 'hidden');
-
-      if (input.classList.contains('form__login')) {
+      if (input.id === 'form__login') {
         const validationResult = Validation.
             validateEmail(input.value);
         if (validationResult) {
@@ -27,7 +26,7 @@ export class SignInValidation {
         }
       }
 
-      if (input.classList.contains('form__password')) {
+      if (input.id === 'form__password') {
         const validationResult = Validation.
             validatePassword(input.value);
         if (validationResult) {

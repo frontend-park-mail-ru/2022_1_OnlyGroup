@@ -15,6 +15,7 @@ const invalidText = `Field must contain only letters
                      and must be at least 1 characters`;
 const invalidAge = `Field must contain only numbers 
                     and must be at least 2 numbers`;
+const emptyField = 'Field must be filled';
 
 /**
  * Validation class
@@ -27,7 +28,7 @@ export class Validation {
     */
   static validateEmail(email) {
     if (email === '') {
-      return 'Field must be filled';
+      return emptyField;
     }
 
     if (!emailRegExp.test(email)) {
@@ -44,7 +45,7 @@ export class Validation {
     */
   static validatePassword(password) {
     if (password === '') {
-      return 'Field must be filled';
+      return emptyField;
     }
 
     return '';
@@ -71,7 +72,7 @@ export class Validation {
     */
   static validateText(text) {
     if (text === '') {
-      return 'Field must be filled';
+      return emptyField;
     }
 
     if (!textRegExp.test(text)) {
@@ -88,7 +89,7 @@ export class Validation {
     */
   static validateAge(year) {
     if (year === '') {
-      return 'Field must be filled';
+      return emptyField;
     }
 
     if (!yearOfBirth.test(year)) {
