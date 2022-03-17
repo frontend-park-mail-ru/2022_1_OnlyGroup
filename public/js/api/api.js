@@ -1,134 +1,121 @@
 const Port = '8080';
-const IP = 'http://89.208.198.192:';
+const IP = 'http://onlysocial.ddns.net:';
 
 
-export class userApi{
-    static checkLogin = async function() {
-        const response = await fetch(`${IP + Port}/users`, {
-            method: 'GET',
-            credentials: 'include',
-        });
-        if (response.status === 401) {
+export class Api {
+    static checkLogin = async () => {
+        try {
+            const response = await fetch(`${IP + Port}/users`, {
+                method: 'GET', credentials: 'include',
+            });
+            const fetchedUser = await response.json();
+            return fetchedUser.ID;
+        } catch {
             return -1;
         }
-        if (!response.ok) {
-            throw false;
-        }
-        const fetchedUser = await response.json();
-        return fetchedUser.ID;
     }
 
-    static logIn = async function (email, password) {
-        const request = JSON.stringify({Email: email, Password: password});
-        const response = await fetch(`${IP + Port}/users`, {
-            method: 'PUT',
-            credentials: 'include',
-            body: request,
-        });
-        if (!response.ok) {
-            // TODO errors
-            throw 'Error';
+    static logIn = async (email, password) => {
+        try {
+            const request = JSON.stringify({Email: email, Password: password});
+            const response = await fetch(`${IP + Port}/users`, {
+                method: 'PUT',
+                credentials: 'include',
+                body: request,
+            });
+            const fetchedUser = await response.json();
+            return fetchedUser.ID;
+        } catch {
+            return -1;
         }
-        const fetchedUser = await response.json();
-        return fetchedUser.ID;
-
     }
 
-    static logUp = async function(email, password) {
-        const request = JSON.stringify({Email: email, Password: password});
-        const response = await fetch(`${IP + Port}/users`, {
-            method: 'POST',
-            credentials: 'include',
-            body: request,
-        });
-        if (!response.ok) {
-            // TODO errors
-            throw 'Error';
-        }
-        const fetchedUser = await response.json();
-        return fetchedUser.ID;
+    static logUp = async (email, password) => {
+        try {
+            const request = JSON.stringify({Email: email, Password: password});
+            const response = await fetch(`${IP + Port}/users`, {
+                method: 'POST',
+                credentials: 'include',
+                body: request,
+            });
+            const fetchedUser = await response.json();
+            return fetchedUser.ID;
+        } catch {
+            return -1;
+        }        
     }
 
-    static logOut = async function () {
-        const response = await fetch(`${IP + Port}/users`, {
-            method: 'DELETE',
-            credentials: 'include',
-        });
-        if (!response.ok) {
-            // TODO errors
-            throw 'Error';
-        }
-        return true;
+    static logOut = async () => {
+        try {
+            const response = await fetch(`${IP + Port}/users`, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+            return true;
+        } catch {
+            return -1;
+        }        
     }
 
-    static getLongProfile = async function (id) {
-        const response = await fetch(`${IP + Port}/profiles/${id.toString()}`, {
-            method: 'GET',
-            credentials: 'include',
-        });
-        if (response.status === 401) {
+    static getLongProfile = async (id)  => {
+        try {
+            const response = await fetch(`${IP + Port}/profiles/${id.toString()}`, {
+                method: 'GET',
+                credentials: 'include',
+            });
+            const data = await response.json();
+            return data;
+        } catch {
             return false;
         }
-        if (!response.ok) {
-            throw false;
-        }
-        const data = await response.json();
-        return data;
     }
 
-    static getShortProfile = async function(id) {
-        const response = await fetch(`${IP + Port}/profiles/${id.toString()}/shorts`, {
-            method: 'GET',
-            credentials: 'include',
-        });
-        if (response.status === 401) {
+    static getShortProfile = async (id) => {
+        try {
+            const response = await fetch(`${IP + Port}/profiles/${id.toString()}/shorts`, {
+                method: 'GET',
+                credentials: 'include',
+            });
+            const data = await response.json();
+            return data;
+        } catch {
             return false;
         }
-        if (!response.ok) {
-            throw false;
-        }
-        const data = await response.json();
-        return data;
     }
 
-    static changeProfile = async function(newUser) {
-        const request = JSON.stringify({
-            FirstName: newUser.firstName,
-            LastName: newUser.lastName,
-            Birthday: newUser.birthday,
-            City: newUser.city,
-            Interests: newUser.interests,
-            AboutUser: newUser.aboutUser,
-            Gender: newUser.gender,
-        });
-        const response = await fetch(`${IP + Port}/profiles/${newUser.id.toString()}`, {
-            method: 'PUT',
-            credentials: 'include',
-            body: request,
-        });
-        if (response.status === 401) {
+    static changeProfile = async (newUser) => {
+        try {
+            const request = JSON.stringify({
+                FirstName: newUser.firstName,
+                LastName: newUser.lastName,
+                Birthday: newUser.birthday,
+                City: newUser.city,
+                Interests: newUser.interests,
+                AboutUser: newUser.aboutUser,
+                Gender: newUser.gender,
+            });
+            const response = await fetch(`${IP + Port}/profiles/${newUser.id.toString()}`, {
+                method: 'PUT',
+                credentials: 'include',
+                body: request,
+            });
+            return true;
+        } catch {
             return false;
         }
-        if (!response.ok) {
-            throw false;
-        }
-        return true;
     }
 
-    static findCandidate = async function () {
-        const response = await fetch(`${IP + Port}/profiles/candidates`, {
-            method: 'POST',
-            credentials: 'include',
-        });
-        if (response.status === 401) {
+    static findCandidate = async () => {
+        try {
+            const response = await fetch(`${IP + Port}/profiles/candidates`, {
+                method: 'POST',
+                credentials: 'include',
+            });
+            const data = await response.json();
+            return data.Candidates;
+        } catch {
             return false;
         }
-        if (!response.ok) {
-            // TODO errors
-            throw {Error: 'error'};
-        }
-        const data = await response.json();
-        return data.Candidates;
     }
 }
 
