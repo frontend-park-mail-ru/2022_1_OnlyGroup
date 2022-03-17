@@ -4,11 +4,12 @@ const root = document.getElementById('root');
  * Router
  */
 export class Router {
+  #routes;
   /**
    * Class constructor
    */
   constructor() {
-    this.routes = {};
+    this.#routes = {};
   }
 
   /**
@@ -16,11 +17,12 @@ export class Router {
    * @param {*} path
    */
   go(path) {
-    if (typeof this.routes[window.location.pathname] !== undefined) {
-      this.routes[path].render();
-    } else {
-      this.routes['/error'].render();
-    }
+    if (typeof this.#routes[window.location.pathname] !== undefined) {
+      this.#routes[path].render();
+      return;
+    } 
+    
+    this.#routes['/error'].render();
   }
 
   /**
@@ -29,18 +31,14 @@ export class Router {
    * @param {Class} View
    */
   register(path, View) {
-    this.routes[path] = new View(root);
+    this.#routes[path] = new View(root);
   }
 
   /**
    * Render page
    */
   start() {
-    if (typeof this.routes[window.location.pathname] !== undefined) {
-      this.go(window.location.pathname);
-    } else {
-      this.go('/error');
-    }
+    this.go(window.location.pathname);
 
     window.addEventListener('click', (event) => {
       let parentElem = event.target.parentElement;
