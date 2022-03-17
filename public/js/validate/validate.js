@@ -16,16 +16,6 @@ const invalidText = `Field must contain only letters
 const invalidAge = `Field must contain only numbers 
                     and must be at least 2 numbers`;
 
-const emptyResult = {
-  validationResult: false,
-  validationText: 'Field must be filled',
-};
-
-const validResult = {
-  validationResult: true,
-  validationText: '',
-};
-
 /**
  * Validation class
  */
@@ -33,98 +23,79 @@ export class Validation {
   /**
     * Validating email with RegExp
     * @param {string} email
-    * @return {Object}
+    * @return {String}
     */
   static validateEmail(email) {
     if (email === '') {
-      return emptyResult;
+      return 'Field must be filled';
     }
 
     if (!emailRegExp.test(email)) {
-      return {
-        validationResult: false,
-        validationText: invalidEmail,
-      };
+      return invalidEmail;
     }
 
-    return validResult;
+    return '';
   }
 
   /**
     * Validating password with RegExp
     * @param {string} password
-    * @return {Object}
+    * @return {String}
     */
   static validatePassword(password) {
     if (password === '') {
-      return emptyResult;
+      return 'Field must be filled';
     }
 
-    /* if (!passwordRegExp.test(password)) {
-      return {
-        validationResult: false,
-        validationText: invalidPassword,
-      };
-    }*/
-
-    return validResult;
+    return '';
   }
 
   /**
     * Validating passwords on equal
     * @param {string} password
     * @param {string} repeatedPassword
-    * @return {Object}
+    * @return {String}
     */
   static validatePasswordsRepeat(password, repeatedPassword) {
     if (password !== repeatedPassword) {
-      return {
-        validationResult: false,
-        validationText: invalidEqual,
-      };
+      return invalidEqual;
     }
 
-    return validResult;
+    return '';
   }
 
   /**
     * Validating text input with RegExp
     * @param {string} text
-    * @return {Object}
+    * @return {String}
     */
   static validateText(text) {
     if (text === '') {
-      return emptyResult;
+      return 'Field must be filled';
     }
 
     if (!textRegExp.test(text)) {
-      return {
-        validationResult: false,
-        validationText: invalidText,
-      };
+      return invalidText;
     }
 
-    return validResult;
+    return '';
   }
 
   /**
     * Validating age input with RegExp
     * @param {string} year
-    * @return {Object}
+    * @return {String}
     */
   static validateAge(year) {
     if (year === '') {
-      return emptyResult;
+      return 'Field must be filled';
     }
 
     if (!yearOfBirth.test(year)) {
-      return {
-        validationResult: false,
-        validationText: invalidAge,
-      };
+      return invalidAge;
     }
 
-    return validResult;
+    return '';
   }
 }
 

@@ -20,9 +20,9 @@ export class SignInValidation {
       if (input.classList.contains('form__login')) {
         const validationResult = Validation.
             validateEmail(input.value);
-        if (!validationResult.validationResult) {
+        if (validationResult) {
           SignIn.setErrorVisible(input, 'visible',
-              validationResult.validationText);
+              validationResult);
           errors++;
         }
       }
@@ -30,9 +30,9 @@ export class SignInValidation {
       if (input.classList.contains('form__password')) {
         const validationResult = Validation.
             validatePassword(input.value);
-        if (!validationResult.validationResult) {
+        if (validationResult) {
           SignIn.setErrorVisible(input, 'visible',
-              validationResult.validationText);
+              validationResult);
           errors++;
         }
       }

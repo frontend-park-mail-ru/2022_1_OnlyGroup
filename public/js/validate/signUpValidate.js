@@ -14,24 +14,24 @@ export class SignUpValidation {
     let errors = 0;
 
     for (let index = 0; index < inputs.length; index++) {
-      let validationResult = {};
+      let validationResult = '';
       const input = inputs[index];
       SignUp.setErrorVisible(input, 'hidden');
 
       if (input.classList.contains('form__login')) {
         validationResult = Validation.validateEmail(input.value);
-        if (!validationResult.validationResult) {
+        if (validationResult) {
           SignUp.setErrorVisible(input, 'visible',
-              validationResult.validationText);
+              validationResult);
           errors++;
         }
       }
 
       if (input.classList.contains('form__password')) {
         validationResult = Validation.validatePassword(input.value);
-        if (!validationResult.validationResult) {
+        if (validationResult) {
           SignUp.setErrorVisible(input, 'visible',
-              validationResult.validationText);
+              validationResult);
           errors++;
         }
       }
@@ -40,9 +40,9 @@ export class SignUpValidation {
         const password = document.querySelector('.form__password');
         validationResult = Validation.
             validatePasswordsRepeat(password.value, input.value);
-        if (!validationResult.validationResult) {
+        if (validationResult) {
           SignUp.setErrorVisible(password, 'visible',
-              validationResult.validationText);
+              validationResult);
           errors++;
         }
       }
