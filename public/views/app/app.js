@@ -20,9 +20,8 @@ export class App {
     * Render page
     */
   render() {
-    this.getUserProfile();
     this.root.innerHTML = appComponent();
-    this.innerUserInformation();
+    this.getUserProfile();
     this.callInsertCandidate();
     this.setHandlers();
   }
@@ -55,6 +54,7 @@ export class App {
   async getUserProfile() {
     try {
       this.data = await Api.getShortProfile(activeUser.getId());
+      this.innerUserInformation();
     } catch (e) {
       return;
     }
