@@ -1,7 +1,7 @@
 import signInComponent from './signIn.pug.js';
 import {SignInForm} from '../../js/forms/signInForm.js';
-import {userApi} from '../../js/api/api.js';
-import activeUser from '../../js/api/userApi.js';
+import {Api} from '../../js/api/api.js';
+import activeUser from '../../js/api/user.js';
 import router from '../../router/router.js';
 
 /**
@@ -19,16 +19,23 @@ export class SignIn {
    * Render page
    */
   async render() {
-    const userId = await userApi.checkLogin();
-    if (userId !== -1) {
-      activeUser.id = userId;
-      router.go('/profile');
-      return;
-    }
+    this.checkUserLogin();
     this.root.innerHTML = signInComponent();
     this.setHandler();
   }
 
+  /**
+   * Async function for check user login
+   * @returns
+   */
+  async checkUserLogin() {
+    const userId = await Api.checkLogin();
+    if (userId !== -1) {
+      activeUser.setId(userId);
+      router.redirect('/profile');
+      return;
+    }
+  }
 
   /**
    * Event listeners
