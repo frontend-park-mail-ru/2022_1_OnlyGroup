@@ -160,8 +160,8 @@ export class App {
     }
 
     activeUser.logout();
-    router.go('/');
     this.removeHandlers();
+    router.go('/');
   }
 
   /**
@@ -190,7 +190,7 @@ export class App {
   removeHandlers() {
     const elements = this.getDOMElements();
 
-    elements[0].addEventListener('click', (event) => {
+    elements[0].removeEventListener('click', (event) => {
       this.changeEventBehavior(event);
       this.insertCandidate();
     });
@@ -199,7 +199,7 @@ export class App {
 
     elements[2].removeEventListener('click', (event) => this.editProfileActions(elements[3], ['flex', 'flex', 'none'], event));
 
-    elements[4].addEventListener('click', (event) => {
+    elements[4].removeEventListener('click', (event) => {
       this.logoutButton(event);
     });
   }
