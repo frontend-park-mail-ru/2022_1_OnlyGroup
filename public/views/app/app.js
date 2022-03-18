@@ -179,7 +179,7 @@ export class App {
 
     elements[2].addEventListener('click', (event) => this.editProfileActions(elements[3], ['flex', 'flex', 'none'], event));
 
-    elements[4].addEventListener('click', async (event) => {
+    elements[4].addEventListener('click', (event) => {
       this.logoutButton(event);
     });
   }
@@ -199,7 +199,7 @@ export class App {
 
     elements[2].removeEventListener('click', (event) => this.editProfileActions(elements[3], ['flex', 'flex', 'none'], event));
 
-    elements[4].addEventListener('click', async (event) => {
+    elements[4].addEventListener('click', (event) => {
       this.logoutButton(event);
     });
   }
