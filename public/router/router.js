@@ -16,8 +16,9 @@ export class Router {
    * Redirect to page by path
    * @param {*} path
    */
-  go(path) {
+  redirect(path) {
     if (typeof this.#routes[window.location.pathname] !== undefined) {
+      window.history.pushState(null, null, path);
       this.#routes[path].render();
       return;
     } 
@@ -38,7 +39,7 @@ export class Router {
    * Render page
    */
   start() {
-    this.go(window.location.pathname);
+    this.redirect(window.location.pathname);
 
     window.addEventListener('click', (event) => {
       let parentElem = event.target.parentElement;
@@ -46,7 +47,7 @@ export class Router {
         if (event.target.tagName === 'A') {
           event.preventDefault();
 
-          this.go(event.target.pathname);
+          this.redirect(event.target.pathname);
           break;
         }
 
