@@ -24,9 +24,17 @@ export class Api {
                 body: request,
             });
             const fetchedUser = await response.json();
-            return fetchedUser.ID;
+            const result = {
+                body: fetchedUser.ID,
+                status: true
+            };
+            return result;
         } catch {
-            return -1;
+            const result = {
+                body: '',
+                status: false
+            };
+            return result;
         }
     }
 
@@ -39,9 +47,17 @@ export class Api {
                 body: request,
             });
             const fetchedUser = await response.json();
-            return fetchedUser.ID;
+            const result = {
+                body: fetchedUser.ID,
+                status: true
+            };
+            return result;
         } catch {
-            return -1;
+            const result = {
+                body: '',
+                status: false
+            };
+            return result;
         }        
     }
 
