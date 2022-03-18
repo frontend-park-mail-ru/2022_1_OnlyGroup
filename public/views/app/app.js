@@ -19,7 +19,7 @@ export class App {
   /**
     * Render page
     */
-  async render() {
+  render() {
     this.getUserProfile();
     this.root.innerHTML = appComponent();
     this.innerUserInformation();
@@ -42,7 +42,7 @@ export class App {
   /**
    * Async function for inner user information to page
    */
-  async innerUserInformation() {
+  innerUserInformation() {
     const name = this.data.FirstName + ' ' + this.data.LastName + ', ' + this.data.Birthday;
     document.querySelector('.fullname').innerHTML = name;
     document.querySelector('.info__city p').innerHTML = this.data.City;
@@ -54,12 +54,12 @@ export class App {
    */
   async getUserProfile() {
     try {
-      this.data = await Api.getShortProfile(activeUser.id);
+      this.data = await Api.getShortProfile(activeUser.getId());
     } catch (e) {
       return;
     }
     
-    if (data === false) {
+    if (this.data === false) {
       this.removeHandlers();
       router.go('/login');
       return;
