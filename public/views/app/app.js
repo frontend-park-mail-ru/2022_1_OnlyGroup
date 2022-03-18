@@ -61,7 +61,7 @@ export class App {
     
     if (this.data === false) {
       this.removeHandlers();
-      router.go('/login');
+      router.redirect('/login');
       return;
     }
   }
@@ -89,7 +89,7 @@ export class App {
     const candidateId = await this.getCandidate();
     if (candidateId === -1) {
       this.removeHandlers();
-      router.go('/login');
+      router.redirect('/login');
     }
     const Candidate = await Api.getLongProfile(candidateId);
 
@@ -161,7 +161,7 @@ export class App {
 
     activeUser.logout();
     this.removeHandlers();
-    router.go('/');
+    router.redirect('/');
   }
 
   /**
