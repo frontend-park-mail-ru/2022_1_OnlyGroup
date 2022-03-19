@@ -13,10 +13,10 @@ export class Router {
   }
 
   /**
-   * Redirect to page by path
-   * @param {*} path
+   * Go to path page
+   * @param {string} path
    */
-  redirect(path) {
+  go(path) {
     if (typeof this.#routes[window.location.pathname] !== undefined) {
       window.history.pushState(null, null, path);
       this.#routes[path].render();
@@ -24,6 +24,15 @@ export class Router {
     } 
     
     this.#routes['/error'].render();
+  }
+
+  /**
+   * Redirect to page by path
+   * @param {string} path
+   */
+  redirect(path) {
+    window.history.pushState(null, null, path);
+    this.#routes[path].render();
   }
 
   /**
@@ -53,6 +62,11 @@ export class Router {
 
         parentElem = parentElem.parentElement;
       }
+    });
+    
+    window.addEventListener('popstate', (event) => {
+      event.preventDefault();
+      this.#routes[window.location.pathname].render();
     });
   }
 }
