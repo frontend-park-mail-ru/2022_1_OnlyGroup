@@ -8,10 +8,10 @@ import activeUser from '../api/user.js';
  * Sign in events
  */
 export class SignInForm {
-/**
-  * Event of form submit
-  * @param {Event} event
-  */
+  /**
+   * Event of form submit
+   * @param {Event} event
+   */
   static formSubmitEvent = async (event)=> {
     event.preventDefault();
     if (this.#validateErrors() !== 0) {
@@ -54,12 +54,10 @@ export class SignInForm {
    * @returns {number} errors
    */
   static #validateErrors() {
-    let errors = SignInValidation.inputsValidate([
+    return errors = SignInValidation.inputsValidate([
       document.getElementById('form__login'),
       document.getElementById('form__password')
     ]);
-
-    return errors;
   }
 
   /**
