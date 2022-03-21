@@ -20,9 +20,9 @@ let imgSrc = [source + 'vk.svg', source + 'google.svg', source + 'facebook.svg']
 
 
 
-pug_mixins["createInput"] = pug_interp = function(iType, iClass){
+pug_mixins["createInput"] = pug_interp = function(iType, iClass, iD){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Cinput" + (pug_attr("class", pug_classes([iClass], [true]), false, false)+pug_attr("type", iType, true, false)) + "\u002F\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug_attr("class", pug_classes([iClass], [true]), false, false)+pug_attr("type", iType, true, false)+pug_attr("id", iD, true, false)) + "\u002F\u003E";
 };
 pug_mixins["createP"] = pug_interp = function(text, pClass){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -30,17 +30,17 @@ pug_html = pug_html + "\u003Cp" + (pug_attr("class", pug_classes([pClass], [true
 };
 pug_html = pug_html + "\u003Cdiv class=\"main__content\"\u003E\u003Cdiv class=\"overlay\"\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"content__authorize\"\u003E\u003Cdiv class=\"signup\"\u003E\u003Cdiv class=\"authorize__logo\"\u003E\u003Cimg" + (" class=\"logo__img signup__logo__img\""+pug_attr("src", `${source}logo.png`, true, false)) + "\u002F\u003E\u003Ch1 class=\"logo__text signup__logo__text\"\u003EOnlySocial\u003C\u002Fh1\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"authorize__form\"\u003E\u003Cform id=\"form\"\u003E";
 pug_mixins["createP"]('Email', 'form__text__email form__signup');
-pug_mixins["createInput"]('text', 'form__login form__input__require form__signup');
+pug_mixins["createInput"]('text', 'form__login form__input__require form__signup', 'form__login');
 pug_html = pug_html + "\u003Cdiv class=\"form__error signup__error\"\u003E";
 pug_mixins["createP"]('Error: wrong email', 'form__login__error form__input__error');
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 pug_mixins["createP"]('Password', 'form__text__password form__signup');
-pug_mixins["createInput"]('password', 'form__password form__input__require form__signup');
+pug_mixins["createInput"]('password', 'form__password form__input__require form__signup', 'form__password');
 pug_html = pug_html + "\u003Cdiv class=\"form__error signup__error\"\u003E";
 pug_mixins["createP"]('Error: wrong password', 'form__password__error form__input__error');
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 pug_mixins["createP"]('Repeat password', 'form__text__password form__signup');
-pug_mixins["createInput"]('password', 'form__password form__repeat__passwords form__input__require form__signup');
+pug_mixins["createInput"]('password', 'form__password form__repeat__passwords form__input__require form__signup', 'form__repeat__password');
 pug_html = pug_html + "\u003Cbutton class=\"form__button form__signup__btn\" type=\"submit\"\u003ESign up\u003C\u002Fbutton\u003E\u003C\u002Fform\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"form__sign-in\"\u003E";
 pug_mixins["createP"]('Already have account?', '');
 pug_html = pug_html + "\u003Ca href=\"\u002Flogin\"\u003ESign in\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";;return pug_html;}

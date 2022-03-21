@@ -1,7 +1,7 @@
 import { SignUpValidation } from '../validate/signUpValidate.js';
-import {userApi} from "../api/api.js";
+import {Api} from "../api/api.js";
 import {Errors} from "../modules/errors.js";
-import activeUser from "../api/userApi.js";
+import activeUser from "../api/user.js";
 import router from '../../router/router.js';
 
 export class SignUpForm {
@@ -11,35 +11,59 @@ export class SignUpForm {
      */
     static formSubmitEvent = async (event) => {
         event.preventDefault();
-        let errors = SignUpValidation.inputsValidate(document.querySelectorAll('.form__input__require'));
-
-        if (errors !== 0) {
+        if (this.#validateInput() !== 0) {
             return;
         }
-
-        const form = document.querySelectorAll('.form__input__require');
-
-        let emailField, passwordField;
-        form.forEach(field => {
-            if (field.classList.contains('form__login')) {
-                emailField = field;
-            }
-            if (field.classList.contains('form__password')) {
-                passwordField = field;
-            }
-        })
-
-        let userId;
-        try{
-            userId = await userApi.logUp(emailField.value, passwordField.value)
-        } catch (e){
-            Errors.setErrorVisible(passwordField, 'visible', "Email already used");
+        const fields = this.#getFormData();
+        let response = await Api.logUp(fields.emailField.value, fields.passwordField.value);
+        if (!response.status) {
+            Errors.setErrorVisible(fields.emailField, 'visible', "Email already used");
             return;
         }
-        activeUser.id = userId;
-
-        router.go("/profile");
-
+        activeUser.setId(response.body);
+        
+        this.#removeHandlers();
+        router.redirect('/profile');
     }
 
+    /**
+     * Get data form inputs 
+     * @returns {Object}
+     */
+    static #getFormData() {
+        const form = document.querySelectorAll('.form__input__require');
+        let fields = {};
+        form.forEach(field => {
+            if (field.id === 'form__login') {
+                fields.emailField = field;
+            }
+            if (field.id === 'form__password') {
+                fields.passwordField = field;
+            }
+        });
+
+        return fields;
+    }
+    
+    /**
+     * Check input fields
+     * @returns {number} errors
+     */
+    static #validateInput() {
+        let errors = SignUpValidation.inputsValidate([
+            document.getElementById('form__login'),
+            document.getElementById('form__password'),
+            document.getElementById('form__repeat__password')
+        ]);
+
+        return errors;
+    }
+
+    /**
+     * Remove handlers
+     */
+    static #removeHandlers() {
+        const form = document.getElementById('form');
+        form.removeEventListener('submit', this.formSubmitEvent);
+    }
 }

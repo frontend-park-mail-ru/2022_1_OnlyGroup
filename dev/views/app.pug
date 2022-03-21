@@ -52,21 +52,21 @@ mixin createMessage()
                     .settings
                         .settings__link
                             img(src=`${settings}` class="link__img")
-                            a(href="/profile" class="settings__edit") Edit profile
-                            a(href="/" class="logout") Logout
+                            a(href="/profile" class="settings__edit" id='settings__edit') Edit profile
+                            a(href="/" class="logout" id="logout") Logout
             .profile__navigation
-                .navigation__buttons
+                .navigation__buttons#navigation__buttons
                     .buttons__message
                         img(src=`${MsgLight}` class="buttons__message__icon")
                         a(href="" class="message__link") Message
                     .buttons__matches
                         img(src=`${Matches}` class="buttons__matches__icon")
                         a(href="" class="matches__link") Matches
-                .navigation__field
+                .navigation__field#navigation__field
                     +createMessage()
                     +createMessage()
                     +createMessage()
-                .navigation__profile
+                .navigation__profile#navigation__profile
                     form(id="editProfile")
                         .nameBlock
                             .block
@@ -96,13 +96,13 @@ mixin createMessage()
                             p.photoP Change photo:
                             input(class="photo" type="file")
                         .buttonsBlock
-                            button(type="submit" class="cancel") Cancel
+                            button(type="submit" class="cancel" id='cancel__button') Cancel
                             button(type="submit" class="save") Save changes
         .content__feed
             .feed__people
                 .people__photo
                     img(src=`${source}userPhoto.png`)
-                    .navigation__icons
+                    .navigation__icons#navigation__icons
                         +createNavIcons(navIcons)
             .feed__info
                 .info__name

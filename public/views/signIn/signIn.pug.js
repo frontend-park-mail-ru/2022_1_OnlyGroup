@@ -20,9 +20,9 @@ let imgSrc = [source + 'vk.svg', source + 'google.svg', source + 'facebook.svg']
 
 
 
-pug_mixins["createInput"] = pug_interp = function(iType, iClass){
+pug_mixins["createInput"] = pug_interp = function(iType, iClass, iD){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Cinput" + (pug_attr("class", pug_classes([iClass], [true]), false, false)+pug_attr("type", iType, true, false)) + "\u002F\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug_attr("class", pug_classes([iClass], [true]), false, false)+pug_attr("type", iType, true, false)+pug_attr("id", iD, true, false)) + "\u002F\u003E";
 };
 pug_mixins["createP"] = pug_interp = function(text, pClass){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -34,7 +34,7 @@ block: function(){
 pug_html = pug_html + " ";
 }
 }, 'Email', 'form__text__email');
-pug_mixins["createInput"]('text', 'form__login form__input__require');
+pug_mixins["createInput"]('text', 'form__login form__input__require', 'form__login');
 pug_html = pug_html + "\u003Cdiv class=\"form__error\"\u003E";
 pug_mixins["createP"].call({
 block: function(){
@@ -51,7 +51,7 @@ pug_mixins["createInput"].call({
 block: function(){
 pug_html = pug_html + " ";
 }
-}, 'password', 'form__password form__input__require');
+}, 'password', 'form__password form__input__require', 'form__password');
 pug_html = pug_html + "\u003Cdiv class=\"form__error\"\u003E ";
 pug_mixins["createP"]('Error: wrong password', 'form__password__error form__input__error');
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cbutton class=\"form__button\" type=\"submit\"\u003ESign in\u003C\u002Fbutton\u003E\u003C\u002Fform\u003E\u003C\u002Fdiv\u003E\u003Cdiv class=\"form__create-new-account\"\u003E";

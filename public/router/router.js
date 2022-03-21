@@ -4,23 +4,31 @@ const root = document.getElementById('root');
  * Router
  */
 export class Router {
+  #routes;
   /**
    * Class constructor
    */
   constructor() {
-    this.routes = {};
+    this.#routes = {};
+  }
+
+  go(path) {
+    if (typeof this.#routes[window.location.pathname] !== undefined) {
+      window.history.pushState(null, null, path);
+      this.#routes[path].render();
+      return;
+    } 
+    
+    this.#routes['/error'].render();
   }
 
   /**
    * Redirect to page by path
    * @param {*} path
    */
-  go(path) {
-    if (typeof this.routes[window.location.pathname] !== undefined) {
-      this.routes[path].render();
-    } else {
-      this.routes['/error'].render();
-    }
+  redirect(path) {
+    window.history.pushState(null, null, path);
+    this.#routes[path].render();
   }
 
   /**
@@ -29,18 +37,14 @@ export class Router {
    * @param {Class} View
    */
   register(path, View) {
-    this.routes[path] = new View(root);
+    this.#routes[path] = new View(root);
   }
 
   /**
    * Render page
    */
   start() {
-    if (typeof this.routes[window.location.pathname] !== undefined) {
-      this.go(window.location.pathname);
-    } else {
-      this.go('/error');
-    }
+    this.go(window.location.pathname);
 
     window.addEventListener('click', (event) => {
       let parentElem = event.target.parentElement;
@@ -54,6 +58,11 @@ export class Router {
 
         parentElem = parentElem.parentElement;
       }
+    });
+
+    window.addEventListener('popstate', (event) => {
+      event.preventDefault();
+      this.#routes[window.location.pathname].render();
     });
   }
 }

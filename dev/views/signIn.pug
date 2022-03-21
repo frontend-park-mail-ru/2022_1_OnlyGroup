@@ -6,8 +6,8 @@ mixin createSocialImages(imgSrc)
         a(href="#") 
             img(src= iSrc)
 
-mixin createInput(iType, iClass)
-    input(class= iClass, type= iType)
+mixin createInput(iType, iClass, iD)
+    input(class= iClass, type= iType, id= iD)
 
 mixin createP(text, pClass)
     p(class= pClass)= text 
@@ -22,11 +22,11 @@ mixin createP(text, pClass)
         .authorize__form 
             form(id="form" action="#")
                 +createP('Email', 'form__text__email') 
-                +createInput('text', 'form__login form__input__require')
+                +createInput('text', 'form__login form__input__require', 'form__login')
                 .form__error
                     +createP('Error: wrong email', 'form__login__error form__input__error')  
                 +createP('Password', 'form__text__password') 
-                +createInput('password', 'form__password form__input__require') 
+                +createInput('password', 'form__password form__input__require', 'form__password') 
                 .form__error 
                     +createP('Error: wrong password', 'form__password__error form__input__error')
                 button.form__button(type="submit") Sign in
