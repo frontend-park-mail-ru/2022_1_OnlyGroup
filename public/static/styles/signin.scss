@@ -19,7 +19,6 @@
 
 @mixin button-inputs-style() {
     border-radius: 15px;
-    overflow: none;
     cursor: pointer;
     text-decoration: none;
 }
@@ -30,15 +29,6 @@
     opacity: 65%;
     position: absolute;
     z-index: 2;
-
-    @media (max-width: 1600px) {
-        background-repeat: repeat-x;
-        opacity: 85%;
-    }
-
-    @media (max-width: 1150px) {
-        opacity: 95%;
-    }
 }
 
 .content__authorize {
@@ -49,83 +39,9 @@
     border-radius: 28px;
     z-index: 3;
 
-    @media (max-width: 1400px) {
-        @include size(650px, 620px);
-
-        .form__login, .form__password {
-            @include size(500px, 52px);
-        }
-    }
-
-    @media (max-width: 1150px) {
-        @include size(650px, 620px);
-    }
-
-    @media (max-width: 700px) {
-        @include size(550px, 600px);
-
-        .form__login, .form__password {
-            @include size(400px, 48px);
-        }
-
-        .form__button {
-            @include size(360px, 48px);
-        }
-    }
-
-    @media (max-width: 580px) {
-        @include size(450px, 620px);
-
-        .form__login, .form__password {
-            @include size(340px, 44px);
-        }
-
-        .form__button {
-            @include size(310px, 44px);
-        }
-
-        .form__text__email, .form__text__password {
-            margin-left: 0;
-            text-align: center;
-        }
-    }
-
-    @media (max-width: 480px) {
-        @include size(330px, 560px);
-
-        .logo__text {
-            @include text-styles(28px, 14px);
-        }
-
-        .form__create-new-account, .form__sign-in {
-            font-size: 13px;
-        }
-
-        .form__login, .form__password {
-            @include size(230px, 40px);
-            @include text-styles(14px, 14px);
-        }
-
-        .form__text {
-            @include text-styles(26px, 18px);
-        }
-
-        .form__button {
-            @include size(210px, 40px);
-            font-size: 14px;
-            margin-top: 0;
-        }
-
-        .form__text__email, .form__text__password {
-            @include text-styles(14px, 8px);
-            margin-left: 0;
-            text-align: center;
-        }
-    }
-
     .authorize__logo {
         @include flex-container(column);
-            
+
         .logo__text {
             @include text-styles(36px, 0px);
             margin-top: -12px;
@@ -209,6 +125,252 @@
             margin-top: 14px;
             font-weight: $font-weight-medium;
             color: $form-text-color;
+        }
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .overlay {
+        background-repeat: repeat-x;
+        opacity: 85%;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .content__authorize {
+        @include size(650px, 620px);
+    }
+
+    .overlay {
+        opacity: 95%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .content__authorize {
+        @include size(520px, 600px);
+
+        .authorize__form {
+            .form__input__require {
+                @include size(400px, 48px);
+            }
+
+            .form__button {
+                @include size(422px, 48px);
+            }
+
+            .form__error {
+                width: 422px;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .content__authorize {
+        @include size(450px, 570px);
+
+        .authorize__form {
+            .form__input__require {
+                @include size(340px, 44px);
+                @include text-styles(14px, 10px);
+            }
+
+            .form__button {
+                @include size(362px, 44px);
+                font-size: 14px;
+                margin-top: 8px;
+            }
+
+            .form__text__email, .form__text__password {
+                @include text-styles(16px, 8px);
+                margin-top: 8px;
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .form__error {
+                width: 362px;
+                font-size: 14px;
+            }
+        }
+
+        .form__create-new-account {
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .content__authorize {
+        @include size(330px, 520px);
+
+        .authorize__logo {
+            .logo__img {
+                width: 85px;
+                margin-bottom: 4px;
+            }
+
+            .logo__text {
+                @include text-styles(28px, 0px);
+            }
+        }
+
+        .form__create-new-account, .form__sign-in {
+            font-size: 13px;
+        }
+
+        .authorize__form {
+            .form__input__require {
+                @include size(230px, 40px);
+                @include text-styles(14px, 10px);
+            }
+
+            .form__button {
+                @include size(252px, 40px);
+                font-size: 14px;
+                margin-top: 8px;
+            }
+
+            .form__text__email, .form__text__password {
+                @include text-styles(14px, 8px);
+                margin-top: 8px;
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .form__error {
+                width: 250px;
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+@media screen and (max-height: 850px) {
+    @media screen and (min-width: 700px) {
+        .content__authorize {
+            @include size(630px, 560px);
+
+            .authorize__form {
+                .form__input__require {
+                    @include size(480px, 44px);
+                    @include text-styles(14px, 10px);
+                }
+
+                .form__button {
+                    @include size(502px, 44px);
+                    font-size: 18px;
+                    margin-top: 8px;
+                }
+
+                .form__text__email, .form__text__password {
+                    @include text-styles(18px, 8px);
+                    margin-top: 8px;
+                    margin-left: 0;
+                    text-align: center;
+                }
+
+                .form__error {
+                    width: 502px;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 1600px) {
+        .overlay {
+            background-repeat: repeat-x;
+            opacity: 85%;
+        }
+    }
+
+    @media screen and (max-width: 1150px) {
+        .overlay {
+            opacity: 95%;
+        }
+    }
+
+    @media screen and (max-width: 700px) {
+        .content__authorize {
+            @include size(450px, 560px);
+
+            .authorize__form {
+                .form__input__require {
+                    @include size(340px, 44px);
+                    @include text-styles(14px, 10px);
+                }
+
+                .form__button {
+                    @include size(362px, 44px);
+                    font-size: 14px;
+                    margin-top: 8px;
+                }
+
+                .form__text__email, .form__text__password {
+                    @include text-styles(16px, 8px);
+                    margin-top: 8px;
+                    margin-left: 0;
+                    text-align: center;
+                }
+
+                .form__error {
+                    width: 362px;
+                    font-size: 14px;
+                }
+            }
+
+            .form__create-new-account {
+                font-size: 16px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .content__authorize {
+            @include size(330px, 510px);
+
+            .authorize__logo {
+                .logo__img {
+                    width: 85px;
+                    margin-bottom: 4px;
+                }
+
+                .logo__text {
+                    @include text-styles(28px, 0px);
+                }
+            }
+
+            .form__create-new-account, .form__sign-in {
+                font-size: 13px;
+            }
+
+            .authorize__form {
+                .form__input__require {
+                    @include size(230px, 40px);
+                    @include text-styles(14px, 10px);
+                }
+
+                .form__button {
+                    @include size(252px, 40px);
+                    font-size: 14px;
+                    margin-top: 8px;
+                }
+
+                .form__text__email, .form__text__password {
+                    @include text-styles(14px, 8px);
+                    margin-top: 8px;
+                    margin-left: 0;
+                    text-align: center;
+                }
+
+                .form__error {
+                    width: 250px;
+                    font-size: 13px;
+                }
+            }
         }
     }
 }
