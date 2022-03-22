@@ -3,15 +3,15 @@ Tinder
 
 ### [Проект](https://www.google.com/ "project")
 
-### [Репозиторий фронтенда](https://github.com/go-park-mail-ru/2022_1_OnlyGroup "backend repo")
+### [Репозиторий бэкенда](https://github.com/go-park-mail-ru/2022_1_OnlyGroup "backend repo")
 
 ### [Документация](https://www.google.com/ "doc")
 
 ### Команда
 
-  * [Климовский Денис](github.com/kdv2001 "full stack")
-  * [Денисова Анастасия](github.com/antdenv "full stack")
-  * [Петренко Илья](github.com/petrenkilya "full stack")
+  * [Климовский Денис](https://github.com/kdv2001 "full stack")
+  * [Денисова Анастасия](https://github.com/antdenv "full stack")
+  * [Петренко Илья](https://github.com/petrenkilya "full stack")
 
 ### Менторы
 
