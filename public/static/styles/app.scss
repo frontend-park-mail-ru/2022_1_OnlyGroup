@@ -372,11 +372,16 @@
                 @include size(35%, 520px);
                 display: flex;
                 flex-direction: column;
-                padding: 3% 5%;
+                padding-left: 5%;
+                padding-right: 5%;
                 overflow-y: scroll;
                 scrollbar-width: none;
 
                 .info__name {
+                    position: sticky;
+                    top: 0;
+                    padding-top: 20px;
+                    background-color: $bg-color-light;
                     .fullname {
                         font-size: 28px;
                         font-weight: $font-weight-semibold;
@@ -420,6 +425,10 @@
                     font-size: 18px;
                     font-weight: $font-weight-semibold;
                     margin-bottom: 18px;
+                }
+
+                .info__horoscope {
+                    padding-bottom: 20px;
                 }
 
                 .horoscope__block {
