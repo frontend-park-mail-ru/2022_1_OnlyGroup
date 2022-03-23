@@ -1,0 +1,107 @@
+@mixin flex-container($flexDirectionProperty) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $flexDirectionProperty;
+}
+
+@mixin text-styles($fontSize, $marginBottom) {
+    font-size: $fontSize;
+    margin-bottom: $marginBottom;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin button-inputs-style() {
+    border-radius: 15px;
+    overflow: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@mixin default-button() {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    background: $bg-color-light;
+}
+
+.matchBlock {
+    @include flex-container(column);
+    @include size(475px, 373px);
+    background-color: $bg-color-light;
+    border-radius: 15px;
+    padding-top: 32px;
+}
+
+.matchBlock__upper-buttons {
+    @include flex-container(row);
+    @include size(431px, 44px);
+    background-color: $light-bg-color;
+    border-radius: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    button {
+        @include default-button();
+        @include button-inputs-style();
+        @include size(180px, 32px);
+        @include flex-container(row);
+        margin-inline: 14px;
+        border-radius: 12px;
+    }
+}
+
+#match-button {
+    background-color: #f26477;
+    .matchBlock__upper-buttons_button-text {
+        font-weight: $font-weight-semibold;
+        @include text-styles(14px, 0px);
+        margin-left: 12px;
+        color: $bg-color-light;
+    }
+}
+
+#message-button {
+    background-color: $bg-color-light;
+    .matchBlock__upper-buttons_button-text {
+        font-weight: $font-weight-semibold;
+        @include text-styles(14px, 0px);
+        margin-left: 12px;
+        color: $color-dark;
+    }
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    margin-bottom: 56px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+
+    button {
+        @include default-button();
+        @include button-inputs-style();
+        @include size(70px, 70px);
+        background-color: $light-bg-color;
+        border-radius: 50%;
+        align-self: center;
+        justify-self: center;
+        transition: 0.2s linear;
+    }
+
+    .item__img {
+        @include size(70px, 70px);
+        border-radius: 50%;
+    }
+
+    button:hover {
+        transition: 0.2s linear;
+        transform: scale(1.1);
+    }
+}

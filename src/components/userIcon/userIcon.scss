@@ -1,0 +1,108 @@
+@mixin flex-container($flexDirectionProperty) {
+  display: flex;
+  flex-direction: $flexDirectionProperty;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin text-styles($fontSize, $marginBottom) {
+  margin-bottom: $marginBottom;
+  font-size: $fontSize;
+}
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin button-inputs-style() {
+  overflow: none;
+  text-decoration: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.user-icon {
+  @include flex-container(row);
+
+  font-weight: $font-weight-semibold;
+  background-color: $bg-color-light;
+  border-radius: 22px;
+  @include size(475px, 151px);
+  @include text-styles(16, 0);
+}
+
+.user-icon__avatar {
+  @include size(100px, 100px);
+
+  margin-right: 10px;
+  border-radius: 12px;
+}
+
+.user-icon__info-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-icon__info-text {
+  margin-bottom: 3px;
+}
+
+.user-icon__info-box__personal {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  margin-left: 20px;
+}
+
+.user-icon__info-box__personal-location {
+  @include flex-container(row);
+
+  img {
+    margin-right: 8px;
+  }
+
+  div {
+    margin-right: 15px;
+  }
+}
+
+.user-icon__info-box__settings {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12;
+  margin-left: 20px;
+
+  button {
+    color: $settings-link-color;
+    font-weight: $font-weight-semibold;
+    background: #ffff;
+    border: 0;
+    border-radius: 0;
+    opacity: 0.6;
+  }
+
+  img {
+    opacity: 0.6;
+  }
+}
+
+.user-icon__info-box__settings:hover {
+  button {
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  img {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+
+.user-icon__info-location-png {
+  @include size(20px, 20px);
+}
+
+.user-icon__info-settings-png {
+  @include size(25px, 25px);
+}

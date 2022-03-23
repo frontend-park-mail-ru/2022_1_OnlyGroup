@@ -1,0 +1,24 @@
+<form id= "form" action="submit" class="signup">
+    <div class="signup__logo-container">
+        <img src="./static/images/logo.png" class="signup__logo" alt="logo">
+        <p class="signup__logo-text">OnlySocial</p>
+    </div>
+    <div class="signup__signup-container">
+        <div class="signup__signup-form">
+            <p class="signup__signup-text">Электронная почта</p>
+            <input id="signup" required class="input signup__signup_email" type="text">
+            <div class="error-title email-error" id="email-error"></div>
+            <p class="signup__signup-text">Пароль</p>
+            <input id="password" type="password" required class="input signup__signup_password">
+            <div class="error-title password-error" id="password-error"></div>
+            <p class="signup__signup-text">Повторите пароль</p>
+            <input id="repeat-password" type="password" required class="input signup__signup_password">
+            <div class="error-title password-error password-repeat-error" id="password-repeat-error"></div>
+            <button id="form_submit" class="signup__submit-button" type="submit">Зарегистрироваться</button>
+        </div>
+    </div>
+
+    <div class="signup__signin-container">
+        <span class="signup__signin-container_text">Уже есть аккаунт? <a href="/" class="signup__signin-container_signin">Войти!</a></span>
+    </div>
+</form>

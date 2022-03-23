@@ -1,0 +1,87 @@
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin font-style($font-size, $font-weight) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+}
+
+.info {
+  @include size(385px, 525px);
+
+  padding: 40px 45px;
+  background-color: $bg-color-light;
+  border-radius: 20px;
+}
+
+.header-text {
+  @include font-style(28px, 600);
+
+  margin: 0;
+}
+
+.location-text {
+  @include font-style(18px, 500);
+
+  margin-left: 10px;
+  color: $text-dark-color;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.info-description {
+  @include font-style(15px, 500);
+
+  margin-bottom: 30px;
+  color: $text-dark-color;
+}
+
+.info-header {
+  margin-bottom: 30px;
+}
+
+.info-interests {
+  margin-bottom: 35px;
+}
+
+.interests-title,
+.horoscope-title {
+  @include font-style(18px, 600);
+
+  margin-bottom: 20px;
+}
+
+.item {
+  margin-right: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  background-color: $light-bg-color;
+  border-radius: 12px;
+}
+
+.horoscope-description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.horoscope-description-text {
+  @include font-style(15px, 500);
+
+  color: $text-dark-color;
+}
+
+.horoscope-title {
+  margin-bottom: 0;
+}
+
+.horoscope-img {
+  margin-right: 15px;
+}

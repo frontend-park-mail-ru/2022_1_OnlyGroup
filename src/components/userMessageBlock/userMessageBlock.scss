@@ -1,0 +1,156 @@
+@mixin flex-container($flexDirectionProperty) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $flexDirectionProperty;
+}
+
+@mixin text-styles($fontSize, $marginBottom) {
+    font-size: $fontSize;
+    margin-bottom: $marginBottom;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin button-inputs-style() {
+    border-radius: 15px;
+    overflow: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@mixin default-button() {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    background: $bg-color-light;
+}
+
+.user__message {
+    @include flex-container(column);
+    @include size(475px, 762px);
+    border-radius: 15px;
+    background-color: $bg-color-light;
+}
+
+.message__body {
+    @include flex-container(column);
+    @include size(431px, 657px);
+    border-radius: 10px;
+    background-color: $light-bg-color;
+}
+
+.body__message-layout {
+    @include size(391px, 551px);
+    @include flex-container(column);
+    border-radius: 10px;
+    background-color: $bg-color-light;
+    margin-bottom: 20px;
+}
+
+.body__message-input {
+    @include size(391px, 45px);
+    border-radius: 10px;
+    background-color: $bg-color-light;
+}
+
+.message-layout__header {
+    @include size(369px, 60px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #F1F1F1;
+    margin-bottom: 10px;
+}
+
+.user-icon {
+    @include size(48px, 48px);
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-right: 15px;
+}
+
+.header__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    .user-info {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .user-visit__info {
+        font-size: 13px;
+    }
+}
+
+.message-layout__body {
+    @include size(369px, 449px);
+    background-color: $bg-color-light;
+}
+
+.message__header {
+    @include flex-container(row);
+    @include size(431px, 44px);
+    background-color: $light-bg-color;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    button {
+        @include default-button();
+        @include button-inputs-style();
+        @include size(180px, 32px);
+        @include flex-container(row);
+        margin-inline: 14px;
+        border-radius: 12px;
+    }
+    #match__button {
+        background-color: $bg-color-light;
+        .messageBlock__upper-buttons_button-text {
+            font-weight: $font-weight-semibold;
+            @include text-styles(14px, 0px);
+            margin-left: 12px;
+            color: $color-dark;
+        }
+    }
+    #message__button {
+        background-color: $button-dark-color;
+        .messageBlock__upper-buttons_button-text {
+            font-weight: $font-weight-semibold;
+            @include text-styles(14px, 0px);
+            margin-left: 12px;
+            color: $bg-color-light;
+        }
+    }
+}
+
+.body__message-input {
+    @include flex-container(row);
+}
+
+.message-input {
+    @include size(310px, 25px);
+    margin-right: 10px;
+    font-size: 14px;
+    border: none;
+}
+
+.message-input:focus {
+    outline: none;
+}
+
+#send-message__button {
+    border-style: none;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+#send-message__button:hover {
+    transition: 0.2s linear;
+    transform: scale(1.1);
+}

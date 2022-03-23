@@ -1,0 +1,43 @@
+@mixin flex-container($flexDirectionProperty) {
+  display: flex;
+  flex-direction: $flexDirectionProperty;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+.signup {
+  @include flex-container(column);
+  @include size(700px, 720px);
+
+  background-color: $bg-color-light;
+  border-radius: 28px;
+}
+
+@media screen and (max-width: 1150px) {
+  .signup {
+    @include size(620px, 690px);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .signup {
+    @include size(520px, 660px);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .signup {
+    @include size(420px, 640px);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .signup {
+    @include size(360px, 650px);
+  }
+}
