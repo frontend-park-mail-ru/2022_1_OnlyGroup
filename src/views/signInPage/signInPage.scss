@@ -1,0 +1,48 @@
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin flex-container($flexDirectionProperty) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $flexDirectionProperty;
+}
+
+.layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+
+    background-image: url('./static/images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.overlay {
+    @include size(100%, 100vh);
+    background: $overlay-gradient;
+    opacity: 65%;
+    position: absolute;
+    z-index: 2;
+
+    @media (max-width: 1600px) {
+        background-repeat: repeat-x;
+        opacity: 85%;
+    }
+
+    @media (max-width: 1150px) {
+        opacity: 95%;
+    }
+}
