@@ -1,17 +1,17 @@
 <div class="matchBlock">
     <div class="matchBlock__upper-buttons">
-        <button id='message-button'>
+        <button id="match-block__message-button" class="message-button">
             <img src="./static/images/MsgDark.png">
-                <div class="matchBlock__upper-buttons_button-text">Message</div> 
+                <div class="matchBlock__upper-buttons_button-text">Сообщения</div> 
         </button>
-        <button id='match-button'>
+        <button id="match-block__match-button" class="match-button">
             <img src="./static/images/cardsLight.png" class="userIcon__info-location-png" alt="location">
-                <div class="matchBlock__upper-buttons_button-text">Match</div>
+                <div class="matchBlock__upper-buttons_button-text">Совпадения</div>
         </button>
     </div>
     <div class="wrapper">
         {{#each matches}}
-            <button class="match__item"><img src="{{this}}" alt="match user" class="item__img"></button>
+            <button class="match__item button"><img src="{{this}}" alt="match user" class="item__img"></button>
         {{/each}}
     </div>
 </div>
