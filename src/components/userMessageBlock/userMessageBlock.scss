@@ -32,24 +32,25 @@
 
 .user__message {
     @include flex-container(column);
-    @include size(475px, 762px);
+    @include size(475px, 652px);
     border-radius: 15px;
     background-color: $bg-color-light;
 }
 
 .message__body {
     @include flex-container(column);
-    @include size(431px, 657px);
+    @include size(431px, 554px);
     border-radius: 10px;
     background-color: $light-bg-color;
 }
 
 .body__message-layout {
-    @include size(391px, 551px);
+    @include size(391px, 450px);
     @include flex-container(column);
     border-radius: 10px;
     background-color: $bg-color-light;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
+    padding-top: 12px;
 }
 
 .body__message-input {
@@ -66,6 +67,8 @@
     border-radius: 10px;
     background-color: #F1F1F1;
     margin-bottom: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 .user-icon {
@@ -73,6 +76,7 @@
     border-radius: 50%;
     margin-left: 20px;
     margin-right: 15px;
+    object-fit: cover;
 }
 
 .header__info {
@@ -109,22 +113,21 @@
         margin-inline: 14px;
         border-radius: 12px;
     }
-    #match__button {
+    #user-message__message-button {
         background-color: $bg-color-light;
         .messageBlock__upper-buttons_button-text {
             font-weight: $font-weight-semibold;
             @include text-styles(14px, 0px);
-            margin-left: 12px;
+            margin-left: 8px;
             color: $color-dark;
         }
     }
-    #message__button {
-        background-color: $button-dark-color;
+    #user-message__match-button {
         .messageBlock__upper-buttons_button-text {
             font-weight: $font-weight-semibold;
             @include text-styles(14px, 0px);
-            margin-left: 12px;
-            color: $bg-color-light;
+            margin-left: 8px;
+            color: $color-dark;
         }
     }
 }

@@ -54,24 +54,17 @@
         @include flex-container(row);
         margin-inline: 14px;
         border-radius: 12px;
+        font-weight: $font-weight-semibold;
+        font-size: 14px;
     }
-    #match-button {
-        background-color: $bg-color-light;
-        .messageBlock__upper-buttons_button-text {
-            font-weight: $font-weight-semibold;
-            @include text-styles(14px, 0px);
-            margin-left: 12px;
-            color: #000;
-        }
+
+    .messageBlock__upper-buttons_button-text {
+        margin-left: 8px;
     }
-    #message-button {
-        background-color: $button-dark-color;
-        .messageBlock__upper-buttons_button-text {
-            font-weight: $font-weight-semibold;
-            @include text-styles(14px, 0px);
-            margin-left: 12px;
-            color: $bg-color-light;
-        }
+
+    #message-block__message-button {
+        background-color: #9589B9;
+        color: #fff;
     }
 }
 
@@ -89,12 +82,14 @@
 .messageBlock__messages-message {
     @include default-button();
     @include button-inputs-style();
-    @include size(420px, 95px);
-    @include flex-container(row);
-    width: fit-content;
+    @include size(430px, 95px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid $light-bg-color;
-    padding-left: 10px;
-    margin-right: 10px;
+    padding-left: 20px;
+    padding-right: 2px;
     .messageBlock__messages-message__text-block {
         display: flex;
         flex-direction: column;
@@ -117,6 +112,12 @@
         border-radius: 50%;
         margin-left: 70px;
         margin-right: 20px;
+    }
+
+    .messageBlock__container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 }
 

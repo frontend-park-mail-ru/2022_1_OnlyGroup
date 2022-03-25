@@ -1,28 +1,28 @@
 <div class="user__message">
     <div class="message__header">
-        <button id="message__button">
-            <img src="./static/images/MsgLight.png" class="messageBlock__MsgDark-png">
-            <div class="messageBlock__upper-buttons_button-text">Message</div> 
+        <button id="user-message__message-button" class="button">
+            <img src="./static/images/MsgDark.png" class="messageBlock__MsgDark-png message-button">
+            <div class="messageBlock__upper-buttons_button-text">Сообщения</div> 
         </button>
-        <button id="match__button">
-            <img src="./static/images/CardsDark.png" class="messageBlock__cardsDark-png" alt="location">
-            <div class="messageBlock__upper-buttons_button-text">Match</div>
+        <button id="user-message__match-button" class="button">
+            <img src="./static/images/CardsDark.png" class="messageBlock__cardsDark-png match-button" alt="location">
+            <div class="messageBlock__upper-buttons_button-text">Совпадения</div>
         </button>
     </div>
     <div class="message__body">
         <div class="body__message-layout">
             <div class="message-layout__header">
-                <img src="{{userImg}}" alt="user icon" class="user-icon">
+                <img src="" alt="user icon" class="user-icon" id="user-icon">
                 <div class="header__info">
-                    <p class="user-info">{{name}} {{surname}}, {{age}}</p>
-                    <p class="user-visit__info">{{userVisit}}</p>
+                    <p class="user-info" id="user-name"></p>
+                    <p class="user-visit__info" id="user-visit"></p>
                 </div>
             </div>
             <div class="message-layout__body"></div>
         </div>
         <div class="body__message-input">
             <input type="text" required class="message-input">
-            <button id="send-message__button"><img src="./static/images/sendMessageIcon.png" alt="send message icon"></button>
+            <button id="send-message__button" class="button"><img src="./static/images/sendMessageIcon.png" alt="send message icon"></button>
         </div>
     </div>
 </div>

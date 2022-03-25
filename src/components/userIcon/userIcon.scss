@@ -22,19 +22,19 @@
   cursor: pointer;
 }
 
-.user-icon {
+.user-block {
   @include flex-container(row);
 
   font-weight: $font-weight-semibold;
   background-color: $bg-color-light;
-  border-radius: 22px;
-  @include size(475px, 151px);
+  border-radius: 15px;
+  @include size(475px, 130px);
   @include text-styles(16, 0);
 }
 
 .user-icon__avatar {
   @include size(100px, 100px);
-
+  object-fit: cover;
   margin-right: 10px;
   border-radius: 12px;
 }
@@ -51,12 +51,14 @@
 .user-icon__info-box__personal {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   margin-left: 20px;
 }
 
 .user-icon__info-box__personal-location {
-  @include flex-container(row);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 
   img {
     margin-right: 8px;
@@ -105,4 +107,5 @@
 
 .user-icon__info-settings-png {
   @include size(25px, 25px);
+  margin-right: 5px;
 }

@@ -25,8 +25,8 @@
 .changeForm {
     @include flex-container(column);
     @include size(470px, 400px);
-    background-color: $bg-color-light$bg-color-light;
-    border-radius: 28px;
+    background-color: $bg-color-light;
+    border-radius: 15px;
 }
 
 .changeForm__input-block {
@@ -40,7 +40,6 @@
 .changeForm__input-block__input {
     @include flex-container(row);
     align-items: center;
-    margin-block: 3px;
     p {
         font-weight: $font-weight-semibold;
         @include text-styles(16px, 0px);
@@ -124,11 +123,11 @@
         margin-top: 5px;
         transition: 0.1s linear;
     }
-    #changeForm__cancel-botton {
+    #changeForm__cancel-button {
         position: absolute;
         left: 0;
     }
-    #changeForm__save-botton {
+    #changeForm__save-button {
         position: absolute;
         right: 0;
     }

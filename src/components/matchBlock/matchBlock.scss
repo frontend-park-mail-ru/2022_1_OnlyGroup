@@ -32,10 +32,10 @@
 
 .matchBlock {
     @include flex-container(column);
-    @include size(475px, 373px);
+    @include size(475px, 361px);
     background-color: $bg-color-light;
     border-radius: 15px;
-    padding-top: 32px;
+    padding-top: 44px;
 }
 
 .matchBlock__upper-buttons {
@@ -55,7 +55,7 @@
     }
 }
 
-#match-button {
+#match-block__match-button {
     background-color: #f26477;
     .matchBlock__upper-buttons_button-text {
         font-weight: $font-weight-semibold;
@@ -65,7 +65,7 @@
     }
 }
 
-#message-button {
+#match-block__message-button {
     background-color: $bg-color-light;
     .matchBlock__upper-buttons_button-text {
         font-weight: $font-weight-semibold;

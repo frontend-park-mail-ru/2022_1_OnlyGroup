@@ -1,58 +1,28 @@
 <div class="messageBlock">
     <div class="messageBlock__upper-buttons">
-        <button id='message-button'>
+        <button id="message-block__message-button" class="message-button">
             <img src="./static/images/MsgLight.png" class="messageBlock__MsgDark-png">
-                <div class="messageBlock__upper-buttons_button-text">Message</div> 
+            <div class="messageBlock__upper-buttons_button-text">Сообщения</div> 
         </button>
-        <button id='match-button'>
+        <button id="message-block__match-button" class="match-button">
             <img src="./static/images/CardsDark.png" class="messageBlock__cardsDark-png" alt="location">
-                <div class="messageBlock__upper-buttons_button-text">Match</div>
+            <div class="messageBlock__upper-buttons_button-text">Совпадения</div>
         </button>
     </div>
     <div class="messageBlock__messages">
-        {{!-- Add messages --}}
-        <button class="messageBlock__messages-message">
-            <img src="{{imgsrc}}" alt="">
-            <div class="messageBlock__messages-message__text-block">
-                <p class="messageBlock__messages-message__username">{{username}}</p>
-                <p class="messageBlock__messages-message__text">{{message}}</p>
-            </div>
-            <div class="messageBlock__messages-message__counter">
-                {{messageCount}}
-            </div>
-        </button>
-        
-        <button class="messageBlock__messages-message">
-            <img src="{{imgsrc}}" alt="">
-            <div class="messageBlock__messages-message__text-block">
-                <p class="messageBlock__messages-message__username">{{username}}</p>
-                <p class="messageBlock__messages-message__text">{{message}}</p>
-            </div>
-            <div class="messageBlock__messages-message__counter">
-                {{messageCount}}
-            </div>
-        </button>
-
-        <button class="messageBlock__messages-message">
-            <img src="{{imgsrc}}" alt="">
-            <div class="messageBlock__messages-message__text-block">
-                <p class="messageBlock__messages-message__username">{{username}}</p>
-                <p class="messageBlock__messages-message__text">{{message}}</p>
-            </div>
-            <div class="messageBlock__messages-message__counter">
-                {{messageCount}}
-            </div>
-        </button>
-
-        <button class="messageBlock__messages-message">
-            <img src="{{imgsrc}}" alt="">
-            <div class="messageBlock__messages-message__text-block">
-                <p class="messageBlock__messages-message__username">{{username}}</p>
-                <p class="messageBlock__messages-message__text">{{message}}</p>
-            </div>
-            <div class="messageBlock__messages-message__counter">
-                {{messageCount}}
-            </div>
-        </button>
+        {{#each messages}}
+            <button class="messageBlock__messages-message">
+                <div class="messageBlock__container">
+                    <img src="{{this.userMessageIcon}}" alt="" class="user-message__icon">
+                    <div class="messageBlock__messages-message__text-block">
+                        <p class="messageBlock__messages-message__username">{{this.userMessageName}}</p>
+                        <p class="messageBlock__messages-message__text">{{this.userMessage}}</p>
+                    </div>
+                </div>
+                <div class="messageBlock__messages-message__counter">
+                    {{this.messageCount}}
+                </div>
+            </button>
+        {{/each}}
     </div>
 </div>
