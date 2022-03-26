@@ -7,6 +7,9 @@ export class Api {
             const response = await fetch(`${IP + Port}/users`, {
                 method: 'GET', credentials: 'include',
             });
+            if(!response.ok){
+                return -1;
+            }
             const fetchedUser = await response.json();
             return fetchedUser.ID;
         } catch {
@@ -22,6 +25,14 @@ export class Api {
                 credentials: 'include',
                 body: request,
             });
+            if(!response.ok){
+                const error = await response.json();
+                const result = {
+                    body: error.Msg,
+                    status: false
+                };
+                return result;
+            }
             const fetchedUser = await response.json();
             const result = {
                 body: fetchedUser.ID,
@@ -45,6 +56,14 @@ export class Api {
                 credentials: 'include',
                 body: request,
             });
+            if(!response.ok){
+                const error = await response.json();
+                const result = {
+                    body: error.Msg,
+                    status: false
+                };
+                return result;
+            }
             const fetchedUser = await response.json();
             const result = {
                 body: fetchedUser.ID,
@@ -57,7 +76,7 @@ export class Api {
                 status: false
             };
             return result;
-        }        
+        }
     }
 
     static logOut = async () => {
@@ -66,10 +85,13 @@ export class Api {
                 method: 'DELETE',
                 credentials: 'include',
             });
+            if(!response.ok){
+                return false;
+            }
             return true;
         } catch {
-            return -1;
-        }        
+            return false;
+        }
     }
 
     static getLongProfile = async (id)  => {
@@ -78,6 +100,9 @@ export class Api {
                 method: 'GET',
                 credentials: 'include',
             });
+            if(!response.ok){
+                return false;
+            }
             const data = await response.json();
             return data;
         } catch {
@@ -91,6 +116,9 @@ export class Api {
                 method: 'GET',
                 credentials: 'include',
             });
+            if(!response.ok){
+                return false;
+            }
             const data = await response.json();
             return data;
         } catch {
@@ -114,7 +142,8 @@ export class Api {
                 credentials: 'include',
                 body: request,
             });
-            return true;
+            return response.ok;
+
         } catch {
             return false;
         }
@@ -126,6 +155,9 @@ export class Api {
                 method: 'POST',
                 credentials: 'include',
             });
+            if(!response.ok){
+                return false;
+            }
             const data = await response.json();
             return data.Candidates;
         } catch {
