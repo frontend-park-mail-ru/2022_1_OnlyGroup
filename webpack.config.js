@@ -7,6 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
+const version = 1;
 
 const PATHS = {
     src: path.join(__dirname, './src/'),
@@ -17,13 +18,13 @@ module.exports = {
     watch: true,
     resolve: {
         alias: {
-            Assets: path.resolve('src/static'),
-            Components: path.resolve('src/components'),
-            /*Controllers: path.resolve('src/controllers'),
-            Events: path.resolve('src/events'),
-            Models: path.resolve('src/models'),
-            Modules: path.resolve('src/modules'),
-            Views: path.resolve('src/views'),*/
+            _assets: path.resolve('src/static'),
+            _components: path.resolve('src/components'),
+            /*_controllers: path.resolve('src/controllers'),
+            _events: path.resolve('src/events'),
+            _models: path.resolve('src/models'),
+            _modules: path.resolve('src/modules'),
+            _views: path.resolve('src/views'),*/
         },
         extensions: ['.js'],
     },
@@ -32,7 +33,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: './',
-        filename: 'index_bundle.js',
+        filename: `index_bundle_${version}.js`,
     },
     module: {
         rules: [
@@ -79,7 +80,7 @@ module.exports = {
             directory: path.join(__dirname, 'dist'),
         },
         compress: false,
-        port: 3000,
+        port: 9000,
         historyApiFallback: true,
     },
 }
