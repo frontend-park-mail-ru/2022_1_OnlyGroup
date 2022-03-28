@@ -1,19 +1,24 @@
+import { LoginController } from '../../controllers/authController.js';
 import {View} from '../view/baseView.js';
-import signInPage from './signInPage.hbs';
+import loginView from './loginView.hbs';
 
 /**
  * View class for login page
  */
-export class SignInView extends View {
+export class LoginView extends View {
   /**
    * Constructor
    * @param {Object} parent
    */
   constructor({
     parent: parent = document.body,
+    controller: controller = new LoginController({
+      parent: parent,
+    }),
   }) {
     super({
       parent: parent,
+      controller: controller,
     });
   }
 
@@ -22,7 +27,7 @@ export class SignInView extends View {
    * @param {Object} props
    */
   render(props = {}) {
-    this.parent.insertAdjacentHTML('afterbegin', signInPage({}));
+    this.parent.insertAdjacentHTML('afterbegin', loginView({}));
     this.setHandlers();
   }
 
