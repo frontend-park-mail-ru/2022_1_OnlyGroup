@@ -1,10 +1,10 @@
 import {View} from '../view/baseView.js';
-import signUpPage from './signUpPage.hbs';
+import registerView from './registerView.hbs';
 
 /**
  * View class for login page
  */
-export class SignUpView extends View {
+export class RegisterView extends View {
   /**
    * Constructor
    * @param {Object} parent
@@ -22,7 +22,7 @@ export class SignUpView extends View {
    * @param {Object} props
    */
   render(props = {}) {
-    this.parent.insertAdjacentHTML('afterbegin', signUpPage({}));
+    this.parent.insertAdjacentHTML('afterbegin', registerView({}));
     this.setHandlers();
   }
 
