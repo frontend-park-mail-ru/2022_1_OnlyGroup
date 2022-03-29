@@ -1,51 +1,19 @@
-@mixin flex-container($flexDirectionProperty) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: $flexDirectionProperty;
-}
-
-@mixin text-styles($fontSize, $marginBottom) {
-    font-size: $fontSize;
-    margin-bottom: $marginBottom;
-}
-
-@mixin size($width, $height) {
-    width: $width;
-    height: $height;
-}
-
-@mixin button-inputs-style() {
-    border-radius: 15px;
-    overflow: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-@mixin default-button() {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: 0;
-    background: $bg-color-light;
-}
-
 .user__message {
     @include flex-container(column);
-    @include size(475px, 652px);
+    @include size(476px, 652px);
     border-radius: 15px;
     background-color: $bg-color-light;
 }
 
 .message__body {
     @include flex-container(column);
-    @include size(431px, 554px);
+    @include size(430px, 554px);
     border-radius: 10px;
     background-color: $light-bg-color;
 }
 
 .body__message-layout {
-    @include size(391px, 450px);
+    @include size(390px, 450px);
     @include flex-container(column);
     border-radius: 10px;
     background-color: $bg-color-light;
@@ -54,13 +22,13 @@
 }
 
 .body__message-input {
-    @include size(391px, 45px);
+    @include size(390px, 46px);
     border-radius: 10px;
     background-color: $bg-color-light;
 }
 
 .message-layout__header {
-    @include size(369px, 60px);
+    @include size(370px, 60px);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -95,13 +63,13 @@
 }
 
 .message-layout__body {
-    @include size(369px, 449px);
+    @include size(370px, 450px);
     background-color: $bg-color-light;
 }
 
 .message__header {
     @include flex-container(row);
-    @include size(431px, 44px);
+    @include size(430px, 44px);
     background-color: $light-bg-color;
     border-radius: 10px;
     margin-bottom: 14px;

@@ -1,27 +1,3 @@
-@mixin flex-container($flexDirectionProperty) {
-  display: flex;
-  flex-direction: $flexDirectionProperty;
-  align-items: center;
-  justify-content: center;
-}
-
-@mixin text-styles($fontSize, $marginBottom) {
-  margin-bottom: $marginBottom;
-  font-size: $fontSize;
-}
-
-@mixin size($width, $height) {
-  width: $width;
-  height: $height;
-}
-
-@mixin button-inputs-style() {
-  overflow: none;
-  text-decoration: none;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
 .login {
   @include flex-container(column);
   @include size(690px, 610px);
@@ -82,7 +58,7 @@
 }
 
 .input {
-  @include size(515px, 52px);
+  @include size(516px, 52px);
   @include text-styles(18px, 10px);
   @include button-inputs-style();
 
@@ -104,7 +80,7 @@
 .login__submit-button,
 .signup__submit-button {
   @include text-styles(22px, 8px);
-  @include size(515px, 52px);
+  @include size(516px, 52px);
   @include flex-container(row);
   @include button-inputs-style();
 

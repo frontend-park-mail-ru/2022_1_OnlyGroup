@@ -1,15 +1,5 @@
-@mixin size($width, $height) {
-  width: $width;
-  height: $height;
-}
-
-@mixin font-style($font-size, $font-weight) {
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
 .info {
-  @include size(385px, 525px);
+  @include size(386px, 526px);
 
   padding: 40px 45px;
   background-color: $bg-color-light;
