@@ -1,27 +1,3 @@
-@mixin flex-container($flexDirectionProperty) {
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    flex-direction: $flexDirectionProperty;
-}
-
-@mixin text-styles($fontSize, $marginBottom) {
-    font-size: $fontSize;
-    margin-bottom: $marginBottom;
-}
-
-@mixin size($width, $height) {
-    width: $width;
-    height: $height;
-}
-
-@mixin button-inputs-style() {
-    border-radius: 15px;
-    overflow: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
 .changeForm {
     @include flex-container(column);
     @include size(470px, 400px);
@@ -32,9 +8,9 @@
 .changeForm__input-block {
     display: flex;
     flex-direction: column;
-    margin-left: 73px;
-    margin-bottom: 33px;
-    margin-right: 73px;
+    margin-left: 74px;
+    margin-bottom: 34px;
+    margin-right: 74px;
 }
 
 .changeForm__input-block__input {

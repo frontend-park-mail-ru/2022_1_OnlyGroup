@@ -1,40 +1,8 @@
-@mixin flex-container($flexDirectionProperty) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: $flexDirectionProperty;
-}
-
-@mixin text-styles($fontSize, $marginBottom) {
-    font-size: $fontSize;
-    margin-bottom: $marginBottom;
-}
-
-@mixin size($width, $height) {
-    width: $width;
-    height: $height;
-}
-
-@mixin button-inputs-style() {
-    border-radius: 15px;
-    overflow: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-@mixin default-button() {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: 0;
-    background: $bg-color-light;
-}
-
 .messageBlock {
     display: flex;
     flex-direction: column;
     align-items: center;
-    @include size(475px, 385px);
+    @include size(476px, 386px);
     background-color: $bg-color-light;
     border-radius: 15px;
     position: relative;
@@ -43,7 +11,7 @@
 
 .messageBlock__upper-buttons {
     @include flex-container(row);
-    @include size(431px, 44px);
+    @include size(430px, 44px);
     background-color: $light-bg-color;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -71,7 +39,7 @@
 .messageBlock__messages {
     display: inline-block;
     justify-content: center;
-    @include size(430px, 285px);
+    @include size(430px, 286px);
     overflow-y: auto;
     img {
         @include size(70px, 70px);
@@ -82,7 +50,7 @@
 .messageBlock__messages-message {
     @include default-button();
     @include button-inputs-style();
-    @include size(430px, 95px);
+    @include size(430px, 96px);
     display: flex;
     flex-direction: row;
     align-items: center;

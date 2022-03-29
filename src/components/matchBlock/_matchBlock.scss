@@ -1,38 +1,6 @@
-@mixin flex-container($flexDirectionProperty) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: $flexDirectionProperty;
-}
-
-@mixin text-styles($fontSize, $marginBottom) {
-    font-size: $fontSize;
-    margin-bottom: $marginBottom;
-}
-
-@mixin size($width, $height) {
-    width: $width;
-    height: $height;
-}
-
-@mixin button-inputs-style() {
-    border-radius: 15px;
-    overflow: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-@mixin default-button() {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: 0;
-    background: $bg-color-light;
-}
-
 .matchBlock {
     @include flex-container(column);
-    @include size(475px, 361px);
+    @include size(476px, 360px);
     background-color: $bg-color-light;
     border-radius: 15px;
     padding-top: 44px;
@@ -40,7 +8,7 @@
 
 .matchBlock__upper-buttons {
     @include flex-container(row);
-    @include size(431px, 44px);
+    @include size(430px, 44px);
     background-color: $light-bg-color;
     border-radius: 10px;
     padding-top: 6px;

@@ -1,34 +1,10 @@
-@mixin flex-container($flexDirectionProperty) {
-  display: flex;
-  flex-direction: $flexDirectionProperty;
-  align-items: center;
-  justify-content: center;
-}
-
-@mixin text-styles($fontSize, $marginBottom) {
-  margin-bottom: $marginBottom;
-  font-size: $fontSize;
-}
-
-@mixin size($width, $height) {
-  width: $width;
-  height: $height;
-}
-
-@mixin button-inputs-style() {
-  overflow: none;
-  text-decoration: none;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
 .user-block {
   @include flex-container(row);
 
   font-weight: $font-weight-semibold;
   background-color: $bg-color-light;
   border-radius: 15px;
-  @include size(475px, 130px);
+  @include size(476px, 130px);
   @include text-styles(16, 0);
 }
 
