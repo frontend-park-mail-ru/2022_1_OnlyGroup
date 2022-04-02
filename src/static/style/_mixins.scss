@@ -1,0 +1,36 @@
+@mixin flex-container($flexDirectionProperty) {
+    display: flex;
+    flex-direction: $flexDirectionProperty;
+    justify-content: center;
+    align-items: left;
+}
+
+@mixin text-styles($fontSize, $marginBottom) {
+    font-size: $fontSize;
+    margin-bottom: $marginBottom;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin button-inputs-style() {
+    border-radius: 16px;
+    overflow: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@mixin font-style($font-size, $font-weight) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+}
+
+@mixin default-button() {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    background: $bg-color-light;
+}

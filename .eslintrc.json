@@ -1,0 +1,21 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "extends": ["eslint:recommended", "google"],
+    "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module"
+    },
+    "ignorePatterns": ["src/static/js/*.js"],
+    "rules": {
+      "no-undef": "off",
+      "no-invalid-this": "off",
+      "max-len": "off",
+      "new-cap": "off",
+      "no-unused-vars": "off"
+    }
+}

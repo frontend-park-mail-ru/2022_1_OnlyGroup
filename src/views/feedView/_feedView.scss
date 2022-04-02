@@ -1,0 +1,73 @@
+.feedView {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    @include size(100%, 100vh);
+    background: $content-bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: $main-layout;
+}
+
+.feedView__userIcon {
+    position: absolute;
+    left: 180px;
+    top: 68px;
+}
+
+.feedView__messageBlock {
+    position: absolute;
+    left: 180px;
+    top: 216px;
+    transition: opacity 1s;
+}
+
+.feedView__matchBlock {
+    position: absolute;
+    left: 180px;
+    top: 216px;
+    display: none;
+    transition: opacity 1s;
+}
+
+.feedView__changeForm {
+    position: absolute;
+    left: 180px;
+    top: 216px;
+    display: none;
+    transition: opacity 1s;
+}
+
+.feedView__userMessageBlock {
+    position: absolute;
+    left: 180px;
+    top: 216px;
+    display: none;
+    transition: opacity 1s;
+}
+
+.feedView__feedPhotoCard {
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+    top: 68px;
+}
+
+.feedView__feedInfoCard {
+    position: absolute;
+    right: 178px;
+    top: 68px;
+}
+
+// Active classes
+
+.display-flex {
+    display: flex;
+}
+
+.display-none {
+    display: none;
+}
+
