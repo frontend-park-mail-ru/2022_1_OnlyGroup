@@ -1,0 +1,53 @@
+@mixin flex-container($flexDirectionProperty) {
+    display: flex;
+    flex-direction: $flexDirectionProperty;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin text-styles($fontSize, $marginBottom) {
+    font-size: $fontSize;
+    margin-bottom: $marginBottom;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin button-inputs-style() {
+    border-radius: 16px;
+    overflow: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button-component {
+  @include flex-container(column);
+  @include button-inputs-style();
+  color: $bg-color-light;
+  font-weight: $font-weight-medium;
+  background: $button-bg-gradient;
+  border: none;
+}
+
+.button-component:hover {
+  background: $button-bg-gradient-hover;
+}
+
+.login-register-button {
+  @include text-styles(22px, 8px);
+  @include size(516px, 52px);
+}
+
+.edit-profile-button {
+  @include text-styles(14px, 8px);
+  @include size(160px, 32px);
+  border-radius: 8px;
+}
+
+.actions-button {
+  @include text-styles(14px, 8px);
+  @include size(200px, 32px);
+  border-radius: 8px;
+}

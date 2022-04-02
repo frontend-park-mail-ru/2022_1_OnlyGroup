@@ -1,0 +1,22 @@
+@mixin flex-container($flex-direction) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: $flex-direction;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+.text-container {
+    @include flex-container(row);
+    @include size(410px, auto);
+    background-color: #fff;
+    color: black;
+}
+
+.info-text {
+    color: #504A71;
+}

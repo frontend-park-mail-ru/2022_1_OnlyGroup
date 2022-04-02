@@ -1,0 +1,29 @@
+@mixin font-style($font-size, $font-weight) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.text {
+    @include font-style(18px, 500);
+    margin-left: 10px;
+    color: $text-dark-color;
+}
+
+.profile-text {
+    @include font-style(18px, 500);
+    margin-left: 10px;
+    color: $color-dark;
+}
+
+.icon {
+    width: 27px;
+    height: 27px;
+    border-radius: 0;
+}
