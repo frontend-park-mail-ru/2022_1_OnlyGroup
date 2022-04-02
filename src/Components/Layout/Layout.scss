@@ -29,7 +29,7 @@
     border-radius: $border-max;
 }
 
-// Слой для профиля 
+// Слой для профиля
 .user-profile-layout {
     @include size(476px, 130px);
     @include flex-container(row);
@@ -69,7 +69,7 @@
 .messages-layout {
     @include size(500px, 700px);
     @include flex-container(column);
-    background-color: $messages;
+    //background-color: $messages;
     border-radius: $border-min;
 }
 
@@ -77,7 +77,7 @@
 .messages-user-info-layout, .messages-input-layout {
     @include size(470px, 60px);
     @include flex-container(row);
-    background-color: $header;
+    //background-color: $header;
     border-radius: $border-min;
 }
 

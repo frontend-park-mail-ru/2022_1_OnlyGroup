@@ -1,6 +1,9 @@
-import { LoginController } from '../../controllers/authController.js';
 import {View} from '../view/baseView.js';
 import loginView from './loginView.hbs';
+import LoginForm from "../../Components/LoginForm/LoginForm";
+import LoginFormComponent from "../../Components/LoginForm/LoginForm";
+import EventBus from "../../Modules/EventBus";
+import router from "../../Modules/router";
 
 /**
  * View class for login page
@@ -10,25 +13,35 @@ export class LoginView extends View {
    * Constructor
    * @param {Object} parent
    */
-  constructor({
-    parent: parent = document.body,
-    controller: controller = new LoginController({
-      parent: parent,
-    }),
-  }) {
-    super({
-      parent: parent,
-      controller: controller,
-    });
+  constructor({parent}) {
+    // super({parent});
+    // debugger
+    super({parent})
+    this.loginForm = new LoginFormComponent()
   }
 
   /**
    * Render page function
    * @param {Object} props
    */
-  render(props = {}) {
-    this.parent.insertAdjacentHTML('afterbegin', loginView({}));
-    this.setHandlers();
+  render() {
+    let rendered = this.loginForm.render();
+    this.parent.innerHTML = rendered;
+    this.loginForm.mount();
+    EventBus.addEventListener('api finished', this.view.rerfeshuserinfo)
+    EventBus.addEventListener('form-submit', ()=>{
+      //api получить авторизаиця
+      сцьлцу
+      сцулошцус
+      EventBus.emitEventListener('login suscess', {wcjiwecwbnecnwec})
+    })
+    EventBus.addEventListener('login suscees', ()=>{
+      router.go("/profile")
+    })
+
+    this.loginForm.button.button
+    // this.parent.insertAdjacentHTML('afterbegin', );
+    // this.setHandlers();
   }
 
   /**
@@ -71,8 +84,9 @@ export class LoginView extends View {
    * Add event listeners on elements
    */
   setHandlers() {
-    const form = document.getElementById('form');
-    form.addEventListener('click', this.login.bind(this));
+
+    // const form = document.getElementById('form');
+    // form.addEventListener('click', this.login.bind(this));
   }
 
   /**

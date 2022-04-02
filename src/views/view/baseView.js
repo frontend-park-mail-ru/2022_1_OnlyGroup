@@ -8,14 +8,8 @@ export class View {
      * @param {Object} controller
      * @param {Object} routing
      */
-  constructor({
-    parent = document.body,
-    controller,
-    routing = () => {},
-  }) {
+  constructor({parent}) {
     this.parent = parent;
-    this.controller = controller;
-    this.routing = routing;
   }
 
   /**
