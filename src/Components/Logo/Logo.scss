@@ -1,0 +1,27 @@
+@mixin flex-container($flex-direction) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: $flex-direction;
+}
+
+@mixin text-styles($fontSize, $marginBottom) {
+    font-size: $fontSize;
+    margin-bottom: $marginBottom;
+}
+
+.logo {
+    @include flex-container(column);
+    width: fit-content;
+}
+
+.logo-title {
+  @include text-styles(36px, 0);
+  margin-top: -12px;
+  font-weight: $font-weight-medium;
+  letter-spacing: 1%;
+  background: $logo-text-gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
