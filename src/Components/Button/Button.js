@@ -1,27 +1,28 @@
 import Button from './Button.hbs';
-import IdGenerator from "../../Modules/idGenerator";
+import {BaseComponent} from "../Base/Base";
 
-export class ButtonComponent {
-    constructor({styles, text}) {
-        this.id = IdGenerator.getId();
+export class ButtonComponent extends BaseComponent{
+    constructor({styles, text, onClick}) {
+        super({styles});
         this.buttonText = text
-        this.styles = styles;
+        this.onClick = onClick;
     }
     render() {
         let styles = this.styles.join(' ');
-        const template = Button({buttonId: this.id, buttonText: this.buttonText, styles: styles});
-        return template;
+        return Button({buttonId: this.id, buttonText: this.buttonText, styles: styles});
     }
-    mount(callback){
-        this.button = document.getElementById(this.id);
-        this.callback = callback;
-        this.button.addEventListener('click', callback);
+    mount(){
+        this.checkFound();
+        this.elem.addEventListener('click', this.onClick);
     }
     unmount(){
-        this.button.removeEventListener('click', this.callback);
+        if(this.elem){
+            this.elem.removeEventListener('click', this.onClick);
+        }
     }
     changeText(text){
+        this.checkFound();
         this.buttonText = text
-        this.button.innerText=text
+        this.button.innerText = text
     }
 }

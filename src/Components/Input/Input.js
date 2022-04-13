@@ -1,19 +1,27 @@
 import Input from './Input.hbs';
 import idGenerator from "../../Modules/idGenerator";
+import {BaseComponent} from "../Base/Base";
 
-export class InputComponent {
+export class InputComponent extends BaseComponent{
     constructor({type, styles}) {
+        super({styles})
         this.type = type;
         this.id = idGenerator.getId();
-        this.styles = styles
     }
     render() {
-        return Input({inputType: this.type, inputId: this.id, styles: this.styles});
+        let styles = this.styles.join(' ');
+        return Input({inputType: this.type, inputId: this.id, styles: styles});
     }
     getValue(){
-        if (!this.input){
-            this.input = document.getElementById(this.id)
+        this.checkFound();
+        return this.elem.value;
+    }
+    setError(visible){
+        this.checkFound();
+        if(visible){
+            this.elem.classList.add('input-error');
+            return;
         }
-        return this.input.value
+        this.elem.classList.remove('input-error');
     }
 }

@@ -23,5 +23,29 @@ body {
   background-color: black;
 }
 
+@for $i from 1 through 100 {
+  .ml-#{$i} {
+    margin-left: $i;
+  }
 
+  .mr-#{$i} {
+    margin-right: $i;
+  }
+
+  .mt-#{$i} {
+    margin-top: $i;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: $i;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
 

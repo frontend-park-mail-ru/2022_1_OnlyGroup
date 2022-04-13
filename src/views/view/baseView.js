@@ -16,7 +16,7 @@ export class View {
      * Render function
      * @param {Object} props
      */
-  render(props = {}) {}
+  render() {}
 
   /**
      * Function for set handlers before render

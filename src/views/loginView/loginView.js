@@ -4,6 +4,7 @@ import LoginForm from "../../Components/LoginForm/LoginForm";
 import LoginFormComponent from "../../Components/LoginForm/LoginForm";
 import EventBus from "../../Modules/EventBus";
 import router from "../../Modules/router";
+import {TextComponent} from "../../Components/Text/Text";
 
 /**
  * View class for login page
@@ -17,7 +18,8 @@ export class LoginView extends View {
     // super({parent});
     // debugger
     super({parent})
-    this.loginForm = new LoginFormComponent()
+    this.loginForm = new LoginFormComponent({})
+    this.loginForm.components.emailError = new TextComponent({'error text', 'ijirhwew'})
   }
 
   /**
@@ -28,29 +30,7 @@ export class LoginView extends View {
     let rendered = this.loginForm.render();
     this.parent.innerHTML = rendered;
     this.loginForm.mount();
-    EventBus.addEventListener('api finished', this.view.rerfeshuserinfo)
-    EventBus.addEventListener('form-submit', ()=>{
-      //api получить авторизаиця
-      сцьлцу
-      сцулошцус
-      EventBus.emitEventListener('login suscess', {wcjiwecwbnecnwec})
-    })
-    EventBus.addEventListener('login suscees', ()=>{
-      router.go("/profile")
-    })
-
-    this.loginForm.button.button
-    // this.parent.insertAdjacentHTML('afterbegin', );
-    // this.setHandlers();
-  }
-
-  /**
-   * Function for login user (connect with API)
-   * @param {Event} event
-   */
-  login(event) {
-    // TODO: set controller
-  }
+e
 
   /**
    * Function for show errors on page
@@ -75,7 +55,7 @@ export class LoginView extends View {
     const errors = document.querySelectorAll('.error-title');
     console.log(errors.length);
     for (let i = 0; i < errors.length; i++) {
-      errors[i].style.borderColor = '#594c74';
+      errors[i].style.borderColor = '#594C74';
       errors[i].visibility = 'hidden';
     }
   }
@@ -93,11 +73,11 @@ export class LoginView extends View {
    * Remove event listeners from elements
    */
   removeHandlers() {
-    const form = document.getElementById('form');
-    if (form) {
-      form.removeEventListener('click', this.login.bind(this));
-    }
-
-    this.parent.innerHtml = '';
+    // const form = document.getElementById('form');
+    // if (form) {
+    //   form.removeEventListener('click', this.login.bind(this));
+    // }
+    //
+    // this.parent.innerHtml = '';
   }
 }

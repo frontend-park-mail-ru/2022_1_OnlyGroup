@@ -1,4 +1,5 @@
 import {LoginView} from './../../views/loginView/loginView.js'
+import EventBus from "../../Modules/EventBus";
 
 export default new class LoginController{
     constructor() {
@@ -7,7 +8,7 @@ export default new class LoginController{
 
     start(){
         this.view.render();
-
+        EventBus.addEventListener('action-login', )
     }
     stop(){
         this.view.unmount();

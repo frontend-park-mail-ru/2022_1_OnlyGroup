@@ -21,7 +21,7 @@
     }
 
     /**
-     * Get all listeners 
+     * Get all listeners
      * @returns {Array} listeners
      */
     getEventListeners() {
@@ -30,8 +30,8 @@
 
     /**
      * Add event listener to Event Bus
-     * @param {String} eventName 
-     * @param {Function} callbackFunction 
+     * @param {String} eventName
+     * @param {Function} callbackFunction
      */
     addEventListener(eventName, callbackFunction) {
         this.listeners[eventName] = this.listeners[eventName] ? this.listeners[eventName] : [];
@@ -51,10 +51,10 @@
 
     /**
      * Emit event listener
-     * @param {String} eventName 
+     * @param {String} eventName
      * @param {Object} parameters
      */
-    emitEventListener(eventName, parameters) {
+    emitEvent(eventName, parameters) {
         if (this.listeners[eventName]) {
             this.listeners[eventName].forEach((listener) => listener(parameters ? parameters : {}));
         }
