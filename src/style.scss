@@ -1,23 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
-@import "./static/style/_mixins.scss";
 @import "./static/style/_variables.scss";
-@import "./components/loginForm/_loginForm.scss";
-@import "./components/signupForm/_signupForm.scss";
-@import "./components/feedPhotoCard/_feedPhotoCard.scss";
-@import "./components/feedInfoCard/_feedInfoCard.scss";
-@import "./components/userIcon/_userIcon.scss";
-@import "./views/loginView/_loginView.scss";
-@import "./components/changeForm/_changeForm.scss";
-@import "./components/changeForm/_changeForm.scss";
-@import "./components/matchBlock/_matchBlock.scss";
-@import "./components/messageBlock/_messageBlock.scss";
-@import "./components/userMessageBlock/_userMessageBlock.scss";
-@import "./views/feedView/_feedView.scss";
+@import "./Components/Input/Input.scss";
+@import "./Components/Button/Button.scss";
+@import "./Components/Interest/Interest.scss";
+@import "./Components/TextWithIcon/TextWithIcon.scss";
+@import "./Components/Message/Message.scss";
+@import "./Components/FeedPhotoCard/FeedPhotoCard.scss";
+@import "./Components/Layout/Layout.scss";
+@import "./Components/Logo/Logo.scss";
+@import "./Components/ButtonWithIcon/ButtonWithIcon.scss";
+@import "./Components/Text/Text.scss";
+@import "./Components/InputWithIcon/InputWithIcon.scss";
 
 * {
   font-family: Montserrat, sans-serif;
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: black;
 }
 
 
