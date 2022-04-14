@@ -16,6 +16,7 @@ export class ButtonComponent extends BaseComponent{
         this.elem.addEventListener('click', this.onClick);
     }
     unmount(){
+        super.unmount();
         if(this.elem){
             this.elem.removeEventListener('click', this.onClick);
         }

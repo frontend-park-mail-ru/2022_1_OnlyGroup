@@ -4,12 +4,13 @@ import router from "../../Modules/router";
 import {BaseComponent} from "../Base/Base";
 
 export class LogoComponent extends BaseComponent{
-    constructor() {
-        super({styles: Array.from("")});
+    constructor({styles}) {
+        super({styles});
     }
 
     render() {
-        return Logo({id: this.id});
+        const styles = this.styles.join(' ');
+        return Logo({id: this.id, styles: styles});
     }
 
     static onCLick(ev){
@@ -23,6 +24,7 @@ export class LogoComponent extends BaseComponent{
     }
 
     unmount(){
+        super.unmount();
         if(this.elem){
             this.elem.removeEventListener('click', LogoComponent.onCLick);
         }

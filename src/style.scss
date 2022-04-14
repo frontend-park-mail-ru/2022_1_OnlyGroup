@@ -7,11 +7,14 @@
 //@import "./Components/Message/Message.scss";
 //@import "./Components/FeedPhotoCard/FeedPhotoCard.scss";
 @import "./Components/Layout/Layout.scss";
-//@import "./Components/Logo/Logo.scss";
+@import "./Components/Logo/Logo.scss";
+@import "./Components/Input/Input.scss";
 //@import "./Components/ButtonWithIcon/ButtonWithIcon.scss";
-//@import "./Components/Text/Text.scss";
+@import "./Components/Text/Text.scss";
 //@import "./Components/InputWithIcon/InputWithIcon.scss";
 @import "Components/LoginForm/LoginForm.scss";
+@import "views/loginView/loginView.scss";
+@import "helpers.scss";
 
 * {
   font-family: Montserrat, sans-serif;
@@ -22,30 +25,3 @@
 body {
   background-color: black;
 }
-
-@for $i from 1 through 100 {
-  .ml-#{$i} {
-    margin-left: $i;
-  }
-
-  .mr-#{$i} {
-    margin-right: $i;
-  }
-
-  .mt-#{$i} {
-    margin-top: $i;
-  }
-
-  .mb-#{$i} {
-    margin-bottom: $i;
-  }
-}
-
-.flex {
-  display: flex;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-

@@ -54,7 +54,7 @@
      * @param {String} eventName
      * @param {Object} parameters
      */
-    emitEvent(eventName, parameters) {
+    emitEvent(eventName, parameters = null) {
         if (this.listeners[eventName]) {
             this.listeners[eventName].forEach((listener) => listener(parameters ? parameters : {}));
         }

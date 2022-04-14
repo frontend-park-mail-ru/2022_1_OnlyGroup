@@ -15,9 +15,7 @@ export class TextComponent extends BaseComponent{
     }
 
     setText(text){
-        this.checkFound();
         this.textContent = text;
-        this.elem.innerText = text;
     }
 
 }

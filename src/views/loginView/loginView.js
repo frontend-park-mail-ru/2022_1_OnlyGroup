@@ -10,74 +10,36 @@ import {TextComponent} from "../../Components/Text/Text";
  * View class for login page
  */
 export class LoginView extends View {
-  /**
-   * Constructor
-   * @param {Object} parent
-   */
-  constructor({parent}) {
-    // super({parent});
-    // debugger
-    super({parent})
-    this.loginForm = new LoginFormComponent({})
-    this.loginForm.components.emailError = new TextComponent({'error text', 'ijirhwew'})
-  }
+    #loginForm;
 
-  /**
-   * Render page function
-   * @param {Object} props
-   */
-  render() {
-    let rendered = this.loginForm.render();
-    this.parent.innerHTML = rendered;
-    this.loginForm.mount();
-e
-
-  /**
-   * Function for show errors on page
-   * @param {Object} error
-   */
-  showErrors(error) {
-    if (error.emailError ) {
-      document.getElementById('login').style.borderColor = '#CF5151';
-      document.getElementById('email-error').innerHTML = error.emailError;
+    constructor({parent}) {
+        super({parent});
+        this.#loginForm = new LoginFormComponent({onSubmit: this.formSubmit});
     }
 
-    if (error.passwordError) {
-      document.getElementById('password').style.borderColor = '#CF5151';
-      document.getElementById('password-error').innerHTML = error.passwordError;
+    render() {
+        let rendered = this.#loginForm.render();
+        this.parent.innerHTML = loginView({inner: rendered});
+        this.#loginForm.mount();
     }
-  }
 
-  /**
-   * Function for remove errors from page
-   */
-  removeErrors() {
-    const errors = document.querySelectorAll('.error-title');
-    console.log(errors.length);
-    for (let i = 0; i < errors.length; i++) {
-      errors[i].style.borderColor = '#594C74';
-      errors[i].visibility = 'hidden';
+    formSubmit({Email, Password}){
+        EventBus.emitEvent('action-login', {Email, Password});
     }
-  }
 
-  /**
-   * Add event listeners on elements
-   */
-  setHandlers() {
+    setUnloginned(){
+        this.#loginForm.setUnloginned();
+        this.#loginForm.unmount();
+        this.render();
+    }
 
-    // const form = document.getElementById('form');
-    // form.addEventListener('click', this.login.bind(this));
-  }
+    setValidationError({Email, Password, PasswordRepeat}){
+        this.#loginForm.setValidationError({Email, Password});
+        this.#loginForm.unmount();
+        this.render();
+    }
 
-  /**
-   * Remove event listeners from elements
-   */
-  removeHandlers() {
-    // const form = document.getElementById('form');
-    // if (form) {
-    //   form.removeEventListener('click', this.login.bind(this));
-    // }
-    //
-    // this.parent.innerHtml = '';
-  }
+    unmount(){
+        this.#loginForm.unmount();
+    }
 }

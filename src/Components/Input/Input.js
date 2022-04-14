@@ -3,25 +3,22 @@ import idGenerator from "../../Modules/idGenerator";
 import {BaseComponent} from "../Base/Base";
 
 export class InputComponent extends BaseComponent{
-    constructor({type, styles}) {
+    constructor({type, styles, label}) {
         super({styles})
         this.type = type;
-        this.id = idGenerator.getId();
+        this.value = '';
+        this.label = label ? label : null;
     }
     render() {
         let styles = this.styles.join(' ');
-        return Input({inputType: this.type, inputId: this.id, styles: styles});
+        return Input({inputType: this.type, inputId: this.id, styles: styles, value: this.value, label: this.label, error: this.error});
     }
     getValue(){
         this.checkFound();
+        this.value = this.elem.value;
         return this.elem.value;
     }
-    setError(visible){
-        this.checkFound();
-        if(visible){
-            this.elem.classList.add('input-error');
-            return;
-        }
-        this.elem.classList.remove('input-error');
+    setError(error){
+        this.error = error
     }
 }

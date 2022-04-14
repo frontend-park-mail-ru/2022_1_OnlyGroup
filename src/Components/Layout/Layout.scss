@@ -17,7 +17,6 @@
 
 // Слой для авторизации
 .login-layout {
-    @include size(690px, 610px);
     @include flex-container(column);
     border-radius: $border-max;
 }

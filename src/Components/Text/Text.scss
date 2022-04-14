@@ -1,22 +1,11 @@
-@mixin flex-container($flex-direction) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: $flex-direction;
+.text{
+    font-family: 'Montserrat';
+    font-style: normal;
 }
 
-@mixin size($width, $height) {
-    width: $width;
-    height: $height;
-}
+.login-error-text{
 
-.text-container {
-    @include flex-container(row);
-    @include size(410px, auto);
-    background-color: #fff;
-    color: black;
-}
+    color: #CF5151;
+    font-weight: 500;
 
-.info-text {
-    color: #504A71;
 }
