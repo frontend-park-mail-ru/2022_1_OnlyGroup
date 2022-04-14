@@ -1,27 +1,25 @@
-@mixin flex-container($flex-direction) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: $flex-direction;
-}
-
-@mixin text-styles($fontSize, $marginBottom) {
-    font-size: $fontSize;
-    margin-bottom: $marginBottom;
-}
-
-.logo {
-    @include flex-container(column);
-    width: fit-content;
+.logo-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-title {
-  @include text-styles(36px, 0);
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  letter-spacing: 0.01em;
   margin-top: -12px;
-  font-weight: $font-weight-medium;
-  letter-spacing: 1%;
-  background: $logo-text-gradient;
+
+  background: linear-gradient(180deg, #000000 0%, rgba(103, 31, 255, 0.87) 100%);
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
+  //background-clip: text;
+  text-fill-color: transparent;
+}
+
+.logo-view-login{
+  margin-bottom: 25px;
 }

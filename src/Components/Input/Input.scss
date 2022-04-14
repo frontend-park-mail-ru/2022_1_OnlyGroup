@@ -1,41 +1,32 @@
-@mixin text-styles($fontSize, $marginBottom) {
-    font-size: $fontSize;
-    margin-bottom: $marginBottom;
-}
-
-@mixin size($width, $height) {
-    width: $width;
-    height: $height;
-}
-
-@mixin button-inputs-style() {
-    border-radius: $border-min;
-    overflow: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.input-component {
-  @include button-inputs-style();
-  outline: none;
-  border: $input-border;
-  color: $color-dark;
-}
-
-.edit-profile-input {
-  @include size(220px, 32px);
-  border-radius: 8px;
-  padding-left: 15px;
-}
-
-.message-input {
-  @include size(470px, 60px);
+.input-component{
+  height: 52px;
+  border: 1px solid #594c74;
+  box-sizing: border-box;
+  border-radius: 15px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 50%;
   padding-left: 20px;
-  font-size: 16px;
+  color: black;
 }
 
-.login-register-input {
-  @include size(516px, 52px);
-  padding-left: 20px;
-  font-size: 16px;
+.login-register-input{
+  width: 100%;
 }
+
+.input-container-text__error{
+  color: #CF5151;
+  font-weight: 500;
+}
+
+.input-container__label {
+  font-weight: 600;
+}
+
+.input-component__error {
+  border-color: tomato;
+}
+
+
