@@ -91,5 +91,6 @@ Thumbs.db
 Terms
 Privacy
 
+*.pug.js
 *.pug.jspackage-lock.json
 package-lock.json
