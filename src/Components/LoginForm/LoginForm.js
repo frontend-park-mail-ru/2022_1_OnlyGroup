@@ -1,16 +1,16 @@
-import idGenerator from '../../Modules/idGenerator';
 import LoginForm from './LoginForms.hbs';
 import {ButtonComponent} from '../Button/Button';
 import {InputComponent} from '../Input/Input';
 import {TextComponent} from '../Text/Text';
 import {LogoComponent} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
+import {loginViewNames} from '../../Modules/ViewConsts';
+import {AppPaths} from '../../Modules/Router';
 
 /**
  * Login form smart component
  */
 export default class LoginFormComponent extends BaseComponent {
-    #components;
     #onSubmit;
     #onLogoClick;
 
@@ -20,29 +20,39 @@ export default class LoginFormComponent extends BaseComponent {
      * @param {function}onLogoClick
      */
     constructor({onSubmit, onLogoClick}) {
-        super({styles: []});
+        super({});
         this.#onSubmit = onSubmit;
         this.#onLogoClick = onLogoClick;
-        this.#components = {};
-        this.#components.logo = new LogoComponent({styles: ['logo-view-login'], onClick: this.onLogoClick});
-        this.#components.emailInput = new InputComponent({
+        this.components.logo = new LogoComponent({styles: ['logo-BaseView-login'], onClick: this.logoClick});
+        this.components.emailInput = new InputComponent({
             type: 'text',
-            label: 'Email',
+            label: loginViewNames.emailTittle,
             styles: ['login-register-input', 'w-full'],
         });
-        this.#components.passwordInput = new InputComponent({
+        this.components.passwordInput = new InputComponent({
             type: 'password',
-            label: 'Пароль',
+            label: loginViewNames.passwordTitle,
             styles: ['login-register-input', 'w-full'],
         });
-        this.#components.mainError = new TextComponent({
+        this.components.mainError = new TextComponent({
             text: '',
             styles: ['login-error-text'],
         });
-        this.#components.button = new ButtonComponent({
-            text: 'Войти',
+        this.components.button = new ButtonComponent({
+            text: loginViewNames.buttonTittle,
             styles: ['login-register-button'],
             onClick: this.onButtonClick,
+        });
+
+        this.components.registerContainer = new BaseComponent({styles: ['login-form-register-offer-container', 'w-full']});
+        this.components.registerContainer.components.registerOffer = new TextComponent({
+            text: loginViewNames.registerOffer,
+            styles: [],
+        });
+        this.components.registerContainer.components.registerLink = new TextComponent({
+            text: loginViewNames.registerLinkTittle,
+            styles: [],
+            href: AppPaths.logupPage,
         });
     }
 
@@ -50,7 +60,7 @@ export default class LoginFormComponent extends BaseComponent {
      * @callback Callback for logo click
      * @param {Event}ev
      */
-    onLogoClick(ev) {
+    logoClick = (ev) => {
         ev.preventDefault();
         this.#onLogoClick();
     }
@@ -69,8 +79,8 @@ export default class LoginFormComponent extends BaseComponent {
      */
     formSubmit = (ev) => {
         ev.preventDefault();
-        const email = this.#components.emailInput.getValue();
-        const password = this.#components.passwordInput.getValue();
+        const email = this.components.emailInput.getValue();
+        const password = this.components.passwordInput.getValue();
         this.#onSubmit({email, password});
     }
 
@@ -79,39 +89,37 @@ export default class LoginFormComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        this.renderedComponents = Object.values(this.#components).reduce((prevStr, currElem) => {
-            return prevStr + currElem.render();
-        }, '');
-        return LoginForm(...this);
+        super.preRender();
+        return LoginForm(this);
     }
 
     /**
      * Remove all errors in form
      */
     removeAllErrors() {
-        this.#components.mainError.setText('');
-        this.#components.emailInput.setError(null);
-        this.#components.passwordInput.setError(null);
+        this.components.mainError.setText('');
+        this.components.emailInput.setError(null);
+        this.components.passwordInput.setError(null);
     }
 
     /**
-     * Set validation error
-     * @param {string}Email
-     * @param {string}Password
-     * @param {string}Main
+     * Set errors
+     * @param {string}email
+     * @param {string}password
+     * @param {string}main
      */
-    setValidationError({Email, Password, Main}) {
+    setErrors({email, password, main}) {
         this.removeAllErrors();
-        this.#components.emailInput.setError(Email);
-        this.#components.passwordInput.setError(Password);
-        this.#components.mainError.setText(Main);
+        this.components.emailInput.setError(email);
+        this.components.passwordInput.setError(password);
+        this.components.mainError.setText(main);
     }
 
     /**
      * Mount login form component
      */
     mount() {
-        Object.values(this.#components).forEach((component) => {
+        Object.values(this.components).forEach((component) => {
             component.mount();
         });
         this.findElem();
@@ -122,7 +130,7 @@ export default class LoginFormComponent extends BaseComponent {
      * Unmount login form component
      */
     unmount() {
-        Object.values(this.#components).forEach((component) => {
+        Object.values(this.components).forEach((component) => {
             component.unmount();
         });
         super.unmount();

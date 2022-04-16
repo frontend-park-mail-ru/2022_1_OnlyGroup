@@ -1,7 +1,7 @@
-import router from './Modules/router.js';
-import loginController from './controllers/loginController/loginController'
-import "./style.scss"
+import router from './Modules/Router.js';
+import loginController from './controllers/loginController/LoginController';
+import './style.scss';
 
-router.register("/", loginController)
+router.register('/', loginController);
 
-router.start()
+router.start();

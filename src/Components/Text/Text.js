@@ -22,7 +22,7 @@ export class TextComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Text(...this);
+        return Text(this);
     }
 
     /**

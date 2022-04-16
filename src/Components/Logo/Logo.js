@@ -20,7 +20,7 @@ export class LogoComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Logo(...this);
+        return Logo(this);
     }
 
     /**

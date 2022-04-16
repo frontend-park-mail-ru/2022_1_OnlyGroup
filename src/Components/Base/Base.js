@@ -1,4 +1,5 @@
-import idGenerator from '../../Modules/idGenerator';
+import idGenerator from '../../Modules/IDGenerator';
+import Base from './Base.hbs';
 
 /**
  * Base component
@@ -6,28 +7,34 @@ import idGenerator from '../../Modules/idGenerator';
 export class BaseComponent {
     id;
     styles;
+    components;
 
     /**
      *  Create base component
-     * @param {Array}styles
+     * @param {Array|undefined}styles
      */
     constructor({styles}) {
         this.id = idGenerator.getId();
-        this.styles = styles;
+        this.styles = (styles === undefined) ? '' : styles.join(' ');
+        this.components = {};
     }
 
     /**
-     * Get styles for handlebars
-     * @return {string}
+     * Prepare for render(this.renderedComponents)
      */
-    get styles() {
-        return this.styles.join(' ');
+    preRender() {
+        this.renderedComponents = Object.values(this.components).reduce((prevStr, currElem) => {
+            return prevStr + currElem.render();
+        }, '');
     }
 
     /**
      * Render component
+     * @return {string}
      */
     render() {
+        this.preRender();
+        return Base(this);
     }
 
     /**

@@ -53,9 +53,10 @@ class EventBus {
     /**
      * Emit event listener
      * @param {String} eventName
-     * @param {Object} parameters
+     * @param {Object|undefined} parameters
      */
-    emitEventListener(eventName, parameters) {
+    emitEvent(eventName, parameters= null) {
+        console.log(`emitted ${eventName}`, parameters);
         if (this.listeners[eventName]) {
             this.listeners[eventName].forEach((listener) => listener(parameters ? parameters : {}));
         }

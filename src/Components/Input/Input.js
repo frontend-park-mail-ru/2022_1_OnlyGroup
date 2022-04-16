@@ -1,5 +1,5 @@
 import Input from './Input.hbs';
-import idGenerator from '../../Modules/idGenerator';
+import idGenerator from '../../Modules/IDGenerator';
 import {BaseComponent} from '../Base/Base';
 
 /**
@@ -31,7 +31,7 @@ export class InputComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Input(...this);
+        return Input(this);
     }
 
     /**
