@@ -1,29 +1,57 @@
 import Button from './Button.hbs';
-import {BaseComponent} from "../Base/Base";
+import {BaseComponent} from '../Base/Base';
 
-export class ButtonComponent extends BaseComponent{
-    constructor({styles, text, onClick}) {
+/**
+ * Button Component
+ */
+export class ButtonComponent extends BaseComponent {
+    /**
+     * Create button component
+     * @param {Array}styles
+     * @param {string}text
+     * @param {string|null}icon
+     * @param {function|undefined|null}onClick
+     */
+    constructor({styles, text, icon, onClick}) {
         super({styles});
-        this.buttonText = text
-        this.onClick = onClick;
+        this.icon = icon;
+        this.buttonText = text;
+        this.onClick = (onClick === undefined) ? null : onClick;
     }
+
+    /**
+     * Render button component
+     * @return {string}
+     */
     render() {
-        let styles = this.styles.join(' ');
-        return Button({buttonId: this.id, buttonText: this.buttonText, styles: styles});
+        return Button(...this);
     }
-    mount(){
-        this.checkFound();
-        this.elem.addEventListener('click', this.onClick);
-    }
-    unmount(){
-        super.unmount();
-        if(this.elem){
-            this.elem.removeEventListener('click', this.onClick);
+
+    /**
+     * Mount button component
+     */
+    mount() {
+        this.findElem();
+        if (this.onClick && this.elem) {
+            this.elem.addEventListener('click', this.onClick);
         }
     }
-    changeText(text){
-        this.checkFound();
-        this.buttonText = text
-        this.button.innerText = text
+
+    /**
+     * Unmount button component
+     */
+    unmount() {
+        if (this.onClick && this.elem) {
+            this.elem.removeEventListener('click', this.onClick);
+        }
+        super.unmount();
+    }
+
+    /**
+     * Set button text
+     * @param {string}text
+     */
+    changeText(text) {
+        this.buttonText = text;
     }
 }

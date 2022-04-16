@@ -1,27 +1,53 @@
-import idGenerator from "../../Modules/idGenerator";
+import idGenerator from '../../Modules/idGenerator';
 
+/**
+ * Base component
+ */
 export class BaseComponent {
     id;
     styles;
+
+    /**
+     *  Create base component
+     * @param {Array}styles
+     */
     constructor({styles}) {
         this.id = idGenerator.getId();
         this.styles = styles;
     }
 
-    render(){
-        return '';
+    /**
+     * Get styles for handlebars
+     * @return {string}
+     */
+    get styles() {
+        return this.styles.join(' ');
     }
 
-    mount(){
-
+    /**
+     * Render component
+     */
+    render() {
     }
 
-    unmount(){
+    /**
+     * Mount component
+     */
+    mount() {
+    }
+
+    /**
+     * Unmount component
+     */
+    unmount() {
         this.elem = null;
     }
 
-    checkFound(){
-        if(!this.elem){
+    /**
+     * Find element in DOM
+     */
+    findElem() {
+        if (!this.elem) {
             this.elem = document.getElementById(this.id);
         }
     }

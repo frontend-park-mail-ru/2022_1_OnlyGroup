@@ -1,9 +1,8 @@
 import FeedPhotoCard from './FeedPhotoCard.hbs';
+import {BaseComponent} from '../Base/Base';
 
-export class FeedPhotoCardComponent {
-    static render(props, callback) {
-        const template = FeedPhotoCard({userPhoto: props.userPhoto});
-        // Event bus (callback)
-        return template;
-    }
+/**
+ * Photo card in feed component
+ */
+export class FeedPhotoCardComponent extends BaseComponent {
 }
