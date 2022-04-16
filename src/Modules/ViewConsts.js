@@ -8,3 +8,14 @@ export const loginViewNames = {
     emailVerificationFailed: 'Неверный Email',
     passwordVerificationFailed: 'Пароль должен содержать строчную и заглавную буквы и цифру',
 };
+
+export const registerViewNames = {
+    loginOffer: 'Уже есть аккаунт?',
+    loginLinkTittle: 'Войти',
+    emailTittle: 'Email',
+    passwordTitle: 'Пароль',
+    passwordRepeatTittle: 'Пароль еще раз',
+    buttonTittle: 'Зарегистрироваться',
+    userEmailUsed: 'Email уже используется',
+    passwordRepeatVerifictionFailed: 'Пароли не совпадают',
+};

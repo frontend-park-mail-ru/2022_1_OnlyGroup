@@ -1,5 +1,6 @@
 import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
+import {loginViewNames, registerViewNames} from '../Modules/ViewConsts';
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordPatternLowerCase = `[a-z]+`;
@@ -50,23 +51,23 @@ class User {
      * @param {string}email
      * @param {string}password
      * @param {string|null|undefined}passwordRepeat
-     * @return {null|{password: boolean, passwordRepeat: boolean, email: boolean}}
+     * @return {null|{password: string, passwordRepeat: string, email: string}}
      */
     static #validateEmailPasswordRepeatPassword({email, password, passwordRepeat = null}) {
         let validationFailed = false;
-        let validationError = {'email': false, 'password': false, 'passwordRepeat': false};
+        const validationError = {'email': '', 'password': '', 'passwordRepeat': ''};
         if (!User.#validateEmail(email)) {
             validationFailed = true;
-            validationError.email = true;
+            validationError.email = loginViewNames.emailVerificationFailed;
         }
         if (!User.#validatePassword(password)) {
             validationFailed = true;
-            validationError.password = true;
+            validationError.password = loginViewNames.passwordVerificationFailed;
         }
         passwordRepeat = (passwordRepeat === undefined) ? null : passwordRepeat;
         if (passwordRepeat && passwordRepeat !== password) {
-            validationError.passwordRepeat = true;
-            validationError = true;
+            validationFailed = true;
+            validationError.passwordRepeat = registerViewNames.passwordRepeatVerifictionFailed;
         }
         if (validationFailed) {
             return validationError;
@@ -134,7 +135,12 @@ class User {
             EventBus.emitEvent('user-validation-failed', validationRes);
             return;
         }
-        const result = Api.LogUp({Email: email, Password: password});
+        const result = await Api.LogUp({Email: email, Password: password});
+        if (result.Status === 409) {
+            EventBus.emitEvent('user-not-loginned-registered', {message: registerViewNames.userEmailUsed});
+            return;
+        }
+
         this.#processAuthResult(result);
     }
 

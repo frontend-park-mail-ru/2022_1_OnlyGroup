@@ -41,12 +41,19 @@ export class BaseComponent {
      * Mount component
      */
     mount() {
+        this.findElem();
+        Object.values(this.components).forEach((component) => {
+            component.mount();
+        });
     }
 
     /**
      * Unmount component
      */
     unmount() {
+        Object.values(this.components).forEach((component) => {
+            component.unmount();
+        });
         this.elem = null;
     }
 
