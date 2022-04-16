@@ -1,0 +1,35 @@
+import Text from './Text.hbs';
+import {BaseComponent} from '../Base/Base';
+
+/**
+ * Text component
+ */
+export class TextComponent extends BaseComponent {
+    /**
+     * Create text component
+     * @param {string}text
+     * @param {Array}styles
+     * @param {string|null|undefined}href
+     */
+    constructor({text, styles, href}) {
+        super({styles});
+        this.textContent = text;
+        this.href = (href === undefined) ? null : href;
+    }
+
+    /**
+     * Render text component
+     * @return {string}
+     */
+    render() {
+        return Text(this);
+    }
+
+    /**
+     * Set text of text component
+     * @param {string}text
+     */
+    setText(text) {
+        this.textContent = text;
+    }
+}
