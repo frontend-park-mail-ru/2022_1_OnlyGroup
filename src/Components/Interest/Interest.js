@@ -1,7 +1,8 @@
 import Interest from './Interest.hbs';
+import {BaseComponent} from '../Base/Base';
 
-export class InterestComponent {
-    static render(props) {
-        return Interest({interestText: props.interestText});
-    }
+/**
+ * Interest component
+ */
+export class InterestComponent extends BaseComponent {
 }

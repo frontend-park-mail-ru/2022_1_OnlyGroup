@@ -1,7 +1,7 @@
 /**
  * Class Event Bus
  */
- class EventBus {
+class EventBus {
     /**
      * Constructor
      */
@@ -10,7 +10,8 @@
     }
 
     /**
-     * Get instance of class Event Bus
+     * Get singleton EventBus
+     * @return {EventBus}
      */
     static getInstance() {
         if (!EventBus.instance) {
@@ -22,7 +23,7 @@
 
     /**
      * Get all listeners
-     * @returns {Array} listeners
+     * @return {Array} listeners
      */
     getEventListeners() {
         return this.listeners;
@@ -54,7 +55,7 @@
      * @param {String} eventName
      * @param {Object} parameters
      */
-    emitEvent(eventName, parameters = null) {
+    emitEventListener(eventName, parameters) {
         if (this.listeners[eventName]) {
             this.listeners[eventName].forEach((listener) => listener(parameters ? parameters : {}));
         }

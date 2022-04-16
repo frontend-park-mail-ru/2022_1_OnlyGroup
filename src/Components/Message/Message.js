@@ -1,15 +1,9 @@
 import Message from './Message.hbs';
+import {BaseComponent} from '../Base/Base';
 
-export class MessageComponent {
-    static render(props, callback) {
-        const template = Message({
-            userIcon: props.userIcon, 
-            userName: props.userName, 
-            userMessage: props.userMessage, 
-            messageCount: props.messageCount,
-            messageId: props.messageId,
-        });
-        // Event bus callback
-        return template;
-    }
+/**
+ * Message component
+ */
+export class MessageComponent extends BaseComponent {
+
 }

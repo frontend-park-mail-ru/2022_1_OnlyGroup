@@ -6,6 +6,7 @@
       "node": true
     },
     "extends": ["eslint:recommended", "google"],
+
     "parserOptions": {
       "ecmaVersion": 12,
       "sourceType": "module"
@@ -15,6 +16,7 @@
       "no-undef": "off",
       "no-invalid-this": "off",
       "max-len": "off",
+        "indent": ["error", 4],
       "new-cap": "off",
       "no-unused-vars": "off"
     }

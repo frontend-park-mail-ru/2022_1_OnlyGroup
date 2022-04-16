@@ -1,21 +1,35 @@
 import Text from './Text.hbs';
-import IdGenerator from "../../Modules/idGenerator";
-import {BaseComponent} from "../Base/Base";
+import {BaseComponent} from '../Base/Base';
 
-export class TextComponent extends BaseComponent{
-    constructor({text, styles}) {
-        super({styles})
-        this.id = IdGenerator.getId();
+/**
+ * Text component
+ */
+export class TextComponent extends BaseComponent {
+    /**
+     * Create text component
+     * @param {string}text
+     * @param {Array}styles
+     * @param {string|null|undefined}href
+     */
+    constructor({text, styles, href}) {
+        super({styles});
         this.textContent = text;
+        this.href = (href === undefined) ? null : href;
     }
 
+    /**
+     * Render text component
+     * @return {string}
+     */
     render() {
-        let styles = this.styles.join(' ');
-        return Text({textContent: this.textContent, styles: styles, id: this.id});
+        return Text(...this);
     }
 
-    setText(text){
+    /**
+     * Set text of text component
+     * @param {string}text
+     */
+    setText(text) {
         this.textContent = text;
     }
-
 }

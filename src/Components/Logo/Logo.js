@@ -1,32 +1,45 @@
 import Logo from './Logo.hbs';
-import idGenerator from "../../Modules/idGenerator";
-import router from "../../Modules/router";
-import {BaseComponent} from "../Base/Base";
+import {BaseComponent} from '../Base/Base';
 
-export class LogoComponent extends BaseComponent{
-    constructor({styles}) {
+/**
+ * Logo component
+ */
+export class LogoComponent extends BaseComponent {
+    /**
+     * Create logo component
+     * @param {Array}styles
+     * @param {function|undefined|null}onClick
+     */
+    constructor({styles, onClick}) {
         super({styles});
+        this.onClick = (onClick === undefined) ? null : onClick;
     }
 
+    /**
+     * Render logo component
+     * @return {string}
+     */
     render() {
-        const styles = this.styles.join(' ');
-        return Logo({id: this.id, styles: styles});
+        return Logo(...this);
     }
 
-    static onCLick(ev){
-        ev.preventDefault();
-        router.go("/");
-    }
-
+    /**
+     * Mount logo component
+     */
     mount() {
-        this.checkFound();
-        this.elem.addEventListener('click', LogoComponent.onCLick);
+        this.findElem();
+        if (this.elem && this.onClick) {
+            this.elem.addEventListener('click', this.onClick);
+        }
     }
 
-    unmount(){
-        super.unmount();
-        if(this.elem){
-            this.elem.removeEventListener('click', LogoComponent.onCLick);
+    /**
+     * Unmount logo component
+     */
+    unmount() {
+        if (this.elem && this.onClick) {
+            this.elem.removeEventListener('click', this.onClick);
         }
+        super.unmount();
     }
 }
