@@ -1,4 +1,4 @@
-import LoginRegisterForms from './LoginRegisterForms.hbs';
+import LoginRegisterForms from './LoginForm.hbs';
 import {ButtonComponent} from '../Button/Button';
 import {InputComponent} from '../Input/Input';
 import {TextComponent} from '../Text/Text';
@@ -18,13 +18,11 @@ export default class LoginFormComponent extends BaseComponent {
      * Create login form component
      * @param {function}onSubmit
      * @param {function}onLogoClick
-     * @param {function}onRegisterClick
      */
-    constructor({onSubmit, onLogoClick, onRegisterClick}) {
+    constructor({onSubmit, onLogoClick}) {
         super({});
         this.onSubmit = onSubmit;
         this.onLogoClick = onLogoClick;
-        this.onRegisterClick = onRegisterClick;
         this.components.logo = new LogoComponent({styles: ['logo-BaseView-login'], onClick: this.logoClick});
         this.components.emailInput = new InputComponent({
             type: 'text',
@@ -54,8 +52,7 @@ export default class LoginFormComponent extends BaseComponent {
         this.components.registerContainer.components.registerLink = new TextComponent({
             text: loginViewNames.registerLinkTittle,
             styles: [],
-            href: AppPaths.logupPage,
-            onClick: this.registerClick,
+            href: AppPaths.registerPage,
         });
     }
 
@@ -74,16 +71,6 @@ export default class LoginFormComponent extends BaseComponent {
      */
     onButtonClick = (ev) => {
         this.formSubmit(ev);
-    }
-
-    /**
-     * @callback Callback for login link click
-     * @param {Event}ev
-     */
-    registerClick = (ev) =>{
-        ev.preventDefault();
-        ev.stopPropagation();
-        this.onRegisterClick();
     }
 
     /**

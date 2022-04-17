@@ -1,23 +1,22 @@
-import {LoginRegisterView} from '../../views/LoginRegisterView/LoginRegisterView.js';
 import activeUser from '../../Models/User';
-import {BaseController} from '../base/BaseController';
+import {BaseController} from '../Base/BaseController';
+import {RegisterView} from '../../views/RegisterView/RegisterView';
 
 /**
  * Login controller
  */
-export default new class LoginController extends BaseController {
+export default new class RegisterController extends BaseController {
     /**
      * Create new login controller
      */
     constructor() {
-        super({view: LoginRegisterView});
+        super({view: RegisterView});
         super.setEvents({
-            'action-login': this.actionLogin,
             'action-register': this.actionRegister,
-            'user-not-loginned-registered': this.userNotLogginedRegistered,
+            'user-not-loginned-registered': this.userNotRegistered,
             'user-validation-failed': this.userValidationFailed,
             'api-failed': this.apiFailed,
-            'user-loggined': this.userLogginedRegistered,
+            'user-loggined': this.userRegistered,
         });
     }
 
@@ -32,25 +31,16 @@ export default new class LoginController extends BaseController {
     }
 
     /**
-     * @callback Callback login form submitted
-     * @param {string}email
-     * @param {string}Password
-     */
-    actionLogin = ({email, password}) => {
-        activeUser.Login({email, password});
-    }
-
-    /**
      * @callback Callback user sucsessfully loggined
      */
-    userLogginedRegistered = () => {
+    userRegistered = () => {
         // TODO router.go('/');
     }
 
     /**
      * @callback Callback user not loggined
      */
-    userNotLogginedRegistered = ({message}) => {
+    userNotRegistered = ({message}) => {
         this.view.setErrors({email: '', password: '', passwordRepeat: '', main: message});
         this.view.reRender();
     }
@@ -66,6 +56,13 @@ export default new class LoginController extends BaseController {
         this.view.reRender();
     }
 
+    /**
+     * Start controller and check user loggined
+     */
+    start() {
+        super.start();
+        activeUser.CheckLogin();
+    }
 
     /**
      * @callback Callback api failed

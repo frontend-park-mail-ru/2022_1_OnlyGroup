@@ -6,7 +6,7 @@ import EventBus from '../../Modules/EventBus';
  */
 export class BaseController {
     /**
-     * Create base controller
+     * Create Base controller
      * @param {BaseView}view
      */
     constructor({view}) {

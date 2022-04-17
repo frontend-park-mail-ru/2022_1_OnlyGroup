@@ -11,8 +11,10 @@
 //@import "./Components/ButtonWithIcon/ButtonWithIcon.scss";
 @import "./Components/Text/Text.scss";
 //@import "./Components/InputWithIcon/InputWithIcon.scss";
-@import "Components/LoginForm/LoginRgisterForms";
-@import "views/LoginRegisterView/LoginRegisterView";
+@import "Components/LoginForm/LoginForm";
+@import "Components/RegisterForm/RegisterForm";
+@import "views/LoginView/LoginView";
+@import "views/RegisterView/RegisterView";
 @import "helpers.scss";
 
 * {

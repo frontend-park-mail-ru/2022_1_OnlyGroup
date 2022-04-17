@@ -1,7 +1,8 @@
 export const AppPaths = {
     loginPage: '/login',
-    logupPage: '/logup',
+    registerPage: '/register',
     mainPage: '/',
+    notFoundPage: '/404',
 };
 
 /**
@@ -24,14 +25,15 @@ export class Router {
      * @param {string}path
      */
     go(path) {
-        // this.#currentRoute.unmount()
+        this.#currentRoute.stop();
         if (typeof this.#routes[window.location.pathname] !== undefined) {
             window.history.pushState(null, null, path);
-            this.#routes[path].start();
+            this.#currentRoute = this.#routes[path];
+            this.#currentRoute.start();
             return;
         }
 
-        this.#routes['/error'].render();
+        this.#routes[AppPaths.notFoundPage].start();
     }
 
     /**
@@ -39,15 +41,13 @@ export class Router {
      * @param {*} path
      */
     redirect(path) {
-        // this.#currentRoute.unmount()
         window.history.pushState(null, null, path);
-        this.#routes[path].render();
     }
 
     /**
      * Register path
      * @param {string} path
-     * @param {Class} controller
+     * @param {BaseController} controller
      */
     register(path, controller) {
         this.#routes[path] = controller;
@@ -57,8 +57,6 @@ export class Router {
      * Render page
      */
     start() {
-        this.go(window.location.pathname);
-
         window.addEventListener('click', (event) => {
             let parentElem = event.target.parentElement;
             while (parentElem) {
@@ -75,8 +73,12 @@ export class Router {
 
         window.addEventListener('popstate', (event) => {
             event.preventDefault();
-            this.#routes[window.location.pathname].render();
+            this.#currentRoute.stop();
+            this.#currentRoute = this.#routes[window.location.pathname];
+            this.#currentRoute.start();
         });
+        this.#currentRoute = this.#routes[window.location.pathname];
+        this.#currentRoute.start();
     }
 }
 

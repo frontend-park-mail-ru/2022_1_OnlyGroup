@@ -1,4 +1,4 @@
-import LoginRegisterForms from './LoginRegisterForms.hbs';
+import LoginRegisterForms from '../LoginForm/LoginForm.hbs';
 import {ButtonComponent} from '../Button/Button';
 import {InputComponent} from '../Input/Input';
 import {TextComponent} from '../Text/Text';
@@ -20,11 +20,10 @@ export default class RegisterFormComponent extends BaseComponent {
      * @param {function}onLogoClick
      * @param {function}onLoginClick
      */
-    constructor({onSubmit, onLogoClick, onLoginClick}) {
+    constructor({onSubmit, onLogoClick}) {
         super({});
         this.onSubmit = onSubmit;
         this.onLogoClick = onLogoClick;
-        this.onLoginClick = onLoginClick;
         this.components.logo = new LogoComponent({styles: ['logo-BaseView-login'], onClick: this.logoClick});
         this.components.emailInput = new InputComponent({
             type: 'text',
@@ -51,7 +50,7 @@ export default class RegisterFormComponent extends BaseComponent {
             onClick: this.onButtonClick,
         });
 
-        this.components.registerContainer = new BaseComponent({styles: ['login-form-register-offer-container', 'w-full']});
+        this.components.registerContainer = new BaseComponent({styles: ['register-form-login-offer-container', 'w-full']});
         this.components.registerContainer.components.registerOffer = new TextComponent({
             text: registerViewNames.loginOffer,
             styles: [],
@@ -60,7 +59,6 @@ export default class RegisterFormComponent extends BaseComponent {
             text: registerViewNames.loginLinkTittle,
             styles: [],
             href: AppPaths.loginPage,
-            onClick: this.loginClick,
         });
     }
 
@@ -79,16 +77,6 @@ export default class RegisterFormComponent extends BaseComponent {
      */
     onButtonClick = (ev) => {
         this.formSubmit(ev);
-    }
-
-    /**
-     * @callback Callback for login link click
-     * @param {Event}ev
-     */
-    loginClick = (ev) =>{
-        ev.preventDefault();
-        ev.stopPropagation();
-        this.onLoginClick();
     }
 
     /**

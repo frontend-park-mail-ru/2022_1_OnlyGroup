@@ -65,7 +65,7 @@ class User {
             validationError.password = loginViewNames.passwordVerificationFailed;
         }
         passwordRepeat = (passwordRepeat === undefined) ? null : passwordRepeat;
-        if (passwordRepeat && passwordRepeat !== password) {
+        if (passwordRepeat !== null && (passwordRepeat.length === 0 ||passwordRepeat !== password)) {
             validationFailed = true;
             validationError.passwordRepeat = registerViewNames.passwordRepeatVerifictionFailed;
         }
