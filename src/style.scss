@@ -13,8 +13,12 @@
 //@import "./Components/InputWithIcon/InputWithIcon.scss";
 @import "Components/LoginForm/LoginForm";
 @import "Components/RegisterForm/RegisterForm";
+@import "Components/Menu/Menu";
+@import "Components/Avatar/Avatar";
+@import "Components/ActiveUser/ActiveUser";
 @import "views/LoginView/LoginView";
 @import "views/RegisterView/RegisterView";
+@import "views/FeedView/FeedView";
 @import "helpers.scss";
 
 * {

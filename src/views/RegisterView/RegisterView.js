@@ -1,13 +1,13 @@
-import {BaseView} from '../BaseView/BaseView.js';
-import registerView from './RegisterView.hbs';
+import BaseView from '../BaseView/BaseView.js';
 import EventBus from '../../Modules/EventBus';
 import RegisterFormComponent from '../../Components/RegisterForm/RegisterForm';
+import loginView from '../LoginView/LoginView.hbs';
 
 /**
  * View class for login page
  */
 export class RegisterView extends BaseView {
-    #registerForm;
+    registerForm;
 
     /**
      * Create login BaseView
@@ -15,28 +15,19 @@ export class RegisterView extends BaseView {
      */
     constructor({parent}) {
         super({parent});
-        this.#registerForm = new RegisterFormComponent({
+        this.components.registerForm = new RegisterFormComponent({
             onSubmit: this.registerFormSubmit,
             onLogoClick: this.logoClick,
-            onLoginClick: this.loginLinkClick,
         });
     }
 
     /**
-     * Render BaseView and mount components
+     * Render register view
      */
     render() {
-        this.renderedComponents = this.#registerForm.render();
-        this.parent.innerHTML = registerView(this);
-        this.#registerForm.mount();
-    }
-
-    /**
-     * Rerender BaseView
-     */
-    reRender() {
-        this.unmount();
-        this.render();
+        super.preRender();
+        this.parent.innerHTML = loginView(this);
+        this.mount();
     }
 
     /**
@@ -64,13 +55,13 @@ export class RegisterView extends BaseView {
      * @param {string}main
      */
     setErrors({email, password, passwordRepeat, main}) {
-        this.#registerForm.setErrors({email, password, passwordRepeat, main});
+        this.components.registerForm.setErrors({email, password, passwordRepeat, main});
     }
 
     /**
-     * Unmount BaseView
+     * Remove all form inputs values
      */
-    unmount() {
-        this.#registerForm.unmount();
+    clear() {
+        this.components.registerForm.clear();
     }
 }

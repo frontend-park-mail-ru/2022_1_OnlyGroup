@@ -2,6 +2,10 @@ export const AppPaths = {
     loginPage: '/login',
     registerPage: '/register',
     mainPage: '/',
+    messagesPage: '/messages',
+    matchesPage: 'matches',
+    findCandidatePage: '/candidates',
+    profilePage: '/settings',
     notFoundPage: '/404',
 };
 

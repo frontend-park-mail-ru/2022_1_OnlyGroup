@@ -71,4 +71,11 @@ export class InputComponent extends BaseComponent {
         }
         super.unmount();
     }
+
+    /**
+     * Clear input value
+     */
+    clear() {
+        this.value = '';
+    }
 }

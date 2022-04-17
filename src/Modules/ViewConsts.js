@@ -19,3 +19,11 @@ export const registerViewNames = {
     userEmailUsed: 'Email уже используется',
     passwordRepeatVerifictionFailed: 'Пароли не совпадают',
 };
+
+export const feedViewNames = {
+    buttonMessagesTittle: 'Сообщения',
+    buttonMatchesTittle: 'Совпадения',
+    buttonFindCandidatesTittle: 'Подбор',
+    buttonMyProfileTittle: 'Мой профиль',
+    buttonExitTittle: 'Выход',
+};

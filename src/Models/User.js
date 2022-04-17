@@ -14,14 +14,14 @@ const statusUnathorized = 401;
  * User class
  */
 class User {
-    #id;
+    id;
 
     /**
      * Create new user
      * @param {number|null|undefined}id
      */
     constructor(id = null) {
-        this.#id = id;
+        this.id = id;
     }
 
     /**
@@ -65,7 +65,7 @@ class User {
             validationError.password = loginViewNames.passwordVerificationFailed;
         }
         passwordRepeat = (passwordRepeat === undefined) ? null : passwordRepeat;
-        if (passwordRepeat !== null && (passwordRepeat.length === 0 ||passwordRepeat !== password)) {
+        if (passwordRepeat !== null && (passwordRepeat.length === 0 || passwordRepeat !== password)) {
             validationFailed = true;
             validationError.passwordRepeat = registerViewNames.passwordRepeatVerifictionFailed;
         }
@@ -99,6 +99,14 @@ class User {
      * @constructor
      */
     async CheckLogin() {
+        if (this.id === -1) {
+            EventBus.emitEvent('user-unloginned');
+            return;
+        }
+        if (this.id !== null) {
+            EventBus.emitEvent('user-loggined');
+            return;
+        }
         const result = await Api.CheckLogin();
         this.#processAuthResult(result);
     }
@@ -106,7 +114,7 @@ class User {
     /**
      * Login user
      * @param {string}email
-     * @param {string}Password
+     * @param {string}password
      * @return {Promise<void>}
      * @constructor
      */
@@ -150,12 +158,12 @@ class User {
      * @constructor
      */
     async LogOut() {
-        const result = Api.LogOut();
+        const result = await Api.LogOut();
         if (!result.isOk()) {
             EventBus.emitEvent('api-failed', result);
             return;
         }
-        this.#id = -1;
+        this.id = -1;
         EventBus.emitEvent('user-unloginned');
     }
 }

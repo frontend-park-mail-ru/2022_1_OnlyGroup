@@ -1,0 +1,16 @@
+.feed-view{
+    background: radial-gradient(55.42% 55.42% at 50% 50%, #B9A4E6 0%, #21194E 95.11%);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.left-column{
+    flex-basis: 400px;
+    padding: 4%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 50px;
+}

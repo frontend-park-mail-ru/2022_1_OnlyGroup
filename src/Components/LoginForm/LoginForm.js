@@ -128,5 +128,14 @@ export default class LoginFormComponent extends BaseComponent {
      */
     unmount() {
         super.unmount();
+        this.removeAllErrors();
+    }
+
+    /**
+     * Clear inputs
+     */
+    clear() {
+        this.components.emailInput.clear();
+        this.components.passwordInput.clear();
     }
 }

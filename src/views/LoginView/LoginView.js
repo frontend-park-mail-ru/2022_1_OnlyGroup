@@ -1,4 +1,4 @@
-import {BaseView} from '../BaseView/BaseView.js';
+import BaseView from '../BaseView/BaseView.js';
 import loginView from './LoginView.hbs';
 import LoginFormComponent from '../../Components/LoginForm/LoginForm';
 import EventBus from '../../Modules/EventBus';
@@ -7,36 +7,25 @@ import EventBus from '../../Modules/EventBus';
  * View class for login page
  */
 export class LoginView extends BaseView {
-    #loginForm;
-
     /**
      * Create login BaseView
      * @param {HTMLElement}parent
      */
     constructor({parent}) {
         super({parent});
-        this.#loginForm = new LoginFormComponent({
+        this.components.loginForm = new LoginFormComponent({
             onSubmit: this.loginFormSubmit,
             onLogoClick: this.logoClick,
-            onRegisterClick: this.registerLinkClick,
         });
     }
 
     /**
-     * Render BaseView and mount components
+     * Render login view
      */
     render() {
-        this.renderedComponents = this.#loginForm.render();
+        super.preRender();
         this.parent.innerHTML = loginView(this);
-        this.#loginForm.mount();
-    }
-
-    /**
-     * Rerender BaseView
-     */
-    reRender() {
-        this.unmount();
-        this.render();
+        this.mount();
     }
 
     /**
@@ -62,13 +51,13 @@ export class LoginView extends BaseView {
      * @param {string}main
      */
     setErrors({email, password, main}) {
-        this.#loginForm.setErrors({email, password, main});
+        this.components.loginForm.setErrors({email, password, main});
     }
 
     /**
-     * Unmount BaseView
+     * Remove all form inputs values
      */
-    unmount() {
-        this.#loginForm.unmount();
+    clear() {
+        this.components.loginForm.clear();
     }
 }

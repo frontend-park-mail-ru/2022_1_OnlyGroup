@@ -18,7 +18,6 @@ export default class RegisterFormComponent extends BaseComponent {
      * Create login form component
      * @param {function}onSubmit
      * @param {function}onLogoClick
-     * @param {function}onLoginClick
      */
     constructor({onSubmit, onLogoClick}) {
         super({});
@@ -138,5 +137,14 @@ export default class RegisterFormComponent extends BaseComponent {
      */
     unmount() {
         super.unmount();
+    }
+
+    /**
+     * Clear inputs
+     */
+    clear() {
+        this.components.emailInput.clear();
+        this.components.passwordInput.clear();
+        this.components.passwordRepeatInput.clear();
     }
 }

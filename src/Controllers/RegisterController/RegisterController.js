@@ -1,46 +1,48 @@
-import {LoginView} from '../../views/LoginView/LoginView.js';
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
+import {RegisterView} from '../../views/RegisterView/RegisterView';
+import router, {AppPaths} from '../../Modules/Router';
 
 /**
  * Login controller
  */
-export default new class LoginController extends BaseController {
+export default new class RegisterController extends BaseController {
     /**
      * Create new login controller
      */
     constructor() {
-        super({view: LoginView});
+        super({view: RegisterView});
         super.setEvents({
-            'action-login': this.actionLogin,
-            'user-not-loginned-registered': this.userNotLoggined,
+            'action-register': this.actionRegister,
+            'user-not-loginned-registered': this.userNotRegistered,
             'user-validation-failed': this.userValidationFailed,
             'api-failed': this.apiFailed,
-            'user-loggined': this.userLoggined,
+            'user-loggined': this.userRegistered,
         });
     }
 
     /**
-     * @callback Callback login form submitted
+     * @callback Callback register form submitted
      * @param {string}email
-     * @param {string}Password
+     * @param {string}password
+     * @param {string}passwordRepeat
      */
-    actionLogin = ({email, password}) => {
-        activeUser.Login({email, password});
+    actionRegister({email, password, passwordRepeat}) {
+        activeUser.LogUp({email, password, passwordRepeat});
     }
 
     /**
      * @callback Callback user sucsessfully loggined
      */
-    userLoggined = () => {
-        // TODO router.go('/');
+    userRegistered = () => {
+        router.go(AppPaths.findCandidatePage);
     }
 
     /**
      * @callback Callback user not loggined
      */
-    userNotLoggined = ({message}) => {
-        this.view.setErrors({email: '', password: '', main: message});
+    userNotRegistered = ({message}) => {
+        this.view.setErrors({email: '', password: '', passwordRepeat: '', main: message});
         this.view.reRender();
     }
 
@@ -59,10 +61,10 @@ export default new class LoginController extends BaseController {
      * Start controller and check user loggined
      */
     start() {
+        this.view.clear();
         super.start();
         activeUser.CheckLogin();
     }
-
 
     /**
      * @callback Callback api failed

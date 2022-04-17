@@ -1,47 +1,47 @@
+import {LoginView} from '../../views/LoginView/LoginView.js';
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
-import {RegisterView} from '../../views/RegisterView/RegisterView';
+import router, {AppPaths} from '../../Modules/Router';
 
 /**
  * Login controller
  */
-export default new class RegisterController extends BaseController {
+export default new class LoginController extends BaseController {
     /**
      * Create new login controller
      */
     constructor() {
-        super({view: RegisterView});
+        super({view: LoginView});
         super.setEvents({
-            'action-register': this.actionRegister,
-            'user-not-loginned-registered': this.userNotRegistered,
+            'action-login': this.actionLogin,
+            'user-not-loginned-registered': this.userNotLoggined,
             'user-validation-failed': this.userValidationFailed,
             'api-failed': this.apiFailed,
-            'user-loggined': this.userRegistered,
+            'user-loggined': this.userLoggined,
         });
     }
 
     /**
-     * @callback Callback register form submitted
+     * @callback Callback login form submitted
      * @param {string}email
-     * @param {string}password
-     * @param {string}passwordRepeat
+     * @param {string}Password
      */
-    actionRegister({email, password, passwordRepeat}) {
-        activeUser.LogUp({email, password, passwordRepeat});
+    actionLogin = ({email, password}) => {
+        activeUser.Login({email, password});
     }
 
     /**
      * @callback Callback user sucsessfully loggined
      */
-    userRegistered = () => {
-        // TODO router.go('/');
+    userLoggined = () => {
+        router.go(AppPaths.findCandidatePage);
     }
 
     /**
      * @callback Callback user not loggined
      */
-    userNotRegistered = ({message}) => {
-        this.view.setErrors({email: '', password: '', passwordRepeat: '', main: message});
+    userNotLoggined = ({message}) => {
+        this.view.setErrors({email: '', password: '', main: message});
         this.view.reRender();
     }
 
@@ -51,8 +51,8 @@ export default new class RegisterController extends BaseController {
      * @param {string}password
      * @param {string}passwordRepeat
      */
-    userValidationFailed = ({email, password, passwordRepeat}) => {
-        this.view.setErrors({email: email, password: password, passwordRepeat: passwordRepeat, main: ''});
+    userValidationFailed = ({email, password}) => {
+        this.view.setErrors({email: email, password: password, main: ''});
         this.view.reRender();
     }
 
@@ -60,9 +60,11 @@ export default new class RegisterController extends BaseController {
      * Start controller and check user loggined
      */
     start() {
+        this.view.clear();
         super.start();
         activeUser.CheckLogin();
     }
+
 
     /**
      * @callback Callback api failed
