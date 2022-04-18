@@ -1,8 +1,8 @@
-import LoginForm from './LoginForms.hbs';
-import {ButtonComponent} from '../Button/Button';
-import {InputComponent} from '../Input/Input';
-import {TextComponent} from '../Text/Text';
-import {LogoComponent} from '../Logo/Logo';
+import loginForm from './LoginForms.hbs';
+import {Button} from '../Button/Button';
+import {Input} from '../Input/Input';
+import {Text} from '../Text/Text';
+import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {loginViewNames} from '../../Modules/ViewConsts';
 import {AppPaths} from '../../Modules/Router';
@@ -10,46 +10,46 @@ import {AppPaths} from '../../Modules/Router';
 /**
  * Login form smart component
  */
-export default class LoginFormComponent extends BaseComponent {
+export default class LoginForm extends BaseComponent {
     #onSubmit;
     #onLogoClick;
 
     /**
      * Create login form component
-     * @param {function}onSubmit
-     * @param {function}onLogoClick
+     * @param {function} onSubmit
+     * @param {function} onLogoClick
      */
     constructor({onSubmit, onLogoClick}) {
         super({});
         this.#onSubmit = onSubmit;
         this.#onLogoClick = onLogoClick;
-        this.components.logo = new LogoComponent({styles: ['logo-BaseView-login'], onClick: this.logoClick});
-        this.components.emailInput = new InputComponent({
+        this.components.logo = new Logo({styles: ['logo-BaseView-login'], onClick: this.logoClick});
+        this.components.emailInput = new Input({
             type: 'text',
             label: loginViewNames.emailTittle,
             styles: ['login-register-input', 'w-full'],
         });
-        this.components.passwordInput = new InputComponent({
+        this.components.passwordInput = new Input({
             type: 'password',
             label: loginViewNames.passwordTitle,
             styles: ['login-register-input', 'w-full'],
         });
-        this.components.mainError = new TextComponent({
+        this.components.mainError = new Text({
             text: '',
             styles: ['login-error-text'],
         });
-        this.components.button = new ButtonComponent({
+        this.components.button = new Button({
             text: loginViewNames.buttonTittle,
             styles: ['login-register-button'],
             onClick: this.onButtonClick,
         });
 
         this.components.registerContainer = new BaseComponent({styles: ['login-form-register-offer-container', 'w-full']});
-        this.components.registerContainer.components.registerOffer = new TextComponent({
+        this.components.registerContainer.components.registerOffer = new Text({
             text: loginViewNames.registerOffer,
             styles: [],
         });
-        this.components.registerContainer.components.registerLink = new TextComponent({
+        this.components.registerContainer.components.registerLink = new Text({
             text: loginViewNames.registerLinkTittle,
             styles: [],
             href: AppPaths.logupPage,
@@ -58,7 +58,7 @@ export default class LoginFormComponent extends BaseComponent {
 
     /**
      * @callback Callback for logo click
-     * @param {Event}ev
+     * @param {Event} ev
      */
     logoClick = (ev) => {
         ev.preventDefault();
@@ -67,7 +67,7 @@ export default class LoginFormComponent extends BaseComponent {
 
     /**
      * @callback Callback for button click
-     * @param {Event}ev
+     * @param {Event} ev
      */
     onButtonClick = (ev) => {
         this.formSubmit(ev);
@@ -75,7 +75,7 @@ export default class LoginFormComponent extends BaseComponent {
 
     /**
      * @callback Callback for form submit
-     * @param {Event}ev
+     * @param {Event} ev
      */
     formSubmit = (ev) => {
         ev.preventDefault();
@@ -90,7 +90,7 @@ export default class LoginFormComponent extends BaseComponent {
      */
     render() {
         super.preRender();
-        return LoginForm(this);
+        return loginForm(this);
     }
 
     /**
@@ -104,9 +104,9 @@ export default class LoginFormComponent extends BaseComponent {
 
     /**
      * Set errors
-     * @param {string}email
-     * @param {string}password
-     * @param {string}main
+     * @param {string} email
+     * @param {string} password
+     * @param {string} main
      */
     setErrors({email, password, main}) {
         this.removeAllErrors();

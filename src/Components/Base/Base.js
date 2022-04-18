@@ -11,7 +11,7 @@ export class BaseComponent {
 
     /**
      *  Create base component
-     * @param {Array|undefined}styles
+     * @param {Array|undefined} styles
      */
     constructor({styles}) {
         this.id = idGenerator.getId();
