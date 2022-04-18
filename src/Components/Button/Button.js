@@ -24,7 +24,7 @@ export class Button extends BaseComponent {
      * @return {string}
      */
     render() {
-        return button(...this);
+        return button(this);
     }
 
     /**
