@@ -1,16 +1,16 @@
-import Button from './Button.hbs';
+import button from './Button.hbs';
 import {BaseComponent} from '../Base/Base';
 
 /**
  * Button Component
  */
-export class ButtonComponent extends BaseComponent {
+export class Button extends BaseComponent {
     /**
      * Create button component
-     * @param {Array}styles
-     * @param {string}text
-     * @param {string|null}icon
-     * @param {function|undefined|null}onClick
+     * @param {Array} styles
+     * @param {string} text
+     * @param {string|null} icon
+     * @param {function|undefined|null} onClick
      */
     constructor({styles, text, icon, onClick}) {
         super({styles});
@@ -49,7 +49,7 @@ export class ButtonComponent extends BaseComponent {
 
     /**
      * Set button text
-     * @param {string}text
+     * @param {string} text
      */
     changeText(text) {
         this.buttonText = text;

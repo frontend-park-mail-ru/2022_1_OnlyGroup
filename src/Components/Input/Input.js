@@ -1,18 +1,18 @@
-import Input from './Input.hbs';
+import input from './Input.hbs';
 import idGenerator from '../../Modules/idGenerator';
 import {BaseComponent} from '../Base/Base';
 
 /**
  * Input component
  */
-export class InputComponent extends BaseComponent {
+export class Input extends BaseComponent {
     /**
      * Create input component
      * @param {string} type
-     * @param {Array}styles
-     * @param {string|null|undefined}label
-     * @param {string|null|undefined}icon
-     * @param {function|null|undefined}iconOnClick
+     * @param {Array} styles
+     * @param {string|null|undefined} label
+     * @param {string|null|undefined} icon
+     * @param {function|null|undefined} iconOnClick
      */
     constructor({type, styles, label, icon, iconOnClick}) {
         super({styles});
@@ -31,7 +31,7 @@ export class InputComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Input(...this);
+        return input(...this);
     }
 
     /**
@@ -46,7 +46,7 @@ export class InputComponent extends BaseComponent {
 
     /**
      * Set error text
-     * @param {string|null}error
+     * @param {string|null} error
      */
     setError(error) {
         this.error = error;
