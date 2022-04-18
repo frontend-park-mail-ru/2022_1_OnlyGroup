@@ -5,7 +5,7 @@
 //@import "./Components/Interest/Interest.scss";
 //@import "./Components/TextWithIcon/TextWithIcon.scss";
 //@import "./Components/Message/Message.scss";
-//@import "./Components/FeedPhotoCard/FeedPhotoCard.scss";
+//@import "./Components/FeedUser/FeedUser.scss";
 @import "./Components/Logo/Logo.scss";
 @import "./Components/Input/Input.scss";
 //@import "./Components/ButtonWithIcon/ButtonWithIcon.scss";
@@ -16,6 +16,8 @@
 @import "Components/Menu/Menu";
 @import "Components/Avatar/Avatar";
 @import "Components/ActiveUser/ActiveUser";
+@import "Components/FeedAction/FeedAction";
+@import "Components/FeedPhoto/FeedPhoto";
 @import "views/LoginView/LoginView";
 @import "views/RegisterView/RegisterView";
 @import "views/FeedView/FeedView";

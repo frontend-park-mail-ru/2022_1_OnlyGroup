@@ -3,14 +3,23 @@
     width: 100vw;
     height: 100vh;
     display: flex;
+    justify-content: space-between;
 }
 
 .left-column{
     flex-basis: 400px;
-    padding: 4%;
+    padding: 30px;
     display: flex;
     justify-content: start;
     align-items: center;
     flex-direction: column;
     row-gap: 50px;
+}
+
+.right-column{
+    margin: 40px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-grow: 1;
 }

@@ -4,6 +4,7 @@ import MenuComponent, {menuStatesName} from '../../Components/Menu/Menu';
 import EventBus from '../../Modules/EventBus';
 import {ActiveUserComponent} from '../../Components/ActiveUser/ActiveUser';
 import {BaseComponent} from '../../Components/Base/Base';
+import FeedPhoto from '../../Components/FeedPhoto/FeedPhoto';
 
 /**
  * View class for login page
@@ -25,6 +26,19 @@ export default class FeedView extends BaseView {
             styles: [],
             state: menuStatesName.findCandidate,
             onExitClick: this.exitClick,
+        });
+        this.components.rightColumn = new BaseComponent({
+            styles: ['right-column'],
+        });
+        this.components.rightColumn.components.photo = new FeedPhoto({
+            styles: [],
+            src: 'static/images/userPhoto.png',
+            onLikeClick: () => {
+                alert('like');
+            },
+            onDislikeClick: () => {
+                alert('like');
+            },
         });
     }
 
