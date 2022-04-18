@@ -10,7 +10,7 @@ export class BaseComponent {
     components;
 
     /**
-     *  Create base component
+     *  Create Base component
      * @param {Array|undefined} styles
      */
     constructor({styles}) {

@@ -21,10 +21,9 @@ export class Router {
 
     /**
      * Go to path
-     * @param {string}path
+     * @param {string} path
      */
     go(path) {
-        // this.#currentRoute.unmount()
         if (typeof this.#routes[window.location.pathname] !== undefined) {
             window.history.pushState(null, null, path);
             this.#routes[path].start();
@@ -39,7 +38,6 @@ export class Router {
      * @param {*} path
      */
     redirect(path) {
-        // this.#currentRoute.unmount()
         window.history.pushState(null, null, path);
         this.#routes[path].render();
     }

@@ -1,4 +1,4 @@
-import {BaseView} from '../../views/BaseView/BaseView';
+import {BaseView} from '../../Views/BaseView/BaseView';
 import EventBus from '../../Modules/EventBus';
 
 /**
@@ -6,7 +6,7 @@ import EventBus from '../../Modules/EventBus';
  */
 export class BaseController {
     /**
-     * Create base controller
+     * Create Base controller
      * @param {BaseView}view
      */
     constructor({view}) {

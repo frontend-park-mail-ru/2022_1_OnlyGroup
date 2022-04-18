@@ -1,6 +1,7 @@
-import {LoginView} from '../../views/LoginView/LoginView.js';
+import {LoginView} from '../../Views/LoginView/LoginView.js';
 import activeUser from '../../Models/User';
-import {BaseController} from '../base/BaseController';
+import {BaseController} from '../Base/BaseController';
+import {apiFailed, loginRegisterEvents} from '../../Modules/EventBusEvents';
 
 /**
  * Login controller
@@ -12,21 +13,21 @@ export default new class LoginController extends BaseController {
     constructor() {
         super({view: LoginView});
         super.setEvents({
-            'action-login': this.actionLogin,
-            'user-unloginned': this.userUnloggined,
-            'user-validation-failed': this.userValidationFailed,
-            'api-failed': this.apiFailed,
-            'user-loggined': this.userLoggined,
+            [loginRegisterEvents.actionLogin]: this.actionLogin,
+            [loginRegisterEvents.userNotLoggined]: this.userUnloggined,
+            [loginRegisterEvents.userValidationFailed]: this.userValidationFailed,
+            [apiFailed]: this.apiFailed,
+            [loginRegisterEvents.userLoggined]: this.userLoggined,
         });
     }
 
     /**
      * @callback Callback form submitted
-     * @param {string}email
-     * @param {string}Password
+     * @param {string} email
+     * @param {string} Password
      */
     actionLogin = ({email, password}) => {
-        activeUser.Login({email, password});
+        activeUser.login({email, password});
     }
 
     /**
@@ -46,18 +47,17 @@ export default new class LoginController extends BaseController {
 
     /**
      * @callback Callback validation user data failed
-     * @param {string}email
-     * @param {string}password
-     * @param {string}passwordRepeat
+     * @param {string} email
+     * @param {string} password
      */
-    userValidationFailed = ({email, password, passwordRepeat}) => {
+    userValidationFailed = ({email, password}) => {
         this.view.setErrors({email: email, password: password, main: false});
         this.view.reRender();
     }
 
     /**
      * @callback Callback api failed
-     * @param {string}ErrorMsg
+     * @param {string} ErrorMsg
      */
     apiFailed = ({ErrorMsg}) => {
         // TODO api error processing

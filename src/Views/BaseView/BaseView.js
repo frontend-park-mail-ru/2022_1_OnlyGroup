@@ -3,21 +3,21 @@
  */
 export class BaseView {
     /**
-     * Create base view
-     * @param {HTMLElement}parent
+     * Create Base view
+     * @param {HTMLElement} parent
      */
     constructor({parent}) {
         this.parent = parent;
     }
 
     /**
-     * Render base view
+     * Render Base view
      */
     render() {
     }
 
     /**
-     * Unmount base view
+     * Unmount Base view
      */
     unmount() {
     }

@@ -3,6 +3,7 @@ import loginView from './LoginView.hbs';
 import LoginFormComponent from '../../Components/LoginForm/LoginForm';
 import EventBus from '../../Modules/EventBus';
 import {loginViewNames} from '../../Modules/ViewConsts';
+import {loginRegisterEvents} from '../../Modules/EventBusEvents';
 
 /**
  * View class for login page
@@ -12,7 +13,7 @@ export class LoginView extends BaseView {
 
     /**
      * Create login BaseView
-     * @param {HTMLElement}parent
+     * @param {HTMLElement} parent
      */
     constructor({parent}) {
         super({parent});
@@ -45,18 +46,18 @@ export class LoginView extends BaseView {
 
     /**
      * Callback for form submit
-     * @param {string}email
-     * @param {string}password
+     * @param {string} email
+     * @param {string} password
      */
     formSubmit({email, password}) {
-        EventBus.emitEvent('action-login', {email, password});
+        EventBus.emitEvent(loginRegisterEvents.actionLogin, {email, password});
     }
 
     /**
      * Set errors in login form and rerender
-     * @param {boolean}email
-     * @param {boolean}password
-     * @param {boolean}main
+     * @param {boolean} email
+     * @param {boolean} password
+     * @param {boolean} main
      */
     setErrors({email, password, main}) {
         this.#loginForm.setErrors({
