@@ -66,7 +66,7 @@ export class User {
     }
 
     /**
-     * Logup user
+     * Register user
      * @param {string} email
      * @param {string} password
      * @param {string} passwordRepeat
