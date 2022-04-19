@@ -1,6 +1,5 @@
 import {BaseView} from '../BaseView/BaseView.js';
 import registerView from './RegisterView.hbs';
-import EventBus from '../../Modules/EventBus';
 import RegisterFormComponent from '../../Components/RegisterForm/RegisterForm';
 
 /**
@@ -34,23 +33,6 @@ export class RegisterView extends BaseView {
     }
 
     /**
-     * @callback Callback for logo click
-     */
-    logoClick = () => {
-        EventBus.emitEvent('logo-click');
-    }
-
-    /**
-     * Callback for register form submit
-     * @param {string}email
-     * @param {string}password
-     * @param {string}passwordRepeat
-     */
-    registerFormSubmit({email, password, passwordRepeat}) {
-        EventBus.emitEvent('action-register', {email, password, passwordRepeat});
-    }
-
-    /**
      * Set errors in login form and rerender
      * @param {string}email
      * @param {string}password
@@ -58,13 +40,6 @@ export class RegisterView extends BaseView {
      * @param {string}main
      */
     setErrors({email, password, passwordRepeat, main}) {
-        this.#registerForm.setErrors({email, password, passwordRepeat, main});
-    }
-
-    /**
-     * Unmount BaseView
-     */
-    unmount() {
-        this.#registerForm.unmount();
+        this.components.registerForm.setErrors({email, password, passwordRepeat, main});
     }
 }
