@@ -8,7 +8,7 @@ const statusUnathorized = 401;
 /**
  * User class
  */
-class User {
+export class User {
     #id;
 
     /**
