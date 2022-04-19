@@ -1,14 +1,14 @@
-import Logo from './Logo.hbs';
+import logo from './Logo.hbs';
 import {BaseComponent} from '../Base/Base';
 
 /**
  * Logo component
  */
-export class LogoComponent extends BaseComponent {
+export class Logo extends BaseComponent {
     /**
      * Create logo component
-     * @param {Array}styles
-     * @param {function|undefined|null}onClick
+     * @param {Array} styles
+     * @param {function|undefined|null} onClick
      */
     constructor({styles, onClick}) {
         super({styles});
@@ -20,7 +20,7 @@ export class LogoComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Logo(...this);
+        return logo(...this);
     }
 
     /**

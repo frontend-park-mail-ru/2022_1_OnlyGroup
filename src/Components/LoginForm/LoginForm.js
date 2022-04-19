@@ -1,45 +1,45 @@
 import idGenerator from '../../Modules/idGenerator';
-import LoginForm from './LoginForms.hbs';
-import {ButtonComponent} from '../Button/Button';
-import {InputComponent} from '../Input/Input';
-import {TextComponent} from '../Text/Text';
-import {LogoComponent} from '../Logo/Logo';
+import loginForm from './LoginForms.hbs';
+import {Button} from '../Button/Button';
+import {Input} from '../Input/Input';
+import {Text} from '../Text/Text';
+import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 
 /**
  * Login form smart component
  */
-export default class LoginFormComponent extends BaseComponent {
+export default class LoginForm extends BaseComponent {
     #components;
     #onSubmit;
     #onLogoClick;
 
     /**
      * Create login form component
-     * @param {function}onSubmit
-     * @param {function}onLogoClick
+     * @param {function} onSubmit
+     * @param {function} onLogoClick
      */
     constructor({onSubmit, onLogoClick}) {
         super({styles: []});
         this.#onSubmit = onSubmit;
         this.#onLogoClick = onLogoClick;
         this.#components = {};
-        this.#components.logo = new LogoComponent({styles: ['logo-view-login'], onClick: this.onLogoClick});
-        this.#components.emailInput = new InputComponent({
+        this.#components.logo = new Logo({styles: ['logo-view-login'], onClick: this.onLogoClick});
+        this.#components.emailInput = new Input({
             type: 'text',
             label: 'Email',
             styles: ['login-register-input', 'w-full'],
         });
-        this.#components.passwordInput = new InputComponent({
+        this.#components.passwordInput = new Input({
             type: 'password',
             label: 'Пароль',
             styles: ['login-register-input', 'w-full'],
         });
-        this.#components.mainError = new TextComponent({
+        this.#components.mainError = new Text({
             text: '',
             styles: ['login-error-text'],
         });
-        this.#components.button = new ButtonComponent({
+        this.#components.button = new Button({
             text: 'Войти',
             styles: ['login-register-button'],
             onClick: this.onButtonClick,
@@ -48,7 +48,7 @@ export default class LoginFormComponent extends BaseComponent {
 
     /**
      * @callback Callback for logo click
-     * @param {Event}ev
+     * @param {Event} ev
      */
     onLogoClick(ev) {
         ev.preventDefault();
@@ -57,7 +57,7 @@ export default class LoginFormComponent extends BaseComponent {
 
     /**
      * @callback Callback for button click
-     * @param {Event}ev
+     * @param {Event} ev
      */
     onButtonClick = (ev) => {
         this.formSubmit(ev);
@@ -65,7 +65,7 @@ export default class LoginFormComponent extends BaseComponent {
 
     /**
      * @callback Callback for form submit
-     * @param {Event}ev
+     * @param {Event} ev
      */
     formSubmit = (ev) => {
         ev.preventDefault();
@@ -82,7 +82,7 @@ export default class LoginFormComponent extends BaseComponent {
         this.renderedComponents = Object.values(this.#components).reduce((prevStr, currElem) => {
             return prevStr + currElem.render();
         }, '');
-        return LoginForm(...this);
+        return loginForm(...this);
     }
 
     /**
@@ -96,9 +96,9 @@ export default class LoginFormComponent extends BaseComponent {
 
     /**
      * Set validation error
-     * @param {string}Email
-     * @param {string}Password
-     * @param {string}Main
+     * @param {string} Email
+     * @param {string} Password
+     * @param {string} Main
      */
     setValidationError({Email, Password, Main}) {
         this.removeAllErrors();

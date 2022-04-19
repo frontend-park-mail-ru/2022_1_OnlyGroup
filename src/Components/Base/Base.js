@@ -9,7 +9,7 @@ export class BaseComponent {
 
     /**
      *  Create base component
-     * @param {Array}styles
+     * @param {Array} styles
      */
     constructor({styles}) {
         this.id = idGenerator.getId();
