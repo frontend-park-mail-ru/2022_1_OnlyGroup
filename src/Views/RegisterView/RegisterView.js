@@ -1,6 +1,6 @@
-import {BaseView} from '../BaseView/BaseView.js';
 import registerView from './RegisterView.hbs';
 import RegisterFormComponent from '../../Components/RegisterForm/RegisterForm';
+import BaseView from '../BaseView/BaseView';
 
 /**
  * View class for login page
@@ -22,14 +22,6 @@ export class RegisterView extends BaseView {
         super.preRender();
         this.parent.innerHTML = registerView(this);
         this.mount();
-    }
-
-    /**
-     * Rerender BaseView
-     */
-    reRender() {
-        this.unmount();
-        this.render();
     }
 
     /**

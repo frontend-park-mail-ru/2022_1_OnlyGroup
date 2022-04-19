@@ -4,7 +4,7 @@ import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
-import {loginViewNames, registerViewNames} from '../../Modules/ViewConsts';
+import {registerViewNames} from '../../Modules/ViewConsts';
 import {AppPaths} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
 import {loginRegisterEvents} from '../../Modules/EventBusEvents';
@@ -39,7 +39,7 @@ export default class RegisterForm extends BaseComponent {
             styles: ['login-error-text'],
         });
         this.components.button = new Button({
-            text: loginViewNames.buttonTittle,
+            text: registerViewNames.buttonTittle,
             styles: ['login-register-button'],
             onClick: this.onButtonClick,
         });

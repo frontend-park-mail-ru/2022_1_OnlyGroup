@@ -1,4 +1,4 @@
-import {loginViewNames} from './ViewConsts';
+import {loginViewNames, registerViewNames} from './ViewConsts';
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordPatternLowerCase = `[a-z]+`;
@@ -44,7 +44,7 @@ export default class Validators {
      */
     static validateEmailPasswordRepeatPassword({email, password, passwordRepeat = null}) {
         let validationFailed = false;
-        let validationError = {'email': '', 'password': '', 'passwordRepeat': ''};
+        const validationError = {'email': '', 'password': '', 'passwordRepeat': ''};
         if (!this.validateEmail(email)) {
             validationFailed = true;
             validationError.email = loginViewNames.emailVerificationFailed;
@@ -54,10 +54,9 @@ export default class Validators {
             validationError.password = loginViewNames.passwordVerificationFailed;
         }
         passwordRepeat = (passwordRepeat === undefined) ? null : passwordRepeat;
-        if (passwordRepeat && passwordRepeat !== password) {
-            // TODO password name
-            validationError.passwordRepeat = 'TODO';
-            validationError = true;
+        if (passwordRepeat !== null && (passwordRepeat !== password || passwordRepeat.length === 0)) {
+            validationFailed = true;
+            validationError.passwordRepeat = registerViewNames.passwordRepeatVerifictionFailed;
         }
         if (validationFailed) {
             return validationError;

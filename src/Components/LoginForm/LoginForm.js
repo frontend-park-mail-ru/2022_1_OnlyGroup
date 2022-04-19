@@ -1,4 +1,4 @@
-import loginForm from './LoginForms.hbs';
+import loginForm from './LoginForm.hbs';
 import {Button} from '../Button/Button';
 import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
@@ -94,7 +94,7 @@ export default class LoginForm extends BaseComponent {
      * Mount login form component
      */
     mount() {
-        this.findElem();
+        super.mount();
         if (this.elem) {
             this.elem.addEventListener('submit', this.formSubmit);
         }
