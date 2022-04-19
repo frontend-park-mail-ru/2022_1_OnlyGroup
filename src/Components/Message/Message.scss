@@ -1,0 +1,79 @@
+@mixin text-styles($fontSize, $marginBottom) {
+    font-size: $fontSize;
+    margin-bottom: $marginBottom;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin button-inputs-style() {
+    border-radius: 16px;
+    overflow: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@mixin default-button() {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    background: $bg-color-light;
+}
+
+.message-container {
+    @include default-button();
+    @include button-inputs-style();
+    @include size(430px, 96px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $light-bg-color;
+    padding-left: 20px;
+    padding-right: 2px;    
+}
+
+.message-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: $font-weight-semibold;
+    @include text-styles(14px, 0px);
+    margin-left: 25px;
+}
+
+.message-text-content {
+    font-weight: 400;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.message-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $button-dark-color;
+    @include size(24px, 24px);
+    border-radius: 50%;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.icon-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+img {
+    @include size(70px, 70px);
+    border-radius: 50%;
+}
+
+.message-container:hover {
+    transition: 0.3s linear;
+    background-color: $light-bg-color;
+}

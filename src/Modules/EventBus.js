@@ -1,7 +1,7 @@
 /**
  * Class Event Bus
  */
- class EventBus {
+class EventBus {
     /**
      * Constructor
      */
@@ -10,7 +10,8 @@
     }
 
     /**
-     * Get instance of class Event Bus
+     * Get singleton EventBus
+     * @return {EventBus}
      */
     static getInstance() {
         if (!EventBus.instance) {
@@ -21,8 +22,8 @@
     }
 
     /**
-     * Get all listeners 
-     * @returns {Array} listeners
+     * Get all listeners
+     * @return {Array} listeners
      */
     getEventListeners() {
         return this.listeners;
@@ -30,8 +31,8 @@
 
     /**
      * Add event listener to Event Bus
-     * @param {String} eventName 
-     * @param {Function} callbackFunction 
+     * @param {String} eventName
+     * @param {Function} callbackFunction
      */
     addEventListener(eventName, callbackFunction) {
         this.listeners[eventName] = this.listeners[eventName] ? this.listeners[eventName] : [];
@@ -51,7 +52,7 @@
 
     /**
      * Emit event listener
-     * @param {String} eventName 
+     * @param {String} eventName
      * @param {Object} parameters
      */
     emitEventListener(eventName, parameters) {
