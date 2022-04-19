@@ -31,5 +31,6 @@ export class Text extends BaseComponent {
      */
     setText(text) {
         this.textContent = text;
+        this.stateChanged = true;
     }
 }

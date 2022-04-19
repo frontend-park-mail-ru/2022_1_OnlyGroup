@@ -18,6 +18,7 @@ export class Input extends BaseComponent {
         super({styles});
         this.type = type;
         this.value = '';
+        this.inputId = idGenerator.getId();
         this.icon = (icon === undefined) ? null : icon;
         if (icon) {
             this.buttonId = idGenerator.getId();
@@ -35,13 +36,24 @@ export class Input extends BaseComponent {
     }
 
     /**
+     * Find elem
+     */
+    findElem() {
+        super.findElem();
+        this.inputElem = document.getElementById(this.inputId.toString());
+        if (this.icon) {
+            this.iconElem = document.getElementById(this.buttonId.toString());
+        }
+    }
+
+    /**
      * Get value of input
      * @return {string}
      */
     getValue() {
         this.findElem();
-        this.value = this.elem.value;
-        return this.elem.value;
+        this.value = this.inputElem.value;
+        return this.value;
     }
 
     /**
@@ -49,7 +61,11 @@ export class Input extends BaseComponent {
      * @param {string|null} error
      */
     setError(error) {
+        if (error === this.error) {
+            return;
+        }
         this.error = error;
+        this.stateChanged = true;
     }
 
     /**
@@ -70,5 +86,13 @@ export class Input extends BaseComponent {
             this.elem.removeEventListener('click', this.iconOnClick);
         }
         super.unmount();
+    }
+
+    /**
+     * Clear input
+     */
+    clear() {
+        this.value = '';
+        this.stateChanged = true;
     }
 }

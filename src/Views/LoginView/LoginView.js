@@ -1,76 +1,43 @@
-import {BaseView} from '../BaseView/BaseView.js';
+import BaseView from '../BaseView/BaseView.js';
 import loginView from './LoginView.hbs';
 import LoginFormComponent from '../../Components/LoginForm/LoginForm';
-import EventBus from '../../Modules/EventBus';
-import {loginViewNames} from '../../Modules/ViewConsts';
-import {loginRegisterEvents} from '../../Modules/EventBusEvents';
 
 /**
  * View class for login page
  */
 export class LoginView extends BaseView {
-    #loginForm;
-
     /**
      * Create login BaseView
-     * @param {HTMLElement} parent
+     * @param {HTMLElement}parent
      */
     constructor({parent}) {
         super({parent});
-        this.#loginForm = new LoginFormComponent({onSubmit: this.formSubmit, onLogoClick: this.logoClick});
+        this.components.loginForm = new LoginFormComponent();
     }
 
     /**
-     * Render BaseView and mount components
+     * Render login view
      */
     render() {
-        this.renderedComponents = this.#loginForm.render();
+        super.preRender();
         this.parent.innerHTML = loginView(this);
-        this.#loginForm.mount();
-    }
-
-    /**
-     * Rerender BaseView
-     */
-    reRender() {
-        this.unmount();
-        this.render();
-    }
-
-    /**
-     * @callback Callback for logo click
-     */
-    logoClick() {
-        EventBus.emitEvent('logo-click');
-    }
-
-    /**
-     * Callback for form submit
-     * @param {string} email
-     * @param {string} password
-     */
-    formSubmit({email, password}) {
-        EventBus.emitEvent(loginRegisterEvents.actionLogin, {email, password});
+        this.mount();
     }
 
     /**
      * Set errors in login form and rerender
-     * @param {boolean} email
-     * @param {boolean} password
-     * @param {boolean} main
+     * @param {string}email
+     * @param {string}password
+     * @param {string}main
      */
     setErrors({email, password, main}) {
-        this.#loginForm.setErrors({
-            email: (email) ? loginViewNames.emailVerificationFailed : '',
-            password: password ? loginViewNames.passwordVerificationFailed : '',
-            main: main ? loginViewNames.userLoginFailed : '',
-        });
+        this.components.loginForm.setErrors({email, password, main});
     }
 
     /**
-     * Unmount BaseView
+     * Remove all form inputs values
      */
-    unmount() {
-        this.#loginForm.unmount();
+    clear() {
+        this.components.loginForm.clear();
     }
 }

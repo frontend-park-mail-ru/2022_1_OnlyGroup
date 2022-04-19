@@ -2,6 +2,7 @@ import {LoginView} from '../../Views/LoginView/LoginView.js';
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
 import {apiFailed, loginRegisterEvents} from '../../Modules/EventBusEvents';
+import {loginViewNames} from '../../Modules/ViewConsts';
 
 /**
  * Login controller
@@ -41,7 +42,7 @@ export default new class LoginController extends BaseController {
      * @callback Callback user not loggined
      */
     userUnloggined = () => {
-        this.view.setErrors({email: false, password: false, main: true});
+        this.view.setErrors({email: '', password: '', main: loginViewNames.userLoginFailed});
         this.view.reRender();
     }
 
@@ -51,7 +52,7 @@ export default new class LoginController extends BaseController {
      * @param {string} password
      */
     userValidationFailed = ({email, password}) => {
-        this.view.setErrors({email: email, password: password, main: false});
+        this.view.setErrors({email: email, password: password, main: ''});
         this.view.reRender();
     }
 

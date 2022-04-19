@@ -6,24 +6,18 @@ import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {loginViewNames} from '../../Modules/ViewConsts';
 import {AppPaths} from '../../Modules/Router';
+import EventBus from '../../Modules/EventBus';
 
 /**
  * Login form smart component
  */
 export default class LoginForm extends BaseComponent {
-    #onSubmit;
-    #onLogoClick;
-
     /**
      * Create login form component
-     * @param {function} onSubmit
-     * @param {function} onLogoClick
      */
-    constructor({onSubmit, onLogoClick}) {
+    constructor() {
         super({});
-        this.#onSubmit = onSubmit;
-        this.#onLogoClick = onLogoClick;
-        this.components.logo = new Logo({styles: ['logo-BaseView-login'], onClick: this.logoClick});
+        this.components.logo = new Logo({styles: ['logo-BaseView-login']});
         this.components.emailInput = new Input({
             type: 'text',
             label: loginViewNames.emailTittle,
@@ -57,15 +51,6 @@ export default class LoginForm extends BaseComponent {
     }
 
     /**
-     * @callback Callback for logo click
-     * @param {Event} ev
-     */
-    logoClick = (ev) => {
-        ev.preventDefault();
-        this.#onLogoClick();
-    }
-
-    /**
      * @callback Callback for button click
      * @param {Event} ev
      */
@@ -81,7 +66,7 @@ export default class LoginForm extends BaseComponent {
         ev.preventDefault();
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
-        this.#onSubmit({email, password});
+        EventBus.emitEvent('action-login', {email, password});
     }
 
     /**
@@ -94,22 +79,12 @@ export default class LoginForm extends BaseComponent {
     }
 
     /**
-     * Remove all errors in form
-     */
-    removeAllErrors() {
-        this.components.mainError.setText('');
-        this.components.emailInput.setError(null);
-        this.components.passwordInput.setError(null);
-    }
-
-    /**
      * Set errors
      * @param {string} email
      * @param {string} password
      * @param {string} main
      */
     setErrors({email, password, main}) {
-        this.removeAllErrors();
         this.components.emailInput.setError(email);
         this.components.passwordInput.setError(password);
         this.components.mainError.setText(main);
@@ -119,9 +94,7 @@ export default class LoginForm extends BaseComponent {
      * Mount login form component
      */
     mount() {
-        Object.values(this.components).forEach((component) => {
-            component.mount();
-        });
+        super.mount();
         this.findElem();
         this.elem.addEventListener('submit', this.formSubmit);
     }
@@ -130,9 +103,14 @@ export default class LoginForm extends BaseComponent {
      * Unmount login form component
      */
     unmount() {
-        Object.values(this.components).forEach((component) => {
-            component.unmount();
-        });
         super.unmount();
+    }
+
+    /**
+     * Clear all inputs
+     */
+    clear() {
+        this.components.emailInput.clear();
+        this.components.passwordInput.clear();
     }
 }
