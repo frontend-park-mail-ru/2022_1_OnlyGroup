@@ -1,18 +1,18 @@
-import Logo from './Logo.hbs';
+import logo from './Logo.hbs';
 import {BaseComponent} from '../Base/Base';
+import EventBus from '../../Modules/EventBus';
+import {logoClick} from '../../Modules/EventBusEvents';
 
 /**
  * Logo component
  */
-export class LogoComponent extends BaseComponent {
+export class Logo extends BaseComponent {
     /**
      * Create logo component
-     * @param {Array}styles
-     * @param {function|undefined|null}onClick
+     * @param {Array} styles
      */
-    constructor({styles, onClick}) {
+    constructor({styles}) {
         super({styles});
-        this.onClick = (onClick === undefined) ? null : onClick;
     }
 
     /**
@@ -20,7 +20,14 @@ export class LogoComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Logo(this);
+        return logo(this);
+    }
+
+    /**
+     * @callback Callback for logo click
+     */
+    click() {
+        EventBus.emitEvent(logoClick);
     }
 
     /**

@@ -1,8 +1,8 @@
-import {BaseView} from '../../views/BaseView/BaseView';
+import {BaseView} from '../../Views/BaseView/BaseView';
 import EventBus from '../../Modules/EventBus';
 
 /**
- * Base controller classx
+ * Base controller class
  */
 export class BaseController {
     /**

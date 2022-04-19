@@ -2,15 +2,10 @@
 @import "./static/style/_variables.scss";
 @import "./Components/Input/Input.scss";
 @import "./Components/Button/Button.scss";
-//@import "./Components/Interest/Interest.scss";
-//@import "./Components/TextWithIcon/TextWithIcon.scss";
-//@import "./Components/Message/Message.scss";
-//@import "./Components/FeedPhotoCard/FeedPhotoCard.scss";
 @import "./Components/Logo/Logo.scss";
 @import "./Components/Input/Input.scss";
-//@import "./Components/ButtonWithIcon/ButtonWithIcon.scss";
 @import "./Components/Text/Text.scss";
-//@import "./Components/InputWithIcon/InputWithIcon.scss";
+@import "Views/LoginView/LoginView";
 @import "Components/LoginForm/LoginForm";
 @import "Components/RegisterForm/RegisterForm";
 @import "views/LoginView/LoginView";

@@ -1,6 +1,7 @@
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
-import {RegisterView} from '../../views/RegisterView/RegisterView';
+import {RegisterView} from '../../Views/RegisterView/RegisterView';
+import {apiFailed, loginRegisterEvents} from '../../Modules/EventBusEvents';
 
 /**
  * Login controller
@@ -12,11 +13,11 @@ export default new class RegisterController extends BaseController {
     constructor() {
         super({view: RegisterView});
         super.setEvents({
-            'action-register': this.actionRegister,
-            'user-not-loginned-registered': this.userNotRegistered,
-            'user-validation-failed': this.userValidationFailed,
-            'api-failed': this.apiFailed,
-            'user-loggined': this.userRegistered,
+            [loginRegisterEvents.actionRegister]: this.actionRegister,
+            [loginRegisterEvents.userNotLoggined]: this.userNotLoggined,
+            [loginRegisterEvents.userValidationFailed]: this.userValidationFailed,
+            [apiFailed]: this.apiFailed,
+            [loginRegisterEvents.userLoggined]: this.userRegistered,
         });
     }
 
@@ -27,7 +28,7 @@ export default new class RegisterController extends BaseController {
      * @param {string}passwordRepeat
      */
     actionRegister({email, password, passwordRepeat}) {
-        activeUser.LogUp({email, password, passwordRepeat});
+        activeUser.logUp({email, password, passwordRepeat});
     }
 
     /**
@@ -40,7 +41,7 @@ export default new class RegisterController extends BaseController {
     /**
      * @callback Callback user not loggined
      */
-    userNotRegistered = ({message}) => {
+    userNotLoggined = ({message}) => {
         this.view.setErrors({email: '', password: '', passwordRepeat: '', main: message});
         this.view.reRender();
     }
@@ -61,7 +62,7 @@ export default new class RegisterController extends BaseController {
      */
     start() {
         super.start();
-        activeUser.CheckLogin();
+        activeUser.checkLogin();
     }
 
     /**

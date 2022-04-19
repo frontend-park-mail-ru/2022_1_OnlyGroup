@@ -22,7 +22,7 @@ export class Router {
 
     /**
      * Go to path
-     * @param {string}path
+     * @param {string} path
      */
     go(path) {
         this.#currentRoute.stop();

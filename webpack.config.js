@@ -11,8 +11,8 @@ const version = new Date(Date.now());
 
 const PATHS = {
     src: path.join(__dirname, './src/'),
-    dist: path.resolve(__dirname, './dist/')
-}
+    dist: path.resolve(__dirname, './dist/'),
+};
 
 module.exports = {
     watch: true,
@@ -20,7 +20,7 @@ module.exports = {
         alias: {
             _assets: path.resolve('src/static'),
             _components: path.resolve('src/components'),
-            /*_controllers: path.resolve('src/controllers'),
+            /* _controllers: path.resolve('src/controllers'),
             _events: path.resolve('src/events'),
             _models: path.resolve('src/models'),
             _modules: path.resolve('src/modules'),
@@ -42,7 +42,7 @@ module.exports = {
                 loader: 'handlebars-loader',
                 exclude: /(node_modules)/,
                 include: [
-                  path.resolve(__dirname, 'src/'),
+                    path.resolve(__dirname, 'src/'),
                 ],
             },
             {
@@ -51,9 +51,9 @@ module.exports = {
             },
             {
                 test: /\.(svg|png|jpg|jpeg|woff|woff2|eot|ttf)$/,
-                use: 'file-loader'
+                use: 'file-loader',
             },
-        ]
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -61,15 +61,15 @@ module.exports = {
             filename: 'index.html',
         }),
         new MiniCssExtractPlugin({
-            filename: 'style.css'
+            filename: 'style.css',
         }),
         new CopyPlugin({
             patterns: [
                 {
                     from: path.resolve(__dirname, 'src', 'static', 'images'),
-                    to: path.resolve(__dirname, 'dist', 'static', 'images')
-                }
-            ]
+                    to: path.resolve(__dirname, 'dist', 'static', 'images'),
+                },
+            ],
         }),
         new webpack.DefinePlugin({
             DEBUG: debug,
@@ -83,4 +83,4 @@ module.exports = {
         port: 9000,
         historyApiFallback: true,
     },
-}
+};
