@@ -30,7 +30,9 @@ export class Text extends BaseComponent {
      * @param {string} text
      */
     setText(text) {
-        this.textContent = text;
-        this.stateChanged = true;
+        if (text !== this.textContent) {
+            this.textContent = text;
+            this.stateChanged = true;
+        }
     }
 }

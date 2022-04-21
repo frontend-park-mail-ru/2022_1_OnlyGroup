@@ -22,6 +22,13 @@ export class BaseComponent {
         this.components = {};
         this.stateChanged = false;
         this.events = {};
+        this.initComponents();
+    }
+
+    /**
+     * Create all components
+     */
+    initComponents() {
     }
 
     /**

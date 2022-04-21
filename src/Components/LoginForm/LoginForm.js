@@ -18,6 +18,15 @@ export default class LoginForm extends BaseComponent {
      */
     constructor() {
         super({});
+        this.setEvents({
+            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
+        });
+    }
+
+    /**
+     * Create all components on page
+     */
+    initComponents() {
         this.components.logo = new Logo({styles: ['logo-BaseView-login']});
         this.components.emailInput = new Input({
             type: 'text',
@@ -48,9 +57,6 @@ export default class LoginForm extends BaseComponent {
             text: loginViewNames.registerLinkTittle,
             styles: [],
             href: APP_PATHS.logupPage,
-        });
-        this.setEvents({
-            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
         });
     }
 
