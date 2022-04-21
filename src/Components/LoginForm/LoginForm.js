@@ -4,7 +4,7 @@ import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
-import {loginViewNames} from '../../Modules/ViewConsts';
+import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
 import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
@@ -30,12 +30,12 @@ export default class LoginForm extends BaseComponent {
         this.components.logo = new Logo({styles: ['logo-BaseView-login']});
         this.components.emailInput = new Input({
             type: 'text',
-            label: loginViewNames.emailTittle,
+            label: LOGIN_VIEW_NAMES.emailTittle,
             styles: ['login-register-input', 'w-full'],
         });
         this.components.passwordInput = new Input({
             type: 'password',
-            label: loginViewNames.passwordTitle,
+            label: LOGIN_VIEW_NAMES.passwordTitle,
             styles: ['login-register-input', 'w-full'],
         });
         this.components.mainError = new Text({
@@ -43,18 +43,18 @@ export default class LoginForm extends BaseComponent {
             styles: ['login-error-text'],
         });
         this.components.button = new Button({
-            text: loginViewNames.buttonTittle,
+            text: LOGIN_VIEW_NAMES.buttonTittle,
             styles: ['login-register-button'],
             onClick: this.onButtonClick,
         });
 
         this.components.registerContainer = new BaseComponent({styles: ['login-form-register-offer-container', 'w-full']});
         this.components.registerContainer.components.registerOffer = new Text({
-            text: loginViewNames.registerOffer,
+            text: LOGIN_VIEW_NAMES.registerOffer,
             styles: [],
         });
         this.components.registerContainer.components.registerLink = new Text({
-            text: loginViewNames.registerLinkTittle,
+            text: LOGIN_VIEW_NAMES.registerLinkTittle,
             styles: [],
             href: APP_PATHS.registerPage,
         });

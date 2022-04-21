@@ -2,7 +2,7 @@ import {LoginView} from '../../Views/LoginView/LoginView.js';
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
 import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
-import {loginViewNames} from '../../Modules/ViewConsts';
+import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
 
 /**
  * Login controller
@@ -42,7 +42,7 @@ export default new class LoginController extends BaseController {
      * @callback Callback user not loggined
      */
     userUnloggined = () => {
-        this.view.setErrors({email: '', password: '', main: loginViewNames.userLoginFailed});
+        this.view.setErrors({email: '', password: '', main: LOGIN_VIEW_NAMES.userLoginFailed});
         this.view.reRender();
     }
 
@@ -63,5 +63,13 @@ export default new class LoginController extends BaseController {
     apiFailed = ({ErrorMsg}) => {
         // TODO api error processing
         alert(`Api error ${ErrorMsg}`);
+    }
+
+    /**
+     * Start login controller
+     */
+    start() {
+        super.start();
+        activeUser.checkLogin();
     }
 };
