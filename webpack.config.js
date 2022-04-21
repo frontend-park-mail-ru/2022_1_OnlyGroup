@@ -20,11 +20,6 @@ module.exports = {
         alias: {
             _assets: path.resolve('src/static'),
             _components: path.resolve('src/components'),
-            /* _controllers: path.resolve('src/controllers'),
-            _events: path.resolve('src/events'),
-            _models: path.resolve('src/models'),
-            _modules: path.resolve('src/modules'),
-            _views: path.resolve('src/views'),*/
         },
         extensions: ['.js'],
     },

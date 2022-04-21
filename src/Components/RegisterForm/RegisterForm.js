@@ -4,10 +4,10 @@ import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
-import {registerViewNames} from '../../Modules/ViewConsts';
-import {AppPaths} from '../../Modules/Router';
+import {REGISTER_VIEW_NAMES} from '../../Modules/ViewConsts';
+import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
-import {loginRegisterEvents} from '../../Modules/EventBusEvents';
+import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login form smart component
@@ -18,20 +18,29 @@ export default class RegisterForm extends BaseComponent {
      */
     constructor() {
         super({});
+        this.setEvents({
+            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
+        });
+    }
+
+    /**
+     * Init all components
+     */
+    initComponents() {
         this.components.logo = new Logo({styles: ['logo-BaseView-login']});
         this.components.emailInput = new Input({
             type: 'text',
-            label: registerViewNames.emailTittle,
+            label: REGISTER_VIEW_NAMES.emailTittle,
             styles: ['login-register-input', 'w-full'],
         });
         this.components.passwordInput = new Input({
             type: 'password',
-            label: registerViewNames.passwordTitle,
+            label: REGISTER_VIEW_NAMES.passwordTitle,
             styles: ['login-register-input', 'w-full'],
         });
         this.components.passwordRepeatInput = new Input({
             type: 'password',
-            label: registerViewNames.passwordRepeatTittle,
+            label: REGISTER_VIEW_NAMES.passwordRepeatTittle,
             styles: ['login-register-input', 'w-full'],
         });
         this.components.mainError = new Text({
@@ -39,20 +48,20 @@ export default class RegisterForm extends BaseComponent {
             styles: ['login-error-text'],
         });
         this.components.button = new Button({
-            text: registerViewNames.buttonTittle,
+            text: REGISTER_VIEW_NAMES.buttonTittle,
             styles: ['login-register-button'],
             onClick: this.onButtonClick,
         });
 
         this.components.registerContainer = new BaseComponent({styles: ['register-form-login-offer-container', 'w-full']});
         this.components.registerContainer.components.registerOffer = new Text({
-            text: registerViewNames.loginOffer,
+            text: REGISTER_VIEW_NAMES.loginOffer,
             styles: [],
         });
         this.components.registerContainer.components.registerLink = new Text({
-            text: registerViewNames.loginLinkTittle,
+            text: REGISTER_VIEW_NAMES.loginLinkTittle,
             styles: [],
-            href: AppPaths.loginPage,
+            href: APP_PATHS.loginPage,
         });
     }
 
@@ -73,7 +82,7 @@ export default class RegisterForm extends BaseComponent {
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
         const passwordRepeat = this.components.passwordRepeatInput.getValue();
-        EventBus.emitEvent(loginRegisterEvents.actionRegister, {email, password, passwordRepeat});
+        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.actionRegister, {email, password, passwordRepeat});
     }
 
     /**
@@ -81,7 +90,7 @@ export default class RegisterForm extends BaseComponent {
      * @return {string}
      */
     render() {
-        super.preRender();
+        super.prepareRender();
         return registerForms(this);
     }
 
@@ -117,5 +126,14 @@ export default class RegisterForm extends BaseComponent {
             this.elem.removeEventListener('submit', this.formSubmit);
         }
         super.unmount();
+    }
+
+    /**
+     * Clear all inputs
+     */
+    clear() {
+        this.components.emailInput.clear();
+        this.components.passwordInput.clear();
+        this.components.passwordRepeatInput.clear();
     }
 }

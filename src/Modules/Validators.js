@@ -1,4 +1,4 @@
-import {loginViewNames, registerViewNames} from './ViewConsts';
+import {loginViewNames, REGISTER_VIEW_NAMES} from './ViewConsts';
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordPatternLowerCase = `[a-z]+`;
@@ -56,7 +56,7 @@ export default class Validators {
         passwordRepeat = (passwordRepeat === undefined) ? null : passwordRepeat;
         if (passwordRepeat !== null && (passwordRepeat !== password || passwordRepeat.length === 0)) {
             validationFailed = true;
-            validationError.passwordRepeat = registerViewNames.passwordRepeatVerifictionFailed;
+            validationError.passwordRepeat = REGISTER_VIEW_NAMES.passwordRepeatVerificationFailed;
         }
         if (validationFailed) {
             return validationError;

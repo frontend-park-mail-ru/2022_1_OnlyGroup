@@ -1,7 +1,7 @@
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
 import {RegisterView} from '../../Views/RegisterView/RegisterView';
-import {apiFailed, loginRegisterEvents} from '../../Modules/EventBusEvents';
+import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login controller
@@ -13,11 +13,11 @@ export default new class RegisterController extends BaseController {
     constructor() {
         super({view: RegisterView});
         super.setEvents({
-            [loginRegisterEvents.actionRegister]: this.actionRegister,
-            [loginRegisterEvents.userNotLoggined]: this.userNotLoggined,
-            [loginRegisterEvents.userValidationFailed]: this.userValidationFailed,
-            [apiFailed]: this.apiFailed,
-            [loginRegisterEvents.userLoggined]: this.userRegistered,
+            [LOGIN_REGISTER_EVENTS.actionRegister]: this.actionRegister,
+            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.userNotLoggined,
+            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.userValidationFailed,
+            [API_FAILED]: this.apiFailed,
+            [LOGIN_REGISTER_EVENTS.userLoggined]: this.userRegistered,
         });
     }
 

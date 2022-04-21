@@ -1,7 +1,7 @@
 import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
 import Validators from '../Modules/Validators';
-import {registerViewNames} from '../Modules/ViewConsts';
+import {REGISTER_VIEW_NAMES} from '../Modules/ViewConsts';
 import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../Modules/EventBusEvents';
 
 const statusUnathorized = 401;
@@ -86,7 +86,7 @@ export class User {
         }
         const result = await Api.LogUp({Email: email, Password: password});
         if (result.Status === 409) {
-            EventBus.emitEvent(loginRegisterEvents.userValidationFailed, {email: registerViewNames.userEmailUsed});
+            EventBus.emitEvent(loginRegisterEvents.userValidationFailed, {email: REGISTER_VIEW_NAMES.userEmailUsed});
             return;
         }
 

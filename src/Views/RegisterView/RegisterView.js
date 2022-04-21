@@ -19,7 +19,7 @@ export class RegisterView extends BaseView {
      * Render BaseView and mount components
      */
     render() {
-        super.preRender();
+        super.prepareRender();
         this.parent.innerHTML = registerView(this);
         this.mount();
     }
