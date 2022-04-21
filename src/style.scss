@@ -5,11 +5,10 @@
 @import "./Components/Logo/Logo.scss";
 @import "./Components/Input/Input.scss";
 @import "./Components/Text/Text.scss";
-@import "Views/LoginView/LoginView";
-@import "Components/LoginForm/LoginForm";
-@import "Components/RegisterForm/RegisterForm";
-@import "Views/LoginView/LoginView";
-@import "Views/RegisterView/RegisterView";
+@import "./Components/LoginForm/LoginForm.scss";
+@import "./Components/RegisterForm/RegisterForm";
+@import "./Views/LoginView/LoginView";
+@import "./Views/RegisterView/RegisterView";
 @import "helpers.scss";
 
 * {

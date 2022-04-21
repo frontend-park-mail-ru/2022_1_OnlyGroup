@@ -52,11 +52,9 @@ export class Text extends BaseComponent {
      * @param {string} text
      */
     setText(text) {
-        if (text === this.textContent) {
+        if (text !== this.textContent) {
             this.textContent = text;
             this.stateChanged = true;
         }
-        this.textContent = text;
-        this.stateChanged = true;
     }
 }

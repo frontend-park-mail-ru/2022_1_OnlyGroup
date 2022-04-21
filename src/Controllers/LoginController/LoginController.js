@@ -1,7 +1,7 @@
 import {LoginView} from '../../Views/LoginView/LoginView.js';
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
-import {apiFailed, loginRegisterEvents} from '../../Modules/EventBusEvents';
+import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
 import {loginViewNames} from '../../Modules/ViewConsts';
 
 /**
@@ -14,11 +14,11 @@ export default new class LoginController extends BaseController {
     constructor() {
         super({view: LoginView});
         super.setEvents({
-            [loginRegisterEvents.actionLogin]: this.actionLogin,
-            [loginRegisterEvents.userNotLoggined]: this.userNotLoggined,
-            [loginRegisterEvents.userValidationFailed]: this.userValidationFailed,
-            [apiFailed]: this.apiFailed,
-            [loginRegisterEvents.userLoggined]: this.userLoggined,
+            [LOGIN_REGISTER_EVENTS.actionLogin]: this.actionLogin,
+            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.userUnloggined,
+            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.userValidationFailed,
+            [API_FAILED]: this.apiFailed,
+            [LOGIN_REGISTER_EVENTS.userLoggined]: this.userLoggined,
         });
     }
 
@@ -41,8 +41,8 @@ export default new class LoginController extends BaseController {
     /**
      * @callback Callback user not loggined
      */
-    userNotLoggined = ({message}) => {
-        this.view.setErrors({email: '', password: '', main: message});
+    userUnloggined = () => {
+        this.view.setErrors({email: '', password: '', main: loginViewNames.userLoginFailed});
         this.view.reRender();
     }
 
@@ -55,15 +55,6 @@ export default new class LoginController extends BaseController {
         this.view.setErrors({email: email, password: password, main: ''});
         this.view.reRender();
     }
-
-    /**
-     * Start controller and check user loggined
-     */
-    start() {
-        super.start();
-        activeUser.checkLogin();
-    }
-
 
     /**
      * @callback Callback api failed

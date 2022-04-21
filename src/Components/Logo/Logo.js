@@ -1,7 +1,7 @@
 import logo from './Logo.hbs';
 import {BaseComponent} from '../Base/Base';
 import EventBus from '../../Modules/EventBus';
-import {logoClick} from '../../Modules/EventBusEvents';
+import {LOGO_CLICK} from '../../Modules/EventBusEvents';
 
 /**
  * Logo component
@@ -27,7 +27,7 @@ export class Logo extends BaseComponent {
      * @callback Callback for logo click
      */
     click() {
-        EventBus.emitEvent(logoClick);
+        EventBus.emitEvent(LOGO_CLICK);
     }
 
     /**

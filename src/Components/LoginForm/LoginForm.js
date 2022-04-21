@@ -5,8 +5,9 @@ import {Text} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {loginViewNames} from '../../Modules/ViewConsts';
-import {AppPaths} from '../../Modules/Router';
+import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
+import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login form smart component
@@ -17,6 +18,15 @@ export default class LoginForm extends BaseComponent {
      */
     constructor() {
         super({});
+        this.setEvents({
+            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
+        });
+    }
+
+    /**
+     * Create all components on page
+     */
+    initComponents() {
         this.components.logo = new Logo({styles: ['logo-BaseView-login']});
         this.components.emailInput = new Input({
             type: 'text',
@@ -46,7 +56,7 @@ export default class LoginForm extends BaseComponent {
         this.components.registerContainer.components.registerLink = new Text({
             text: loginViewNames.registerLinkTittle,
             styles: [],
-            href: AppPaths.registerPage,
+            href: APP_PATHS.registerPage,
         });
     }
 
@@ -66,7 +76,7 @@ export default class LoginForm extends BaseComponent {
         ev.preventDefault();
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
-        EventBus.emitEvent('action-login', {email, password});
+        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.actionLogin, {email, password});
     }
 
     /**
@@ -74,7 +84,7 @@ export default class LoginForm extends BaseComponent {
      * @return {string}
      */
     render() {
-        super.preRender();
+        this.prepareRender();
         return loginForm(this);
     }
 
