@@ -45,7 +45,7 @@ export class User {
      */
     async checkLogin() {
         if (this.id === -1) {
-            EventBus.emitEvent(loginRegisterEvents.userNotLoggined);
+            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userNotLoggined);
             return;
         }
         const result = await Api.CheckLogin();
@@ -86,7 +86,7 @@ export class User {
         }
         const result = await Api.LogUp({Email: email, Password: password});
         if (result.Status === 409) {
-            EventBus.emitEvent(loginRegisterEvents.userValidationFailed, {email: REGISTER_VIEW_NAMES.userEmailUsed});
+            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userValidationFailed, {email: REGISTER_VIEW_NAMES.userEmailUsed});
             return;
         }
 
