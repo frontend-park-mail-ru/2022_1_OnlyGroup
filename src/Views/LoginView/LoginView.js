@@ -19,7 +19,7 @@ export class LoginView extends BaseView {
      * Render login view
      */
     render() {
-        super.preRender();
+        this.prepareRender();
         this.parent.innerHTML = loginView(this);
         this.mount();
     }
@@ -32,12 +32,5 @@ export class LoginView extends BaseView {
      */
     setErrors({email, password, main}) {
         this.components.loginForm.setErrors({email, password, main});
-    }
-
-    /**
-     * Remove all form inputs values
-     */
-    clear() {
-        this.components.loginForm.clear();
     }
 }

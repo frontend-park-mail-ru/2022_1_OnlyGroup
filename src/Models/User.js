@@ -1,7 +1,7 @@
 import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
 import Validators from '../Modules/Validators';
-import {apiFailed, loginRegisterEvents} from '../Modules/EventBusEvents';
+import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../Modules/EventBusEvents';
 
 const statusUnathorized = 401;
 
@@ -26,15 +26,15 @@ export class User {
     #processAuthResult(result) {
         if (result.Status === statusUnathorized) {
             this.id = -1;
-            EventBus.emitEvent(loginRegisterEvents.userNotLoggined);
+            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userNotLoggined);
             return;
         }
         if (!result.isOk()) {
-            EventBus.emitEvent(apiFailed, result);
+            EventBus.emitEvent(API_FAILED, result);
             return;
         }
         this.id = +result.Body.ID;
-        EventBus.emitEvent(loginRegisterEvents.userLoggined);
+        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userLoggined);
     }
 
     /**
@@ -57,7 +57,7 @@ export class User {
     async login({email, password}) {
         const validationRes = Validators.validateEmailPasswordRepeatPassword({email, password});
         if (validationRes) {
-            EventBus.emitEvent(loginRegisterEvents.userValidationFailed, validationRes);
+            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userValidationFailed, validationRes);
             return;
         }
 
@@ -76,7 +76,7 @@ export class User {
     async logUp({email, password, passwordRepeat}) {
         const validationRes = Validators.validateEmailPasswordRepeatPassword({email, password, passwordRepeat});
         if (validationRes) {
-            EventBus.emitEvent(loginRegisterEvents.userValidationFailed, validationRes);
+            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userValidationFailed, validationRes);
             return;
         }
         const result = await Api.LogUp({Email: email, Password: password});
@@ -91,11 +91,11 @@ export class User {
     async logOut() {
         const result = Api.LogOut();
         if (!result.isOk()) {
-            EventBus.emitEvent(apiFailed, result);
+            EventBus.emitEvent(API_FAILED, result);
             return;
         }
         this.#id = -1;
-        EventBus.emitEvent(loginRegisterEvents.userNotLoggined);
+        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userNotLoggined);
     }
 }
 

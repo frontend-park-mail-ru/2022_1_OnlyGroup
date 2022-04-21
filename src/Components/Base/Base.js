@@ -1,5 +1,6 @@
 import idGenerator from '../../Modules/IDGenerator';
 import Base from './Base.hbs';
+import EventBus from '../../Modules/EventBus';
 
 /**
  * Base component
@@ -7,6 +8,7 @@ import Base from './Base.hbs';
 export class BaseComponent {
     id;
     styles;
+    events;
     components;
     stateChanged;
 
@@ -19,15 +21,44 @@ export class BaseComponent {
         this.styles = (styles === undefined) ? '' : styles.join(' ');
         this.components = {};
         this.stateChanged = false;
+        this.events = {};
+    }
+
+    /**
+     * Set events from eventBus that component should listen
+     * @param {Object} events
+     */
+    setEvents(events) {
+        this.events = events;
     }
 
     /**
      * Prepare for render(this.renderedComponents)
      */
-    preRender() {
+    prepareRender() {
         this.renderedComponents = Object.values(this.components).reduce((prevStr, currElem) => {
             return prevStr + currElem.render();
         }, '');
+    }
+
+    /**
+     * Start listenning for eventBus events and mount component
+     */
+    start() {
+        Object.entries(this.events).forEach(([key, value]) => {
+            EventBus.addEventListener(key, value);
+        });
+        this.mount();
+    }
+
+    /**
+     * Stop listenning for eventBus events and unmount component
+     */
+    stop() {
+        Object.entries(this.events).forEach(([key, value]) => {
+            EventBus.removeEventListener(key, value);
+        });
+        this.unmount();
     }
 
     /**
@@ -54,7 +85,7 @@ export class BaseComponent {
      * @return {string}
      */
     render() {
-        this.preRender();
+        this.prepareRender();
         return Base(this);
     }
 

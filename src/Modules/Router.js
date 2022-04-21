@@ -1,4 +1,4 @@
-export const AppPaths = {
+export const APP_PATHS = {
     loginPage: '/login',
     logupPage: '/logup',
     mainPage: '/',
