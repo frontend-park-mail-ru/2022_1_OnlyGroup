@@ -1,4 +1,4 @@
-export const loginViewNames = {
+export const LOGIN_VIEW_NAMES = {
     registerOffer: 'Все еще нет аккаунта?',
     registerLinkTittle: 'Зарегистрироваться',
     emailTittle: 'Email',

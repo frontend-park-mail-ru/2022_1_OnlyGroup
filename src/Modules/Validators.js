@@ -1,4 +1,4 @@
-import {loginViewNames} from './ViewConsts';
+import {LOGIN_VIEW_NAMES} from './ViewConsts';
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordPatternLowerCase = `[a-z]+`;
@@ -47,11 +47,11 @@ export default class Validators {
         let validationError = {'email': '', 'password': '', 'passwordRepeat': ''};
         if (!this.validateEmail(email)) {
             validationFailed = true;
-            validationError.email = loginViewNames.emailVerificationFailed;
+            validationError.email = LOGIN_VIEW_NAMES.emailVerificationFailed;
         }
         if (!this.validatePassword(password)) {
             validationFailed = true;
-            validationError.password = loginViewNames.passwordVerificationFailed;
+            validationError.password = LOGIN_VIEW_NAMES.passwordVerificationFailed;
         }
         passwordRepeat = (passwordRepeat === undefined) ? null : passwordRepeat;
         if (passwordRepeat && passwordRepeat !== password) {
