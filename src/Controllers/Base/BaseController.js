@@ -1,13 +1,12 @@
-import {BaseView} from '../../views/BaseView/BaseView';
 import EventBus from '../../Modules/EventBus';
 
 /**
- * Base controller classx
+ * Base controller class
  */
 export class BaseController {
     /**
      * Create Base controller
-     * @param {BaseView}view
+     * @param {BaseView} view
      */
     constructor({view}) {
         this.view = new view({parent: document.getElementById('root')});
@@ -25,7 +24,7 @@ export class BaseController {
      * Start controller
      */
     start() {
-        this.view.render();
+        this.view.start();
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.addEventListener(key, value);
         });
@@ -35,7 +34,7 @@ export class BaseController {
      * Stop controller
      */
     stop() {
-        this.view.unmount();
+        this.view.stop();
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.removeEventListener(key, value);
         });

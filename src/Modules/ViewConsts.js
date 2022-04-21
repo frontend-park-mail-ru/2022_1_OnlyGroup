@@ -1,4 +1,4 @@
-export const loginViewNames = {
+export const LOGIN_VIEW_NAMES = {
     registerOffer: 'Все еще нет аккаунта?',
     registerLinkTittle: 'Зарегистрироваться',
     emailTittle: 'Email',
@@ -9,7 +9,7 @@ export const loginViewNames = {
     passwordVerificationFailed: 'Пароль должен содержать строчную и заглавную буквы и цифру',
 };
 
-export const registerViewNames = {
+export const REGISTER_VIEW_NAMES = {
     loginOffer: 'Уже есть аккаунт?',
     loginLinkTittle: 'Войти',
     emailTittle: 'Email',
@@ -17,7 +17,7 @@ export const registerViewNames = {
     passwordRepeatTittle: 'Пароль еще раз',
     buttonTittle: 'Зарегистрироваться',
     userEmailUsed: 'Email уже используется',
-    passwordRepeatVerifictionFailed: 'Пароли не совпадают',
+    passwordRepeatVerificationFailed: 'Пароли не совпадают',
 };
 
 export const feedViewNames = {

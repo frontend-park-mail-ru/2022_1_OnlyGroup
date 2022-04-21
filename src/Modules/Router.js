@@ -1,4 +1,4 @@
-export const AppPaths = {
+export const APP_PATHS = {
     loginPage: '/login',
     registerPage: '/register',
     messagesPage: '/messages',
@@ -25,7 +25,7 @@ export class Router {
 
     /**
      * Go to path
-     * @param {string}path
+     * @param {string} path
      */
     go(path) {
         this.#currentRoute.stop();

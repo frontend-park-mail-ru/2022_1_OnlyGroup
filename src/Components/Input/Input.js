@@ -1,23 +1,24 @@
-import Input from './Input.hbs';
+import input from './Input.hbs';
 import idGenerator from '../../Modules/IDGenerator';
 import {BaseComponent} from '../Base/Base';
 
 /**
  * Input component
  */
-export class InputComponent extends BaseComponent {
+export class Input extends BaseComponent {
     /**
      * Create input component
      * @param {string} type
-     * @param {Array}styles
-     * @param {string|null|undefined}label
-     * @param {string|null|undefined}icon
-     * @param {function|null|undefined}iconOnClick
+     * @param {Array} styles
+     * @param {string|null|undefined} label
+     * @param {string|null|undefined} icon
+     * @param {function|null|undefined} iconOnClick
      */
     constructor({type, styles, label, icon, iconOnClick}) {
         super({styles});
         this.type = type;
         this.value = '';
+        this.inputId = idGenerator.getId();
         this.icon = (icon === undefined) ? null : icon;
         if (icon) {
             this.buttonId = idGenerator.getId();
@@ -31,7 +32,18 @@ export class InputComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Input(this);
+        return input(this);
+    }
+
+    /**
+     * Find elem
+     */
+    findElem() {
+        super.findElem();
+        this.inputElem = document.getElementById(this.inputId.toString());
+        if (this.icon) {
+            this.iconElem = document.getElementById(this.buttonId.toString());
+        }
     }
 
     /**
@@ -40,16 +52,20 @@ export class InputComponent extends BaseComponent {
      */
     getValue() {
         this.findElem();
-        this.value = this.elem.value;
-        return this.elem.value;
+        this.value = this.inputElem.value;
+        return this.value;
     }
 
     /**
      * Set error text
-     * @param {string|null}error
+     * @param {string|null} error
      */
     setError(error) {
+        if (error === this.error) {
+            return;
+        }
         this.error = error;
+        this.stateChanged = true;
     }
 
     /**
@@ -73,9 +89,10 @@ export class InputComponent extends BaseComponent {
     }
 
     /**
-     * Clear input value
+     * Clear input
      */
     clear() {
         this.value = '';
+        this.stateChanged = true;
     }
 }

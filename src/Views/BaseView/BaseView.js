@@ -1,5 +1,5 @@
 /**
- * BaseView class
+ * Base view class
  */
 export default class BaseView {
     components;
@@ -14,9 +14,28 @@ export default class BaseView {
     }
 
     /**
+     * Start base view
+     */
+    start() {
+        Object.values(this.components).forEach((component) => {
+            component.start();
+        });
+        this.render();
+    }
+
+    /**
+     * Start base view
+     */
+    stop() {
+        Object.values(this.components).forEach((component) => {
+            component.stop();
+        });
+    }
+
+    /**
      * Render Base view
      */
-    preRender() {
+    prepareRender() {
         this.renderedComponents = Object.values(this.components).reduce((prevStr, currElem) => {
             return prevStr + currElem.render();
         }, '');
@@ -32,8 +51,9 @@ export default class BaseView {
      * Rerender view
      */
     reRender() {
-        this.unmount();
-        this.render();
+        Object.values(this.components).forEach((component) => {
+            component.reRender();
+        });
     }
 
     /**

@@ -1,7 +1,8 @@
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
 import {RegisterView} from '../../views/RegisterView/RegisterView';
-import router, {AppPaths} from '../../Modules/Router';
+import router, {APP_PATHS} from '../../Modules/Router';
+import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login controller
@@ -13,11 +14,11 @@ export default new class RegisterController extends BaseController {
     constructor() {
         super({view: RegisterView});
         super.setEvents({
-            'action-register': this.actionRegister,
-            'user-not-loginned-registered': this.userNotRegistered,
-            'user-validation-failed': this.userValidationFailed,
-            'api-failed': this.apiFailed,
-            'user-loggined': this.userRegistered,
+            [LOGIN_REGISTER_EVENTS.actionRegister]: this.actionRegister,
+            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.userNotLoggined,
+            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.userValidationFailed,
+            [API_FAILED]: this.apiFailed,
+            [LOGIN_REGISTER_EVENTS.userLoggined]: this.userRegistered,
         });
     }
 
@@ -28,20 +29,20 @@ export default new class RegisterController extends BaseController {
      * @param {string}passwordRepeat
      */
     actionRegister({email, password, passwordRepeat}) {
-        activeUser.LogUp({email, password, passwordRepeat});
+        activeUser.logUp({email, password, passwordRepeat});
     }
 
     /**
      * @callback Callback user sucsessfully loggined
      */
     userRegistered = () => {
-        router.go(AppPaths.findCandidatePage);
+        router.go(APP_PATHS.findCandidatePage);
     }
 
     /**
      * @callback Callback user not loggined
      */
-    userNotRegistered = ({message}) => {
+    userNotLoggined = ({message}) => {
         this.view.setErrors({email: '', password: '', passwordRepeat: '', main: message});
         this.view.reRender();
     }
@@ -61,9 +62,8 @@ export default new class RegisterController extends BaseController {
      * Start controller and check user loggined
      */
     start() {
-        this.view.clear();
         super.start();
-        activeUser.CheckLogin();
+        activeUser.checkLogin();
     }
 
     /**

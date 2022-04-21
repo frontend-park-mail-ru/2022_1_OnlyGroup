@@ -1,16 +1,16 @@
-import Button from './Button.hbs';
+import button from './Button.hbs';
 import {BaseComponent} from '../Base/Base';
 
 /**
  * Button Component
  */
-export class ButtonComponent extends BaseComponent {
+export class Button extends BaseComponent {
     /**
      * Create button component
-     * @param {Array}styles
-     * @param {string}text
-     * @param {string|null|undefined}icon
-     * @param {function|undefined|null}onClick
+     * @param {Array} styles
+     * @param {string} text
+     * @param {string|null|undefined} icon
+     * @param {function|undefined|null} onClick
      * @param {Array|undefined}enabledStyles
      * @param {string|undefined}href
      * @param {Array|undefined}hrefStyles
@@ -33,7 +33,7 @@ export class ButtonComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Button(this);
+        return button(this);
     }
 
     /**
@@ -66,7 +66,7 @@ export class ButtonComponent extends BaseComponent {
 
     /**
      * Set button text
-     * @param {string}text
+     * @param {string} text
      */
     changeText(text) {
         this.buttonText = text;

@@ -1,16 +1,16 @@
-import Text from './Text.hbs';
+import text from './Text.hbs';
 import {BaseComponent} from '../Base/Base';
 
 /**
  * Text component
  */
-export class TextComponent extends BaseComponent {
+export class Text extends BaseComponent {
     /**
      * Create text component
-     * @param {string}text
-     * @param {Array}styles
-     * @param {string|null|undefined}href
-     * @param {function|undefined}onClick
+     * @param {string} text
+     * @param {Array} styles
+     * @param {string|null|undefined} href
+     * @param {function|undefined} onClick
      */
     constructor({text, styles, href, onClick}) {
         super({styles});
@@ -24,7 +24,7 @@ export class TextComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Text(this);
+        return text(this);
     }
 
     /**
@@ -49,9 +49,12 @@ export class TextComponent extends BaseComponent {
 
     /**
      * Set text of text component
-     * @param {string}text
+     * @param {string} text
      */
     setText(text) {
-        this.textContent = text;
+        if (text !== this.textContent) {
+            this.textContent = text;
+            this.stateChanged = true;
+        }
     }
 }
