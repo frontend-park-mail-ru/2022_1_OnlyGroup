@@ -14,8 +14,6 @@ export default new class RegisterController extends BaseController {
         super({view: RegisterView});
         super.setEvents({
             [LOGIN_REGISTER_EVENTS.actionRegister]: this.actionRegister,
-            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.userNotLoggined,
-            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.userValidationFailed,
             [API_FAILED]: this.apiFailed,
             [LOGIN_REGISTER_EVENTS.userLoggined]: this.userRegistered,
         });
@@ -36,25 +34,6 @@ export default new class RegisterController extends BaseController {
      */
     userRegistered = () => {
         // TODO router.go('/');
-    }
-
-    /**
-     * @callback Callback user not loggined
-     */
-    userNotLoggined = ({message}) => {
-        this.view.setErrors({email: '', password: '', passwordRepeat: '', main: message});
-        this.view.reRender();
-    }
-
-    /**
-     * @callback Callback validation user data failed
-     * @param {string}email
-     * @param {string}password
-     * @param {string}passwordRepeat
-     */
-    userValidationFailed = ({email, password, passwordRepeat}) => {
-        this.view.setErrors({email: email, password: password, passwordRepeat: passwordRepeat, main: ''});
-        this.view.reRender();
     }
 
     /**

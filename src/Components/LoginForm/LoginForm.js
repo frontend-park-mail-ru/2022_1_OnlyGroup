@@ -102,12 +102,14 @@ export default class LoginForm extends BaseComponent {
      * Set errors
      * @param {string} email
      * @param {string} password
-     * @param {string} main
+     * @param {string|undefined} main
      */
     setErrors = ({email, password, main}) => {
         this.components.emailInput.setError(email);
         this.components.passwordInput.setError(password);
-        this.components.mainError.setText(main);
+        if (main !== undefined) {
+            this.components.mainError.setText(main);
+        }
         this.reRender();
     }
 

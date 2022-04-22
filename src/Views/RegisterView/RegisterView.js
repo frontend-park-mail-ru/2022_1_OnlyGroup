@@ -23,15 +23,4 @@ export class RegisterView extends BaseView {
         this.parent.innerHTML = registerView(this);
         this.mount();
     }
-
-    /**
-     * Set errors in login form and rerender
-     * @param {string}email
-     * @param {string}password
-     * @param {string}passwordRepeat
-     * @param {string}main
-     */
-    setErrors({email, password, passwordRepeat, main}) {
-        this.components.registerForm.setErrors({email, password, passwordRepeat, main});
-    }
 }
