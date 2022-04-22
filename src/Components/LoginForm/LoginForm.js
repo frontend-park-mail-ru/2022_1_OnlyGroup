@@ -20,6 +20,8 @@ export default class LoginForm extends BaseComponent {
         super({});
         this.setEvents({
             [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
+            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
+            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setUnloggined,
         });
     }
 
@@ -89,15 +91,24 @@ export default class LoginForm extends BaseComponent {
     }
 
     /**
+     * Set user not loggined
+     */
+    setUnloggined = () => {
+        this.setErrors({email: '', password: '', main: LOGIN_VIEW_NAMES.userLoginFailed});
+        this.reRender();
+    }
+
+    /**
      * Set errors
      * @param {string} email
      * @param {string} password
      * @param {string} main
      */
-    setErrors({email, password, main}) {
+    setErrors = ({email, password, main}) => {
         this.components.emailInput.setError(email);
         this.components.passwordInput.setError(password);
         this.components.mainError.setText(main);
+        this.reRender();
     }
 
     /**
@@ -123,7 +134,7 @@ export default class LoginForm extends BaseComponent {
     /**
      * Clear all inputs
      */
-    clear() {
+    clear = () => {
         this.components.emailInput.clear();
         this.components.passwordInput.clear();
     }
