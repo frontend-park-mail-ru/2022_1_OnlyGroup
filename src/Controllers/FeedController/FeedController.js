@@ -1,7 +1,7 @@
 import {BaseController} from '../Base/BaseController';
-import FeedView from '../../views/FeedView/FeedView';
+import FeedView from '../../Views/FeedView/FeedView';
 import activeUser from '../../Models/User';
-import router, {AppPaths} from '../../Modules/Router';
+import router, {APP_PATHS} from '../../Modules/Router';
 
 /**
  * Feed page controller
@@ -24,21 +24,21 @@ export default new class FeedController extends BaseController {
      */
     start() {
         super.start();
-        activeUser.CheckLogin();
+        activeUser.checkLogin();
     }
 
     /**
      * @callback Callback for exit button click
      */
     actionLogout = () =>{
-        activeUser.LogOut();
+        activeUser.logOut();
     }
 
     /**
      * @callback Callback for user unloggined
      */
     userUnloggined = () =>{
-        router.go(AppPaths.loginPage);
+        router.go(APP_PATHS.loginPage);
     }
 
     /**

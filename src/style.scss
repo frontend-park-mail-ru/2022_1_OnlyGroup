@@ -7,8 +7,14 @@
 @import "./Components/Text/Text.scss";
 @import "./Components/LoginForm/LoginForm.scss";
 @import "./Components/RegisterForm/RegisterForm";
+@import "./Components/ActiveUser/ActiveUser";
+@import "./Components/FeedPhoto/FeedPhoto";
+@import "./Components/FeedAction/FeedAction";
+@import "./Components/Avatar/Avatar";
+@import "./Components/Menu/Menu";
 @import "./Views/LoginView/LoginView";
 @import "./Views/RegisterView/RegisterView";
+@import "./Views/FeedView/FeedView";
 
 @import "helpers.scss";
 

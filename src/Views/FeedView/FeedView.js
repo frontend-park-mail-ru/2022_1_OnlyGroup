@@ -46,7 +46,7 @@ export default class FeedView extends BaseView {
      * Render feed view
      */
     render() {
-        super.preRender();
+        super.prepareRender();
         this.parent.innerHTML = feedView(this);
         this.mount();
     }

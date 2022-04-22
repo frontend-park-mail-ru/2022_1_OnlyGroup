@@ -1,6 +1,7 @@
 import {BaseComponent} from '../Base/Base';
 import feedPhoto from './FeedPhoto.hbs';
 import FeedAction from '../FeedAction/FeedAction';
+import IDGenerator from '../../Modules/IDGenerator';
 
 /**
  * Feed photo component
@@ -19,7 +20,12 @@ export default class FeedPhoto extends BaseComponent {
         this.onSuperLikeClick = (onSuperLikeClick === undefined) ? null : onSuperLikeClick;
         this.onLikeClick = onLikeClick;
         this.onDislikeClick = onDislikeClick;
-        this.src = src;
+        this.photoContainerId = IDGenerator.getId();
+        this.photo = new Image();
+        this.photo.src = src;
+        this.photo.classList.add('feed-image');
+        this.photoLoaded = false;
+        this.photo.addEventListener('load', this.onImageLoad);
         this.components.like = new FeedAction({
             styles: [],
             onClick: this.likeClick,
@@ -40,12 +46,27 @@ export default class FeedPhoto extends BaseComponent {
     }
 
     /**
+     * callback
+     */
+    onImageLoad = () => {
+        this.photoLoaded = true;
+        this.stateChanged = true;
+        this.photo.removeEventListener('load', this.onImageLoad);
+        this.reRender();
+    }
+
+    /**
      * Render feed photo
      * @return {string}
      */
     render() {
-        super.preRender();
+        super.prepareRender();
         return feedPhoto(this);
+    }
+
+    findElem() {
+        super.findElem();
+        this.photoContainer = document.getElementById(this.photoContainerId.toString());
     }
 
     /**
@@ -53,6 +74,10 @@ export default class FeedPhoto extends BaseComponent {
      */
     mount() {
         super.mount();
+        if (this.photoLoaded && this.photoContainer) {
+            this.photoContainer.innerHTML = '';
+            this.photoContainer.insertAdjacentElement('afterbegin', this.photo);
+        }
     }
 
     /**

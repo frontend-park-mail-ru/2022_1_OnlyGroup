@@ -1,6 +1,13 @@
-<div class="feed-photo-container {{{styles}}}">
-    <img src="{{{src}}}" class="feed-photo" id="{{{id}}}">
-    <div class="feed-photo-actions-container">
-        {{{renderedComponents}}}
+<div class="feed-photo-container {{{styles}}}" id="{{{id}}}">
+    <div id="{{{photoContainerId}}}" class="feed-photo">
+        {{#if photoLoaded}}
+        {{else}}
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        {{/if}}
     </div>
+    {{#if photoLoaded}}
+        <div class="feed-photo-actions-container">
+            {{{renderedComponents}}}
+        </div>
+    {{/if}}
 </div>

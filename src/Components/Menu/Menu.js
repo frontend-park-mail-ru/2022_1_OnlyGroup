@@ -1,8 +1,8 @@
 import {BaseComponent} from '../Base/Base';
 import menu from './Menu.hbs';
-import {ButtonComponent} from '../Button/Button';
+import {Button} from '../Button/Button';
 import {feedViewNames} from '../../Modules/ViewConsts';
-import {AppPaths} from '../../Modules/Router';
+import {APP_PATHS} from '../../Modules/Router';
 
 export const menuStatesName = {
     message: 'message',
@@ -13,7 +13,7 @@ export const menuStatesName = {
 /**
  * Left menu main page component
  */
-export default class MenuComponent extends BaseComponent {
+export default class Menu extends BaseComponent {
     #currentEnabled;
 
     /**
@@ -25,38 +25,38 @@ export default class MenuComponent extends BaseComponent {
     constructor({styles, state, onExitClick}) {
         super(styles);
         this.onExitClick = onExitClick;
-        this.components.messages = new ButtonComponent({
+        this.components.messages = new Button({
             styles: ['button__menu'],
             text: feedViewNames.buttonMessagesTittle,
-            href: AppPaths.messagesPage,
+            href: APP_PATHS.messagesPage,
             hrefStyles: ['w-full'],
             enabledStyles: [''],
             icon: '/static/images/MsgDark.png',
         });
-        this.components.matches = new ButtonComponent({
+        this.components.matches = new Button({
             styles: ['button__menu'],
             text: feedViewNames.buttonMatchesTittle,
-            href: AppPaths.matchesPage,
+            href: APP_PATHS.matchesPage,
             hrefStyles: ['w-full'],
             icon: 'static/images/cards.png',
         });
-        this.components.findCandidate = new ButtonComponent({
+        this.components.findCandidate = new Button({
             styles: ['button__menu'],
             text: feedViewNames.buttonFindCandidatesTittle,
-            href: AppPaths.findCandidatePage,
+            href: APP_PATHS.findCandidatePage,
             hrefStyles: ['w-full'],
             enabledStyles: ['button__menu-enabled-red'],
             icon: 'static/images/RefreshActive.png',
             iconEnabled: 'static/images/RefreshDisable.png',
         });
-        this.components.myProfile = new ButtonComponent({
+        this.components.myProfile = new Button({
             styles: ['button__menu'],
             text: feedViewNames.buttonMyProfileTittle,
-            href: AppPaths.profilePage,
+            href: APP_PATHS.profilePage,
             hrefStyles: ['w-full'],
             icon: 'static/images/profileDisable.png',
         });
-        this.components.exit = new ButtonComponent({
+        this.components.exit = new Button({
             styles: ['button__menu'],
             text: feedViewNames.buttonExitTittle,
             onClick: this.exitClick,
@@ -94,7 +94,7 @@ export default class MenuComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        super.preRender();
+        super.prepareRender();
         return menu(this);
     }
 }

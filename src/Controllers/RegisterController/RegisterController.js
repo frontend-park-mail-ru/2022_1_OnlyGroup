@@ -1,6 +1,6 @@
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
-import {RegisterView} from '../../views/RegisterView/RegisterView';
+import {RegisterView} from '../../Views/RegisterView/RegisterView';
 import router, {APP_PATHS} from '../../Modules/Router';
 import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
 

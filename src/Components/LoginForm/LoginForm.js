@@ -117,16 +117,8 @@ export default class LoginForm extends BaseComponent {
         if (this.elem) {
             this.elem.removeEventListener('submit', this.formSubmit);
         }
+        this.clear();
         super.unmount();
-        this.removeAllErrors();
-    }
-
-    /**
-     * Clear inputs
-     */
-    clear() {
-        this.components.emailInput.clear();
-        this.components.passwordInput.clear();
     }
 
     /**

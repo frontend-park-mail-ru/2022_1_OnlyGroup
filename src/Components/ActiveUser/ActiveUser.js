@@ -1,6 +1,6 @@
 import {BaseComponent} from '../Base/Base';
 import AvatarComponent from '../Avatar/Avatar';
-import {TextComponent} from '../Text/Text';
+import {Text} from '../Text/Text';
 import activeUser from './ActiveUser.hbs';
 
 /**
@@ -20,11 +20,11 @@ export class ActiveUserComponent extends BaseComponent {
         this.components.column = new BaseComponent({
             styles: ['flex', 'flex-column', 'justify-content-center', 'align-item-center'],
         });
-        this.components.column.components.name = new TextComponent({
+        this.components.column.components.name = new Text({
             text: 'David Jsons',
             styles: [],
         });
-        this.components.column.components.city = new TextComponent({
+        this.components.column.components.city = new Text({
             text: 'Moscow',
             styles: [],
         });
@@ -35,7 +35,7 @@ export class ActiveUserComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        this.preRender();
+        this.prepareRender();
         return activeUser(this);
     }
 }
