@@ -1,4 +1,4 @@
-import {ApiResult, INTERNAL_ERROR} from './ApiResult';
+import {ApiResult} from './ApiResult';
 import {FetchWrap} from './FetchWrap';
 
 const USERS_API_URL = 'users';
@@ -13,58 +13,12 @@ const PROFILE_CANDIDATE_POSTFIX_API_URL = 'candidates';
  */
 export class Api {
     /**
-     * Parse 5xx
-     * @param {Promise<Response>}response
-     * @return {Promise<ApiResult>}
-     */
-    static parseServerError = async (response) => {
-        let parsedError;
-        try {
-            parsedError = await response.json();
-        } catch {
-            return new ApiResult({status: response.status, errorMsg: 'not json response'});
-        }
-
-        return new ApiResult({status: response.status, errorMsg: parsedError.Msg});
-    }
-
-    /**
-     * Parse server response
-     * @param {Promise<Response>}response
-     * @return {Promise<ApiResult>}
-     */
-    static parseServerResponse = async (response) => {
-        let parsedData;
-        try {
-            parsedData = await response.json();
-        } catch {
-            return new ApiResult({status: INTERNAL_ERROR, errorMsg: 'not json response'});
-        }
-        return new ApiResult({status: response.status, body: parsedData});
-    }
-
-    /**
-     * Parse server response and error
-     * @param {Promise<Response>}response
-     * @return {Promise<ApiResult>}
-     */
-    static parseAll = async (response) => {
-        if (!response.ok) {
-            return await this.parseServerError(response);
-        }
-
-        return await this.parseServerResponse(response);
-    }
-
-    /**
      * Check if user loggined
      * @return {Promise<ApiResult>}
      * @constructor
      */
     static CheckLogin = async () => {
-        return FetchWrap.get(USERS_API_URL, async (response) =>{
-            return await this.parseAll(response);
-        });
+        return FetchWrap.Get(USERS_API_URL);
     }
 
     /**
@@ -76,9 +30,7 @@ export class Api {
      */
     static LogIn = async ({Email, Password}) => {
         const request = JSON.stringify({Email, Password});
-        return FetchWrap.put(USERS_API_URL, request, async (response) =>{
-            return await this.parseAll(response);
-        });
+        return FetchWrap.Put(USERS_API_URL, request);
     }
 
     /**
@@ -90,9 +42,7 @@ export class Api {
      */
     static LogUp = async ({Email, Password}) => {
         const request = JSON.stringify({Email: Email, Password: Password});
-        return FetchWrap.post(USERS_API_URL, request, async () => {
-            return await this.parseAll(response);
-        });
+        return FetchWrap.Post(USERS_API_URL, request);
     }
 
     /**
@@ -101,11 +51,7 @@ export class Api {
      * @constructor
      */
     static LogOut = async () => {
-        return FetchWrap.delete(USERS_API_URL, async (response) =>{
-            if (!response.ok) {
-                return await this.parseServerError(response);
-            }
-
+        return FetchWrap.Delete(USERS_API_URL, async (response) =>{
             return new ApiResult({status: response.status});
         });
     }
@@ -117,11 +63,8 @@ export class Api {
      * @constructor
      */
     static GetLongProfile = async ({id}) => {
-        let response;
         const requestUrl = `${PROFILES_API_URL}/${id.toString()}`;
-        return FetchWrap.get(requestUrl, async (response) => {
-            return await this.parseAll(response);
-        });
+        return FetchWrap.Get(requestUrl);
     }
 
     /**
@@ -131,11 +74,8 @@ export class Api {
      * @constructor
      */
     static GetShortProfile = async ({id}) => {
-        let response;
         const requestUrl = `${PROFILES_API_URL}/${id.toString()}/${PROFILE_SHORT_POSTFIX_API_URL}`;
-        return FetchWrap.get(requestUrl, async (response) => {
-            return await this.parseAll(response);
-        });
+        return FetchWrap.Get(requestUrl);
     }
 
     /**
@@ -163,10 +103,7 @@ export class Api {
             Gender: gender,
         });
         const requestUrl = `${PROFILES_API_URL}/${userId}`;
-        return FetchWrap.put(requestUrl, request, async (response) => {
-            if (!response.ok) {
-                return await this.parseServerError(response);
-            }
+        return FetchWrap.Put(requestUrl, request, async (response) => {
             return new ApiResult({status: response.status});
         });
     }
@@ -178,9 +115,7 @@ export class Api {
      */
     static FindCandidate = async () => {
         const requestUrl = `${PROFILES_API_URL}/${PROFILE_CANDIDATE_POSTFIX_API_URL}`;
-        return FetchWrap.post(requestUrl, '', async (response) => {
-            return await this.parseAll(response);
-        });
+        return FetchWrap.Post(requestUrl, '');
     }
 
     /**
@@ -195,10 +130,7 @@ export class Api {
             Id: id,
             Action: action,
         });
-        return FetchWrap.post(LIKES_API_URL, request, async (response) => {
-            if (!response.ok) {
-                return await this.parseServerError(response);
-            }
+        return FetchWrap.Post(LIKES_API_URL, request, async (response) => {
             return new ApiResult({status: response.status});
         });
     }
@@ -209,8 +141,6 @@ export class Api {
      * @constructor
      */
     static GetAllLikes = async () => {
-        return FetchWrap.get(LIKES_API_URL, async (response) => {
-            return await this.parseAll(response);
-        });
+        return FetchWrap.Get(LIKES_API_URL);
     }
 }
