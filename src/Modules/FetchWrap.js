@@ -17,7 +17,7 @@ export class FetchWrap {
      * Decorator for fetch error
      * @param {string} url
      * @param {RequestInit} init
-     * @param {fetch_ok_callback} callback
+     * @param {fetch_ok_callback|undefined} callback
      * @return {Promise<ApiResult>}
      */
     static fetchErrorDecorator = async (url, init, callback) => {
@@ -27,16 +27,52 @@ export class FetchWrap {
         } catch {
             return new ApiResult({status: INTERNAL_ERROR, errorMsg: 'fetch failed'});
         }
-        return callback(response);
+        if (!response.ok) {
+            return await this.parseServerError(response);
+        }
+        if (callback !== undefined) {
+            return callback(response);
+        }
+        return this.parseServerResponse(response);
+    }
+
+    /**
+     * Parse server response
+     * @param {Response}response
+     * @return {Promise<ApiResult>}
+     */
+    static parseServerResponse = async (response) => {
+        let parsedData;
+        try {
+            parsedData = await response.json();
+        } catch {
+            return new ApiResult({status: INTERNAL_ERROR, errorMsg: 'not json response'});
+        }
+        return new ApiResult({status: response.status, body: parsedData});
+    }
+
+    /**
+     * Parse 5xx
+     * @param {Response}response
+     * @return {Promise<ApiResult>}
+     */
+    static parseServerError = async (response) => {
+        let parsedError;
+        try {
+            parsedError = await response.json();
+            return new ApiResult({status: response.status, errorMsg: parsedError.Msg});
+        } catch {
+            return new ApiResult({status: response.status, errorMsg: 'not json response'});
+        }
     }
 
     /**
      * Wrap fetch get
      * @param {string} url
-     * @param {fetch_ok_callback} callback
+     * @param {fetch_ok_callback|undefined} callback
      * @return {Promise<Response>}
      */
-    static get = (url, callback) => {
+    static Get = (url, callback= undefined) => {
         return FetchWrap.fetchErrorDecorator(`${IP + PORT}/${API_PREFIX + url}`, {
             method: 'GET', credentials: 'include',
         }, callback);
@@ -45,10 +81,10 @@ export class FetchWrap {
      * Wrap fetch put
      * @param {string}url
      * @param {string}body
-     * @param {fetch_ok_callback} callback
+     * @param {fetch_ok_callback|undefined} callback
      * @return {Promise<Response>}
      */
-    static put = (url, body, callback) => {
+    static Put = (url, body, callback = undefined) => {
         return FetchWrap.fetchErrorDecorator(`${IP + PORT}/${API_PREFIX + url}`, {
             method: 'PUT',
             credentials: 'include',
@@ -59,10 +95,10 @@ export class FetchWrap {
      * Wrap fetch post
      * @param {string}url
      * @param {string}body
-     * @param {fetch_ok_callback} callback
+     * @param {fetch_ok_callback|undefined} callback
      * @return {Promise<Response>}
      */
-    static post = (url, body, callback) => {
+    static Post = (url, body, callback = undefined) => {
         return FetchWrap.fetchErrorDecorator(`${IP + PORT}/${API_PREFIX + url}`, {
             method: 'POST',
             credentials: 'include',
@@ -72,10 +108,10 @@ export class FetchWrap {
     /**
      * Wrap fetch delete
      * @param {string}url
-     * @param {fetch_ok_callback} callback
+     * @param {fetch_ok_callback|undefined} callback
      * @return {Promise<Response>}
      */
-    static delete = (url, callback) => {
+    static Delete = (url, callback = undefined) => {
         return FetchWrap.fetchErrorDecorator(`${IP + PORT}/${API_PREFIX + url}`, {
             method: 'DELETE',
             credentials: 'include',
