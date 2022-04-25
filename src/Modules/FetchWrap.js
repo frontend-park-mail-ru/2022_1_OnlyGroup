@@ -23,7 +23,7 @@ export class FetchWrap {
     static fetchErrorDecorator = async (url, init, callback) => {
         let response;
         try {
-            response = fetch(url, init);
+            response = await fetch(url, init);
         } catch {
             return new ApiResult({status: INTERNAL_ERROR, errorMsg: 'fetch failed'});
         }
