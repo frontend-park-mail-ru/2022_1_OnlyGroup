@@ -20,6 +20,8 @@ export default class RegisterForm extends BaseComponent {
         super({});
         this.setEvents({
             [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
+            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
+            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setErrors,
         });
     }
 
@@ -99,13 +101,16 @@ export default class RegisterForm extends BaseComponent {
      * @param {string} email
      * @param {string} password
      * @param {string} passwordRepeat
-     * @param {string} main
+     * @param {string|undefined} main
      */
-    setErrors({email, password, passwordRepeat, main}) {
+    setErrors = ({email, password, passwordRepeat, main}) => {
         this.components.emailInput.setError(email);
         this.components.passwordInput.setError(password);
         this.components.passwordRepeatInput.setError(passwordRepeat);
-        this.components.mainError.setText(main);
+        if (main !== undefined) {
+            this.components.mainError.setText(main);
+        }
+        this.reRender();
     }
 
     /**
@@ -131,7 +136,7 @@ export default class RegisterForm extends BaseComponent {
     /**
      * Clear all inputs
      */
-    clear() {
+    clear = () => {
         this.components.emailInput.clear();
         this.components.passwordInput.clear();
         this.components.passwordRepeatInput.clear();

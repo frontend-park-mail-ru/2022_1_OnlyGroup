@@ -23,14 +23,4 @@ export class LoginView extends BaseView {
         this.parent.innerHTML = loginView(this);
         this.mount();
     }
-
-    /**
-     * Set errors in login form and rerender
-     * @param {string}email
-     * @param {string}password
-     * @param {string}main
-     */
-    setErrors({email, password, main}) {
-        this.components.loginForm.setErrors({email, password, main});
-    }
 }
