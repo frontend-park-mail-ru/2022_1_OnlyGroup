@@ -1,170 +1,24 @@
-// import {UserId} from "./apiModels.js";
+import {ApiResult} from './ApiResult';
+import {FetchWrap} from './FetchWrap';
 
-const Port = '8080';
-const IP = 'http://127.0.0.1:';
-const ApiPrefix = '';
-const UsersApiUrl = 'users';
-const ProfilesApiUrl = 'profiles';
-const LikesApiUrl = 'likes';
-const ProfileApiShortPostfixUrl = 'shorts';
-const ProfileApiCandidatesPostfixUrl = 'candidates';
+const USERS_API_URL = 'users';
+const PROFILES_API_URL = 'profiles';
+const LIKES_API_URL = 'likes';
+const PROFILE_SHORT_POSTFIX_API_URL = 'shorts';
+const PROFILE_CANDIDATE_POSTFIX_API_URL = 'candidates';
 
-const InternalError = 500;
-
-/**
- * Present result of api call
- */
-export class ApiResult {
-    Status;
-    ErrorMsg;
-    Body;
-
-    /**
-     * Create result of api
-     * @param {number}status
-     * @param {string}errorMsg
-     * @param {Object}body
-     */
-    constructor({status, errorMsg = undefined, body = undefined}) {
-        this.Status = status;
-        this.ErrorMsg = errorMsg;
-        this.Body = body;
-    }
-
-    /**
-     * Check if 2xx fetch return
-     * @return {boolean}
-     */
-    isOk() {
-        return this.Status / 100 === 2;
-    }
-
-    /**
-     * Check if 401 fetch return
-     * @return {boolean}
-     */
-    isAuthRequired() {
-        return this.Status === 401;
-    }
-
-    /**
-     * Check if 500 fetch return
-     * @return {boolean}
-     */
-    isInternalErr() {
-        return this.Status === InternalError;
-    }
-}
 
 /**
  * Api class(fetch wrapped)
  */
 export class Api {
     /**
-     * Wrap fetch get
-     * @param {string}url
-     * @return {Promise<Response>}
-     */
-    static get = (url) => {
-        return fetch(`${IP + Port}/${ApiPrefix + url}`, {
-            method: 'GET', credentials: 'include',
-        });
-    }
-    /**
-     * Wrap fetch put
-     * @param {string}url
-     * @param {string}body
-     * @return {Promise<Response>}
-     */
-    static put = (url, body) => {
-        return fetch(`${IP + Port}/${ApiPrefix + url}`, {
-            method: 'PUT',
-            credentials: 'include',
-            body: body,
-        });
-    }
-    /**
-     * Wrap fetch post
-     * @param {string}url
-     * @param {string}body
-     * @return {Promise<Response>}
-     */
-    static post = (url, body) => {
-        return fetch(`${IP + Port}/${ApiPrefix + url}`, {
-            method: 'POST',
-            credentials: 'include',
-            body: body,
-        });
-    }
-    /**
-     * Wrap fetch delete
-     * @param {string}url
-     * @return {Promise<Response>}
-     */
-    static delete = (url) => {
-        return fetch(`${IP + Port}/${ApiPrefix + url}`, {
-            method: 'DELETE',
-            credentials: 'include',
-        });
-    }
-
-    /**
-     * Parse 5xx
-     * @param {Promise<Response>}response
-     * @return {Promise<ApiResult>}
-     */
-    static parseServerError = async (response) => {
-        let parsedError;
-        try {
-            parsedError = await response.json();
-        } catch {
-            return new ApiResult({status: response.status, errorMsg: 'not json response'});
-        }
-
-        return new ApiResult({status: response.status, errorMsg: parsedError.Msg});
-    }
-
-    /**
-     * Parse server response
-     * @param {Promise<Response>}response
-     * @return {Promise<ApiResult>}
-     */
-    static parseServerResponse = async (response) => {
-        let parsedData;
-        try {
-            parsedData = await response.json();
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'not json response'});
-        }
-        return new ApiResult({status: response.status, body: parsedData});
-    }
-
-    /**
-     * Parse server response and error
-     * @param {Promise<Response>}response
-     * @return {Promise<ApiResult>}
-     */
-    static parseAll = async (response) => {
-        if (!response.ok) {
-            return await this.parseServerError(response);
-        }
-
-        return await this.parseServerResponse(response);
-    }
-
-    /**
      * Check if user loggined
      * @return {Promise<ApiResult>}
      * @constructor
      */
     static CheckLogin = async () => {
-        let response;
-        try {
-            response = await this.get(UsersApiUrl);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-        return await this.parseAll(response);
+        return FetchWrap.Get(USERS_API_URL);
     }
 
     /**
@@ -176,14 +30,7 @@ export class Api {
      */
     static LogIn = async ({Email, Password}) => {
         const request = JSON.stringify({Email, Password});
-        let response;
-        try {
-            response = await this.put(UsersApiUrl, request);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-
-        return await this.parseAll(response);
+        return FetchWrap.Put(USERS_API_URL, request);
     }
 
     /**
@@ -195,14 +42,7 @@ export class Api {
      */
     static LogUp = async ({Email, Password}) => {
         const request = JSON.stringify({Email: Email, Password: Password});
-        let response;
-        try {
-            response = await this.post(UsersApiUrl, request);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-
-        return await this.parseAll(response);
+        return FetchWrap.Post(USERS_API_URL, request);
     }
 
     /**
@@ -211,17 +51,9 @@ export class Api {
      * @constructor
      */
     static LogOut = async () => {
-        let response;
-        try {
-            response = await this.delete(UsersApiUrl);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-        if (!response.ok) {
-            return await this.parseServerError(response);
-        }
-
-        return new ApiResult({status: response.status});
+        return FetchWrap.Delete(USERS_API_URL, async (response) =>{
+            return new ApiResult({status: response.status});
+        });
     }
 
     /**
@@ -231,14 +63,8 @@ export class Api {
      * @constructor
      */
     static GetLongProfile = async ({id}) => {
-        let response;
-        const requestUrl = `${ProfilesApiUrl}/${id.toString()}`;
-        try {
-            response = await this.get(requestUrl);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-        return await this.parseAll(response);
+        const requestUrl = `${PROFILES_API_URL}/${id.toString()}`;
+        return FetchWrap.Get(requestUrl);
     }
 
     /**
@@ -248,51 +74,38 @@ export class Api {
      * @constructor
      */
     static GetShortProfile = async ({id}) => {
-        let response;
-        const requestUrl = `${ProfilesApiUrl}/${id.toString()}/${ProfileApiShortPostfixUrl}`;
-        try {
-            response = await this.get(requestUrl);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-        return await this.parseAll(response);
+        const requestUrl = `${PROFILES_API_URL}/${id.toString()}/${PROFILE_SHORT_POSTFIX_API_URL}`;
+        return FetchWrap.Get(requestUrl);
     }
 
     /**
      * Change user profile info
-     * @param {number}UserId
-     * @param {string}FirstName
-     * @param {string}LastName
-     * @param {string}BirthDay
-     * @param {string}City
-     * @param {[string]}Interests
-     * @param {string}AboutUser
-     * @param {number}Gender
+     * @param {number} userId
+     * @param {string} firstName
+     * @param {string} lastName
+     * @param {string} birthDay
+     * @param {string} city
+     * @param {[string]} interests
+     * @param {string} aboutUser
+     * @param {number} gender
      * @return {Promise<ApiResult>}
      * @constructor
      */
-    static ChangeProfile = async ({UserId, FirstName, LastName, BirthDay, City, Interests, AboutUser, Gender}) => {
+    static ChangeProfile = async ({userId, firstName, lastName, birthDay, city, interests, aboutUser, gender}) => {
         const request = JSON.stringify({
-            UserId,
-            FirstName,
-            LastName,
-            BirthDay,
-            City,
-            Interests,
-            AboutUser,
-            Gender,
+            UserId: userId,
+            FirstName: firstName,
+            LastName: lastName,
+            BirthDay: birthDay,
+            City: city,
+            Interests: interests,
+            AboutUser: aboutUser,
+            Gender: gender,
         });
-        const requestUrl = `${ProfilesApiUrl}/${UserId}`;
-        let response;
-        try {
-            response = await this.put(requestUrl, request);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-        if (!response.ok) {
-            return await this.parseServerError(response);
-        }
-        return new ApiResult({status: response.status});
+        const requestUrl = `${PROFILES_API_URL}/${userId}`;
+        return FetchWrap.Put(requestUrl, request, async (response) => {
+            return new ApiResult({status: response.status});
+        });
     }
 
     /**
@@ -301,37 +114,25 @@ export class Api {
      * @constructor
      */
     static FindCandidate = async () => {
-        const requestUrl = `${ProfilesApiUrl}/${ProfileApiCandidatesPostfixUrl}`;
-        let response;
-        try {
-            response = await this.post(requestUrl, {});
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-
-        return await this.parseAll(response);
+        const requestUrl = `${PROFILES_API_URL}/${PROFILE_CANDIDATE_POSTFIX_API_URL}`;
+        return FetchWrap.Post(requestUrl, '');
     }
 
     /**
      * Set action(like or dislike)
-     * @param {number}Id
-     * @param {number}Action
+     * @param {number}id
+     * @param {number}action
      * @return {Promise<ApiResult>}
      * @constructor
      */
-    static SetLikeDislike = async ({Id, Action}) => {
-        const request = JSON.stringify({Id, Action});
-        let response;
-        try {
-            response = await this.post(LikesApiUrl, request);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-
-        if (!response.ok) {
-            return await this.parseServerError(response);
-        }
-        return new ApiResult({status: response.status});
+    static SetLikeDislike = async ({id, action}) => {
+        const request = JSON.stringify({
+            Id: id,
+            Action: action,
+        });
+        return FetchWrap.Post(LIKES_API_URL, request, async (response) => {
+            return new ApiResult({status: response.status});
+        });
     }
 
     /**
@@ -340,13 +141,6 @@ export class Api {
      * @constructor
      */
     static GetAllLikes = async () => {
-        let response;
-        try {
-            response = await this.get(LikesApiUrl);
-        } catch {
-            return new ApiResult({status: InternalError, errorMsg: 'fetch failed'});
-        }
-
-        return await this.parseAll(response);
+        return FetchWrap.Get(LIKES_API_URL);
     }
 }
