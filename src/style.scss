@@ -10,11 +10,12 @@
 @import "./Components/ActiveUser/ActiveUser";
 @import "./Components/FeedPhoto/FeedPhoto";
 @import "./Components/FeedAction/FeedAction";
-@import "./Components/Avatar/Avatar";
 @import "./Components/Menu/Menu";
+@import "./Components/Photo/Photo";
+@import "./Components/FeedInfo/FeedInfo";
 @import "./Views/LoginView/LoginView";
 @import "./Views/RegisterView/RegisterView";
-@import "./Views/FeedView/FeedView";
+@import "./Views/FeedView/FeedView";  ;
 
 @import "helpers.scss";
 

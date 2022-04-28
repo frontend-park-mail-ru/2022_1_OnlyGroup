@@ -1,0 +1,10 @@
+<div id="{{{id}}}" class="{{{styles}}}">
+    {{#if imageReady}}
+    {{else}}
+        {{#if loaderEnabled}}
+            <div class="image-loader">
+                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>
+        {{/if}}
+    {{/if}}
+</div>

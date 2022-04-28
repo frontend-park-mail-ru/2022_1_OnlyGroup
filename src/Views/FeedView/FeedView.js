@@ -5,6 +5,7 @@ import EventBus from '../../Modules/EventBus';
 import {ActiveUserComponent} from '../../Components/ActiveUser/ActiveUser';
 import {BaseComponent} from '../../Components/Base/Base';
 import FeedPhoto from '../../Components/FeedPhoto/FeedPhoto';
+import FeedInfo from '_components/FeedInfo/FeedInfo';
 
 /**
  * View class for login page
@@ -32,13 +33,9 @@ export default class FeedView extends BaseView {
         });
         this.components.rightColumn.components.photo = new FeedPhoto({
             styles: [],
-            src: 'static/images/userPhoto.png',
-            onLikeClick: () => {
-                alert('like');
-            },
-            onDislikeClick: () => {
-                alert('like');
-            },
+        });
+        this.components.rightColumn.components.info = new FeedInfo({
+            styles: [],
         });
     }
 

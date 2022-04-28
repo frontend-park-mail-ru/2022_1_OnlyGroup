@@ -27,3 +27,8 @@ export const feedViewNames = {
     buttonMyProfileTittle: 'Мой профиль',
     buttonExitTittle: 'Выход',
 };
+
+export const FEED_VIEW_NAMES = {
+    interests: 'Интересы',
+    horoscope: 'Совместимость по гороскопу',
+};

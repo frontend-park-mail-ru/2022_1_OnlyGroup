@@ -49,30 +49,34 @@ export class BaseComponent {
     }
 
     /**
-     * Start listenning for eventBus events and mount component
+     * Start listenning for eventBus events
      */
     start() {
+        Object.values(this.components).forEach((component) => {
+            component.start();
+        });
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.addEventListener(key, value);
         });
-        this.mount();
     }
 
     /**
-     * Stop listenning for eventBus events and unmount component
+     * Stop listenning for eventBus events
      */
     stop() {
+        Object.values(this.components).forEach((component) => {
+            component.stop();
+        });
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.removeEventListener(key, value);
         });
-        this.unmount();
     }
 
     /**
      * Rerender component
      */
     reRender() {
-        if (this.stateChanged) {
+        if (this.stateChanged && this.elem) {
             const savedElem = this.elem;
             this.unmount();
             savedElem.insertAdjacentHTML('beforebegin', this.render());

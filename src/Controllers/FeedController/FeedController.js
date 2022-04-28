@@ -1,7 +1,8 @@
 import {BaseController} from '../Base/BaseController';
 import FeedView from '../../Views/FeedView/FeedView';
-import activeUser from '../../Models/User';
 import router, {APP_PATHS} from '../../Modules/Router';
+import {Feed} from '../../Models/Feed';
+import activeUser from '../../Models/User';
 
 /**
  * Feed page controller
@@ -12,8 +13,10 @@ export default new class FeedController extends BaseController {
      */
     constructor() {
         super({view: FeedView});
+        this.feedModel = new Feed();
         super.setEvents({
             'action-logout': this.actionLogout,
+            'user-loggined': this.userLoggined,
             'user-unloginned': this.userUnloggined,
             'api-failed': this.apiFailed,
         });
@@ -23,8 +26,16 @@ export default new class FeedController extends BaseController {
      * Start feed page controller
      */
     start() {
-        super.start();
         activeUser.checkLogin();
+        super.start();
+    }
+
+    /**
+     * Stop feed page controller
+     */
+    stop() {
+        super.stop();
+        this.feedModel.stop();
     }
 
     /**
@@ -32,6 +43,10 @@ export default new class FeedController extends BaseController {
      */
     actionLogout = () =>{
         activeUser.logOut();
+    }
+
+    userLoggined = () =>{
+        this.feedModel.start();
     }
 
     /**

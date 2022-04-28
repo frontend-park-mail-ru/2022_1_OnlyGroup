@@ -49,7 +49,7 @@
 </head>
 <body>
 <div class="image-container" id="4">
-    <img src="6.jpg" id="5" class="image">
+    <img src="7.jpg" id="5" class="image">
     <div class="image-selector" id="1">
         <div class="image-selector-zooming" id="3">
             <div class="image-selector-moving" id="2">
@@ -223,6 +223,7 @@
 
         canvas.width = selectWidth;
         canvas.height = selectHeight;
+        console.log(selectLeftX, selectLeftY, selectLeftX+selectWidth, selectLeftY+selectHeight);
         canvas.getContext('2d').drawImage(photo, selectLeftX, selectLeftY, selectWidth, selectHeight, 0, 0, selectWidth, selectHeight);
         document.getElementById('7').insertAdjacentElement('afterbegin', canvas);
     })

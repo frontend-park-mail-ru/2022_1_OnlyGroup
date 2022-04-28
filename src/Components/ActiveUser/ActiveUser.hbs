@@ -1,3 +1,7 @@
 <div id="{{{id}}}" class="active-user {{{styles}}}">
-    {{{renderedComponents}}}
+    {{#if ready}}
+        {{{renderedComponents}}}
+    {{else}}
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    {{/if}}
 </div>

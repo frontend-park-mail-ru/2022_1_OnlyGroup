@@ -2,6 +2,9 @@ import {BaseComponent} from '../Base/Base';
 import feedPhoto from './FeedPhoto.hbs';
 import FeedAction from '../FeedAction/FeedAction';
 import IDGenerator from '../../Modules/IDGenerator';
+import Photo from '_components/Photo/Photo';
+import {Text} from '_components/Text/Text';
+import EventBus from '../../Modules/EventBus';
 
 /**
  * Feed photo component
@@ -10,50 +13,19 @@ export default class FeedPhoto extends BaseComponent {
     /**
      * Create new feed photo
      * @param {Array}styles
-     * @param {function}onLikeClick
-     * @param {function}onDislikeClick
-     * @param {function|undefined}onSuperLikeClick
-     * @param {string}src
      */
-    constructor({styles, onLikeClick, onDislikeClick, onSuperLikeClick, src}) {
+    constructor({styles}) {
         super({styles});
-        this.onSuperLikeClick = (onSuperLikeClick === undefined) ? null : onSuperLikeClick;
-        this.onLikeClick = onLikeClick;
-        this.onDislikeClick = onDislikeClick;
+        this.ready = false;
+        this.allPhotos = null;
+        this.currentPhoto = null;
         this.photoContainerId = IDGenerator.getId();
-        this.photo = new Image();
-        this.photo.src = src;
-        this.photo.classList.add('feed-image');
-        this.photoLoaded = false;
-        this.photo.addEventListener('load', this.onImageLoad);
-        this.components.like = new FeedAction({
-            styles: [],
-            onClick: this.likeClick,
-            src: 'static/images/like.png',
+        this.setEvents({
+            ['photos-ready']: this.photosReady,
+            ['no-photos']: this.noPhotos,
         });
-        this.components.dislike = new FeedAction({
-            styles: [],
-            onClick: this.dislikeClick,
-            src: 'static/images/dislike.png',
-        });
-        if (onSuperLikeClick) {
-            this.components.superLike = new FeedAction({
-                styles: [],
-                onClick: this.superLikeClick,
-                src: 'static/images/favorite.png',
-            });
-        }
     }
 
-    /**
-     * callback
-     */
-    onImageLoad = () => {
-        this.photoLoaded = true;
-        this.stateChanged = true;
-        this.photo.removeEventListener('load', this.onImageLoad);
-        this.reRender();
-    }
 
     /**
      * Render feed photo
@@ -64,20 +36,129 @@ export default class FeedPhoto extends BaseComponent {
         return feedPhoto(this);
     }
 
-    findElem() {
-        super.findElem();
-        this.photoContainer = document.getElementById(this.photoContainerId.toString());
+    /**
+     * Set photo
+     * @param {number} num
+     */
+    changePhoto(num) {
+        this.currentPhotoNum = num;
+        this.components.photoContainer.components.photo = this.allPhotos[num];
+        this.components.photoContainer.stateChanged = true;
+        this.components.photoOverlay.components.current.components.handler.components.text.setText(`${num + 1}/${this.allPhotos.length}`);
+        this.reRender();
     }
 
     /**
-     * Mount feed component
+     * Create current image component (e.g. 3/4)
      */
-    mount() {
-        super.mount();
-        if (this.photoLoaded && this.photoContainer) {
-            this.photoContainer.innerHTML = '';
-            this.photoContainer.insertAdjacentElement('afterbegin', this.photo);
+    createCurrent() {
+        this.components.photoOverlay.components.current = new BaseComponent({
+            styles: ['feed-photo-current-container'],
+        });
+        this.components.photoOverlay.components.current.components.handler = new BaseComponent({
+            styles: ['feed-photo-current-handler'],
+        });
+        this.components.photoOverlay.components.current.components.handler.components.text = new Text({
+            styles: [''],
+            text: '',
+        });
+    }
+
+    /**
+     * Create moves buttons component
+     */
+    createMoves() {
+        this.components.photoOverlay.components.moveContainer = new BaseComponent({
+            styles: ['feed-photo-move-container'],
+        });
+        this.components.photoOverlay.components.moveContainer.components.left = new FeedAction({
+            styles: ['height-fit-content'],
+            onClick: this.leftClick,
+            src: 'static/images/left.png',
+        });
+        this.components.photoOverlay.components.moveContainer.components.right = new FeedAction({
+            styles: ['height-fit-content'],
+            onClick: this.rightClick,
+            src: 'static/images/right.png',
+        });
+    }
+
+    /**
+     * Create like dislike buttons components
+     */
+    createActions() {
+        this.components.photoOverlay.components.likesContainer = new BaseComponent({
+            styles: ['feed-photo-actions-container'],
+        });
+        this.components.photoOverlay.components.likesContainer.components.dislike = new FeedAction({
+            styles: ['height-fit-content'],
+            onClick: this.dislikeClick,
+            src: 'static/images/dislike.png',
+        });
+        this.components.photoOverlay.components.likesContainer.components.like = new FeedAction({
+            styles: ['height-fit-content'],
+            onClick: this.likeClick,
+            src: 'static/images/like.png',
+        });
+    }
+
+    /**
+     * Callback for no photos current user have
+     */
+    noPhotos = () => {
+        this.ready = true;
+        this.components.photoContainer = new BaseComponent({
+            styles: ['feed-photo'],
+        });
+        this.components.photoContainer.components.photo = new Photo({
+            styles: ['feed-photo'],
+            loaderEnabled: true,
+            src: 'static/images/logo.png',
+        });
+        this.components.photoOverlay = new BaseComponent({
+            styles: ['feed-photo-overlay', 'feed-photo-overlay__no-photos'],
+        });
+        this.createActions();
+        this.stateChanged = true;
+        this.reRender();
+    }
+
+    /**
+     * Photos ready callback
+     * @param {[number]} photos
+     */
+    photosReady = ({photos}) => {
+        this.ready = true;
+        this.allPhotosIds = photos;
+        if (this.allPhotos && this.allPhotos.length !== 0) {
+            this.allPhotos.forEach((photo) => {
+                photo.stop();
+                photo.unmount();
+            });
         }
+        this.allPhotos = this.allPhotosIds.map((value) => {
+            const loadEventName = `photo-get-${value.toString()}`;
+            const onLoadEventName = `photo-ready-${value.toString()}`;
+            const newPhoto = new Photo({
+                styles: ['feed-photo'],
+                loadEvent: loadEventName,
+                onLoadEvent: onLoadEventName,
+                loaderEnabled: true,
+            });
+            newPhoto.start();
+            return newPhoto;
+        });
+        this.components.photoOverlay = new BaseComponent({
+            styles: ['feed-photo-overlay'],
+        });
+        this.createCurrent();
+        this.createMoves();
+        this.createActions();
+        this.components.photoContainer = new BaseComponent({
+            styles: ['feed-photo'],
+        });
+        this.stateChanged = true;
+        this.changePhoto(0);
     }
 
     /**
@@ -86,24 +167,41 @@ export default class FeedPhoto extends BaseComponent {
      */
     likeClick = (ev) => {
         ev.preventDefault();
-        this.onLikeClick();
+        EventBus.emitEvent('action-like');
     }
 
     /**
-     * @callback Callback for dislike click
-     * @param {Event}ev
+     * Callback for dislike action
+     * @param {Event} ev
      */
     dislikeClick = (ev) => {
         ev.preventDefault();
-        this.onDislikeClick();
+        EventBus.emitEvent('action-dislike');
     }
 
     /**
-     * @callback Callback for super like click
-     * @param {Event}ev
+     * Callback for right click
+     * @param {Event} ev
      */
-    superLikeClick = (ev) => {
+    rightClick = (ev) => {
         ev.preventDefault();
-        this.onSuperLikeClick();
+        if (this.currentPhotoNum === this.allPhotos.length - 1) {
+            this.changePhoto(0);
+            return;
+        }
+        this.changePhoto(this.currentPhotoNum + 1);
+    }
+
+    /**
+     * Callback for left click
+     * @param {Event} ev
+     */
+    leftClick = (ev) => {
+        ev.preventDefault();
+        if (this.currentPhotoNum === 0) {
+            this.changePhoto(this.allPhotos.length - 1);
+            return;
+        }
+        this.changePhoto(this.currentPhotoNum - 1);
     }
 }
