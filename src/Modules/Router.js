@@ -30,6 +30,7 @@ export class Router {
     go(path) {
         this.#currentRoute.stop();
         if (typeof this.#routes[window.location.pathname] !== undefined) {
+            path = (path) ? path : '/';
             window.history.pushState(null, null, path);
             this.#currentRoute = this.#routes[path];
             this.#currentRoute.start();
@@ -61,9 +62,9 @@ export class Router {
      */
     start() {
         window.addEventListener('click', (event) => {
-            let parentElem = event.target.parentElement;
+            let parentElem = event.target;
             while (parentElem) {
-                if (event.target.tagName === 'A') {
+                if (parentElem.tagName === 'A') {
                     event.preventDefault();
 
                     this.go(event.target.pathname);

@@ -69,7 +69,6 @@ export default class Photo extends BaseComponent {
     stop() {
         super.stop();
         if (this.src !== undefined) {
-            this.image.src = '';
             this.image.removeEventListener('load', this.onPhotoLoadedInternal);
         }
     }
