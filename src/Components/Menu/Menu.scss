@@ -1,0 +1,23 @@
+.menu-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #FFFFFF;
+  border-radius: 15px;
+}
+
+.menu{
+  width: 100%;
+  margin: 21px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 15px;
+  padding: 21px;
+
+  background: #DADADA;
+  border-radius: 10px;
+}

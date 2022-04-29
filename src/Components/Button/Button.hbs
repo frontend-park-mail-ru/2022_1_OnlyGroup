@@ -1,6 +1,17 @@
-<button class="button-component {{{styles}}}" type="submit" id={{id}}>
-    {{#if icon}}
-        <img alt="icon" class="button-icon" src={{icon}}>
-    {{/if}}
-    {{buttonText}}
-</button>
+{{#if href}}<a href="{{{href}}}" class="button-href__no-underlying {{{hrefStyles}}}">{{/if}}
+    <button class="button-component {{{styles}}} {{#if enabled}}{{{enabledStyles}}}{{/if}}" type="submit" id={{id}}>
+        {{#if enabled}}
+            {{#if iconEnabled}}
+                <img alt="icon" class="button-icon" src={{iconEnabled}}>
+            {{else if icon}}
+                    <img alt="icon" class="button-icon" src={{icon}}>
+            {{/if}}
+        {{else if icon}}
+
+                <img alt="icon" class="button-icon" src={{icon}}>
+        {{/if}}
+        {{buttonText}}
+    </button>
+{{#if href}}
+    </a>
+{{/if}}

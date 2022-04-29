@@ -89,6 +89,10 @@ export class Input extends BaseComponent {
     }
 
     /**
+     * Start input component
+     */
+
+    /**
      * Clear input
      */
     clear() {

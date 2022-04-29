@@ -1,0 +1,9 @@
+<div class="feed-photo-container {{{styles}}}" id="{{{id}}}">
+    {{#if ready}}
+        {{{renderedComponents}}}
+    {{else}}
+        <div class="image-loader">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+    {{/if}}
+</div>

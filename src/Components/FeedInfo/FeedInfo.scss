@@ -1,0 +1,12 @@
+.feed-info{
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 50px;
+  min-height: 60vh;
+  max-width: 500px;
+  flex-grow: 1;
+  padding: 30px;
+  row-gap: 20px;
+}
+
