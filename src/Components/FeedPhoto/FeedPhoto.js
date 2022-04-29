@@ -2,8 +2,8 @@ import {BaseComponent} from '../Base/Base';
 import feedPhoto from './FeedPhoto.hbs';
 import FeedAction from '../FeedAction/FeedAction';
 import IDGenerator from '../../Modules/IDGenerator';
-import Photo from '_components/Photo/Photo';
-import {Text} from '_components/Text/Text';
+import Photo from '../Photo/Photo';
+import {Text} from '../Text/Text';
 import EventBus from '../../Modules/EventBus';
 import {FEED_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 

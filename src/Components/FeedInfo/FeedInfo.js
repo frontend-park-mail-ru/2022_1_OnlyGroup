@@ -1,4 +1,4 @@
-import {BaseComponent} from '_components/Base/Base';
+import {BaseComponent} from '../Base/Base';
 import feedInfo from './FeedInfo.hbs';
 import {FEED_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {FEED_EVENTS} from '../../Modules/EventBusEvents';
