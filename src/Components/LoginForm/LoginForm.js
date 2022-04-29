@@ -99,6 +99,16 @@ export default class LoginForm extends BaseComponent {
     }
 
     /**
+     * Start login form
+     */
+    start() {
+        super.start();
+        this.components.mainError.setText('');
+        this.components.emailInput.setError('');
+        this.components.passwordInput.setError('');
+    }
+
+    /**
      * Set errors
      * @param {string} email
      * @param {string} password

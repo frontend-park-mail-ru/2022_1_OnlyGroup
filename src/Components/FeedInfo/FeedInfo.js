@@ -1,6 +1,7 @@
 import {BaseComponent} from '_components/Base/Base';
 import feedInfo from './FeedInfo.hbs';
 import {FEED_VIEW_NAMES} from '../../Modules/ViewConsts';
+import {FEED_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Feed info component
@@ -16,9 +17,9 @@ export default class FeedInfo extends BaseComponent {
         this.interestsName = FEED_VIEW_NAMES.interests;
         this.horoscopeName = FEED_VIEW_NAMES.horoscope;
         this.setEvents({
-            'action-like': this.profileChanged,
-            'action-dislike': this.profileChanged,
-            'info-ready': this.infoReady,
+            [FEED_EVENTS.actionLike]: this.profileChanged,
+            [FEED_EVENTS.actionDislike]: this.profileChanged,
+            [FEED_EVENTS.infoReady]: this.infoReady,
         });
     }
 
@@ -37,6 +38,7 @@ export default class FeedInfo extends BaseComponent {
         this.age = info.age;
         this.city = info.City;
         this.interests = info.interests;
+        // TODO horoscope processing
         this.horoscope = 'Все четко';
         this.stateChanged = true;
         this.reRender();

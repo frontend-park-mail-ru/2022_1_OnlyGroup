@@ -36,7 +36,7 @@ export class Router {
             return;
         }
 
-        this.#routes[AppPaths.notFoundPage].start();
+        this.#routes[APP_PATHS.notFoundPage].start();
     }
 
     /**

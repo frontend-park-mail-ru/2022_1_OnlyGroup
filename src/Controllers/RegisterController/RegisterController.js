@@ -3,6 +3,7 @@ import {BaseController} from '../Base/BaseController';
 import {RegisterView} from '../../Views/RegisterView/RegisterView';
 import router, {APP_PATHS} from '../../Modules/Router';
 import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
+import EventBus from '../../Modules/EventBus';
 
 /**
  * Login controller
@@ -12,11 +13,10 @@ export default new class RegisterController extends BaseController {
      * Create new login controller
      */
     constructor() {
-        super({view: RegisterView});
+        super({view: RegisterView, authRequired: false});
         super.setEvents({
             [LOGIN_REGISTER_EVENTS.actionRegister]: this.actionRegister,
             [API_FAILED]: this.apiFailed,
-            [LOGIN_REGISTER_EVENTS.userLoggined]: this.userRegistered,
         });
     }
 
@@ -40,9 +40,18 @@ export default new class RegisterController extends BaseController {
     /**
      * Start controller and check user loggined
      */
-    start() {
-        super.start();
-        activeUser.checkLogin();
+    async start() {
+        EventBus.addEventListener(LOGIN_REGISTER_EVENTS.userLoggined, this.userRegistered);
+        await activeUser.checkLogin();
+        await super.start();
+    }
+
+    /**
+     * Stop register controller
+     */
+    stop() {
+        EventBus.removeEventListener(LOGIN_REGISTER_EVENTS.userLoggined, this.userRegistered);
+        super.stop();
     }
 
     /**

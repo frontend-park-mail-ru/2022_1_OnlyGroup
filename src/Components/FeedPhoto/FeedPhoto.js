@@ -5,6 +5,7 @@ import IDGenerator from '../../Modules/IDGenerator';
 import Photo from '_components/Photo/Photo';
 import {Text} from '_components/Text/Text';
 import EventBus from '../../Modules/EventBus';
+import {FEED_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Feed photo component
@@ -21,8 +22,8 @@ export default class FeedPhoto extends BaseComponent {
         this.currentPhoto = null;
         this.photoContainerId = IDGenerator.getId();
         this.setEvents({
-            ['photos-ready']: this.photosReady,
-            ['no-photos']: this.noPhotos,
+            [FEED_EVENTS.photosReady]: this.photosReady,
+            [FEED_EVENTS.noPhotos]: this.noPhotos,
         });
     }
 
@@ -113,6 +114,7 @@ export default class FeedPhoto extends BaseComponent {
         this.components.photoContainer.components.photo = new Photo({
             styles: ['feed-photo'],
             loaderEnabled: true,
+            // TODO no photos placeholder
             src: 'static/images/logo.png',
         });
         this.components.photoOverlay = new BaseComponent({
@@ -137,8 +139,8 @@ export default class FeedPhoto extends BaseComponent {
             });
         }
         this.allPhotos = this.allPhotosIds.map((value) => {
-            const loadEventName = `photo-get-${value.toString()}`;
-            const onLoadEventName = `photo-ready-${value.toString()}`;
+            const loadEventName = `${PHOTO_EVENTS.photoGetID}${value.toString()}`;
+            const onLoadEventName = `${PHOTO_EVENTS.photoReadyID}${value.toString()}`;
             const newPhoto = new Photo({
                 styles: ['feed-photo'],
                 loadEvent: loadEventName,
@@ -167,7 +169,7 @@ export default class FeedPhoto extends BaseComponent {
      */
     likeClick = (ev) => {
         ev.preventDefault();
-        EventBus.emitEvent('action-like');
+        EventBus.emitEvent(FEED_EVENTS.actionLike);
     }
 
     /**
@@ -176,7 +178,7 @@ export default class FeedPhoto extends BaseComponent {
      */
     dislikeClick = (ev) => {
         ev.preventDefault();
-        EventBus.emitEvent('action-dislike');
+        EventBus.emitEvent(FEED_EVENTS.actionDislike);
     }
 
     /**

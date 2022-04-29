@@ -1,5 +1,4 @@
 import {BaseComponent} from '_components/Base/Base';
-import IDGenerator from '../../Modules/IDGenerator';
 import photo from './Photo.hbs';
 import EventBus from '../../Modules/EventBus';
 
@@ -34,14 +33,6 @@ export default class Photo extends BaseComponent {
             });
         }
     }
-
-    /**
-     * Find photo element
-     */
-    // findElem() {
-    //     super.findElem();
-    //     this.container = document.getElementById(this.containerId.toString());
-    // }
 
     /**
      * Render photo component

@@ -2,7 +2,7 @@ import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
 import Validators from '../Modules/Validators';
 import {REGISTER_VIEW_NAMES} from '../Modules/ViewConsts';
-import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../Modules/EventBusEvents';
+import {API_FAILED, FEED_EVENTS, LOGIN_REGISTER_EVENTS} from '../Modules/EventBusEvents';
 import {Photo} from './Photo';
 
 const statusUnathorized = 401;
@@ -27,15 +27,17 @@ export class User {
 
     startActiveUser = () => {
         if (this.active) {
-            EventBus.addEventListener('activeUser-load-min', this.loadMin);
+            EventBus.addEventListener(FEED_EVENTS.activeUserLoadMin, this.loadMin);
         }
     }
 
     loadMin = async () => {
-        await this.checkLogin();
+        if (!this.id || this.id === -1) {
+            return;
+        }
         await Promise.all([this.getShortInfo(), this.getAvatar()]);
         this.avatar.startAvatar();
-        EventBus.emitEvent('activeUser-ready-min', {avatar: this.avatar.id, info: this});
+        EventBus.emitEvent(FEED_EVENTS.activeUserReadyMin, {avatar: this.avatar.id, info: this});
     }
 
     /**
@@ -121,7 +123,7 @@ export class User {
      * @constructor
      */
     async logOut() {
-        const result = Api.LogOut();
+        const result = await Api.LogOut();
         if (!result.isOk()) {
             EventBus.emitEvent(API_FAILED, result);
             return;
@@ -133,14 +135,14 @@ export class User {
     startFeed = async () => {
         await Promise.all([this.getAllPhotos(), this.getLongInfo()]);
         if (this.photosIds.length === 0) {
-            EventBus.emitEvent('no-photos');
+            EventBus.emitEvent(FEED_EVENTS.noPhotos);
         } else {
             this.photos.forEach((value) => {
                 value.startFeed();
             });
-            EventBus.emitEvent('photos-ready', {photos: this.photosIds});
+            EventBus.emitEvent(FEED_EVENTS.photosReady, {photos: this.photosIds});
         }
-        EventBus.emitEvent('info-ready', {info: this});
+        EventBus.emitEvent(FEED_EVENTS.infoReady, {info: this});
     }
 
     preLoad = () => {

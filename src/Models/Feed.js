@@ -1,9 +1,5 @@
-/**
- * Feed model
- */
 import EventBus from '../Modules/EventBus';
-import {Photo} from './Photo';
-import {API_FAILED} from '../Modules/EventBusEvents';
+import {API_FAILED, FEED_EVENTS} from '../Modules/EventBusEvents';
 import {User} from './User';
 import {Api} from '../Modules/Api';
 
@@ -17,8 +13,8 @@ export class Feed {
     constructor() {
         this.candidates = [];
         this.events = {
-            'action-like': this.like,
-            'action-dislike': this.dislike,
+            [FEED_EVENTS.actionLike]: this.like,
+            [FEED_EVENTS.actionDislike]: this.dislike,
         };
     }
 
@@ -43,7 +39,7 @@ export class Feed {
             });
         }
         if (this.candidates.length === 0) {
-            EventBus.emitEvent('no-candidates');
+            EventBus.emitEvent(FEED_EVENTS.noCandiates);
             return;
         }
         this.candidates[this.candidates.length-1].startFeed();

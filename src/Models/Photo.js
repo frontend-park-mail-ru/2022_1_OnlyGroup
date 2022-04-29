@@ -1,7 +1,7 @@
 import {IP, PORT} from '../Modules/FetchWrap';
 import {Api, PHOTO_API_URL} from '../Modules/Api';
 import EventBus from '../Modules/EventBus';
-import {API_FAILED} from '../Modules/EventBusEvents';
+import {API_FAILED, PHOTO_EVENTS} from '../Modules/EventBusEvents';
 
 /**
  * User photo model
@@ -40,14 +40,14 @@ export class Photo {
      * Start photo model processing feed
      */
     startFeed() {
-        EventBus.addEventListener(`photo-get-${this.id.toString()}`, this.getPhoto);
+        EventBus.addEventListener(`${PHOTO_EVENTS.photoGetID}${this.id.toString()}`, this.getPhoto);
     }
 
     /**
      * Stop photo model processing feed
      */
     stopFeed() {
-        EventBus.removeEventListener(`photo-get-${this.id.toString()}`, this.getPhoto);
+        EventBus.removeEventListener(`${PHOTO_EVENTS.photoGetID}${this.id.toString()}`, this.getPhoto);
     }
 
     /**
@@ -55,7 +55,7 @@ export class Photo {
      */
     startAvatar() {
         if (this.id) {
-            EventBus.addEventListener(`avatar-get-${this.id.toString()}`, this.getPhoto);
+            EventBus.addEventListener(`${PHOTO_EVENTS.avatarGetID}${this.id.toString()}`, this.getPhoto);
         }
     }
 
@@ -64,7 +64,7 @@ export class Photo {
      */
     stopAvatar() {
         if (this.id) {
-            EventBus.removeEventListener(`avatar-get-${this.id.toString()}`, this.getPhoto);
+            EventBus.removeEventListener(`${PHOTO_EVENTS.avatarGetID}${this.id.toString()}`, this.getPhoto);
         }
     }
 
@@ -72,7 +72,7 @@ export class Photo {
      * Emit ready event
      */
     emitReady() {
-        const eventName = (this.isAvatar) ? `avatar-ready-${this.id.toString()}` : `photo-ready-${this.id.toString()}`;
+        const eventName = (this.isAvatar) ? `${PHOTO_EVENTS.avatarReadyID}${this.id.toString()}` : `${PHOTO_EVENTS.photoReadyID}${this.id.toString()}`;
         EventBus.emitEvent(eventName, {
             image: this.image,
             leftTopX: this.leftTopX,
