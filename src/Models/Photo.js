@@ -1,4 +1,4 @@
-import {IP, PORT} from '../Modules/FetchWrap';
+import {API_PREFIX, IP, PORT} from '../Modules/FetchWrap';
 import {Api, PHOTO_API_URL} from '../Modules/Api';
 import EventBus from '../Modules/EventBus';
 import {API_FAILED, PHOTO_EVENTS} from '../Modules/EventBusEvents';
@@ -115,7 +115,7 @@ export class Photo {
             }
             this.id = result.Body.Avatar;
             this.image = new Image();
-            this.image.src = `${IP + PORT}/${PHOTO_API_URL}/${this.id.toString()}`;
+            this.image.src = `${IP + PORT}/${API_PREFIX}${PHOTO_API_URL}/${this.id.toString()}`;
             this.image.addEventListener('load', this.onLoadImage);
             this.leftTopX = result.Body.Params.LeftTop[0];
             this.leftTopY = result.Body.Params.LeftTop[1];
@@ -123,7 +123,7 @@ export class Photo {
             this.rightBottomY = result.Body.Params.RightBottom[1];
         } else {
             this.image = new Image();
-            this.image.src = `${IP + PORT}/${PHOTO_API_URL}/${this.id.toString()}`;
+            this.image.src = `${IP + PORT}/${API_PREFIX}${PHOTO_API_URL}/${this.id.toString()}`;
             this.image.addEventListener('load', this.onLoadImage);
 
             const result = await Api.GetPhotoParams({id: this.id});
