@@ -1,7 +1,7 @@
 import {BaseComponent} from '../Base/Base';
 import {Text} from '../Text/Text';
 import activeUser from './ActiveUser.hbs';
-import Photo from '_components/Photo/Photo';
+import Photo from '../Photo/Photo';
 import EventBus from '../../Modules/EventBus';
 import {FEED_EVENTS, LOGIN_REGISTER_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 

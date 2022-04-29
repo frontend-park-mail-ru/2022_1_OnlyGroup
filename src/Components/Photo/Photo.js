@@ -1,4 +1,4 @@
-import {BaseComponent} from '_components/Base/Base';
+import {BaseComponent} from '../Base/Base';
 import photo from './Photo.hbs';
 import EventBus from '../../Modules/EventBus';
 

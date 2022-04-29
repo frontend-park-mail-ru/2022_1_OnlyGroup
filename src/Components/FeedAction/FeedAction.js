@@ -1,6 +1,6 @@
 import {BaseComponent} from '../Base/Base';
 import feedAction from './FeedAction.hbs';
-import Photo from '_components/Photo/Photo';
+import Photo from '../Photo/Photo';
 
 /**
  * Feed action component
