@@ -24,8 +24,7 @@ export default new class FeedController extends BaseController {
      * Start feed page controller
      */
     async start() {
-        await super.start();
-        if (this.autheficated) {
+        if (await super.start()) {
             this.feedModel.start();
         }
     }

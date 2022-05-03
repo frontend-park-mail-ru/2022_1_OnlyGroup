@@ -14,7 +14,6 @@ export class BaseController {
      */
     constructor({view, authRequired = true}) {
         this.view = new view({parent: document.getElementById('root')});
-        this.autheficated = false;
         this.authRequired = authRequired;
     }
 
@@ -26,14 +25,6 @@ export class BaseController {
         this.events = events;
     }
 
-    userAutheficated = () => {
-        this.autheficated = true;
-    }
-
-    userUnautheficated = () => {
-        this.autheficated = false;
-    }
-
     userNotLoggined = () => {
         EventBus.emitEvent(REDIRECT, {path: APP_PATHS.loginPage});
     }
@@ -43,14 +34,10 @@ export class BaseController {
      */
     async start() {
         if (this.authRequired) {
-            EventBus.addEventListener(LOGIN_EVENTS.userLoggined, this.userAutheficated);
-            EventBus.addEventListener(LOGIN_EVENTS.userNotLoggined, this.userUnautheficated);
             await activeUser.checkLogin();
-            EventBus.removeEventListener(LOGIN_EVENTS.userLoggined, this.userAutheficated);
-            EventBus.removeEventListener(LOGIN_EVENTS.userNotLoggined, this.userUnautheficated);
-            if (!this.autheficated) {
+            if (!activeUser.id || activeUser.id === -1) {
                 EventBus.emitEvent(REDIRECT, {path: APP_PATHS.loginPage});
-                return;
+                return false;
             }
             EventBus.addEventListener(LOGIN_EVENTS.userNotLoggined, this.userNotLoggined);
         }
@@ -58,13 +45,14 @@ export class BaseController {
             EventBus.addEventListener(key, value);
         });
         this.view.start();
+        return true;
     }
 
     /**
      * Stop controller
      */
     stop() {
-        if (this.authRequired && this.autheficated) {
+        if (this.authRequired) {
             EventBus.removeEventListener(LOGIN_EVENTS.userNotLoggined, this.userNotLoggined);
         }
         this.view.stop();
