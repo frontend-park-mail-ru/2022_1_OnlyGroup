@@ -1,14 +1,21 @@
-{{#if href}}<a href="{{{href}}}" class="button-href__no-underlying {{{hrefStyles}}}">{{/if}}
-    <button class="button-component {{{styles}}} {{#if enabled}}{{{enabledStyles}}}{{/if}}" type="submit" id={{id}}>
+{{#if href}}
+    {{#unless enabled}}
+        <a href="{{{href}}}" class="button-href__no-underlying {{#if messageMenu}}w-full {{/if}}{{#if matchesMenu}}w-full {{/if}}{{#if findCandidateMenu}}w-full {{/if}}{{#if myProfileMenu}}w-full {{/if}}{{#if exitMenu}}w-full {{/if}}">
+    {{/unless}}
+{{/if}}
+    <button class="button-component {{#if enabled}}{{#if messageMenu}}{{/if}}{{#if matchesMenu}}{{/if}}{{#if findCandidateMenu}}button__menu-enabled-red {{/if}}{{#if myProfileMenu}}{{/if}}{{#if exitMenu}}{{/if}}{{/if}}{{#if loginRegisterButton}}login-register-button {{/if}}{{#if messageMenu}}button__menu {{/if}}{{#if matchesMenu}}button__menu {{/if}}{{#if findCandidateMenu}}button__menu {{/if}}{{#if myProfileMenu}}button__menu {{/if}}{{#if exitMenu}}button__menu {{/if}}" type="submit" id={{id}}>
         {{#if enabled}}
-            {{#if iconEnabled}}
-                <img alt="icon" class="button-icon" src={{iconEnabled}}>
-            {{else if icon}}
-                    <img alt="icon" class="button-icon" src={{icon}}>
-            {{/if}}
-        {{else if icon}}
-
-                <img alt="icon" class="button-icon" src={{icon}}>
+            {{#if messageMenu}}<img alt="icon" class="button-icon" src="/static/images/MsgDark.png">{{/if}}
+            {{#if matchesMenu}}<img alt="icon" class="button-icon" src="/static/images/cards.png">{{/if}}
+            {{#if findCandidateMenu}}<img alt="icon" class="button-icon" src="/static/images/RefreshActive.png">{{/if}}
+            {{#if myProfileMenu}}<img alt="icon" class="button-icon" src="/static/images/profileDisable.png">{{/if}}
+            {{#if exitMenu}}<img alt="icon" class="button-icon" src="/static/images/logout.png">{{/if}}
+        {{else}}
+            {{#if messageMenu}}<img alt="icon" class="button-icon" src="/static/images/MsgDark.png">{{/if}}
+            {{#if matchesMenu}}<img alt="icon" class="button-icon" src="/static/images/cards.png">{{/if}}
+            {{#if findCandidateMenu}}<img alt="icon" class="button-icon" src="/static/images/RefreshActive.png">{{/if}}
+            {{#if myProfileMenu}}<img alt="icon" class="button-icon" src="/static/images/profileDisable.png">{{/if}}
+            {{#if exitMenu}}<img alt="icon" class="button-icon" src="/static/images/logout.png">{{/if}}
         {{/if}}
         {{buttonText}}
     </button>

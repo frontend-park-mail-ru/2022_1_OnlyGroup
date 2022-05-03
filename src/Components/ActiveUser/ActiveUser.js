@@ -1,7 +1,7 @@
-import {BaseComponent} from '../Base/Base';
+import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
 import {Text} from '../Text/Text';
 import activeUser from './ActiveUser.hbs';
-import Photo from '../Photo/Photo';
+import Photo, {PHOTO_STATES} from '../Photo/Photo';
 import EventBus from '../../Modules/EventBus';
 import {FEED_EVENTS, LOGIN_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 
@@ -11,10 +11,10 @@ import {FEED_EVENTS, LOGIN_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEve
 export class ActiveUserComponent extends BaseComponent {
     /**
      * Create active user component
-     * @param {Array}styles
+     * @param {string|undefined} state
      */
-    constructor({styles}) {
-        super({styles});
+    constructor({state}) {
+        super({state});
         this.ready = false;
         this.setEvents({
             [FEED_EVENTS.activeUserReadyMin]: this.onReady,
@@ -29,27 +29,25 @@ export class ActiveUserComponent extends BaseComponent {
         this.ready = true;
         if (avatar) {
             this.components.avatar = new Photo({
-                styles: ['avatar'],
+                state: PHOTO_STATES.avatar,
                 loadEvent: `${PHOTO_EVENTS.avatarGetID}${avatar}`,
                 onLoadEvent: `${PHOTO_EVENTS.avatarReadyID}${avatar}`,
                 loaderEnabled: true,
             });
         } else {
             this.components.avatar = new Photo({
-                styles: ['avatar'],
+                state: PHOTO_STATES.avatar,
+                // TODO avatar placeholder
                 src: 'static/images/logo.png',
+                loaderEnabled: true,
             });
         }
-        this.components.column = new BaseComponent({
-            styles: ['flex', 'flex-column', 'justify-content-center', 'align-item-center'],
-        });
+        this.components.column = new BaseComponent({state: BASE_COMPONENT_STATES.activeUserColumn});
         this.components.column.components.name = new Text({
             text: `${info.firstName} ${info.lastName}`,
-            styles: [],
         });
         this.components.column.components.city = new Text({
             text: `${info.city}`,
-            styles: [],
         });
         this.stateChanged = true;
         this.reRender();

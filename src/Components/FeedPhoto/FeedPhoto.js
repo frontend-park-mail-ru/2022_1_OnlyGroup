@@ -1,8 +1,7 @@
-import {BaseComponent} from '../Base/Base';
+import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
 import feedPhoto from './FeedPhoto.hbs';
-import FeedAction from '../FeedAction/FeedAction';
-import IDGenerator from '../../Modules/IDGenerator';
-import Photo from '../Photo/Photo';
+import FeedAction, {FEED_ACTIONS_STATES} from '../FeedAction/FeedAction';
+import Photo, {PHOTO_STATES} from '../Photo/Photo';
 import {Text} from '../Text/Text';
 import EventBus from '../../Modules/EventBus';
 import {FEED_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
@@ -13,14 +12,13 @@ import {FEED_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 export default class FeedPhoto extends BaseComponent {
     /**
      * Create new feed photo
-     * @param {Array}styles
+     * @param {string|undefined} state
      */
-    constructor({styles}) {
-        super({styles});
+    constructor({state}) {
+        super({state});
         this.ready = false;
         this.allPhotos = null;
         this.currentPhoto = null;
-        this.photoContainerId = IDGenerator.getId();
         this.setEvents({
             [FEED_EVENTS.photosReady]: this.photosReady,
             [FEED_EVENTS.noPhotos]: this.noPhotos,
@@ -54,13 +52,12 @@ export default class FeedPhoto extends BaseComponent {
      */
     createCurrent() {
         this.components.photoOverlay.components.current = new BaseComponent({
-            styles: ['feed-photo-current-container'],
+            state: BASE_COMPONENT_STATES.feedPhotoCurrentContainer,
         });
         this.components.photoOverlay.components.current.components.handler = new BaseComponent({
-            styles: ['feed-photo-current-handler'],
+            state: BASE_COMPONENT_STATES.feedPhotoCurrentHandler,
         });
         this.components.photoOverlay.components.current.components.handler.components.text = new Text({
-            styles: [''],
             text: '',
         });
     }
@@ -70,17 +67,15 @@ export default class FeedPhoto extends BaseComponent {
      */
     createMoves() {
         this.components.photoOverlay.components.moveContainer = new BaseComponent({
-            styles: ['feed-photo-move-container'],
+            state: BASE_COMPONENT_STATES.feedPhotoMoveContainer,
         });
         this.components.photoOverlay.components.moveContainer.components.left = new FeedAction({
-            styles: ['height-fit-content'],
+            state: FEED_ACTIONS_STATES.left,
             onClick: this.leftClick,
-            src: 'static/images/left.png',
         });
         this.components.photoOverlay.components.moveContainer.components.right = new FeedAction({
-            styles: ['height-fit-content'],
+            state: FEED_ACTIONS_STATES.right,
             onClick: this.rightClick,
-            src: 'static/images/right.png',
         });
     }
 
@@ -89,17 +84,15 @@ export default class FeedPhoto extends BaseComponent {
      */
     createActions() {
         this.components.photoOverlay.components.likesContainer = new BaseComponent({
-            styles: ['feed-photo-actions-container'],
+            state: BASE_COMPONENT_STATES.feedPhotoActionsContainer,
         });
         this.components.photoOverlay.components.likesContainer.components.dislike = new FeedAction({
-            styles: ['height-fit-content'],
+            state: FEED_ACTIONS_STATES.dislike,
             onClick: this.dislikeClick,
-            src: 'static/images/dislike.png',
         });
         this.components.photoOverlay.components.likesContainer.components.like = new FeedAction({
-            styles: ['height-fit-content'],
+            state: FEED_ACTIONS_STATES.like,
             onClick: this.likeClick,
-            src: 'static/images/like.png',
         });
     }
 
@@ -109,16 +102,16 @@ export default class FeedPhoto extends BaseComponent {
     noPhotos = () => {
         this.ready = true;
         this.components.photoContainer = new BaseComponent({
-            styles: ['feed-photo'],
+            state: BASE_COMPONENT_STATES.feedPhoto,
         });
         this.components.photoContainer.components.photo = new Photo({
-            styles: ['feed-photo'],
+            state: PHOTO_STATES.feedPhoto,
             loaderEnabled: true,
             // TODO no photos placeholder
             src: 'static/images/logo.png',
         });
         this.components.photoOverlay = new BaseComponent({
-            styles: ['feed-photo-overlay', 'feed-photo-overlay__no-photos'],
+            state: BASE_COMPONENT_STATES.feedPhotoOverlayNoPhotos,
         });
         this.createActions();
         this.stateChanged = true;
@@ -142,7 +135,7 @@ export default class FeedPhoto extends BaseComponent {
             const loadEventName = `${PHOTO_EVENTS.photoGetID}${value.toString()}`;
             const onLoadEventName = `${PHOTO_EVENTS.photoReadyID}${value.toString()}`;
             const newPhoto = new Photo({
-                styles: ['feed-photo'],
+                state: PHOTO_STATES.feedPhoto,
                 loadEvent: loadEventName,
                 onLoadEvent: onLoadEventName,
                 loaderEnabled: true,
@@ -151,13 +144,13 @@ export default class FeedPhoto extends BaseComponent {
             return newPhoto;
         });
         this.components.photoOverlay = new BaseComponent({
-            styles: ['feed-photo-overlay'],
+            state: BASE_COMPONENT_STATES.feedPhotoOverlay,
         });
         this.createCurrent();
         this.createMoves();
         this.createActions();
         this.components.photoContainer = new BaseComponent({
-            styles: ['feed-photo'],
+            state: BASE_COMPONENT_STATES.feedPhoto,
         });
         this.stateChanged = true;
         this.changePhoto(0);

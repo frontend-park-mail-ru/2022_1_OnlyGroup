@@ -1,31 +1,32 @@
 import button from './Button.hbs';
 import {BaseComponent} from '../Base/Base';
 
+export const BUTTON_STATES = {
+    loginRegisterButton: 'loginRegisterButton',
+    messageMenu: 'messageMenu',
+    matchesMenu: 'matchesMenu',
+    findCandidateMenu: 'findCandidateMenu',
+    myProfileMenu: 'myProfileMenu',
+    exitMenu: 'exitMenu',
+};
+
 /**
  * Button Component
  */
 export class Button extends BaseComponent {
     /**
      * Create button component
-     * @param {Array} styles
+     * @param {string|undefined} state
      * @param {string} text
-     * @param {string|null|undefined} icon
      * @param {function|undefined|null} onClick
-     * @param {Array|undefined}enabledStyles
      * @param {string|undefined}href
-     * @param {Array|undefined}hrefStyles
-     * @param {string|undefined}iconEnabled
      */
-    constructor({styles, text, icon, onClick, enabledStyles, href, hrefStyles, iconEnabled}) {
-        super({styles});
+    constructor({state, text, onClick, href}) {
+        super({state});
         this.enabled = false;
-        this.enabledStyles = (enabledStyles === undefined) ? '' : enabledStyles.join(' ');
-        this.icon = (icon === undefined) ? null : icon;
-        this.iconEnabled = (iconEnabled === undefined) ? null: icon;
         this.href = href;
-        this.hrefStyles = (hrefStyles === undefined) ? '' : hrefStyles.join(' ');
         this.buttonText = text;
-        this.onClick = (onClick === undefined) ? null : onClick;
+        this.onClick = onClick;
     }
 
     /**

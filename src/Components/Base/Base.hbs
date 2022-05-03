@@ -1,5 +1,5 @@
 {{#if renderedComponents}}
-    <div id="{{{id}}}" class="{{{styles}}}">
+    <div id="{{{id}}}" class="{{#if leftColumn}}left-column{{/if}}{{#if rightColumn}}right-column{{/if}}{{#if activeUserColumn}}flex flex-column justify-content-center align-item-center{{/if}}{{#if feedPhotoCurrentContainer}}feed-photo-current-container{{/if}}{{#if feedPhotoCurrentHandler}}feed-photo-current-handler{{/if}}{{#if feedPhotoMoveContainer}}feed-photo-move-container{{/if}}{{#if feedPhotoActionsContainer}}feed-photo-actions-container{{/if}}{{#if feedPhoto}}feed-photo{{/if}}{{#if feedPhotoOverlay}}feed-photo-overlay{{/if}}{{#if feedPhotoOverlayNoPhotos}}feed-photo-overlay feed-photo-overlay__no-photos{{/if}}{{#if loginFormRegisterOfferContainer}}login-form-register-offer-container w-full{{/if}}">
         {{{renderedComponents}}}
     </div>
 {{/if}}
