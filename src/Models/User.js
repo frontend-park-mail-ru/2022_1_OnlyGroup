@@ -2,7 +2,7 @@ import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
 import Validators from '../Modules/Validators';
 import {REGISTER_VIEW_NAMES} from '../Modules/ViewConsts';
-import {API_FAILED, FEED_EVENTS, LOGIN_REGISTER_EVENTS} from '../Modules/EventBusEvents';
+import {API_FAILED, FEED_EVENTS, LOGIN_EVENTS} from '../Modules/EventBusEvents';
 import {Photo} from './Photo';
 
 const statusUnathorized = 401;
@@ -47,7 +47,7 @@ export class User {
     #processAuthResult(result) {
         if (result.Status === statusUnathorized) {
             this.id = -1;
-            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userNotLoggined);
+            EventBus.emitEvent(LOGIN_EVENTS.userNotLoggined);
             return;
         }
         if (!result.isOk()) {
@@ -55,7 +55,7 @@ export class User {
             return;
         }
         this.id = +result.Body.ID;
-        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userLoggined);
+        EventBus.emitEvent(LOGIN_EVENTS.userLoggined);
     }
 
     /**
@@ -65,11 +65,11 @@ export class User {
      */
     async checkLogin() {
         if (this.id === -1) {
-            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userNotLoggined);
+            EventBus.emitEvent(LOGIN_EVENTS.userNotLoggined);
             return;
         }
         if (this.id !== null) {
-            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userLoggined);
+            EventBus.emitEvent(LOGIN_EVENTS.userLoggined);
             return;
         }
         const result = await Api.CheckLogin();
@@ -86,7 +86,7 @@ export class User {
     async login({email, password}) {
         const validationRes = Validators.validateEmailPasswordRepeatPassword({email, password});
         if (validationRes) {
-            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userValidationFailed, validationRes);
+            EventBus.emitEvent(LOGIN_EVENTS.userValidationFailed, validationRes);
             return;
         }
 
@@ -105,12 +105,12 @@ export class User {
     async logUp({email, password, passwordRepeat}) {
         const validationRes = Validators.validateEmailPasswordRepeatPassword({email, password, passwordRepeat});
         if (validationRes) {
-            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userValidationFailed, validationRes);
+            EventBus.emitEvent(LOGIN_EVENTS.userValidationFailed, validationRes);
             return;
         }
         const result = await Api.LogUp({Email: email, Password: password});
         if (result.Status === 409) {
-            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userValidationFailed, {email: REGISTER_VIEW_NAMES.userEmailUsed});
+            EventBus.emitEvent(LOGIN_EVENTS.userValidationFailed, {email: REGISTER_VIEW_NAMES.userEmailUsed});
             return;
         }
 
@@ -129,20 +129,20 @@ export class User {
             return;
         }
         this.id = -1;
-        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userNotLoggined);
+        EventBus.emitEvent(LOGIN_EVENTS.userNotLoggined);
     }
 
     startFeed = async () => {
         await Promise.all([this.getAllPhotos(), this.getLongInfo()]);
+        EventBus.emitEvent(FEED_EVENTS.infoReady, {info: this});
         if (this.photosIds.length === 0) {
             EventBus.emitEvent(FEED_EVENTS.noPhotos);
-        } else {
-            this.photos.forEach((value) => {
-                value.startFeed();
-            });
-            EventBus.emitEvent(FEED_EVENTS.photosReady, {photos: this.photosIds});
+            return;
         }
-        EventBus.emitEvent(FEED_EVENTS.infoReady, {info: this});
+        this.photos.forEach((value) => {
+            value.start();
+        });
+        EventBus.emitEvent(FEED_EVENTS.photosReady, {photos: this.photosIds});
     }
 
     preLoad = () => {
@@ -255,15 +255,17 @@ export class User {
     stopFeed = async () => {
         if (this.photos) {
             this.photos.forEach((value) => {
-                value.stopFeed();
+                value.stop();
             });
         }
     }
 }
 
-const activeUser = new User({
-    active: true,
-});
-activeUser.startActiveUser();
-globalThis.activeUser = activeUser;
+const
+    activeUser = new User({
+        active: true,
+    });
+activeUser
+    .startActiveUser();
+
 export default activeUser;

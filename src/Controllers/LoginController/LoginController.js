@@ -1,8 +1,8 @@
 import {LoginView} from '../../Views/LoginView/LoginView.js';
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
-import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
-import router, {APP_PATHS} from '../../Modules/Router';
+import {API_FAILED, LOGIN_EVENTS} from '../../Modules/EventBusEvents';
+import {APP_PATHS, REDIRECT} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
 
 /**
@@ -15,7 +15,7 @@ export default new class LoginController extends BaseController {
     constructor() {
         super({view: LoginView, authRequired: false});
         super.setEvents({
-            [LOGIN_REGISTER_EVENTS.actionLogin]: this.actionLogin,
+            [LOGIN_EVENTS.login]: this.login,
             [API_FAILED]: this.apiFailed,
         });
     }
@@ -25,7 +25,7 @@ export default new class LoginController extends BaseController {
      * @param {string} email
      * @param {string} Password
      */
-    actionLogin = ({email, password}) => {
+    login = ({email, password}) => {
         activeUser.login({email, password});
     }
 
@@ -33,7 +33,7 @@ export default new class LoginController extends BaseController {
      * @callback Callback user sucsessfully loggined
      */
     userLoggined = () => {
-        router.go(APP_PATHS.findCandidatePage);
+        EventBus.emitEvent(REDIRECT, {path: APP_PATHS.findCandidatePage});
     }
 
     /**
@@ -49,7 +49,7 @@ export default new class LoginController extends BaseController {
      * Start login controller
      */
     async start() {
-        EventBus.addEventListener(LOGIN_REGISTER_EVENTS.userLoggined, this.userLoggined);
+        EventBus.addEventListener(LOGIN_EVENTS.userLoggined, this.userLoggined);
         await activeUser.checkLogin();
         await super.start();
     }
@@ -58,7 +58,7 @@ export default new class LoginController extends BaseController {
      * Stop login controller
      */
     stop() {
-        EventBus.removeEventListener(LOGIN_REGISTER_EVENTS.userLoggined, this.userLoggined);
+        EventBus.removeEventListener(LOGIN_EVENTS.userLoggined, this.userLoggined);
         super.stop();
     }
 };

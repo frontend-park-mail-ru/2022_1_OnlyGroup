@@ -17,8 +17,8 @@ export default class FeedInfo extends BaseComponent {
         this.interestsName = FEED_VIEW_NAMES.interests;
         this.horoscopeName = FEED_VIEW_NAMES.horoscope;
         this.setEvents({
-            [FEED_EVENTS.actionLike]: this.profileChanged,
-            [FEED_EVENTS.actionDislike]: this.profileChanged,
+            [FEED_EVENTS.like]: this.profileChanged,
+            [FEED_EVENTS.dislike]: this.profileChanged,
             [FEED_EVENTS.infoReady]: this.infoReady,
         });
     }

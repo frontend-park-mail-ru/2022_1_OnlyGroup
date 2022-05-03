@@ -2,6 +2,7 @@ import {BaseController} from '../Base/BaseController';
 import FeedView from '../../Views/FeedView/FeedView';
 import {Feed} from '../../Models/Feed';
 import activeUser from '../../Models/User';
+import {API_FAILED, LOGIN_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Feed page controller
@@ -14,8 +15,8 @@ export default new class FeedController extends BaseController {
         super({view: FeedView});
         this.feedModel = new Feed();
         super.setEvents({
-            'action-logout': this.actionLogout,
-            'api-failed': this.apiFailed,
+            [LOGIN_EVENTS.logout]: this.logout,
+            [API_FAILED]: this.apiFailed,
         });
     }
 
@@ -24,7 +25,9 @@ export default new class FeedController extends BaseController {
      */
     async start() {
         await super.start();
-        this.feedModel.start();
+        if (this.autheficated) {
+            this.feedModel.start();
+        }
     }
 
     /**
@@ -38,7 +41,7 @@ export default new class FeedController extends BaseController {
     /**
      * @callback Callback for exit button click
      */
-    actionLogout = () =>{
+    logout = () => {
         activeUser.logOut();
     }
 

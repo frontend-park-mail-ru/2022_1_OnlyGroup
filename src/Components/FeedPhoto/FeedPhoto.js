@@ -169,7 +169,7 @@ export default class FeedPhoto extends BaseComponent {
      */
     likeClick = (ev) => {
         ev.preventDefault();
-        EventBus.emitEvent(FEED_EVENTS.actionLike);
+        EventBus.emitEvent(FEED_EVENTS.like);
     }
 
     /**
@@ -178,7 +178,7 @@ export default class FeedPhoto extends BaseComponent {
      */
     dislikeClick = (ev) => {
         ev.preventDefault();
-        EventBus.emitEvent(FEED_EVENTS.actionDislike);
+        EventBus.emitEvent(FEED_EVENTS.dislike);
     }
 
     /**

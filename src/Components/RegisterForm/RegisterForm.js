@@ -7,7 +7,7 @@ import {BaseComponent} from '../Base/Base';
 import {REGISTER_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
-import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
+import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login form smart component
@@ -19,9 +19,9 @@ export default class RegisterForm extends BaseComponent {
     constructor() {
         super({});
         this.setEvents({
-            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
-            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
-            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setErrors,
+            [LOGIN_EVENTS.clearForm]: this.clear,
+            [LOGIN_EVENTS.userValidationFailed]: this.setErrors,
+            [LOGIN_EVENTS.userNotLoggined]: this.setErrors,
         });
     }
 
@@ -84,7 +84,7 @@ export default class RegisterForm extends BaseComponent {
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
         const passwordRepeat = this.components.passwordRepeatInput.getValue();
-        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.actionRegister, {email, password, passwordRepeat});
+        EventBus.emitEvent(LOGIN_EVENTS.register, {email, password, passwordRepeat});
     }
 
     /**

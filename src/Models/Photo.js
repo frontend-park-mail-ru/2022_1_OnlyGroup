@@ -39,14 +39,14 @@ export class Photo {
     /**
      * Start photo model processing feed
      */
-    startFeed() {
+    start() {
         EventBus.addEventListener(`${PHOTO_EVENTS.photoGetID}${this.id.toString()}`, this.getPhoto);
     }
 
     /**
      * Stop photo model processing feed
      */
-    stopFeed() {
+    stop() {
         EventBus.removeEventListener(`${PHOTO_EVENTS.photoGetID}${this.id.toString()}`, this.getPhoto);
     }
 
@@ -71,7 +71,7 @@ export class Photo {
     /**
      * Emit ready event
      */
-    emitReady() {
+    emit() {
         const eventName = (this.isAvatar) ? `${PHOTO_EVENTS.avatarReadyID}${this.id.toString()}` : `${PHOTO_EVENTS.photoReadyID}${this.id.toString()}`;
         EventBus.emitEvent(eventName, {
             image: this.image,
@@ -88,7 +88,7 @@ export class Photo {
     getPhoto = () => {
         if (this.paramsReady && this.photoReady) {
             this.emitOnLoad = false;
-            this.emitReady();
+            this.emit();
             return;
         }
         if (!this.loading) {

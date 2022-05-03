@@ -5,7 +5,7 @@ import EventBus from '../../Modules/EventBus';
 import {ActiveUserComponent} from '../../Components/ActiveUser/ActiveUser';
 import {BaseComponent} from '../../Components/Base/Base';
 import FeedPhoto from '../../Components/FeedPhoto/FeedPhoto';
-import FeedInfo from '_components/FeedInfo/FeedInfo';
+import FeedInfo from '../../Components/FeedInfo/FeedInfo';
 
 /**
  * View class for login page

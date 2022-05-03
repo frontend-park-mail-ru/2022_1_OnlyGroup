@@ -1,6 +1,7 @@
 import EventBus from '../../Modules/EventBus';
-import router, {APP_PATHS} from '../../Modules/Router';
-import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
+import {APP_PATHS, REDIRECT} from '../../Modules/Router';
+import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
+import activeUser from '../../Models/User';
 
 /**
  * Base controller class
@@ -34,7 +35,7 @@ export class BaseController {
     }
 
     userNotLoggined = () => {
-        router.go(APP_PATHS.loginPage);
+        EventBus.emitEvent(REDIRECT, {path: APP_PATHS.loginPage});
     }
 
     /**
@@ -42,16 +43,16 @@ export class BaseController {
      */
     async start() {
         if (this.authRequired) {
-            EventBus.addEventListener(LOGIN_REGISTER_EVENTS.userLoggined, this.userAutheficated);
-            EventBus.addEventListener(LOGIN_REGISTER_EVENTS.userNotLoggined, this.userUnautheficated);
+            EventBus.addEventListener(LOGIN_EVENTS.userLoggined, this.userAutheficated);
+            EventBus.addEventListener(LOGIN_EVENTS.userNotLoggined, this.userUnautheficated);
             await activeUser.checkLogin();
-            EventBus.removeEventListener(LOGIN_REGISTER_EVENTS.userLoggined, this.userAutheficated);
-            EventBus.removeEventListener(LOGIN_REGISTER_EVENTS.userNotLoggined, this.userUnautheficated);
+            EventBus.removeEventListener(LOGIN_EVENTS.userLoggined, this.userAutheficated);
+            EventBus.removeEventListener(LOGIN_EVENTS.userNotLoggined, this.userUnautheficated);
             if (!this.autheficated) {
-                router.go(APP_PATHS.loginPage);
+                EventBus.emitEvent(REDIRECT, {path: APP_PATHS.loginPage});
                 return;
             }
-            EventBus.addEventListener(LOGIN_REGISTER_EVENTS.userNotLoggined, this.userNotLoggined);
+            EventBus.addEventListener(LOGIN_EVENTS.userNotLoggined, this.userNotLoggined);
         }
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.addEventListener(key, value);
@@ -64,7 +65,7 @@ export class BaseController {
      */
     stop() {
         if (this.authRequired && this.autheficated) {
-            EventBus.removeEventListener(LOGIN_REGISTER_EVENTS.userNotLoggined, this.userNotLoggined);
+            EventBus.removeEventListener(LOGIN_EVENTS.userNotLoggined, this.userNotLoggined);
         }
         this.view.stop();
         Object.entries(this.events).forEach(([key, value]) => {

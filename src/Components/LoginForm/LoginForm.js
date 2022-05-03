@@ -7,7 +7,7 @@ import {BaseComponent} from '../Base/Base';
 import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
-import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
+import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login form smart component
@@ -19,9 +19,9 @@ export default class LoginForm extends BaseComponent {
     constructor() {
         super({});
         this.setEvents({
-            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
-            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
-            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setUnloggined,
+            [LOGIN_EVENTS.clearForm]: this.clear,
+            [LOGIN_EVENTS.userValidationFailed]: this.setErrors,
+            [LOGIN_EVENTS.userNotLoggined]: this.setUnloggined,
         });
     }
 
@@ -78,7 +78,7 @@ export default class LoginForm extends BaseComponent {
         ev.preventDefault();
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
-        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.actionLogin, {email, password});
+        EventBus.emitEvent(LOGIN_EVENTS.login, {email, password});
     }
 
     /**

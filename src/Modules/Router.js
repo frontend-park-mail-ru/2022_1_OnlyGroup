@@ -1,3 +1,5 @@
+import EventBus from './EventBus';
+
 export const APP_PATHS = {
     loginPage: '/login',
     registerPage: '/register',
@@ -7,6 +9,7 @@ export const APP_PATHS = {
     profilePage: '/settings',
     notFoundPage: '/404',
 };
+export const REDIRECT = 'redirect';
 
 /**
  * Router
@@ -27,7 +30,7 @@ export class Router {
      * Go to path
      * @param {string} path
      */
-    go(path) {
+    go = ({path}) => {
         this.#currentRoute.stop();
         if (typeof this.#routes[window.location.pathname] !== undefined) {
             path = (path) ? path : '/';
@@ -67,7 +70,7 @@ export class Router {
                 if (parentElem.tagName === 'A') {
                     event.preventDefault();
 
-                    this.go(event.target.pathname);
+                    this.go({path: event.target.pathname});
                     break;
                 }
 
@@ -81,6 +84,9 @@ export class Router {
             this.#currentRoute = this.#routes[window.location.pathname];
             this.#currentRoute.start();
         });
+
+        EventBus.addEventListener(REDIRECT, this.go);
+
         this.#currentRoute = this.#routes[window.location.pathname];
         this.#currentRoute.start();
     }

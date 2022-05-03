@@ -20,15 +20,12 @@ export const REGISTER_VIEW_NAMES = {
     passwordRepeatVerificationFailed: 'Пароли не совпадают',
 };
 
-export const feedViewNames = {
+export const FEED_VIEW_NAMES = {
     buttonMessagesTittle: 'Сообщения',
     buttonMatchesTittle: 'Совпадения',
     buttonFindCandidatesTittle: 'Подбор',
     buttonMyProfileTittle: 'Мой профиль',
     buttonExitTittle: 'Выход',
-};
-
-export const FEED_VIEW_NAMES = {
     interests: 'Интересы',
     horoscope: 'Совместимость по гороскопу',
 };

@@ -1,7 +1,7 @@
 import {BaseComponent} from '../Base/Base';
 import menu from './Menu.hbs';
 import {Button} from '../Button/Button';
-import {feedViewNames} from '../../Modules/ViewConsts';
+import {FEED_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 
 export const menuStatesName = {
@@ -27,7 +27,7 @@ export default class Menu extends BaseComponent {
         this.onExitClick = onExitClick;
         this.components.messages = new Button({
             styles: ['button__menu'],
-            text: feedViewNames.buttonMessagesTittle,
+            text: FEED_VIEW_NAMES.buttonMessagesTittle,
             href: APP_PATHS.messagesPage,
             hrefStyles: ['w-full'],
             enabledStyles: [''],
@@ -35,14 +35,14 @@ export default class Menu extends BaseComponent {
         });
         this.components.matches = new Button({
             styles: ['button__menu'],
-            text: feedViewNames.buttonMatchesTittle,
+            text: FEED_VIEW_NAMES.buttonMatchesTittle,
             href: APP_PATHS.matchesPage,
             hrefStyles: ['w-full'],
             icon: 'static/images/cards.png',
         });
         this.components.findCandidate = new Button({
             styles: ['button__menu'],
-            text: feedViewNames.buttonFindCandidatesTittle,
+            text: FEED_VIEW_NAMES.buttonFindCandidatesTittle,
             href: APP_PATHS.findCandidatePage,
             hrefStyles: ['w-full'],
             enabledStyles: ['button__menu-enabled-red'],
@@ -51,14 +51,14 @@ export default class Menu extends BaseComponent {
         });
         this.components.myProfile = new Button({
             styles: ['button__menu'],
-            text: feedViewNames.buttonMyProfileTittle,
+            text: FEED_VIEW_NAMES.buttonMyProfileTittle,
             href: APP_PATHS.profilePage,
             hrefStyles: ['w-full'],
             icon: 'static/images/profileDisable.png',
         });
         this.components.exit = new Button({
             styles: ['button__menu'],
-            text: feedViewNames.buttonExitTittle,
+            text: FEED_VIEW_NAMES.buttonExitTittle,
             onClick: this.exitClick,
             hrefStyles: ['w-full'],
             icon: 'static/images/logout.png',

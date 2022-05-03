@@ -13,8 +13,8 @@ export class Feed {
     constructor() {
         this.candidates = [];
         this.events = {
-            [FEED_EVENTS.actionLike]: this.like,
-            [FEED_EVENTS.actionDislike]: this.dislike,
+            [FEED_EVENTS.like]: this.like,
+            [FEED_EVENTS.dislike]: this.dislike,
         };
     }
 
