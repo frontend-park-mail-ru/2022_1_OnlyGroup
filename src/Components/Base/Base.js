@@ -2,27 +2,41 @@ import idGenerator from '../../Modules/IDGenerator';
 import Base from './Base.hbs';
 import EventBus from '../../Modules/EventBus';
 
+export const BASE_COMPONENT_STATES = {
+    default: 'default',
+    leftColumn: 'leftColumn',
+    rightColumn: 'rightColumn',
+    activeUserColumn: 'activeUserColumn',
+    feedPhotoCurrentContainer: 'feedPhotoCurrentContainer',
+    feedPhotoCurrentHandler: 'feedPhotoCurrentHandler',
+    feedPhotoMoveContainer: 'feedPhotoMoveContainer',
+    feedPhotoActionsContainer: 'feedPhotoActionsContainer',
+    feedPhoto: 'feedPhoto',
+    feedPhotoOverlay: 'feedPhotoOverlay',
+    feedPhotoOverlayNoPhotos: 'feedPhotoOverlayNoPhotos',
+    loginFormOffer: 'loginFormRegisterOfferContainer',
+};
+
 /**
  * Base component
  */
 export class BaseComponent {
     id;
-    styles;
+    state;
     events;
     components;
     stateChanged;
 
     /**
      *  Create Base component
-     * @param {Array|undefined} styles
+     * @param {string|undefined} state
      */
-    constructor({styles}) {
+    constructor({state = BASE_COMPONENT_STATES.default}) {
         this.id = idGenerator.getId();
-        this.styles = (styles === undefined) ? '' : styles.join(' ');
+        this.state = state;
         this.components = {};
         this.stateChanged = false;
         this.events = {};
-        this.initComponents();
     }
 
     /**
@@ -43,7 +57,9 @@ export class BaseComponent {
      * Prepare for render(this.renderedComponents)
      */
     prepareRender() {
+        this[this.state] = true;
         this.renderedComponents = Object.values(this.components).reduce((prevStr, currElem) => {
+            currElem.prepareRender();
             return prevStr + currElem.render();
         }, '');
     }

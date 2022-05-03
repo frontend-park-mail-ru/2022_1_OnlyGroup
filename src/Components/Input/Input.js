@@ -2,6 +2,10 @@ import input from './Input.hbs';
 import idGenerator from '../../Modules/IDGenerator';
 import {BaseComponent} from '../Base/Base';
 
+export const INPUT_STATES = {
+    loginRegisterInput: 'loginRegisterInput',
+};
+
 /**
  * Input component
  */
@@ -9,13 +13,13 @@ export class Input extends BaseComponent {
     /**
      * Create input component
      * @param {string} type
-     * @param {Array} styles
+     * @param {string|undefined} state
      * @param {string|null|undefined} label
      * @param {string|null|undefined} icon
      * @param {function|null|undefined} iconOnClick
      */
-    constructor({type, styles, label, icon, iconOnClick}) {
-        super({styles});
+    constructor({type, state, label, icon, iconOnClick}) {
+        super({state});
         this.type = type;
         this.value = '';
         this.inputId = idGenerator.getId();

@@ -1,9 +1,9 @@
 import registerForms from '../LoginForm/LoginForm.hbs';
-import {Button} from '../Button/Button';
-import {Input} from '../Input/Input';
-import {Text} from '../Text/Text';
-import {Logo} from '../Logo/Logo';
-import {BaseComponent} from '../Base/Base';
+import {Button, BUTTON_STATES} from '../Button/Button';
+import {Input, INPUT_STATES} from '../Input/Input';
+import {Text, TEXT_STATES} from '../Text/Text';
+import {Logo, LOGO_STATES} from '../Logo/Logo';
+import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
 import {REGISTER_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
@@ -23,46 +23,45 @@ export default class RegisterForm extends BaseComponent {
             [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
             [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setErrors,
         });
+        this.initComponents();
     }
 
     /**
      * Init all components
      */
     initComponents() {
-        this.components.logo = new Logo({styles: ['logo-BaseView-login']});
+        this.components.logo = new Logo({state: LOGO_STATES.logoLogin});
         this.components.emailInput = new Input({
             type: 'text',
             label: REGISTER_VIEW_NAMES.emailTittle,
-            styles: ['login-register-input', 'w-full'],
+            state: INPUT_STATES.loginRegisterInput,
         });
         this.components.passwordInput = new Input({
             type: 'password',
             label: REGISTER_VIEW_NAMES.passwordTitle,
-            styles: ['login-register-input', 'w-full'],
+            state: INPUT_STATES.loginRegisterInput,
         });
         this.components.passwordRepeatInput = new Input({
             type: 'password',
             label: REGISTER_VIEW_NAMES.passwordRepeatTittle,
-            styles: ['login-register-input', 'w-full'],
+            state: INPUT_STATES.loginRegisterInput,
         });
         this.components.mainError = new Text({
             text: '',
-            styles: ['login-error-text'],
+            state: TEXT_STATES.loginErrorText,
         });
         this.components.button = new Button({
             text: REGISTER_VIEW_NAMES.buttonTittle,
-            styles: ['login-register-button'],
+            state: BUTTON_STATES.loginRegisterButton,
             onClick: this.onButtonClick,
         });
 
-        this.components.registerContainer = new BaseComponent({styles: ['register-form-login-offer-container', 'w-full']});
-        this.components.registerContainer.components.registerOffer = new Text({
+        this.components.loginContainer = new BaseComponent({state: BASE_COMPONENT_STATES.loginFormOffer});
+        this.components.loginContainer.components.registerOffer = new Text({
             text: REGISTER_VIEW_NAMES.loginOffer,
-            styles: [],
         });
-        this.components.registerContainer.components.registerLink = new Text({
+        this.components.loginContainer.components.registerLink = new Text({
             text: REGISTER_VIEW_NAMES.loginLinkTittle,
-            styles: [],
             href: APP_PATHS.loginPage,
         });
     }

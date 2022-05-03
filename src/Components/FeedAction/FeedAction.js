@@ -1,6 +1,20 @@
 import {BaseComponent} from '../Base/Base';
 import feedAction from './FeedAction.hbs';
-import Photo from '../Photo/Photo';
+import Photo, {PHOTO_STATES} from '../Photo/Photo';
+
+export const FEED_ACTIONS_STATES = {
+    like: 'like',
+    dislike: 'dislike',
+    left: 'left',
+    right: 'right',
+};
+
+const PHOTO_SOURCES = {
+    [FEED_ACTIONS_STATES.like]: 'static/images/like.png',
+    [FEED_ACTIONS_STATES.dislike]: 'static/images/dislike.png',
+    [FEED_ACTIONS_STATES.left]: 'static/images/left.png',
+    [FEED_ACTIONS_STATES.right]: 'static/images/right.png',
+};
 
 /**
  * Feed action component
@@ -8,24 +22,23 @@ import Photo from '../Photo/Photo';
 export default class FeedAction extends BaseComponent {
     /**
      * Create feed action
-     * @param {Array} styles
+     * @param {string|undefined} state
      * @param {function} onClick
-     * @param {string} src
      */
-    constructor({styles, onClick, src}) {
-        super({styles});
+    constructor({state, onClick}) {
+        super({state});
         this.onClick = onClick;
-        this.src = src;
-        this.components.image = new Photo({
-            styles: ['feed-action'],
-            src: this.src,
-        });
+        this.initComponents();
     }
 
     /**
      * Init components
      */
     initComponents() {
+        this.components.image = new Photo({
+            state: PHOTO_STATES.feedAction,
+            src: PHOTO_SOURCES[this.state],
+        });
     }
 
     /**
@@ -33,7 +46,6 @@ export default class FeedAction extends BaseComponent {
      * @return {string}
      */
     render() {
-        this.prepareRender();
         return feedAction(this);
     }
 

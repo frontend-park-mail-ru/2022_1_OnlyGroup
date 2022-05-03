@@ -1,6 +1,6 @@
 {{#if href}}
-    <a href="{{{href}}}" class="link {{{styles}}}" id="{{{id}}}">{{textContent}}</a>
+    <a href="{{{href}}}" class="link {{#if loginErrorText}}login-error-text {{/if}}" id="{{{id}}}">{{textContent}}</a>
 {{else}}
-    <p id="{{{id}}}" class="text {{{styles}}}">{{textContent}}</p>
+    <p id="{{{id}}}" class="text {{#if loginErrorText}}login-error-text {{/if}}">{{textContent}}</p>
 {{/if}}
 

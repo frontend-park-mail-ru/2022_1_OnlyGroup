@@ -3,16 +3,20 @@ import {BaseComponent} from '../Base/Base';
 import EventBus from '../../Modules/EventBus';
 import {LOGO_CLICK} from '../../Modules/EventBusEvents';
 
+export const LOGO_STATES = {
+    logoLogin: 'logoLogin',
+};
+
 /**
  * Logo component
  */
 export class Logo extends BaseComponent {
     /**
      * Create logo component
-     * @param {Array} styles
+     * @param {string|undefined} state
      */
-    constructor({styles}) {
-        super({styles});
+    constructor({state}) {
+        super({state});
     }
 
     /**
@@ -26,7 +30,7 @@ export class Logo extends BaseComponent {
     /**
      * @callback Callback for logo click
      */
-    click() {
+    onClick = () => {
         EventBus.emitEvent(LOGO_CLICK);
     }
 

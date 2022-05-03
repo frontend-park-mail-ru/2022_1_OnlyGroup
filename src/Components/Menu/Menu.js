@@ -1,10 +1,12 @@
-import {BaseComponent} from '../Base/Base';
+import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
 import menu from './Menu.hbs';
-import {Button} from '../Button/Button';
-import {feedViewNames} from '../../Modules/ViewConsts';
+import {Button, BUTTON_STATES} from '../Button/Button';
+import {FEED_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
+import EventBus from '../../Modules/EventBus';
+import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
 
-export const menuStatesName = {
+export const MENU_STATES = {
     message: 'message',
     matches: 'matches',
     findCandidate: 'find-candidate',
@@ -13,67 +15,61 @@ export const menuStatesName = {
 /**
  * Left menu main page component
  */
-export default class Menu extends BaseComponent {
+export default new class Menu extends BaseComponent {
     #currentEnabled;
 
     /**
      * Create new menu component
-     * @param {Array}styles
-     * @param {string}state
-     * @param {function}onExitClick
+     * @param {string|undefined}state
      */
-    constructor({styles, state, onExitClick}) {
-        super(styles);
-        this.onExitClick = onExitClick;
+    constructor({state} = {state: BASE_COMPONENT_STATES.default}) {
+        super(state);
         this.components.messages = new Button({
-            styles: ['button__menu'],
-            text: feedViewNames.buttonMessagesTittle,
+            state: BUTTON_STATES.messageMenu,
+            text: FEED_VIEW_NAMES.buttonMessagesTittle,
             href: APP_PATHS.messagesPage,
-            hrefStyles: ['w-full'],
-            enabledStyles: [''],
-            icon: '/static/images/MsgDark.png',
         });
         this.components.matches = new Button({
-            styles: ['button__menu'],
-            text: feedViewNames.buttonMatchesTittle,
+            state: BUTTON_STATES.matchesMenu,
+            text: FEED_VIEW_NAMES.buttonMatchesTittle,
             href: APP_PATHS.matchesPage,
-            hrefStyles: ['w-full'],
-            icon: 'static/images/cards.png',
         });
         this.components.findCandidate = new Button({
-            styles: ['button__menu'],
-            text: feedViewNames.buttonFindCandidatesTittle,
+            state: BUTTON_STATES.findCandidateMenu,
+            text: FEED_VIEW_NAMES.buttonFindCandidatesTittle,
             href: APP_PATHS.findCandidatePage,
-            hrefStyles: ['w-full'],
-            enabledStyles: ['button__menu-enabled-red'],
-            icon: 'static/images/RefreshActive.png',
-            iconEnabled: 'static/images/RefreshDisable.png',
         });
         this.components.myProfile = new Button({
-            styles: ['button__menu'],
-            text: feedViewNames.buttonMyProfileTittle,
+            state: BUTTON_STATES.myProfileMenu,
+            text: FEED_VIEW_NAMES.buttonMyProfileTittle,
             href: APP_PATHS.profilePage,
-            hrefStyles: ['w-full'],
-            icon: 'static/images/profileDisable.png',
         });
         this.components.exit = new Button({
-            styles: ['button__menu'],
-            text: feedViewNames.buttonExitTittle,
+            state: BUTTON_STATES.exitMenu,
+            text: FEED_VIEW_NAMES.buttonExitTittle,
             onClick: this.exitClick,
-            hrefStyles: ['w-full'],
-            icon: 'static/images/logout.png',
         });
+    }
+
+    /**
+     * Set enabled menu state
+     * @param {string} state
+     */
+    setState({state}) {
+        if (this.#currentEnabled) {
+            this.#currentEnabled.setEnabled(false);
+        }
         switch (state) {
-        case menuStatesName.message:
+        case MENU_STATES.message:
             this.#currentEnabled = this.components.messages;
             break;
-        case menuStatesName.matches:
+        case MENU_STATES.matches:
             this.#currentEnabled = this.components.matches;
             break;
-        case menuStatesName.findCandidate:
+        case MENU_STATES.findCandidate:
             this.#currentEnabled = this.components.findCandidate;
             break;
-        case menuStatesName.myProfile:
+        case MENU_STATES.myProfile:
             this.#currentEnabled = this.components.myProfile;
             break;
         }
@@ -86,7 +82,7 @@ export default class Menu extends BaseComponent {
      */
     exitClick = (ev) => {
         ev.preventDefault();
-        this.onExitClick();
+        EventBus.emitEvent(LOGIN_EVENTS.logout);
     }
 
     /**
@@ -94,7 +90,6 @@ export default class Menu extends BaseComponent {
      * @return {string}
      */
     render() {
-        super.prepareRender();
         return menu(this);
     }
-}
+};

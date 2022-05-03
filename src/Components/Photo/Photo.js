@@ -2,26 +2,38 @@ import {BaseComponent} from '../Base/Base';
 import photo from './Photo.hbs';
 import EventBus from '../../Modules/EventBus';
 
+export const PHOTO_STATES = {
+    feedPhoto: 'feedPhoto',
+    avatar: 'avatar',
+    feedAction: 'feedAction',
+};
+
+const PHOTO_STYLES = {
+    [PHOTO_STATES.feedPhoto]: 'feed-photo',
+    [PHOTO_STATES.avatar]: 'avatar',
+    [PHOTO_STATES.feedAction]: 'feed-action',
+};
+
 /**
  * Photo component
  */
 export default class Photo extends BaseComponent {
     /**
      * Create photo component
-     * @param {Array} styles
+     * @param {string|undefined} state
      * @param {string|undefined} onLoadEvent
      * @param {string|undefined} loadEvent
      * @param {string|undefined} src
      * @param {boolean} loaderEnabled
      */
-    constructor({styles, onLoadEvent, loadEvent, src, loaderEnabled = false}) {
-        super({styles});
-        this.onLoadEventName = onLoadEvent;
+    constructor({state, onLoadEvent, loadEvent, src, loaderEnabled = false}) {
+        super({state});
         this.loadEventName = loadEvent;
         this.src = src;
         this.image = null;
         this.loaderEnabled = loaderEnabled;
         this.imageReady = false;
+        this.style = PHOTO_STYLES[state];
         if (src !== undefined) {
             this.image = new Image();
             this.image.src = this.src;
@@ -93,7 +105,7 @@ export default class Photo extends BaseComponent {
         }
         if (this.imageReady && this.elem) {
             this.elem.innerHTML = '';
-            this.image.classList.add(...this.styles.split(' '));
+            this.image.classList.add(this.style);
             this.elem.insertAdjacentElement('afterbegin', this.image);
         }
     }
