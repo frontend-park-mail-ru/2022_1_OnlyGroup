@@ -1,6 +1,7 @@
 import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
 import feedPhoto from './FeedPhoto.hbs';
 import FeedAction, {FEED_ACTIONS_STATES} from '../FeedAction/FeedAction';
+import IDGenerator from '../../Modules/IDGenerator';
 import Photo, {PHOTO_STATES} from '../Photo/Photo';
 import {Text} from '../Text/Text';
 import EventBus from '../../Modules/EventBus';

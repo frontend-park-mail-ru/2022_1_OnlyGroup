@@ -1,9 +1,9 @@
 import feedView from './FeedView.hbs';
 import BaseView from '../BaseView/BaseView';
-import MenuComponent, {menuStatesName} from '../../Components/Menu/Menu';
+import MenuComponent, {MENU_STATES, menuStatesName} from '../../Components/Menu/Menu';
 import EventBus from '../../Modules/EventBus';
 import {ActiveUserComponent} from '../../Components/ActiveUser/ActiveUser';
-import {BaseComponent} from '../../Components/Base/Base';
+import {BASE_COMPONENT_STATES, BaseComponent} from '../../Components/Base/Base';
 import FeedPhoto from '../../Components/FeedPhoto/FeedPhoto';
 import FeedInfo from '../../Components/FeedInfo/FeedInfo';
 
@@ -13,30 +13,21 @@ import FeedInfo from '../../Components/FeedInfo/FeedInfo';
 export default class FeedView extends BaseView {
     /**
      * Create new
-     * @param {HTMLElement}parent
+     * @param {HTMLElement} parent
      */
     constructor({parent}) {
         super({parent});
-        this.components.leftColumn = new BaseComponent({
-            styles: ['left-column'],
-        });
+        this.components.leftColumn = new BaseComponent({state: BASE_COMPONENT_STATES.leftColumn});
         this.components.leftColumn.components.activeUser = new ActiveUserComponent({
             styles: [],
         });
-        this.components.leftColumn.components.menu = new MenuComponent({
-            styles: [],
-            state: menuStatesName.findCandidate,
-            onExitClick: this.exitClick,
-        });
+        this.components.leftColumn.components.menu = MenuComponent;
+        MenuComponent.setState({state: MENU_STATES.findCandidate});
         this.components.rightColumn = new BaseComponent({
-            styles: ['right-column'],
+            state: BASE_COMPONENT_STATES.rightColumn,
         });
-        this.components.rightColumn.components.photo = new FeedPhoto({
-            styles: [],
-        });
-        this.components.rightColumn.components.info = new FeedInfo({
-            styles: [],
-        });
+        this.components.rightColumn.components.photo = new FeedPhoto({});
+        this.components.rightColumn.components.info = new FeedInfo({});
     }
 
     /**
@@ -46,12 +37,5 @@ export default class FeedView extends BaseView {
         super.prepareRender();
         this.parent.innerHTML = feedView(this);
         this.mount();
-    }
-
-    /**
-     * @callback Callback for exit button click
-     */
-    exitClick = () =>{
-        EventBus.emitEvent('action-logout');
     }
 }
