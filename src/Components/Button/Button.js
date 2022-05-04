@@ -9,12 +9,12 @@ export class Button extends BaseComponent {
      * Create button component
      * @param {Array} styles
      * @param {string} text
-     * @param {string|null} icon
+     * @param {string|null|undefined} icon
      * @param {function|undefined|null} onClick
      */
     constructor({styles, text, icon, onClick}) {
         super({styles});
-        this.icon = icon;
+        this.icon = (icon === undefined) ? null : icon;
         this.buttonText = text;
         this.onClick = (onClick === undefined) ? null : onClick;
     }
@@ -24,7 +24,7 @@ export class Button extends BaseComponent {
      * @return {string}
      */
     render() {
-        return Button(...this);
+        return button(this);
     }
 
     /**
