@@ -43,6 +43,13 @@ export default class BaseView {
     }
 
     /**
+     * Set state
+     * @param {string} state
+     */
+    setState({state}) {
+    }
+
+    /**
      * Render base view
      */
     render() {

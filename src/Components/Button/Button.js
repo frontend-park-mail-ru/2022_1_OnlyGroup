@@ -63,6 +63,7 @@ export class Button extends BaseComponent {
      */
     setEnabled(enabled) {
         this.enabled = enabled;
+        this.stateChanged = true;
     }
 
     /**

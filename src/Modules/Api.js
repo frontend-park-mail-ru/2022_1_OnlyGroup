@@ -95,7 +95,7 @@ export class Api {
      * @return {Promise<ApiResult>}
      * @constructor
      */
-    static ChangeProfile = async ({userId, firstName, lastName, birthDay, city, interests, aboutUser, gender}) => {
+    static ChangeProfile = async ({userId, firstName, lastName, birthDay, aboutUser, city, gender, height, interests}) => {
         const request = JSON.stringify({
             UserId: userId,
             FirstName: firstName,
@@ -104,6 +104,7 @@ export class Api {
             City: city,
             Interests: interests,
             AboutUser: aboutUser,
+            Height: height,
             Gender: gender,
         });
         const requestUrl = `${PROFILES_API_URL}/${userId}`;

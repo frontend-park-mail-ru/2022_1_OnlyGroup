@@ -2,10 +2,12 @@ import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
 import Validators from '../Modules/Validators';
 import {REGISTER_VIEW_NAMES} from '../Modules/ViewConsts';
-import {API_FAILED, FEED_EVENTS, LOGIN_EVENTS} from '../Modules/EventBusEvents';
+import {API_FAILED, FEED_EVENTS, LOGIN_EVENTS, SETTINGS_EVENTS} from '../Modules/EventBusEvents';
 import {Photo} from './Photo';
 
 const statusUnathorized = 401;
+const statusValidationFailed = 416;
+const statusForbidden = 403;
 
 /**
  * User class
@@ -186,7 +188,7 @@ export class User {
     }
 
     getLongInfo = async () => {
-        if (this.info) {
+        if (this.aboutUser) {
             return;
         }
         const response = await Api.GetLongProfile({
@@ -206,6 +208,43 @@ export class User {
         this.height = response.Body.Height;
         this.interests = response.Body.Interests;
         this.calculateAge();
+    }
+
+    /**
+     * Change profile info
+     * @return {Promise<void>}
+     */
+    putLongInfo = async ({firstName, lastName, aboutUser, birthDay, city, gender, height, interests}) => {
+        const validationErr = Validators.validateUserProfile({
+            firstName,
+            lastName,
+            birthDay,
+            aboutUser,
+            city,
+            gender,
+            height,
+            interests,
+        });
+        if (validationErr) {
+            EventBus.emitEvent(SETTINGS_EVENTS.validationFailed, validationErr);
+            return;
+        }
+        const response = await Api.ChangeProfile({
+            userId: this.id,
+            firstName,
+            lastName,
+            aboutUser,
+            birthDay,
+            city,
+            gender,
+            height,
+            interests,
+        });
+        if (!response.isOk()) {
+            EventBus.emitEvent(API_FAILED, response);
+            return;
+        }
+        EventBus.emitEvent(SETTINGS_EVENTS.profileSaved);
     }
 
     getAllPhotos = async () => {
@@ -265,7 +304,6 @@ const
     activeUser = new User({
         active: true,
     });
-activeUser
-    .startActiveUser();
+activeUser.startActiveUser();
 
 export default activeUser;

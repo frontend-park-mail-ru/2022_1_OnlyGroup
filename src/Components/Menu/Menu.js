@@ -15,15 +15,15 @@ export const MENU_STATES = {
 /**
  * Left menu main page component
  */
-export default new class Menu extends BaseComponent {
+export class Menu extends BaseComponent {
     #currentEnabled;
 
     /**
      * Create new menu component
      * @param {string|undefined}state
      */
-    constructor({state} = {state: BASE_COMPONENT_STATES.default}) {
-        super(state);
+    constructor({state}) {
+        super({state});
         this.components.messages = new Button({
             state: BUTTON_STATES.messageMenu,
             text: FEED_VIEW_NAMES.buttonMessagesTittle,
@@ -92,4 +92,4 @@ export default new class Menu extends BaseComponent {
     render() {
         return menu(this);
     }
-};
+}

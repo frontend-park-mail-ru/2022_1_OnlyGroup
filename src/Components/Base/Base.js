@@ -15,6 +15,9 @@ export const BASE_COMPONENT_STATES = {
     feedPhotoOverlay: 'feedPhotoOverlay',
     feedPhotoOverlayNoPhotos: 'feedPhotoOverlayNoPhotos',
     loginFormOffer: 'loginFormRegisterOfferContainer',
+    settingsLeftColumn: 'settingsLeftColumn',
+    settingsRightColumn: 'settingsRightColumn',
+    settingsMainRow: 'settingsMainRow',
 };
 
 /**
@@ -73,6 +76,18 @@ export class BaseComponent {
         });
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.addEventListener(key, value);
+        });
+    }
+
+    /**
+     * Pause component
+     */
+    pause() {
+        Object.values(this.components).forEach((component) => {
+            component.pause();
+        });
+        Object.entries(this.events).forEach(([key, value]) => {
+            EventBus.removeEventListener(key, value);
         });
     }
 

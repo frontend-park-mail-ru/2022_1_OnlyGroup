@@ -7,6 +7,11 @@ import {Text} from '../Text/Text';
 import EventBus from '../../Modules/EventBus';
 import {FEED_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 
+export const FEED_PHOTO_STATES = {
+    feed: 'feed',
+    settings: 'settings',
+};
+
 /**
  * Feed photo component
  */
@@ -15,7 +20,7 @@ export default class FeedPhoto extends BaseComponent {
      * Create new feed photo
      * @param {string|undefined} state
      */
-    constructor({state}) {
+    constructor({state = FEED_PHOTO_STATES.feed}) {
         super({state});
         this.ready = false;
         this.allPhotos = null;
@@ -84,6 +89,9 @@ export default class FeedPhoto extends BaseComponent {
      * Create like dislike buttons components
      */
     createActions() {
+        if (this.state === FEED_PHOTO_STATES.settings) {
+            return;
+        }
         this.components.photoOverlay.components.likesContainer = new BaseComponent({
             state: BASE_COMPONENT_STATES.feedPhotoActionsContainer,
         });

@@ -63,4 +63,21 @@ export default class Validators {
         }
         return null;
     }
+
+    /**
+     * Validate user profile model
+     * @param {string} firstName
+     * @param {string} lastName
+     * @param {string} birthDay
+     * @param {string} aboutUser
+     * @param {string} city
+     * @param {number} gender
+     * @param {number} height
+     * @param {[string]} interests
+     * @return {null}
+     */
+    static validateUserProfile({firstName, lastName, birthDay, aboutUser, city, gender, height, interests}) {
+        const validationError = {firstName: '', lastName: '', birthDay: '', aboutUser: '', city: '', gender: '', height: '', interests: ''};
+        return null;
+    }
 }

@@ -1,9 +1,13 @@
-<div class="input-container flex justify-content-center flex-column gap-4 w-full" id="{{{id}}}">
+<div class="input-container flex justify-content-center {{#if
+        loginRegisterInput}}flex-column {{/if}}{{#if
+        settingsInput}}flex-row align-item-center{{/if}} gap-4 w-full" id="{{{id}}}">
     {{#if label}}
         <span class="text-align-center input-container__label">{{label}}</span>
     {{/if}}
     <div class="input-icon-container">
-        <input type="{{{type}}}" id={{{inputId}}} class="input-component {{#if error}}input-component_error {{/if}}{{#if loginRegisterInput}}login-register-input w-full {{/if}}" value="{{value}}">
+        <input type="{{{type}}}" id="{{{inputId}}}" class="input-component {{#if error}}input-component_error {{/if}}{{#if
+                loginRegisterInput}}login-register-input w-full {{/if}}{{#if
+                settingsInput}}settings-input {{/if}}" value="{{value}}">
         {{#if icon}}
             <button class="input-icon-button" id={{buttonId}}><img src={{icon}} alt="icon"></button>
         {{/if}}

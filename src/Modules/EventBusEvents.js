@@ -27,3 +27,8 @@ export const FEED_EVENTS = {
     infoReady: 'info-ready',
     noCandiates: 'no-candidates',
 };
+
+export const SETTINGS_EVENTS = {
+    validationFailed: 'profile-validation-failed',
+    profileSaved: 'profile-saved',
+};

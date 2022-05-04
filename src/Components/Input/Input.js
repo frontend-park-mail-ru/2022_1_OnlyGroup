@@ -4,6 +4,7 @@ import {BaseComponent} from '../Base/Base';
 
 export const INPUT_STATES = {
     loginRegisterInput: 'loginRegisterInput',
+    settingsInput: 'settingsInput',
 };
 
 /**

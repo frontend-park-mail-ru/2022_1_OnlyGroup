@@ -30,6 +30,14 @@ export class BaseController {
     }
 
     /**
+     * Change url by router
+     * @param {string}url
+     * @return {Promise<void>}
+     */
+    async changeUrl({url}) {
+    }
+
+    /**
      * Start controller
      */
     async start() {

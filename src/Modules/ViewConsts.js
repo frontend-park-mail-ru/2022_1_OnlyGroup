@@ -29,3 +29,12 @@ export const FEED_VIEW_NAMES = {
     interests: 'Интересы',
     horoscope: 'Совместимость по гороскопу',
 };
+
+export const SETTINGS_VIEW_NAME = {
+    firstNameLabel: 'Имя',
+    lastNameLabel: 'Фамилия',
+    birthDayLabel: 'Дата рождения',
+    aboutMeLabel: 'Обо мне',
+    interestsLabel: '',
+
+};

@@ -7,5 +7,6 @@ import feedController from './Controllers/FeedController/FeedController';
 router.register(APP_PATHS.loginPage, loginController);
 router.register(APP_PATHS.registerPage, registerController);
 router.register(APP_PATHS.findCandidatePage, feedController);
+router.register(APP_PATHS.profilePage, feedController);
 
 router.start();
