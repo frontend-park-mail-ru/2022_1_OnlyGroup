@@ -1,0 +1,14 @@
+.login-view{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-layout{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(#5a476e, #000000);
+    opacity: 65%;
+}

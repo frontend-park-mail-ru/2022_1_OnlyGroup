@@ -92,4 +92,4 @@ Terms
 Privacy
 
 *.pug.js
-package-lock.json
+*.pug.jspackage-lock.json
