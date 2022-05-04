@@ -1,6 +1,7 @@
 import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
 import Validators from '../Modules/Validators';
+import {REGISTER_VIEW_NAMES} from '../Modules/ViewConsts';
 import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../Modules/EventBusEvents';
 
 const statusUnathorized = 401;
@@ -9,14 +10,14 @@ const statusUnathorized = 401;
  * User class
  */
 export class User {
-    #id;
+    id;
 
     /**
      * Create new user
      * @param {number|null|undefined} id
      */
     constructor(id = null) {
-        this.#id = id;
+        this.id = id;
     }
 
     /**
@@ -43,6 +44,10 @@ export class User {
      * @constructor
      */
     async checkLogin() {
+        if (this.id === -1) {
+            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userNotLoggined);
+            return;
+        }
         const result = await Api.CheckLogin();
         this.#processAuthResult(result);
     }
@@ -80,6 +85,11 @@ export class User {
             return;
         }
         const result = await Api.LogUp({Email: email, Password: password});
+        if (result.Status === 409) {
+            EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userValidationFailed, {email: REGISTER_VIEW_NAMES.userEmailUsed});
+            return;
+        }
+
         this.#processAuthResult(result);
     }
 
@@ -94,7 +104,7 @@ export class User {
             EventBus.emitEvent(API_FAILED, result);
             return;
         }
-        this.#id = -1;
+        this.id = -1;
         EventBus.emitEvent(LOGIN_REGISTER_EVENTS.userNotLoggined);
     }
 }

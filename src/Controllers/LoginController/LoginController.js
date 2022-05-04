@@ -52,5 +52,3 @@ export default new class LoginController extends BaseController {
         activeUser.checkLogin();
     }
 };
-
-

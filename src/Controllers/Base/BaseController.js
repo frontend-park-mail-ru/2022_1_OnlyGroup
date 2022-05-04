@@ -1,13 +1,12 @@
-import {BaseView} from '../../Views/BaseView/BaseView';
 import EventBus from '../../Modules/EventBus';
 
 /**
- * Base controller classx
+ * Base controller class
  */
 export class BaseController {
     /**
      * Create Base controller
-     * @param {BaseView}view
+     * @param {BaseView} view
      */
     constructor({view}) {
         this.view = new view({parent: document.getElementById('root')});
