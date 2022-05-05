@@ -11,10 +11,11 @@ export class Input extends BaseComponent {
      * @param {string} type
      * @param {Array} styles
      * @param {string|null|undefined} label
+     * @param {string|null|undefined} placeholder
      * @param {string|null|undefined} icon
      * @param {function|null|undefined} iconOnClick
      */
-    constructor({type, styles, label, icon, iconOnClick}) {
+    constructor({type, styles, label, placeholder, icon, iconOnClick}) {
         super({styles});
         this.type = type;
         this.value = '';
@@ -25,6 +26,7 @@ export class Input extends BaseComponent {
         }
         this.iconOnClick = (iconOnClick === undefined) ? null : iconOnClick;
         this.label = (label === undefined) ? null : label;
+        this.placeholder = (placeholder === undefined) ? null : placeholder;
     }
 
     /**

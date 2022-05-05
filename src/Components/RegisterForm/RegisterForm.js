@@ -29,40 +29,44 @@ export default class RegisterForm extends BaseComponent {
      * Init all components
      */
     initComponents() {
-        this.components.logo = new Logo({styles: ['logo-BaseView-login']});
+        this.components.logo = new Logo({styles: []});
         this.components.emailInput = new Input({
             type: 'text',
-            label: REGISTER_VIEW_NAMES.emailTittle,
-            styles: ['login-register-input', 'w-full'],
+            label: REGISTER_VIEW_NAMES.inputs.email.title,
+            placeholder: REGISTER_VIEW_NAMES.inputs.email.placeholder,
+            styles: ['auth-form__input'],
         });
         this.components.passwordInput = new Input({
             type: 'password',
-            label: REGISTER_VIEW_NAMES.passwordTitle,
-            styles: ['login-register-input', 'w-full'],
+            label: REGISTER_VIEW_NAMES.inputs.password.title,
+            placeholder: REGISTER_VIEW_NAMES.inputs.password.placeholder,
+            styles: ['auth-form__input'],
         });
         this.components.passwordRepeatInput = new Input({
             type: 'password',
-            label: REGISTER_VIEW_NAMES.passwordRepeatTittle,
-            styles: ['login-register-input', 'w-full'],
+            label: REGISTER_VIEW_NAMES.inputs.passwordVerify.title,
+            placeholder: REGISTER_VIEW_NAMES.inputs.passwordVerify.placeholder,
+            styles: ['auth-form__input'],
         });
-        this.components.mainError = new Text({
-            text: '',
-            styles: ['login-error-text'],
-        });
+        // this.components.mainError = new Text({
+        //     text: '',
+        //     styles: ['login-error-text'],
+        // });
+        // какой-то мейн еррор, который вроде как не нужен
         this.components.button = new Button({
-            text: REGISTER_VIEW_NAMES.buttonTittle,
-            styles: ['login-register-button'],
+            text: REGISTER_VIEW_NAMES.buttonTitle,
+            styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
 
-        this.components.registerContainer = new BaseComponent({styles: ['register-form-login-offer-container', 'w-full']});
+        this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant', 'w-full']});
         this.components.registerContainer.components.registerOffer = new Text({
             text: REGISTER_VIEW_NAMES.loginOffer,
-            styles: [],
+            styles: ['alt-variant__text'],
         });
         this.components.registerContainer.components.registerLink = new Text({
             text: REGISTER_VIEW_NAMES.loginLinkTittle,
-            styles: [],
+            styles: ['alt-variant__link'],
             href: APP_PATHS.loginPage,
         });
     }

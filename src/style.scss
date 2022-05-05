@@ -5,7 +5,6 @@
 @import "./Components/Input/Input.scss";
 @import "./Components/Button/Button.scss";
 @import "./Components/Logo/Logo.scss";
-@import "./Components/Input/Input.scss";
 @import "./Components/Text/Text.scss";
 @import "./Components/LoginForm/LoginForm.scss";
 @import "./Components/RegisterForm/RegisterForm.scss";
@@ -20,5 +19,5 @@
 }
 
 body {
-  background-color: black;
+  background: radial-gradient(rgba(94, 0, 189, 0.7), rgba(0,0,0, 0.9));
 }

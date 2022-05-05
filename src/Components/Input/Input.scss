@@ -1,32 +1,42 @@
-.input-component{
-  height: 52px;
-  border: var(--input-border);
-  box-sizing: border-box;
-  border-radius: 15px;
-  font-size: 18px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  opacity: 50%;
-  padding-left: 20px;
-  color: black;
-}
-
-.login-register-input{
+.input-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   width: 100%;
+
+  &__label {
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+    padding-bottom: 13px;
+  }
+
+  &__error {
+    color: var(--error-color);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+  }
 }
 
-.input-container-text__error{
-  color: var(--error-color);
-  font-weight: var(--font-weight-medium);
-}
+.input-field {
+  &__input {
+    width: 100%;
+    height: 52px;
+    border: var(--input-border);
+    box-sizing: border-box;
+    border-radius: 15px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    padding-left: 20px;
+    color: black;
 
-.input-container__label {
-  font-weight: var(--font-weight-semibold);
-}
+    &:focus {
+      outline: var(--input-border-hover);
+    }
 
-.input-component__error {
-  border-color: tomato;
+    &_error {
+      border-color: var(--error-color);
+    }
+  }
 }
-
 

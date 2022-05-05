@@ -29,15 +29,17 @@ export default class LoginForm extends BaseComponent {
      * Create all components on page
      */
     initComponents() {
-        this.components.logo = new Logo({styles: ['logo-BaseView-login']});
+        this.components.logo = new Logo({styles: []});
         this.components.emailInput = new Input({
             type: 'text',
-            label: LOGIN_VIEW_NAMES.emailTittle,
+            label: LOGIN_VIEW_NAMES.inputs.email.title,
+            placeholder: LOGIN_VIEW_NAMES.inputs.email.placeholder,
             styles: ['login-register-input', 'w-full'],
         });
         this.components.passwordInput = new Input({
             type: 'password',
-            label: LOGIN_VIEW_NAMES.passwordTitle,
+            label: LOGIN_VIEW_NAMES.inputs.password.title,
+            placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
             styles: ['login-register-input', 'w-full'],
         });
         this.components.mainError = new Text({
@@ -46,18 +48,18 @@ export default class LoginForm extends BaseComponent {
         });
         this.components.button = new Button({
             text: LOGIN_VIEW_NAMES.buttonTittle,
-            styles: ['login-register-button'],
+            styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
 
-        this.components.registerContainer = new BaseComponent({styles: ['login-form-register-offer-container', 'w-full']});
+        this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant', 'w-full']});
         this.components.registerContainer.components.registerOffer = new Text({
             text: LOGIN_VIEW_NAMES.registerOffer,
-            styles: [],
+            styles: ['alt-variant__text'],
         });
         this.components.registerContainer.components.registerLink = new Text({
             text: LOGIN_VIEW_NAMES.registerLinkTittle,
-            styles: [],
+            styles: ['alt-variant__link'],
             href: APP_PATHS.registerPage,
         });
     }

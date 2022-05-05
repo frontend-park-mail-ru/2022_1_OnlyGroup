@@ -1,8 +1,16 @@
 export const LOGIN_VIEW_NAMES = {
     registerOffer: 'Все еще нет аккаунта?',
     registerLinkTittle: 'Зарегистрироваться',
-    emailTittle: 'Email',
-    passwordTitle: 'Пароль',
+    inputs: {
+        email: {
+            title: 'Email',
+            placeholder: 'Введите email',
+        },
+        password: {
+            title: 'Пароль',
+            placeholder: 'Введите пароль',
+        },
+    },
     buttonTittle: 'Войти',
     userLoginFailed: 'Неверный логин или пароль',
     emailVerificationFailed: 'Неверный Email',
@@ -12,10 +20,21 @@ export const LOGIN_VIEW_NAMES = {
 export const REGISTER_VIEW_NAMES = {
     loginOffer: 'Уже есть аккаунт?',
     loginLinkTittle: 'Войти',
-    emailTittle: 'Email',
-    passwordTitle: 'Пароль',
-    passwordRepeatTittle: 'Пароль еще раз',
-    buttonTittle: 'Зарегистрироваться',
+    inputs: {
+        email: {
+            title: 'Email',
+            placeholder: 'Введите email',
+        },
+        password: {
+            title: 'Пароль',
+            placeholder: 'Введите пароль',
+        },
+        passwordVerify: {
+            title: 'Пароль ещё раз',
+            placeholder: 'Повторите ваш пароль',
+        },
+    },
+    buttonTitle: 'Зарегистрироваться',
     userEmailUsed: 'Email уже используется',
     passwordRepeatVerificationFailed: 'Пароли не совпадают',
 };
