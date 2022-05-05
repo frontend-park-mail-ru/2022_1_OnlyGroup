@@ -4,8 +4,7 @@
 }
 
 .login-error-text{
-
-    color: #CF5151;
-    font-weight: 500;
+    color: var(--error-color);
+    font-weight: var(--font-weight-medium);
 
 }

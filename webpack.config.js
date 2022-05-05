@@ -29,6 +29,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: './',
         filename: `index_bundle_${version}.js`,
+        assetModuleFilename: 'assets/[name][ext]',
+        clean: true,
     },
     module: {
         rules: [
@@ -42,11 +44,16 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
+            // {
+            //     test: /\.(svg|png|jpg|jpeg|woff|woff2|eot|ttf)$/,
+            //     use: 'file-loader',
+            // },
             {
-                test: /\.(svg|png|jpg|jpeg|woff|woff2|eot|ttf)$/,
-                use: 'file-loader',
+                test: /\.(png|svg|jpeg|jpg|gif|ico)$/i,
+                exclude: /node_modules/,
+                type: 'asset/resource',
             },
         ],
     },
@@ -56,7 +63,7 @@ module.exports = {
             filename: 'index.html',
         }),
         new MiniCssExtractPlugin({
-            filename: 'style.css',
+            filename: '[name].[contenthash].css',
         }),
         new CopyPlugin({
             patterns: [

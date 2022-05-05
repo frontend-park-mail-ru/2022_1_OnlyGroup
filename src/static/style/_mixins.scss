@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: $flexDirectionProperty;
     justify-content: center;
-    align-items: left;
+    //align-items: left;
 }
 
 @mixin text-styles($fontSize, $marginBottom) {
@@ -17,7 +17,7 @@
 
 @mixin button-inputs-style() {
     border-radius: 16px;
-    overflow: none;
+    //overflow: none;
     cursor: pointer;
     text-decoration: none;
 }
@@ -32,5 +32,5 @@
     -moz-appearance: none;
     appearance: none;
     border: 0;
-    background: $bg-color-light;
+    background: var(--bg-color-light);
 }

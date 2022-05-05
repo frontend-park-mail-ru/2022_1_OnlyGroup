@@ -9,14 +9,14 @@
   border-radius: 15px;
   cursor: pointer;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   border: none;
   color: #fff;
-  background: linear-gradient(45deg, #9F93E3, #8067EF, #6843FD);
+  background: var(--button-bg-gradient);
 }
 
 .button-component:hover {
-  background: $button-bg-gradient-hover;
+  background: var(--button-bg-gradient-hover);
 }
 
 .login-register-button {

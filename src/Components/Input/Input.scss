@@ -1,6 +1,6 @@
 .input-component{
   height: 52px;
-  border: 1px solid #594c74;
+  border: var(--input-border);
   box-sizing: border-box;
   border-radius: 15px;
   font-size: 18px;
@@ -17,12 +17,12 @@
 }
 
 .input-container-text__error{
-  color: #CF5151;
-  font-weight: 500;
+  color: var(--error-color);
+  font-weight: var(--font-weight-medium);
 }
 
 .input-container__label {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .input-component__error {
