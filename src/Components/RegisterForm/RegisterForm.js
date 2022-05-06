@@ -4,7 +4,7 @@ import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
-import {REGISTER_VIEW_NAMES} from '../../Modules/ViewConsts';
+import {REGISTER_VIEW_NAMES} from '../../consts/viewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
 import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';

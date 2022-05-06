@@ -1,4 +1,4 @@
-import {LOGIN_VIEW_NAMES, REGISTER_VIEW_NAMES} from './ViewConsts';
+import {LOGIN_VIEW_NAMES, REGISTER_VIEW_NAMES} from '../consts/viewConsts';
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordPatternLowerCase = `[a-z]+`;
