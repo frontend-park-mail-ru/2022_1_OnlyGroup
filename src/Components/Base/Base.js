@@ -1,5 +1,4 @@
 import idGenerator from '../../Modules/IDGenerator';
-import Base from './Base.hbs';
 import EventBus from '../../Modules/EventBus';
 
 export const BASE_COMPONENT_STATES = {
@@ -22,16 +21,15 @@ export const BASE_COMPONENT_STATES = {
  */
 export class BaseComponent {
     id;
-    state;
+    type;
     events;
     components;
     stateChanged;
 
     /**
      *  Create Base component
-     * @param {string|undefined} state
      */
-    constructor({state = BASE_COMPONENT_STATES.default}) {
+    constructor() {
         this.id = idGenerator.getId();
         this.state = state;
         this.components = {};
@@ -77,6 +75,18 @@ export class BaseComponent {
     }
 
     /**
+     * Pause component
+     */
+    pause() {
+        Object.values(this.components).forEach((component) => {
+            component.pause();
+        });
+        Object.entries(this.events).forEach(([key, value]) => {
+            EventBus.removeEventListener(key, value);
+        });
+    }
+
+    /**
      * Stop listenning for eventBus events
      */
     stop() {
@@ -112,8 +122,7 @@ export class BaseComponent {
      * @return {string}
      */
     render() {
-        this.prepareRender();
-        return Base(this);
+        return '';
     }
 
     /**
