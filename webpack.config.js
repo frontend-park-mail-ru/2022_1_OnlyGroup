@@ -4,31 +4,27 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const StylelintPlugin = require('stylelint-webpack-plugin');
-const version = new Date(Date.now());
 
 const PATHS = {
-    src: path.join(__dirname, './src/'),
-    dist: path.resolve(__dirname, './dist/'),
+    src: path.join(__dirname, './src'),
+    dist: path.resolve(__dirname, './dist'),
 };
 
 module.exports = {
     watch: true,
     resolve: {
         alias: {
-            _assets: path.resolve('src/static'),
-            _components: path.resolve('src/components'),
+            _assets: `${PATHS.src}/static`,
+            _components: `${PATHS.src}/components`,
         },
         extensions: ['.js'],
     },
     mode: debug ? 'development' : 'production',
-    entry: path.resolve('./src/app.js'),
+    entry: `${PATHS.src}/app.js`,
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: PATHS.dist,
         publicPath: './',
-        filename: `index_bundle_${version}.js`,
+        filename: `index_bundle_[hash].js`,
         assetModuleFilename: 'assets/[name][ext]',
         clean: true,
     },
@@ -37,14 +33,13 @@ module.exports = {
             {
                 test: /\.hbs$/,
                 loader: 'handlebars-loader',
-                exclude: /(node_modules)/,
-                include: [
-                    path.resolve(__dirname, 'src/'),
-                ],
+                exclude: /node_modules/,
+                include: PATHS.src,
             },
             {
                 test: /\.scss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                exclude: /node_modules/,
             },
             // {
             //     test: /\.(svg|png|jpg|jpeg|woff|woff2|eot|ttf)$/,
@@ -61,6 +56,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve('src/index.html'),
             filename: 'index.html',
+            favicon: `${PATHS.src}/static/images/favicon.ico`,
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
@@ -71,15 +67,13 @@ module.exports = {
                     from: path.resolve(__dirname, 'src', 'static', 'images'),
                     to: path.resolve(__dirname, 'dist', 'static', 'images'),
                 },
+                {from: `${PATHS.src}/static/images/favicon.ico`, to: 'favicon.ico'},
             ],
-        }),
-        new webpack.DefinePlugin({
-            DEBUG: debug,
         }),
     ],
     devServer: {
         static: {
-            directory: path.join(__dirname, 'dist'),
+            directory: PATHS.dist,
         },
         compress: false,
         port: 9000,

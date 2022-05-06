@@ -1,10 +1,19 @@
-.text{
+.text {
     color: black;
     font-style: normal;
+}
+
+.link {
+    color: var(--link-color);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--link-color-hover);
+        text-decoration: underline;
+    }
 }
 
 .login-error-text{
     color: var(--error-color);
     font-weight: var(--font-weight-medium);
-
 }

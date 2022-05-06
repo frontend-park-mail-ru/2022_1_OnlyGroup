@@ -1,24 +1,28 @@
 .auth-form {
   @include flex-container(column);
+  align-items: center;
+  row-gap: 20px;
 
   width: 550px;
   padding: 30px 50px 50px;
   margin: 35px;
   box-sizing: border-box;
-  align-items: center;
-  background: var(--bg-color-light);
   border-radius: 50px;
-  row-gap: 20px;
+  background: var(--bg-color-light);
   z-index: 2;
 
   &__alt-variant {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    gap: 30px;
   }
 
   &__button {
     height: 68px;
     margin-top: 10px;
+    font-size: 22px;
   }
+}
+
+.alt-variant {
+  @include flex-container(row);
+  align-items: center;
 }

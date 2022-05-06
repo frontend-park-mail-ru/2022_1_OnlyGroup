@@ -1,7 +1,6 @@
 @import "./consts/consts.scss";
-@import "./static/style/_mixins.scss";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
-//@import "./static/style/_variables.scss";
+@import "./consts/mixins.scss";
+//@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 @import "./Components/Input/Input.scss";
 @import "./Components/Button/Button.scss";
 @import "./Components/Logo/Logo.scss";
@@ -10,7 +9,6 @@
 @import "./Components/RegisterForm/RegisterForm.scss";
 @import "./Views/LoginView/LoginView.scss";
 @import "./Views/RegisterView/RegisterView.scss";
-@import "helpers.scss";
 
 * {
   font-family: Montserrat, sans-serif;

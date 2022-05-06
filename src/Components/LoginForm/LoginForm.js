@@ -34,25 +34,26 @@ export default class LoginForm extends BaseComponent {
             type: 'text',
             label: LOGIN_VIEW_NAMES.inputs.email.title,
             placeholder: LOGIN_VIEW_NAMES.inputs.email.placeholder,
-            styles: ['login-register-input', 'w-full'],
+            styles: ['auth-form__input'],
         });
         this.components.passwordInput = new Input({
             type: 'password',
             label: LOGIN_VIEW_NAMES.inputs.password.title,
             placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
-            styles: ['login-register-input', 'w-full'],
+            styles: ['auth-form__input'],
         });
-        this.components.mainError = new Text({
-            text: '',
-            styles: ['login-error-text'],
-        });
+        // this.components.mainError = new Text({
+        //     text: '',
+        //     styles: ['auth-form__main-error'],
+        // });
+        // какой-то мейн еррор, который вроде как не нужен
         this.components.button = new Button({
             text: LOGIN_VIEW_NAMES.buttonTittle,
             styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
 
-        this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant', 'w-full']});
+        this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
         this.components.registerContainer.components.registerOffer = new Text({
             text: LOGIN_VIEW_NAMES.registerOffer,
             styles: ['alt-variant__text'],
@@ -109,9 +110,10 @@ export default class LoginForm extends BaseComponent {
     setErrors = ({email, password, main}) => {
         this.components.emailInput.setError(email);
         this.components.passwordInput.setError(password);
-        if (main !== undefined) {
-            this.components.mainError.setText(main);
-        }
+        // if (main !== undefined) {
+        //     this.components.mainError.setText(main);
+        // }
+        // TODO  щас сразу при переходе на логин пишет ошибку, разобраться
         this.reRender();
     }
 

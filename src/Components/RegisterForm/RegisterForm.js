@@ -50,16 +50,16 @@ export default class RegisterForm extends BaseComponent {
         });
         // this.components.mainError = new Text({
         //     text: '',
-        //     styles: ['login-error-text'],
+        //     styles: ['auth-form__main-error'],
         // });
-        // какой-то мейн еррор, который вроде как не нужен
+        // TODO разобраться
         this.components.button = new Button({
             text: REGISTER_VIEW_NAMES.buttonTitle,
             styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
 
-        this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant', 'w-full']});
+        this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
         this.components.registerContainer.components.registerOffer = new Text({
             text: REGISTER_VIEW_NAMES.loginOffer,
             styles: ['alt-variant__text'],
