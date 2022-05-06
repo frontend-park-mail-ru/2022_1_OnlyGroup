@@ -48,10 +48,10 @@ export default class RegisterForm extends BaseComponent {
             placeholder: REGISTER_VIEW_NAMES.inputs.passwordVerify.placeholder,
             styles: ['auth-form__input'],
         });
-        // this.components.mainError = new Text({
-        //     text: '',
-        //     styles: ['auth-form__main-error'],
-        // });
+        this.components.mainError = new Text({
+            text: '',
+            styles: ['auth-form__main-error'],
+        });
         // TODO разобраться
         this.components.button = new Button({
             text: REGISTER_VIEW_NAMES.buttonTitle,

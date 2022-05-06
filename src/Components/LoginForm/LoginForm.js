@@ -42,11 +42,10 @@ export default class LoginForm extends BaseComponent {
             placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
             styles: ['auth-form__input'],
         });
-        // this.components.mainError = new Text({
-        //     text: '',
-        //     styles: ['auth-form__main-error'],
-        // });
-        // какой-то мейн еррор, который вроде как не нужен
+        this.components.mainError = new Text({
+            text: '',
+            styles: ['auth-form__main-error'],
+        });
         this.components.button = new Button({
             text: LOGIN_VIEW_NAMES.buttonTittle,
             styles: ['auth-form__button'],
@@ -110,9 +109,9 @@ export default class LoginForm extends BaseComponent {
     setErrors = ({email, password, main}) => {
         this.components.emailInput.setError(email);
         this.components.passwordInput.setError(password);
-        // if (main !== undefined) {
-        //     this.components.mainError.setText(main);
-        // }
+        if (main !== undefined) {
+            this.components.mainError.setText(main);
+        }
         // TODO  щас сразу при переходе на логин пишет ошибку, разобраться
         this.reRender();
     }

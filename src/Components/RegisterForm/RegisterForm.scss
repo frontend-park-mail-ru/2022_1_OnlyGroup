@@ -20,6 +20,10 @@
     margin-top: 10px;
     font-size: 22px;
   }
+  &__main-error {
+    color: var(--error-color);
+    font-weight: var(--font-weight-medium);
+  }
 }
 
 .alt-variant {
