@@ -2,7 +2,7 @@ import loginForm from './LoginForm.hbs';
 import {Button} from '../Button/Button';
 import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
-import {Logo} from '../Logo/Logo';
+import {Logo, LOGO_STATES} from '../Logo/Logo';
 import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
 import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';

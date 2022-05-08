@@ -29,7 +29,7 @@ export class User {
         if (this.active) {
             EventBus.addEventListener(FEED_EVENTS.activeUserLoadMin, this.loadMin);
         }
-    }
+    };
 
     loadMin = async () => {
         if (!this.id || this.id === -1) {
@@ -38,7 +38,7 @@ export class User {
         await Promise.all([this.getShortInfo(), this.getAvatar()]);
         this.avatar.startAvatar();
         EventBus.emitEvent(FEED_EVENTS.activeUserReadyMin, {avatar: this.avatar.id, info: this});
-    }
+    };
 
     /**
      * Process api /user result
@@ -143,12 +143,12 @@ export class User {
             value.start();
         });
         EventBus.emitEvent(FEED_EVENTS.photosReady, {photos: this.photosIds});
-    }
+    };
 
     preLoad = () => {
         this.getLongInfo();
         this.getAllPhotos();
-    }
+    };
 
     /**
      * Calculate age by birthday
@@ -173,7 +173,7 @@ export class User {
         this.firstName = response.Body.FirstName;
         this.lastName = response.Body.LastName;
         this.city = response.Body.City;
-    }
+    };
 
     getAvatar = async () => {
         if (!this.avatar) {
@@ -183,10 +183,10 @@ export class User {
             });
             await this.avatar.load();
         }
-    }
+    };
 
     getLongInfo = async () => {
-        if (this.info) {
+        if (this.aboutUser) {
             return;
         }
         const response = await Api.GetLongProfile({
@@ -206,7 +206,7 @@ export class User {
         this.height = response.Body.Height;
         this.interests = response.Body.Interests;
         this.calculateAge();
-    }
+    };
 
     getAllPhotos = async () => {
         if (this.photos) {
@@ -230,7 +230,7 @@ export class User {
             }
             return photo;
         });
-    }
+    };
 
     like = async () => {
         const response = await Api.SetLikeDislike({
@@ -240,7 +240,7 @@ export class User {
         if (!response.isOk()) {
             EventBus.emitEvent(API_FAILED, response);
         }
-    }
+    };
 
     dislike = async () => {
         const response = await Api.SetLikeDislike({
@@ -250,7 +250,7 @@ export class User {
         if (!response.isOk()) {
             EventBus.emitEvent(API_FAILED, response);
         }
-    }
+    };
 
     stopFeed = async () => {
         if (this.photos) {
@@ -258,7 +258,7 @@ export class User {
                 value.stop();
             });
         }
-    }
+    };
 }
 
 const
