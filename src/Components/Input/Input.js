@@ -2,8 +2,9 @@ import input from './Input.hbs';
 import idGenerator from '../../Modules/IDGenerator';
 import {BaseComponent} from '../Base/Base';
 
-export const INPUT_STATES = {
-    loginRegisterInput: 'loginRegisterInput',
+export const INPUT_LABEL_POS = {
+    vertical: 'vertical',
+    horizontal: 'horizontal',
 };
 
 /**
@@ -12,23 +13,33 @@ export const INPUT_STATES = {
 export class Input extends BaseComponent {
     /**
      * Create input component
-     * @param {string} type
-     * @param {string|undefined} state
+     * @param {string|undefined} type
+     * @param {string} inputType
+     * @param {string} labelPos
      * @param {string|null|undefined} label
      * @param {string|null|undefined} icon
      * @param {function|null|undefined} iconOnClick
      */
-    constructor({type, state, label, icon, iconOnClick}) {
-        super({state});
-        this.type = type;
+    constructor({type, inputType, labelPos = INPUT_LABEL_POS.vertical, label, icon, iconOnClick}) {
+        super({type});
+        this.inputType = inputType;
+        this.labelPos = labelPos;
+        this.label = label;
         this.value = '';
         this.inputId = idGenerator.getId();
-        this.icon = (icon === undefined) ? null : icon;
+        this.icon = icon;
         if (icon) {
             this.buttonId = idGenerator.getId();
         }
-        this.iconOnClick = (iconOnClick === undefined) ? null : iconOnClick;
-        this.label = (label === undefined) ? null : label;
+        this.iconOnClick = iconOnClick;
+    }
+
+    /**
+     * Prepare for input render
+     */
+    prepareRender() {
+        super.prepareRender();
+        this[this.labelPos] = true;
     }
 
     /**

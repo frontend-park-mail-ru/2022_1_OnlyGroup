@@ -2,6 +2,8 @@ import {BaseComponent} from '../Base/Base';
 import container from './Container.hbs';
 
 
+export const CONTAINER_TYPES = {};
+
 /**
  * Container class
  */
@@ -11,8 +13,7 @@ export class Container extends BaseComponent {
      * @param {string|undefined}type
      */
     constructor({type}) {
-        super();
-        this.type = type;
+        super({type});
     }
 
     /**
@@ -20,7 +21,16 @@ export class Container extends BaseComponent {
      * @return {string}
      */
     render() {
-        this.prepareRender();
         return container(this);
+    }
+
+    /**
+     * Mount container
+     */
+    mount() {
+        super.mount();
+        if (this.elem) {
+            this.elem.classList = this.elem.parentElement.classList;
+        }
     }
 }

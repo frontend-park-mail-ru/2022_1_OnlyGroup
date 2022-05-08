@@ -1,8 +1,9 @@
-.input-component{
-  height: 52px;
+.input-component {
   border: 1px solid #594c74;
   box-sizing: border-box;
   border-radius: 15px;
+  width: 100%;
+  height: 100%;
   font-size: 18px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -12,20 +13,49 @@
   color: black;
 }
 
-.login-register-input{
+.input-component_primary {
+  height: 52px;
+}
+
+.input-container {
+  display: flex;
   width: 100%;
 }
 
-.input-container-text__error{
+.input-icon-container {
+  width: inherit;
+  height: inherit;
+}
+
+.input-container_vertical {
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+  width: 100%;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.input-container_horizontal {
+  flex-direction: row;
+  justify-content: space-around;
+  width: fit-content;
+  height: 100%;
+  align-items: center;
+  column-gap: 15px;
+}
+
+.input-container__error {
   color: #CF5151;
   font-weight: 500;
 }
 
 .input-container__label {
+  text-align: center;
   font-weight: 600;
 }
 
-.input-component__error {
+.input-container__error {
   border-color: tomato;
 }
 

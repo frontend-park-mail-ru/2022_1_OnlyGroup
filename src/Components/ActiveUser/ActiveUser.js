@@ -1,7 +1,7 @@
-import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
+import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
 import {Text} from '../Text/Text';
 import activeUser from './ActiveUser.hbs';
-import Photo, {PHOTO_STATES} from '../Photo/Photo';
+import Photo from '../Photo/Photo';
 import EventBus from '../../Modules/EventBus';
 import {FEED_EVENTS, LOGIN_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 
@@ -11,10 +11,9 @@ import {FEED_EVENTS, LOGIN_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEve
 export class ActiveUserComponent extends BaseComponent {
     /**
      * Create active user component
-     * @param {string|undefined} state
      */
-    constructor({state}) {
-        super({state});
+    constructor() {
+        super({});
         this.ready = false;
         this.setEvents({
             [FEED_EVENTS.activeUserReadyMin]: this.onReady,
@@ -29,24 +28,26 @@ export class ActiveUserComponent extends BaseComponent {
         this.ready = true;
         if (avatar) {
             this.components.avatar = new Photo({
-                state: PHOTO_STATES.avatar,
+                type: COMPONENTS_TYPES.secondary,
                 loadEvent: `${PHOTO_EVENTS.avatarGetID}${avatar}`,
                 onLoadEvent: `${PHOTO_EVENTS.avatarReadyID}${avatar}`,
                 loaderEnabled: true,
             });
         } else {
             this.components.avatar = new Photo({
-                state: PHOTO_STATES.avatar,
+                type: COMPONENTS_TYPES.secondary,
                 // TODO avatar placeholder
                 src: 'static/images/logo.png',
                 loaderEnabled: true,
             });
         }
-        this.components.column = new BaseComponent({state: BASE_COMPONENT_STATES.activeUserColumn});
-        this.components.column.components.name = new Text({
+        this.addComponents.rightColumn = {};
+        this.addComponents.rightColumn.name = new Text({
+            type: COMPONENTS_TYPES.secondary,
             text: `${info.firstName} ${info.lastName}`,
         });
-        this.components.column.components.city = new Text({
+        this.addComponents.rightColumn.city = new Text({
+            type: COMPONENTS_TYPES.secondary,
             text: `${info.city}`,
         });
         this.stateChanged = true;
@@ -58,7 +59,6 @@ export class ActiveUserComponent extends BaseComponent {
      * @return {string}
      */
     render() {
-        this.prepareRender();
         return activeUser(this);
     }
 

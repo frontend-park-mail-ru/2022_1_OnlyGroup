@@ -1,15 +1,16 @@
 import EventBus from './EventBus';
+import {REDIRECT} from './EventBusEvents';
 
 export const APP_PATHS = {
+    profilePage: '/',
     loginPage: '/login',
     registerPage: '/register',
     messagesPage: '/messages',
-    matchesPage: 'matches',
-    findCandidatePage: '/',
-    profilePage: '/settings',
+    matchesPage: '/matches',
+    findCandidatePage: '/find',
+    settingsPage: '/settings',
     notFoundPage: '/404',
 };
-export const REDIRECT = 'redirect';
 
 /**
  * Router
@@ -31,12 +32,17 @@ export class Router {
      * @param {string} path
      */
     go = ({path}) => {
+        path = (path) ? path : '/';
+        if (this.#currentRoute === this.#routes[path]) {
+            window.history.pushState(null, null, path);
+            this.#currentRoute.changeUrl({url: path});
+            return;
+        }
         this.#currentRoute.stop();
         if (typeof this.#routes[window.location.pathname] !== undefined) {
-            path = (path) ? path : '/';
             window.history.pushState(null, null, path);
             this.#currentRoute = this.#routes[path];
-            this.#currentRoute.start();
+            this.#currentRoute.start({url: window.location.pathname});
             return;
         }
 
@@ -69,8 +75,7 @@ export class Router {
             while (parentElem) {
                 if (parentElem.tagName === 'A') {
                     event.preventDefault();
-
-                    this.go({path: event.target.pathname});
+                    this.go({path: parentElem.pathname});
                     break;
                 }
 
@@ -80,15 +85,13 @@ export class Router {
 
         window.addEventListener('popstate', (event) => {
             event.preventDefault();
-            this.#currentRoute.stop();
-            this.#currentRoute = this.#routes[window.location.pathname];
-            this.#currentRoute.start();
+            this.go({path: window.location.pathname});
         });
 
         EventBus.addEventListener(REDIRECT, this.go);
 
         this.#currentRoute = this.#routes[window.location.pathname];
-        this.#currentRoute.start();
+        this.#currentRoute.start({url: window.location.pathname});
     }
 }
 

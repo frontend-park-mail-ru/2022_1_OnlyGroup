@@ -1,0 +1,24 @@
+.container {
+
+}
+
+.container_primary {
+  height: fit-content;
+  width: fit-content;
+}
+
+.container-row {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.container-row__center {
+  justify-content: center;
+}
+
+.container-row__space-around {
+  justify-content: space-around;
+}

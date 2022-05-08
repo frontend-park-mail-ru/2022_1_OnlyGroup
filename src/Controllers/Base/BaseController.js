@@ -1,6 +1,6 @@
 import EventBus from '../../Modules/EventBus';
-import {APP_PATHS, REDIRECT} from '../../Modules/Router';
-import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
+import {APP_PATHS} from '../../Modules/Router';
+import {LOGIN_EVENTS, REDIRECT} from '../../Modules/EventBusEvents';
 import activeUser from '../../Models/User';
 
 /**
@@ -46,6 +46,14 @@ export class BaseController {
         });
         this.view.start();
         return true;
+    }
+
+    /**
+     * Change url by router
+     * @param {string}url
+     * @return {Promise<void>}
+     */
+    async changeUrl({url}) {
     }
 
     /**

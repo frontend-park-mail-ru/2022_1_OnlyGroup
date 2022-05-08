@@ -1,5 +1,7 @@
 export const API_FAILED = 'api-failed';
 export const LOGO_CLICK = 'logo-click';
+export const REDIRECT = 'redirect';
+
 export const LOGIN_EVENTS = {
     login: 'action-login',
     register: 'action-register',

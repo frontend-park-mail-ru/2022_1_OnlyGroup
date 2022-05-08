@@ -1,10 +1,6 @@
 import text from './Text.hbs';
 import {BaseComponent} from '../Base/Base';
 
-export const TEXT_STATES = {
-    loginErrorText: 'loginErrorText',
-};
-
 /**
  * Text component
  */
@@ -12,15 +8,15 @@ export class Text extends BaseComponent {
     /**
      * Create text component
      * @param {string} text
-     * @param {string|undefined} state
+     * @param {string|undefined} type
      * @param {string|null|undefined} href
      * @param {function|undefined} onClick
      */
-    constructor({text, state, href, onClick}) {
-        super({state});
+    constructor({text, type, href, onClick}) {
+        super({type});
         this.textContent = text;
-        this.href = (href === undefined) ? null : href;
-        this.onClick = (onClick === undefined) ? null : onClick;
+        this.href = href;
+        this.onClick = onClick;
     }
 
     /**
