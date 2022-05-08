@@ -2,7 +2,7 @@ import loginForm from './LoginForm.hbs';
 import {Button} from '../Button/Button';
 import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
-import {Logo, LOGO_STATES} from '../Logo/Logo';
+import {Logo} from '../Logo/Logo';
 import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
 import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
@@ -30,7 +30,7 @@ export default class LoginForm extends BaseComponent {
      * Create all components on page
      */
     initComponents() {
-        this.components.logo = new Logo({state: LOGO_STATES.logoLogin});
+        this.components.logo = new Logo({});
         this.components.emailInput = new Input({
             inputType: 'text',
             label: LOGIN_VIEW_NAMES.emailTittle,

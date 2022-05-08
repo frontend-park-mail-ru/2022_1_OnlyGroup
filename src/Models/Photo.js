@@ -95,7 +95,7 @@ export class Photo {
             this.load();
         }
         this.emitOnLoad = true;
-    }
+    };
 
     /**
      * Load image
@@ -104,42 +104,62 @@ export class Photo {
         this.loading = true;
 
         if (this.isAvatar) {
-            const result = await Api.GetAvatar({userId: this.userId});
-            if (result.Status === 404) {
-                this.id = null;
-                return;
+            await this.loadAvatar();
+            this.paramsReady = true;
+            if (this.emitOnLoad && this.photoReady) {
+                this.getPhoto();
             }
-            if (!result.isOk()) {
-                EventBus.emitEvent(API_FAILED, result);
-                return;
-            }
-            this.id = result.Body.Avatar;
-            this.image = new Image();
-            this.image.src = `${IP + PORT}/${API_PREFIX}${PHOTO_API_URL}/${this.id.toString()}`;
-            this.image.addEventListener('load', this.onLoadImage);
-            this.leftTopX = result.Body.Params.LeftTop[0];
-            this.leftTopY = result.Body.Params.LeftTop[1];
-            this.rightBottomX = result.Body.Params.RightBottom[0];
-            this.rightBottomY = result.Body.Params.RightBottom[1];
-        } else {
-            this.image = new Image();
-            this.image.src = `${IP + PORT}/${API_PREFIX}${PHOTO_API_URL}/${this.id.toString()}`;
-            this.image.addEventListener('load', this.onLoadImage);
-
-            const result = await Api.GetPhotoParams({id: this.id});
-            if (!result.isOk()) {
-                return;
-            }
-            this.leftTopX = result.Body.LeftTop[0];
-            this.leftTopY = result.Body.LeftTop[1];
-            this.rightBottomX = result.Body.RightBottom[0];
-            this.rightBottomY = result.Body.RightBottom[1];
+            return;
         }
 
+        await this.loadImage();
         this.paramsReady = true;
         if (this.emitOnLoad && this.photoReady) {
             this.getPhoto();
         }
+    };
+
+    /**
+     * Load avatar
+     * @return {Promise<void>}
+     */
+    async loadAvatar() {
+        const result = await Api.GetAvatar({userId: this.userId});
+        if (result.Status === 404) {
+            this.id = null;
+            return;
+        }
+        if (!result.isOk()) {
+            EventBus.emitEvent(API_FAILED, result);
+            return;
+        }
+        this.id = result.Body.Avatar;
+        this.image = new Image();
+        this.image.src = `${IP + PORT}/${API_PREFIX}${PHOTO_API_URL}/${this.id.toString()}`;
+        this.image.addEventListener('load', this.onLoadImage);
+        this.leftTopX = result.Body.Params.LeftTop[0];
+        this.leftTopY = result.Body.Params.LeftTop[1];
+        this.rightBottomX = result.Body.Params.RightBottom[0];
+        this.rightBottomY = result.Body.Params.RightBottom[1];
+    }
+
+    /**
+     * Load image
+     * @return {Promise<void>}
+     */
+    async loadImage() {
+        this.image = new Image();
+        this.image.src = `${IP + PORT}/${API_PREFIX}${PHOTO_API_URL}/${this.id.toString()}`;
+        this.image.addEventListener('load', this.onLoadImage);
+
+        const result = await Api.GetPhotoParams({id: this.id});
+        if (!result.isOk()) {
+            return;
+        }
+        this.leftTopX = result.Body.LeftTop[0];
+        this.leftTopY = result.Body.LeftTop[1];
+        this.rightBottomX = result.Body.RightBottom[0];
+        this.rightBottomY = result.Body.RightBottom[1];
     }
 
     onLoadImage = () => {
@@ -148,5 +168,5 @@ export class Photo {
         if (this.emitOnLoad && this.paramsReady) {
             this.getPhoto();
         }
-    }
+    };
 }
