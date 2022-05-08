@@ -1,24 +1,28 @@
-{{#if href}}
-    {{#unless enabled}}
-        <a href="{{{href}}}" class="button-href__no-underlying {{#if messageMenu}}w-full {{/if}}{{#if matchesMenu}}w-full {{/if}}{{#if findCandidateMenu}}w-full {{/if}}{{#if myProfileMenu}}w-full {{/if}}{{#if exitMenu}}w-full {{/if}}">
-    {{/unless}}
-{{/if}}
-    <button class="button-component {{#if enabled}}{{#if messageMenu}}{{/if}}{{#if matchesMenu}}{{/if}}{{#if findCandidateMenu}}button__menu-enabled-red {{/if}}{{#if myProfileMenu}}{{/if}}{{#if exitMenu}}{{/if}}{{/if}}{{#if loginRegisterButton}}login-register-button {{/if}}{{#if messageMenu}}button__menu {{/if}}{{#if matchesMenu}}button__menu {{/if}}{{#if findCandidateMenu}}button__menu {{/if}}{{#if myProfileMenu}}button__menu {{/if}}{{#if exitMenu}}button__menu {{/if}}" type="submit" id={{id}}>
-        {{#if enabled}}
-            {{#if messageMenu}}<img alt="icon" class="button-icon" src="/static/images/MsgDark.png">{{/if}}
-            {{#if matchesMenu}}<img alt="icon" class="button-icon" src="/static/images/cards.png">{{/if}}
-            {{#if findCandidateMenu}}<img alt="icon" class="button-icon" src="/static/images/RefreshActive.png">{{/if}}
-            {{#if myProfileMenu}}<img alt="icon" class="button-icon" src="/static/images/profileDisable.png">{{/if}}
-            {{#if exitMenu}}<img alt="icon" class="button-icon" src="/static/images/logout.png">{{/if}}
+<div class="button" id="{{id}}">
+    {{#if href}}
+        {{#unless enabled}}
+        <a href="{{{href}}}" class="button button-href__no-underlying">
+        {{/unless}}
+    {{/if}}
+    <button class="button {{#if isActive}}button_active {{#if active}}{{#if
+            activeRedType}}button_active-red {{/if}}{{#if activeBlueType}}button_active-blue {{/if}}{{/if}}{{else}}{{#if
+            primaryType}}button_primary {{/if}}{{#if
+            submitType}}button_submit {{/if}}{{/if}}"
+            type="submit" id="{{buttonId}}">
+        {{#if active}}
+            {{#if iconActive}}
+                <img alt="icon" class="button-icon" src="{{{iconActive}}}">
+            {{else if icon}}
+                <img alt="icon" class="button-icon" src="{{{icon}}}">
+            {{/if}}
         {{else}}
-            {{#if messageMenu}}<img alt="icon" class="button-icon" src="/static/images/MsgDark.png">{{/if}}
-            {{#if matchesMenu}}<img alt="icon" class="button-icon" src="/static/images/cards.png">{{/if}}
-            {{#if findCandidateMenu}}<img alt="icon" class="button-icon" src="/static/images/RefreshActive.png">{{/if}}
-            {{#if myProfileMenu}}<img alt="icon" class="button-icon" src="/static/images/profileDisable.png">{{/if}}
-            {{#if exitMenu}}<img alt="icon" class="button-icon" src="/static/images/logout.png">{{/if}}
+            {{#if icon}}
+                <img alt="icon" class="button-icon" src="{{{icon}}}">
+            {{/if}}
         {{/if}}
         {{buttonText}}
     </button>
-{{#if href}}
+    {{#if href}}
     </a>
-{{/if}}
+    {{/if}}
+</div>

@@ -1,13 +1,10 @@
 import button from './Button.hbs';
 import {BaseComponent} from '../Base/Base';
+import IDGenerator from '../../Modules/IDGenerator';
 
-export const BUTTON_STATES = {
-    loginRegisterButton: 'loginRegisterButton',
-    messageMenu: 'messageMenu',
-    matchesMenu: 'matchesMenu',
-    findCandidateMenu: 'findCandidateMenu',
-    myProfileMenu: 'myProfileMenu',
-    exitMenu: 'exitMenu',
+export const BUTTON_ACTIVE_TYPES = {
+    red: 'activeRedType',
+    blue: 'activeBlueType',
 };
 
 /**
@@ -20,13 +17,50 @@ export class Button extends BaseComponent {
      * @param {string} text
      * @param {function|undefined|null} onClick
      * @param {string|undefined}href
+     * @param {string|undefined} icon
+     * @param {string|undefined} iconActive
+     * @param {boolean} isActive
+     * @param {string} activeType
      */
-    constructor({state, text, onClick, href}) {
-        super({state});
-        this.enabled = false;
+    constructor({
+        type,
+        text,
+        onClick,
+        href,
+        icon,
+        iconActive,
+        isActive = false,
+        activeType = BUTTON_ACTIVE_TYPES.blue,
+    }) {
+        super({type});
+        this.active = false;
         this.href = href;
         this.buttonText = text;
         this.onClick = onClick;
+        this.icon = icon;
+        this.iconActive = iconActive;
+        this.activeType = activeType;
+        this.isActive = isActive;
+        this.buttonId = IDGenerator.getId();
+    }
+
+    /**
+     * Prepare button render
+     */
+    prepareRender() {
+        super.prepareRender();
+        if (!this.isActive) {
+            return;
+        }
+        this[this.activeType] = true;
+    }
+
+    /**
+     * Find button
+     */
+    findElem() {
+        super.findElem();
+        this.buttonElem = document.getElementById(this.buttonId.toString());
     }
 
     /**
@@ -42,8 +76,8 @@ export class Button extends BaseComponent {
      */
     mount() {
         this.findElem();
-        if (this.onClick && this.elem && !this.enabled) {
-            this.elem.addEventListener('click', this.onClick);
+        if (this.onClick && this.elem && !this.active) {
+            this.buttonElem.addEventListener('click', this.onClick);
         }
     }
 
@@ -51,18 +85,22 @@ export class Button extends BaseComponent {
      * Unmount button component
      */
     unmount() {
-        if (this.onClick && this.elem && !this.enabled) {
-            this.elem.removeEventListener('click', this.onClick);
+        if (this.onClick && this.elem && !this.active) {
+            this.buttonElem.removeEventListener('click', this.onClick);
         }
         super.unmount();
     }
 
     /**
      * Set button enabled
-     * @param {boolean}enabled
+     * @param {boolean} active
      */
-    setEnabled(enabled) {
-        this.enabled = enabled;
+    setActive(active) {
+        if (!this.isActive) {
+            return;
+        }
+        this.active = active;
+        this.stateChanged = true;
     }
 
     /**

@@ -1,4 +1,4 @@
-<div id="{{{id}}}" class="{{#if feedPhoto}}feed-photo {{/if}}{{#if avatar}}avatar {{/if}}{{#if feedAction}}feed-action {{/if}}">
+<div id="{{{id}}}" class="photo {{#if primaryType}}photo_primary {{/if}}{{#if secondaryType}}photo_secondary {{/if}}">
     {{#unless imageReady}}
         {{#if loaderEnabled}}
             <div class="image-loader">

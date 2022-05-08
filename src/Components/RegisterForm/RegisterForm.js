@@ -1,13 +1,13 @@
 import registerForms from '../LoginForm/LoginForm.hbs';
-import {Button, BUTTON_STATES} from '../Button/Button';
-import {Input, INPUT_STATES} from '../Input/Input';
-import {Text, TEXT_STATES} from '../Text/Text';
-import {Logo, LOGO_STATES} from '../Logo/Logo';
-import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
+import {Button} from '../Button/Button';
+import {Input} from '../Input/Input';
+import {Text} from '../Text/Text';
+import {Logo} from '../Logo/Logo';
+import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
 import {REGISTER_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
-import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
+import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login form smart component
@@ -19,9 +19,9 @@ export default class RegisterForm extends BaseComponent {
     constructor() {
         super({});
         this.setEvents({
-            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
-            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
-            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setErrors,
+            [LOGIN_EVENTS.clearForm]: this.clear,
+            [LOGIN_EVENTS.userValidationFailed]: this.setErrors,
+            [LOGIN_EVENTS.userNotLoggined]: this.setErrors,
         });
         this.initComponents();
     }
@@ -30,37 +30,38 @@ export default class RegisterForm extends BaseComponent {
      * Init all components
      */
     initComponents() {
-        this.components.logo = new Logo({state: LOGO_STATES.logoLogin});
+        this.components.logo = new Logo({});
         this.components.emailInput = new Input({
-            type: 'text',
+            inputType: 'text',
             label: REGISTER_VIEW_NAMES.emailTittle,
-            state: INPUT_STATES.loginRegisterInput,
+            type: COMPONENTS_TYPES.primary,
         });
         this.components.passwordInput = new Input({
-            type: 'password',
+            inputType: 'password',
             label: REGISTER_VIEW_NAMES.passwordTitle,
-            state: INPUT_STATES.loginRegisterInput,
+            type: COMPONENTS_TYPES.primary,
         });
         this.components.passwordRepeatInput = new Input({
-            type: 'password',
+            inputType: 'password',
             label: REGISTER_VIEW_NAMES.passwordRepeatTittle,
-            state: INPUT_STATES.loginRegisterInput,
+            type: COMPONENTS_TYPES.primary,
         });
         this.components.mainError = new Text({
             text: '',
-            state: TEXT_STATES.loginErrorText,
+            type: COMPONENTS_TYPES.error,
         });
         this.components.button = new Button({
             text: REGISTER_VIEW_NAMES.buttonTittle,
-            state: BUTTON_STATES.loginRegisterButton,
+            type: COMPONENTS_TYPES.submit,
             onClick: this.onButtonClick,
         });
 
-        this.components.loginContainer = new BaseComponent({state: BASE_COMPONENT_STATES.loginFormOffer});
-        this.components.loginContainer.components.registerOffer = new Text({
+        this.addComponents.Offer = {};
+        this.addComponents.Offer.text = new Text({
             text: REGISTER_VIEW_NAMES.loginOffer,
+            type: COMPONENTS_TYPES.secondary,
         });
-        this.components.loginContainer.components.registerLink = new Text({
+        this.addComponents.Offer.link = new Text({
             text: REGISTER_VIEW_NAMES.loginLinkTittle,
             href: APP_PATHS.loginPage,
         });
@@ -83,7 +84,7 @@ export default class RegisterForm extends BaseComponent {
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
         const passwordRepeat = this.components.passwordRepeatInput.getValue();
-        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.actionRegister, {email, password, passwordRepeat});
+        EventBus.emitEvent(LOGIN_EVENTS.register, {email, password, passwordRepeat});
     }
 
     /**

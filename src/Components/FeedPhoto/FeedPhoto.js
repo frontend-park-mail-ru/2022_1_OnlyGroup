@@ -1,10 +1,11 @@
-import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
+import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
 import feedPhoto from './FeedPhoto.hbs';
-import FeedAction, {FEED_ACTIONS_STATES} from '../FeedAction/FeedAction';
-import Photo, {PHOTO_STATES} from '../Photo/Photo';
+import FeedAction, {FEED_ACTION_SOURCES} from '../FeedAction/FeedAction';
+import Photo from '../Photo/Photo';
 import {Text} from '../Text/Text';
 import EventBus from '../../Modules/EventBus';
 import {FEED_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
+import {Container} from '_components/Container/Container';
 
 /**
  * Feed photo component
@@ -12,17 +13,22 @@ import {FEED_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 export default class FeedPhoto extends BaseComponent {
     /**
      * Create new feed photo
-     * @param {string|undefined} state
+     * @param {string|undefined} type
+     * @param {boolean} createActions
      */
-    constructor({state}) {
-        super({state});
+    constructor({type, createActions = false}) {
+        super({type});
         this.ready = false;
         this.allPhotos = null;
         this.currentPhoto = null;
+        this.needCreateActions = createActions;
         this.setEvents({
             [FEED_EVENTS.photosReady]: this.photosReady,
             [FEED_EVENTS.noPhotos]: this.noPhotos,
         });
+        this.createCurrent();
+        this.createMoves();
+        this.createActions();
     }
 
 
@@ -43,7 +49,7 @@ export default class FeedPhoto extends BaseComponent {
         this.currentPhotoNum = num;
         this.components.photoContainer.components.photo = this.allPhotos[num];
         this.components.photoContainer.stateChanged = true;
-        this.components.photoOverlay.components.current.components.handler.components.text.setText(`${num + 1}/${this.allPhotos.length}`);
+        this.addComponents.Current.text.setText(`${num + 1}/${this.allPhotos.length}`);
         this.reRender();
     }
 
@@ -51,13 +57,9 @@ export default class FeedPhoto extends BaseComponent {
      * Create current image component (e.g. 3/4)
      */
     createCurrent() {
-        this.components.photoOverlay.components.current = new BaseComponent({
-            state: BASE_COMPONENT_STATES.feedPhotoCurrentContainer,
-        });
-        this.components.photoOverlay.components.current.components.handler = new BaseComponent({
-            state: BASE_COMPONENT_STATES.feedPhotoCurrentHandler,
-        });
-        this.components.photoOverlay.components.current.components.handler.components.text = new Text({
+        this.addComponents.Current = {};
+        this.addComponents.Current.text = new Text({
+            type: COMPONENTS_TYPES.secondary,
             text: '',
         });
     }
@@ -66,32 +68,32 @@ export default class FeedPhoto extends BaseComponent {
      * Create moves buttons component
      */
     createMoves() {
-        this.components.photoOverlay.components.moveContainer = new BaseComponent({
-            state: BASE_COMPONENT_STATES.feedPhotoMoveContainer,
-        });
-        this.components.photoOverlay.components.moveContainer.components.left = new FeedAction({
-            state: FEED_ACTIONS_STATES.left,
+        this.addComponents.Moves = {};
+        this.addComponents.Moves.left = new FeedAction({
+            src: FEED_ACTION_SOURCES.left,
             onClick: this.leftClick,
         });
-        this.components.photoOverlay.components.moveContainer.components.right = new FeedAction({
-            state: FEED_ACTIONS_STATES.right,
+        this.addComponents.Moves.right = new FeedAction({
+            src: FEED_ACTION_SOURCES.right,
             onClick: this.rightClick,
         });
     }
+
 
     /**
      * Create like dislike buttons components
      */
     createActions() {
-        this.components.photoOverlay.components.likesContainer = new BaseComponent({
-            state: BASE_COMPONENT_STATES.feedPhotoActionsContainer,
-        });
-        this.components.photoOverlay.components.likesContainer.components.dislike = new FeedAction({
-            state: FEED_ACTIONS_STATES.dislike,
+        if (!this.needCreateActions) {
+            return;
+        }
+        this.addComponents.Actions = {};
+        this.addComponents.Actions.dislike = new FeedAction({
+            src: FEED_ACTION_SOURCES.dislike,
             onClick: this.dislikeClick,
         });
-        this.components.photoOverlay.components.likesContainer.components.like = new FeedAction({
-            state: FEED_ACTIONS_STATES.like,
+        this.addComponents.Actions.like = new FeedAction({
+            src: FEED_ACTION_SOURCES.like,
             onClick: this.likeClick,
         });
     }
@@ -101,22 +103,24 @@ export default class FeedPhoto extends BaseComponent {
      */
     noPhotos = () => {
         this.ready = true;
-        this.components.photoContainer = new BaseComponent({
-            state: BASE_COMPONENT_STATES.feedPhoto,
-        });
+        if (this.allPhotos && this.allPhotos.length !== 0) {
+            this.allPhotos.forEach((photo) => {
+                photo.stop();
+                photo.unmount();
+            });
+        }
+        this.allPhotos = null;
+        this.components.photoContainer = new Container({});
         this.components.photoContainer.components.photo = new Photo({
-            state: PHOTO_STATES.feedPhoto,
+            type: COMPONENTS_TYPES.primary,
             loaderEnabled: true,
             // TODO no photos placeholder
             src: 'static/images/logo.png',
         });
-        this.components.photoOverlay = new BaseComponent({
-            state: BASE_COMPONENT_STATES.feedPhotoOverlayNoPhotos,
-        });
         this.createActions();
         this.stateChanged = true;
         this.reRender();
-    }
+    };
 
     /**
      * Photos ready callback
@@ -124,18 +128,18 @@ export default class FeedPhoto extends BaseComponent {
      */
     photosReady = ({photos}) => {
         this.ready = true;
-        this.allPhotosIds = photos;
         if (this.allPhotos && this.allPhotos.length !== 0) {
             this.allPhotos.forEach((photo) => {
                 photo.stop();
                 photo.unmount();
             });
         }
-        this.allPhotos = this.allPhotosIds.map((value) => {
-            const loadEventName = `${PHOTO_EVENTS.photoGetID}${value.toString()}`;
-            const onLoadEventName = `${PHOTO_EVENTS.photoReadyID}${value.toString()}`;
+        this.allPhotosIds = photos;
+        this.allPhotos = this.allPhotosIds.map((id) => {
+            const loadEventName = `${PHOTO_EVENTS.photoGetID}${id.toString()}`;
+            const onLoadEventName = `${PHOTO_EVENTS.photoReadyID}${id.toString()}`;
             const newPhoto = new Photo({
-                state: PHOTO_STATES.feedPhoto,
+                type: COMPONENTS_TYPES.primary,
                 loadEvent: loadEventName,
                 onLoadEvent: onLoadEventName,
                 loaderEnabled: true,
@@ -143,18 +147,10 @@ export default class FeedPhoto extends BaseComponent {
             newPhoto.start();
             return newPhoto;
         });
-        this.components.photoOverlay = new BaseComponent({
-            state: BASE_COMPONENT_STATES.feedPhotoOverlay,
-        });
-        this.createCurrent();
-        this.createMoves();
-        this.createActions();
-        this.components.photoContainer = new BaseComponent({
-            state: BASE_COMPONENT_STATES.feedPhoto,
-        });
+        this.components.photoContainer = new Container({});
         this.stateChanged = true;
         this.changePhoto(0);
-    }
+    };
 
     /**
      * @callback Callback for like click
@@ -162,8 +158,8 @@ export default class FeedPhoto extends BaseComponent {
      */
     likeClick = (ev) => {
         ev.preventDefault();
-        EventBus.emitEvent(FEED_EVENTS.actionLike);
-    }
+        EventBus.emitEvent(FEED_EVENTS.like);
+    };
 
     /**
      * Callback for dislike action
@@ -171,8 +167,8 @@ export default class FeedPhoto extends BaseComponent {
      */
     dislikeClick = (ev) => {
         ev.preventDefault();
-        EventBus.emitEvent(FEED_EVENTS.actionDislike);
-    }
+        EventBus.emitEvent(FEED_EVENTS.dislike);
+    };
 
     /**
      * Callback for right click
@@ -185,7 +181,7 @@ export default class FeedPhoto extends BaseComponent {
             return;
         }
         this.changePhoto(this.currentPhotoNum + 1);
-    }
+    };
 
     /**
      * Callback for left click
@@ -198,5 +194,5 @@ export default class FeedPhoto extends BaseComponent {
             return;
         }
         this.changePhoto(this.currentPhotoNum - 1);
-    }
+    };
 }

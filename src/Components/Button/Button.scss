@@ -1,7 +1,8 @@
-.button-component {
+.button {
   font-size: 22px;
+  column-gap: 10px;
+  height: 100%;
   width: 100%;
-  height: 52px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,37 +16,52 @@
   background: linear-gradient(45deg, #9F93E3, #8067EF, #6843FD);
 }
 
-.button-component:hover {
-  background: $button-bg-gradient-hover;
+.button_href-no-underlying {
+  text-decoration: none;
 }
 
-.login-register-button {
-  width: 100%;
-  height: 68px;
-}
-
-.button-icon {
+.button__icon {
   width: 27px;
   height: 27px;
   border-radius: 0;
   margin-right: 8px;
 }
 
-.button-href__no-underlying{
-  text-decoration: none;
+.button:hover {
+  background: $button-bg-gradient-hover;
 }
 
-.button__menu{
+.button-icon {
+  height: 70%;
+}
+
+.buttin_primary {
+  width: 100%;
+  height: 52px;
+}
+
+.button_submit {
+  width: 100%;
+  height: 68px;
+}
+
+.button_active {
+  height: 42px;
   color: #000000;
   background: #FFFFFF;
 }
 
-.button__menu-enabled-red{
+.button_active-red {
   color: #fff;
   background: #DC5252;
 }
 
-.button__menu-enabled-red:hover{
-  background: #DC5252;
+.button_active-blue {
+  color: #fff;
+  background: #9589B9;
+}
+
+.button_active-red:hover {
+  background: tomato;
 }
 

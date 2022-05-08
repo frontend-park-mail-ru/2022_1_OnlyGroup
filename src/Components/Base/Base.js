@@ -1,20 +1,11 @@
 import idGenerator from '../../Modules/IDGenerator';
-import Base from './Base.hbs';
 import EventBus from '../../Modules/EventBus';
 
-export const BASE_COMPONENT_STATES = {
-    default: 'default',
-    leftColumn: 'leftColumn',
-    rightColumn: 'rightColumn',
-    activeUserColumn: 'activeUserColumn',
-    feedPhotoCurrentContainer: 'feedPhotoCurrentContainer',
-    feedPhotoCurrentHandler: 'feedPhotoCurrentHandler',
-    feedPhotoMoveContainer: 'feedPhotoMoveContainer',
-    feedPhotoActionsContainer: 'feedPhotoActionsContainer',
-    feedPhoto: 'feedPhoto',
-    feedPhotoOverlay: 'feedPhotoOverlay',
-    feedPhotoOverlayNoPhotos: 'feedPhotoOverlayNoPhotos',
-    loginFormOffer: 'loginFormRegisterOfferContainer',
+export const COMPONENTS_TYPES = {
+    primary: 'primaryType',
+    secondary: 'secondaryType',
+    submit: 'submitType',
+    error: 'errorType',
 };
 
 /**
@@ -22,19 +13,20 @@ export const BASE_COMPONENT_STATES = {
  */
 export class BaseComponent {
     id;
-    state;
+    type;
     events;
     components;
     stateChanged;
 
     /**
      *  Create Base component
-     * @param {string|undefined} state
+     *  @param {string|undefined} type
      */
-    constructor({state = BASE_COMPONENT_STATES.default}) {
+    constructor({type= COMPONENTS_TYPES.primary}) {
         this.id = idGenerator.getId();
-        this.state = state;
+        this.type = type;
         this.components = {};
+        this.addComponents = {};
         this.stateChanged = false;
         this.events = {};
     }
@@ -57,11 +49,20 @@ export class BaseComponent {
      * Prepare for render(this.renderedComponents)
      */
     prepareRender() {
-        this[this.state] = true;
+        this[this.type] = true;
         this.renderedComponents = Object.values(this.components).reduce((prevStr, currElem) => {
             currElem.prepareRender();
             return prevStr + currElem.render();
         }, '');
+        Object.entries(this.addComponents).forEach(([key, value]) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            this[`rendered${key}`] = Object.values(value).reduce((prevStr, currElem) => {
+                currElem.prepareRender();
+                return prevStr + currElem.render();
+            }, '');
+        });
     }
 
     /**
@@ -71,8 +72,36 @@ export class BaseComponent {
         Object.values(this.components).forEach((component) => {
             component.start();
         });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.start();
+            });
+        });
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.addEventListener(key, value);
+        });
+    }
+
+    /**
+     * Pause component
+     */
+    pause() {
+        Object.values(this.components).forEach((component) => {
+            component.pause();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.pause();
+            });
+        });
+        Object.entries(this.events).forEach(([key, value]) => {
+            EventBus.removeEventListener(key, value);
         });
     }
 
@@ -82,6 +111,14 @@ export class BaseComponent {
     stop() {
         Object.values(this.components).forEach((component) => {
             component.stop();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.stop();
+            });
         });
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.removeEventListener(key, value);
@@ -95,14 +132,23 @@ export class BaseComponent {
         if (this.stateChanged && this.elem) {
             const savedElem = this.elem;
             this.unmount();
+            this.prepareRender();
             savedElem.insertAdjacentHTML('beforebegin', this.render());
             savedElem.parentNode.removeChild(savedElem);
             this.mount();
             this.stateChanged = false;
             return;
         }
-        Object.values(this.components).forEach((component) =>{
+        Object.values(this.components).forEach((component) => {
             component.reRender();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.reRender();
+            });
         });
         this.stateChanged = false;
     }
@@ -112,8 +158,7 @@ export class BaseComponent {
      * @return {string}
      */
     render() {
-        this.prepareRender();
-        return Base(this);
+        return '';
     }
 
     /**
@@ -124,6 +169,14 @@ export class BaseComponent {
         Object.values(this.components).forEach((component) => {
             component.mount();
         });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.mount();
+            });
+        });
     }
 
     /**
@@ -132,6 +185,14 @@ export class BaseComponent {
     unmount() {
         Object.values(this.components).forEach((component) => {
             component.unmount();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.unmount();
+            });
         });
         this.elem = null;
     }

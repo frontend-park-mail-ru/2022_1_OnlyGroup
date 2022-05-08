@@ -9,10 +9,10 @@ import {FEED_EVENTS} from '../../Modules/EventBusEvents';
 export default class FeedInfo extends BaseComponent {
     /**
      * Create feed info component
-     * @param {string|undefined} state
+     * @param {string|undefined} type
      */
-    constructor({state}) {
-        super({state});
+    constructor({type}) {
+        super({type});
         this.ready = false;
         this.interestsName = FEED_VIEW_NAMES.interests;
         this.horoscopeName = FEED_VIEW_NAMES.horoscope;

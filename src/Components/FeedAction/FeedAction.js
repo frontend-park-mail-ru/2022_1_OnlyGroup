@@ -1,19 +1,12 @@
-import {BaseComponent} from '../Base/Base';
+import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
 import feedAction from './FeedAction.hbs';
-import Photo, {PHOTO_STATES} from '../Photo/Photo';
+import Photo from '../Photo/Photo';
 
-export const FEED_ACTIONS_STATES = {
-    like: 'like',
-    dislike: 'dislike',
-    left: 'left',
-    right: 'right',
-};
-
-const PHOTO_SOURCES = {
-    [FEED_ACTIONS_STATES.like]: 'static/images/like.png',
-    [FEED_ACTIONS_STATES.dislike]: 'static/images/dislike.png',
-    [FEED_ACTIONS_STATES.left]: 'static/images/left.png',
-    [FEED_ACTIONS_STATES.right]: 'static/images/right.png',
+export const FEED_ACTION_SOURCES = {
+    like: 'static/images/like.png',
+    dislike: 'static/images/dislike.png',
+    left: 'static/images/left.png',
+    right: 'static/images/right.png',
 };
 
 /**
@@ -22,11 +15,13 @@ const PHOTO_SOURCES = {
 export default class FeedAction extends BaseComponent {
     /**
      * Create feed action
-     * @param {string|undefined} state
+     * @param {string|undefined} type
+     * @param {string} src
      * @param {function} onClick
      */
-    constructor({state, onClick}) {
-        super({state});
+    constructor({type, src, onClick}) {
+        super({type});
+        this.src = src;
         this.onClick = onClick;
         this.initComponents();
     }
@@ -36,8 +31,8 @@ export default class FeedAction extends BaseComponent {
      */
     initComponents() {
         this.components.image = new Photo({
-            state: PHOTO_STATES.feedAction,
-            src: PHOTO_SOURCES[this.state],
+            type: COMPONENTS_TYPES.secondary,
+            src: this.src,
         });
     }
 

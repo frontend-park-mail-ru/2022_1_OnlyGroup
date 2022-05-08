@@ -1,13 +1,13 @@
 import loginForm from './LoginForm.hbs';
-import {Button, BUTTON_STATES} from '../Button/Button';
-import {Input, INPUT_STATES} from '../Input/Input';
-import {Text, TEXT_STATES} from '../Text/Text';
-import {Logo, LOGO_STATES} from '../Logo/Logo';
-import {BASE_COMPONENT_STATES, BaseComponent} from '../Base/Base';
+import {Button} from '../Button/Button';
+import {Input} from '../Input/Input';
+import {Text} from '../Text/Text';
+import {Logo} from '../Logo/Logo';
+import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
 import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
-import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
+import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login form smart component
@@ -19,9 +19,9 @@ export default class LoginForm extends BaseComponent {
     constructor() {
         super({});
         this.setEvents({
-            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
-            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
-            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setUnloggined,
+            [LOGIN_EVENTS.clearForm]: this.clear,
+            [LOGIN_EVENTS.userValidationFailed]: this.setErrors,
+            [LOGIN_EVENTS.userNotLoggined]: this.setUnloggined,
         });
         this.initComponents();
     }
@@ -32,30 +32,30 @@ export default class LoginForm extends BaseComponent {
     initComponents() {
         this.components.logo = new Logo({state: LOGO_STATES.logoLogin});
         this.components.emailInput = new Input({
-            type: 'text',
+            inputType: 'text',
             label: LOGIN_VIEW_NAMES.emailTittle,
-            state: INPUT_STATES.loginRegisterInput,
+            type: COMPONENTS_TYPES.primary,
         });
         this.components.passwordInput = new Input({
-            type: 'password',
+            inputType: 'password',
             label: LOGIN_VIEW_NAMES.passwordTitle,
-            state: INPUT_STATES.loginRegisterInput,
+            type: COMPONENTS_TYPES.primary,
         });
         this.components.mainError = new Text({
             text: '',
-            state: TEXT_STATES.loginErrorText,
+            type: COMPONENTS_TYPES.error,
         });
         this.components.button = new Button({
             text: LOGIN_VIEW_NAMES.buttonTittle,
-            state: BUTTON_STATES.loginRegisterButton,
+            type: COMPONENTS_TYPES.submit,
             onClick: this.onButtonClick,
         });
-
-        this.components.registerContainer = new BaseComponent({state: BASE_COMPONENT_STATES.loginFormOffer});
-        this.components.registerContainer.components.registerOffer = new Text({
+        this.addComponents.Offer = {};
+        this.addComponents.Offer.text = new Text({
             text: LOGIN_VIEW_NAMES.registerOffer,
+            type: COMPONENTS_TYPES.secondary,
         });
-        this.components.registerContainer.components.registerLink = new Text({
+        this.addComponents.Offer.link = new Text({
             text: LOGIN_VIEW_NAMES.registerLinkTittle,
             href: APP_PATHS.registerPage,
         });
@@ -77,7 +77,7 @@ export default class LoginForm extends BaseComponent {
         ev.preventDefault();
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
-        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.actionLogin, {email, password});
+        EventBus.emitEvent(LOGIN_EVENTS.login, {email, password});
     }
 
     /**
