@@ -1,6 +1,12 @@
 import text from './Text.hbs';
 import {BaseComponent} from '../Base/Base';
 
+export const TEXT_TYPES = {
+    primary: 'primaryType',
+    secondary: 'secondaryType',
+    error: 'errorType',
+};
+
 /**
  * Text component
  */
@@ -12,11 +18,12 @@ export class Text extends BaseComponent {
      * @param {string|null|undefined} href
      * @param {function|undefined} onClick
      */
-    constructor({text, type, href, onClick}) {
-        super({type});
+    constructor({text, type = TEXT_TYPES.primary, href, onClick}) {
+        super();
         this.textContent = text;
         this.href = href;
         this.onClick = onClick;
+        this[type] = true;
     }
 
     /**

@@ -1,8 +1,8 @@
 import activeUser from '../../Models/User';
 import {BaseController} from '../Base/BaseController';
 import {RegisterView} from '../../Views/RegisterView/RegisterView';
-import {APP_PATHS, REDIRECT} from '../../Modules/Router';
-import {API_FAILED, LOGIN_EVENTS} from '../../Modules/EventBusEvents';
+import {APP_PATHS} from '../../Modules/Router';
+import {API_FAILED, LOGIN_EVENTS, REDIRECT} from '../../Modules/EventBusEvents';
 import EventBus from '../../Modules/EventBus';
 
 /**

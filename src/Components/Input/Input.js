@@ -7,6 +7,10 @@ export const INPUT_LABEL_POS = {
     horizontal: 'horizontal',
 };
 
+export const INPUT_TYPES = {
+    primary: 'primaryType',
+};
+
 /**
  * Input component
  */
@@ -20,11 +24,19 @@ export class Input extends BaseComponent {
      * @param {string|null|undefined} icon
      * @param {function|null|undefined} iconOnClick
      */
-    constructor({type, inputType, labelPos = INPUT_LABEL_POS.vertical, label, icon, iconOnClick}) {
-        super({type});
+    constructor({
+        type = INPUT_TYPES.primary,
+        inputType,
+        labelPos = INPUT_LABEL_POS.vertical,
+        label,
+        icon,
+        iconOnClick,
+    }) {
+        super();
         this.inputType = inputType;
         this.labelPos = labelPos;
         this.label = label;
+        this[type] = true;
         this.value = '';
         this.inputId = idGenerator.getId();
         this.icon = icon;

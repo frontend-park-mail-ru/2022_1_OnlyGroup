@@ -1,6 +1,6 @@
-import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
+import {BaseComponent} from '../Base/Base';
 import feedAction from './FeedAction.hbs';
-import Photo from '../Photo/Photo';
+import Photo, {PHOTO_TYPES} from '../Photo/Photo';
 
 export const FEED_ACTION_SOURCES = {
     like: 'static/images/like.png',
@@ -15,12 +15,11 @@ export const FEED_ACTION_SOURCES = {
 export default class FeedAction extends BaseComponent {
     /**
      * Create feed action
-     * @param {string|undefined} type
      * @param {string} src
      * @param {function} onClick
      */
-    constructor({type, src, onClick}) {
-        super({type});
+    constructor({src, onClick}) {
+        super();
         this.src = src;
         this.onClick = onClick;
         this.initComponents();
@@ -31,7 +30,7 @@ export default class FeedAction extends BaseComponent {
      */
     initComponents() {
         this.components.image = new Photo({
-            type: COMPONENTS_TYPES.secondary,
+            type: PHOTO_TYPES.secondary,
             src: this.src,
         });
     }

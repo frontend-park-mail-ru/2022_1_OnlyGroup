@@ -1,11 +1,15 @@
-import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
+import {BaseComponent} from '../Base/Base';
 import photo from './Photo.hbs';
 import EventBus from '../../Modules/EventBus';
 
+export const PHOTO_TYPES = {
+    primary: 'primaryType',
+    secondary: 'secondaryType',
+};
 
 const PHOTO_STYLES = {
-    [COMPONENTS_TYPES.primary]: ['photo', 'photo_primary'],
-    [COMPONENTS_TYPES.secondary]: ['photo', 'photo_secondary'],
+    [PHOTO_TYPES.primary]: ['photo', 'photo_primary'],
+    [PHOTO_TYPES.secondary]: ['photo', 'photo_secondary'],
 };
 
 /**
@@ -20,14 +24,15 @@ export default class Photo extends BaseComponent {
      * @param {string|undefined} src
      * @param {boolean} loaderEnabled
      */
-    constructor({type, onLoadEvent, loadEvent, src, loaderEnabled = false}) {
-        super({type});
+    constructor({type = PHOTO_TYPES.primary, onLoadEvent, loadEvent, src, loaderEnabled = false}) {
+        super();
         this.loadEventName = loadEvent;
         this.src = src;
         this.image = null;
         this.loaderEnabled = loaderEnabled;
         this.imageReady = false;
         this.photoStyle = PHOTO_STYLES[type];
+        this[type] = true;
         if (src !== undefined) {
             this.image = new Image();
             this.image.src = this.src;
@@ -66,7 +71,7 @@ export default class Photo extends BaseComponent {
         this.imageReady = true;
         this.stateChanged = true;
         this.reRender();
-    }
+    };
 
 
     /**
@@ -86,7 +91,7 @@ export default class Photo extends BaseComponent {
         this.stateChanged = true;
         this.imageReady = true;
         this.reRender();
-    }
+    };
 
     /**
      * Mount photo component
