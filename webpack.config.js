@@ -16,6 +16,7 @@ module.exports = {
         alias: {
             _assets: `${PATHS.src}/Static`,
             _components: `${PATHS.src}/Components`,
+            _views: `${PATHS.src}/Views`,
         },
         extensions: ['.js'],
     },

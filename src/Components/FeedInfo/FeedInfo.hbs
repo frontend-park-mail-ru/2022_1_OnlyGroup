@@ -1,0 +1,31 @@
+<div class="feed-info" id="{{{id}}}">
+    {{#if ready}}
+        <div class="feed-info-header">
+            <p class="feed-info-header_name">{{name}}, {{age}}</p>
+            <p class="feed-info-header_location">{{city}}</p>
+        </div>
+        <div class="feed-info-about-user">
+            <p class="feed-info-about-user_text">{{aboutUser}}</p>
+        </div>
+        {{#if interests}}
+            <div class="feed-info-interests">
+                <p>{{interestsName}}</p>
+                <div class="feed-info-interests-container">
+                    {{#each interests}}
+                        <div class="feed-info-interest">
+                            <p class="feed-info-interest_text">{{this}}</p>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        {{/if}}
+        {{#if horoscope}}
+            <div class="feed-info-horoscope">
+                <p class="feed-info-horoscope_tittle">{{horoscopeName}}</p>
+                <p class="feed-info-horoscope_text">{{horoscope}}</p>
+            </div>
+        {{/if}}
+    {{else}}
+        <div class="lds-ring"><div class="lds-ring_div lds-ring_div__first"></div><div class="lds-ring_div lds-ring_div__second"></div><div class="lds-ring_div lds-ring_div__third"></div><div class="lds-ring_div"></div></div>
+    {{/if}}
+</div>

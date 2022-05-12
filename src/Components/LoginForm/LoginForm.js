@@ -1,13 +1,13 @@
 import loginForm from './LoginForm.hbs';
-import {Button} from '../Button/Button';
-import {Input} from '../Input/Input';
-import {Text} from '../Text/Text';
+import {Button, BUTTON_TYPES} from '../Button/Button';
+import {Input, INPUT_TYPES} from '../Input/Input';
+import {Text, TEXT_TYPES} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {LOGIN_VIEW_NAMES} from '../../Consts/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
-import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
+import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login form smart component
@@ -17,50 +17,67 @@ export default class LoginForm extends BaseComponent {
      * Create login form component
      */
     constructor() {
-        super({});
+        super();
         this.setEvents({
-            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
-            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
-            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setUnloggined,
+            [LOGIN_EVENTS.clearForm]: this.clear,
+            [LOGIN_EVENTS.userValidationFailed]: this.setErrors,
+            [LOGIN_EVENTS.userNotLoggined]: this.setUnloggined,
         });
+        this.initComponents();
     }
 
     /**
      * Create all components on page
      */
     initComponents() {
-        this.components.logo = new Logo({styles: ['auth-form__logo']});
+        // this.components.logo = new Logo({styles: ['auth-form__logo']});
+        this.components.logo = new Logo({});
         this.components.emailInput = new Input({
-            type: 'text',
-            label: LOGIN_VIEW_NAMES.inputs.email.title,
-            placeholder: LOGIN_VIEW_NAMES.inputs.email.placeholder,
-            styles: ['auth-form__input'],
+            inputType: 'text',
+            label: LOGIN_VIEW_NAMES.emailTittle,
+            type: INPUT_TYPES.primary,
+            // type: 'text',
+            // label: LOGIN_VIEW_NAMES.inputs.email.title,
+            // placeholder: LOGIN_VIEW_NAMES.inputs.email.placeholder,
+            // styles: ['auth-form__input'],
         });
         this.components.passwordInput = new Input({
-            type: 'password',
-            label: LOGIN_VIEW_NAMES.inputs.password.title,
-            placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
-            styles: ['auth-form__input'],
+            inputType: 'password',
+            label: LOGIN_VIEW_NAMES.passwordTitle,
+            type: INPUT_TYPES.primary,
+            // type: 'password',
+            // label: LOGIN_VIEW_NAMES.inputs.password.title,
+            // placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
+            // styles: ['auth-form__input'],
         });
         this.components.mainError = new Text({
             text: '',
-            styles: ['auth-form__main-error'],
+            type: TEXT_TYPES.error,
+            // styles: ['auth-form__main-error'],
         });
         this.components.button = new Button({
-            text: LOGIN_VIEW_NAMES.button.title,
-            styles: ['auth-form__button'],
+            text: LOGIN_VIEW_NAMES.buttonTittle,
+            type: BUTTON_TYPES.submit,
+            // text: LOGIN_VIEW_NAMES.button.title,
+            // styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
+        this.addComponents.Offer = {};
+        this.addComponents.Offer.text = new Text({
+            text: LOGIN_VIEW_NAMES.registerOffer,
+            type: TEXT_TYPES.secondary,
 
-        this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
-        this.components.registerContainer.components.registerOffer = new Text({
-            text: LOGIN_VIEW_NAMES.altVariant.offer,
-            styles: ['alt-variant__text'],
+        // this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
+        // this.components.registerContainer.components.registerOffer = new Text({
+        //     text: LOGIN_VIEW_NAMES.altVariant.offer,
+        //     styles: ['alt-variant__text'],
         });
-        this.components.registerContainer.components.registerLink = new Text({
-            text: LOGIN_VIEW_NAMES.altVariant.linkTitle,
-            styles: ['alt-variant__link'],
-            href: APP_PATHS.registerPage,
+        this.addComponents.Offer.link = new Text({
+            text: LOGIN_VIEW_NAMES.registerLinkTittle,
+        // this.components.registerContainer.components.registerLink = new Text({
+        //     text: LOGIN_VIEW_NAMES.altVariant.linkTitle,
+        //     styles: ['alt-variant__link'],
+        //     href: APP_PATHS.registerPage,
         });
     }
 
@@ -80,7 +97,7 @@ export default class LoginForm extends BaseComponent {
         ev.preventDefault();
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
-        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.actionLogin, {email, password});
+        EventBus.emitEvent(LOGIN_EVENTS.login, {email, password});
     }
 
     /**
@@ -98,6 +115,16 @@ export default class LoginForm extends BaseComponent {
     setUnloggined = () => {
         this.setErrors({email: '', password: '', main: LOGIN_VIEW_NAMES.errors.loginFail});
         this.reRender();
+    }
+
+    /**
+     * Start login form
+     */
+    start() {
+        super.start();
+        this.components.mainError.setText('');
+        this.components.emailInput.setError('');
+        this.components.passwordInput.setError('');
     }
 
     /**
@@ -132,6 +159,7 @@ export default class LoginForm extends BaseComponent {
         if (this.elem) {
             this.elem.removeEventListener('submit', this.formSubmit);
         }
+        this.clear();
         super.unmount();
     }
 

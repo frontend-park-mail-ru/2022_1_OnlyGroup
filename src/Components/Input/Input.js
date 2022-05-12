@@ -2,31 +2,59 @@ import input from './Input.hbs';
 import idGenerator from '../../Modules/IDGenerator';
 import {BaseComponent} from '../Base/Base';
 
+export const INPUT_LABEL_POS = {
+    vertical: 'vertical',
+    horizontal: 'horizontal',
+};
+
+export const INPUT_TYPES = {
+    primary: 'primaryType',
+};
+
 /**
  * Input component
  */
 export class Input extends BaseComponent {
     /**
      * Create input component
-     * @param {string} type
-     * @param {Array} styles
+     * @param {string|undefined} type
+     * @param {string} inputType
+     * @param {string} labelPos
      * @param {string|null|undefined} label
      * @param {string|null|undefined} placeholder
      * @param {string|null|undefined} icon
      * @param {function|null|undefined} iconOnClick
      */
-    constructor({type, styles, label, placeholder, icon, iconOnClick}) {
-        super({styles});
-        this.type = type;
+    constructor({
+        type = INPUT_TYPES.primary,
+        inputType,
+        labelPos = INPUT_LABEL_POS.vertical,
+        label,
+        placeholder,
+        icon,
+        iconOnClick,
+    }) {
+        super();
+        this.inputType = inputType;
+        this.labelPos = labelPos;
+        this.label = label;
+        this[type] = true;
         this.value = '';
+        this.placeholder = placeholder
         this.inputId = idGenerator.getId();
-        this.icon = (icon === undefined) ? null : icon;
+        this.icon = icon;
         if (icon) {
             this.buttonId = idGenerator.getId();
         }
-        this.iconOnClick = (iconOnClick === undefined) ? null : iconOnClick;
-        this.label = (label === undefined) ? null : label;
-        this.placeholder = (placeholder === undefined) ? null : placeholder;
+        this.iconOnClick = iconOnClick;
+    }
+
+    /**
+     * Prepare for input render
+     */
+    prepareRender() {
+        super.prepareRender();
+        this[this.labelPos] = true;
     }
 
     /**

@@ -1,6 +1,36 @@
-<button class="button {{{styles}}}" type="submit" id={{id}}>
-    {{#if icon}}
-        <img alt="icon" class="button__icon" src={{icon}}>
+<div class="button" id="{{id}}">
+    {{#if href}}
+        {{#unless active}}
+        <a href="{{{href}}}" class="button button-href__no-underlying">
+        {{/unless}}
     {{/if}}
-    {{buttonText}}
-</button>
+    <button class="button {{#if canActivate}}button_active {{#if active}}{{#if
+            activeRedType}}button_active-red {{/if}}{{#if activeBlueType}}button_active-blue {{/if}}{{/if}}{{else}}{{#if
+            primaryType}}button_primary {{/if}}{{#if
+            submitType}}button_submit {{/if}}{{/if}}"
+            type="submit" id="{{buttonId}}">
+        {{#if active}}
+            {{#if iconActive}}
+                <img alt="icon" class="button-icon" src="{{{iconActive}}}">
+            {{else if icon}}
+                <img alt="icon" class="button-icon" src="{{{icon}}}">
+            {{/if}}
+        {{else}}
+            {{#if icon}}
+                <img alt="icon" class="button-icon" src="{{{icon}}}">
+            {{/if}}
+        {{/if}}
+        {{buttonText}}
+    </button>
+    {{#if href}}
+        {{#unless active}}
+        </a>
+        {{/unless}}
+    {{/if}}
+</div>
+<!--<button class="button {{{styles}}}" type="submit" id={{id}}>-->
+<!--    {{#if icon}}-->
+<!--        <img alt="icon" class="button__icon" src={{icon}}>-->
+<!--    {{/if}}-->
+<!--    {{buttonText}}-->
+<!--</button>-->
