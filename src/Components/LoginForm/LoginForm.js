@@ -34,20 +34,16 @@ export default class LoginForm extends BaseComponent {
         this.components.logo = new Logo({});
         this.components.emailInput = new Input({
             inputType: 'text',
-            label: LOGIN_VIEW_NAMES.emailTittle,
+            label: LOGIN_VIEW_NAMES.inputs.email.title,
+            placeholder: LOGIN_VIEW_NAMES.inputs.email.placeholder,
             type: INPUT_TYPES.primary,
-            // type: 'text',
-            // label: LOGIN_VIEW_NAMES.inputs.email.title,
-            // placeholder: LOGIN_VIEW_NAMES.inputs.email.placeholder,
             // styles: ['auth-form__input'],
         });
         this.components.passwordInput = new Input({
             inputType: 'password',
-            label: LOGIN_VIEW_NAMES.passwordTitle,
+            label: LOGIN_VIEW_NAMES.inputs.password.title,
+            placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
             type: INPUT_TYPES.primary,
-            // type: 'password',
-            // label: LOGIN_VIEW_NAMES.inputs.password.title,
-            // placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
             // styles: ['auth-form__input'],
         });
         this.components.mainError = new Text({
@@ -56,28 +52,25 @@ export default class LoginForm extends BaseComponent {
             // styles: ['auth-form__main-error'],
         });
         this.components.button = new Button({
-            text: LOGIN_VIEW_NAMES.buttonTittle,
+            text: LOGIN_VIEW_NAMES.button.title,
             type: BUTTON_TYPES.submit,
-            // text: LOGIN_VIEW_NAMES.button.title,
             // styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
         this.addComponents.Offer = {};
         this.addComponents.Offer.text = new Text({
-            text: LOGIN_VIEW_NAMES.registerOffer,
             type: TEXT_TYPES.secondary,
 
         // this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
         // this.components.registerContainer.components.registerOffer = new Text({
-        //     text: LOGIN_VIEW_NAMES.altVariant.offer,
+            text: LOGIN_VIEW_NAMES.altVariant.offer,
         //     styles: ['alt-variant__text'],
         });
         this.addComponents.Offer.link = new Text({
-            text: LOGIN_VIEW_NAMES.registerLinkTittle,
         // this.components.registerContainer.components.registerLink = new Text({
-        //     text: LOGIN_VIEW_NAMES.altVariant.linkTitle,
+            text: LOGIN_VIEW_NAMES.altVariant.linkTitle,
         //     styles: ['alt-variant__link'],
-        //     href: APP_PATHS.registerPage,
+            href: APP_PATHS.registerPage,
         });
     }
 

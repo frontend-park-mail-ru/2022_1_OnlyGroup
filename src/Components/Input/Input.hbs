@@ -5,6 +5,9 @@
     {{/if}}
     <div class="input-icon-container">
         <input type="{{{inputType}}}" id="{{{inputId}}}"
+            {{#if placeholder}}
+               placeholder="{{placeholder}}"
+            {{/if}}
                class="input-component {{#if primaryType}}input-component_primary {{/if}}{{#if
                        error}}input-component_error {{/if}}" value="{{value}}">
         {{#if icon}}
@@ -16,23 +19,23 @@
     {{/if}}
 </div>
 <!--<div class="{{{styles}}} input-container" id="{{{id}}}">-->
-<!--    {{#if label}}-->
+        <!--    {{#if label}}-->
 <!--        <span class="input-container__label">{{label}}</span>-->
-<!--    {{/if}}-->
+        <!--    {{/if}}-->
 <!--    <div class="input-container__field input-field">-->
 <!--        <input type="{{{type}}}"-->
 <!--               id={{{inputId}}}-->
-<!--            {{#if placeholder}}-->
+        <!--            {{#if placeholder}}-->
 <!--               placeholder="{{placeholder}}"-->
-<!--            {{/if}}-->
+        <!--            {{/if}}-->
 <!--               class="input-field__input {{#if error}}input-field__input_error{{/if}}"-->
 <!--               autocomplete="on"-->
 <!--               value="{{value}}">-->
-<!--        {{#if icon}}-->
+        <!--        {{#if icon}}-->
 <!--            <button class="input-field__button" id={{buttonId}}><img src={{icon}} alt="icon"></button>-->
-<!--        {{/if}}-->
+        <!--        {{/if}}-->
 <!--    </div>-->
-<!--    {{#if error}}-->
+        <!--    {{#if error}}-->
 <!--        <span class="input-container__error">{{error}}</span>-->
-<!--    {{/if}}-->
+        <!--    {{/if}}-->
 <!--</div>-->

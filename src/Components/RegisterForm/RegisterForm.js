@@ -30,33 +30,28 @@ export default class RegisterForm extends BaseComponent {
      * Init all components
      */
     initComponents() {
+        console.log('inintComponents gister form');
         this.components.logo = new Logo({});
         // this.components.logo = new Logo({styles: ['auth-form__logo']});
         this.components.emailInput = new Input({
             inputType: 'text',
-            label: REGISTER_VIEW_NAMES.emailTittle,
             type: INPUT_TYPES.primary,
-            // type: 'text',
-            // label: REGISTER_VIEW_NAMES.inputs.email.title,
-            // placeholder: REGISTER_VIEW_NAMES.inputs.email.placeholder,
+            label: REGISTER_VIEW_NAMES.inputs.email.title,
+            placeholder: REGISTER_VIEW_NAMES.inputs.email.placeholder,
             // styles: ['auth-form__input'],
         });
         this.components.passwordInput = new Input({
             inputType: 'password',
-            label: REGISTER_VIEW_NAMES.passwordTitle,
+            label: REGISTER_VIEW_NAMES.inputs.password.title,
             type: INPUT_TYPES.primary,
-            // type: 'password',
-            // label: REGISTER_VIEW_NAMES.inputs.password.title,
-            // placeholder: REGISTER_VIEW_NAMES.inputs.password.placeholder,
+            placeholder: REGISTER_VIEW_NAMES.inputs.password.placeholder,
             // styles: ['auth-form__input'],
         });
         this.components.passwordRepeatInput = new Input({
             inputType: 'password',
-            label: REGISTER_VIEW_NAMES.passwordRepeatTittle,
+            label: REGISTER_VIEW_NAMES.inputs.passwordVerify.title,
+            placeholder: REGISTER_VIEW_NAMES.inputs.passwordVerify.placeholder,
             type: INPUT_TYPES.primary,
-            // type: 'password',
-            // label: REGISTER_VIEW_NAMES.inputs.passwordVerify.title,
-            // placeholder: REGISTER_VIEW_NAMES.inputs.passwordVerify.placeholder,
             // styles: ['auth-form__input'],
         });
         this.components.mainError = new Text({
@@ -74,17 +69,17 @@ export default class RegisterForm extends BaseComponent {
 
         this.addComponents.Offer = {};
         this.addComponents.Offer.text = new Text({
-            text: REGISTER_VIEW_NAMES.loginOffer,
+            // text: REGISTER_VIEW_NAMES.loginOffer,
             type: TEXT_TYPES.secondary,
         // this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
         // this.components.registerContainer.components.registerOffer = new Text({
-        //     text: REGISTER_VIEW_NAMES.altVariant.title,
+            text: REGISTER_VIEW_NAMES.altVariant.offer,
         //     styles: ['alt-variant__text'],
         });
         this.addComponents.Offer.link = new Text({
-            text: REGISTER_VIEW_NAMES.loginLinkTittle,
+            // text: REGISTER_VIEW_NAMES.loginLinkTittle,
         // this.components.registerContainer.components.registerLink = new Text({
-        //     text: REGISTER_VIEW_NAMES.altVariant.linkTitle,
+            text: REGISTER_VIEW_NAMES.altVariant.linkTitle,
         //     styles: ['alt-variant__link'],
             href: APP_PATHS.loginPage,
         });
