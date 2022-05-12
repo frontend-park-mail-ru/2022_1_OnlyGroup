@@ -38,6 +38,7 @@ export default class BaseView {
     stop() {
         Object.values(this.components).forEach((component) => {
             component.stop();
+            component.unmount();
         });
         Object.values(this.addComponents).forEach((value) => {
             if (typeof value !== 'object') {

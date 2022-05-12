@@ -3,7 +3,7 @@ import {Text, TEXT_TYPES} from '../Text/Text';
 import activeUser from './ActiveUser.hbs';
 import Photo, {PHOTO_TYPES} from '../Photo/Photo';
 import EventBus from '../../Modules/EventBus';
-import {FEED_EVENTS, LOGIN_REGISTER_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
+import {FEED_EVENTS, LOGIN_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Feed left top active user component
@@ -17,7 +17,7 @@ export class ActiveUserComponent extends BaseComponent {
         this.ready = false;
         this.setEvents({
             [FEED_EVENTS.activeUserReadyMin]: this.onReady,
-            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.clearInfo,
+            [LOGIN_EVENTS.userNotLoggined]: this.clearInfo,
         });
     }
 

@@ -30,7 +30,7 @@ export default class LoginForm extends BaseComponent {
      * Create all components on page
      */
     initComponents() {
-        this.components.logo = new Logo({state: LOGO_STATES.logoLogin});
+        this.components.logo = new Logo({});
         this.components.emailInput = new Input({
             inputType: 'text',
             label: LOGIN_VIEW_NAMES.emailTittle,

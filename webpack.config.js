@@ -19,7 +19,8 @@ module.exports = {
     resolve: {
         alias: {
             _assets: path.resolve('src/static'),
-            _components: path.resolve('src/components'),
+            _components: path.resolve('src/Components'),
+            _views: path.resolve('src/Views'),
         },
         extensions: ['.js'],
     },
