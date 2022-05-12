@@ -1,6 +1,9 @@
 {{#if href}}
-    <a href="{{{href}}}" class="link {{{styles}}}" id="{{{id}}}">{{textContent}}</a>
+    <a href="{{{href}}}"
+       class="text {{#if primaryType}}text_primary {{/if}}{{#if errorType}}text_error {{/if}}"
+       id="{{{id}}}">{{textContent}}</a>
 {{else}}
-    <p id="{{{id}}}" class="text {{{styles}}}">{{textContent}}</p>
+    <p id="{{{id}}}"
+       class="text {{#if primaryType}}text_primary {{/if}}{{#if secondaryType}}text_secondary {{/if}}{{#if errorType}}text_error {{/if}}">{{textContent}}</p>
 {{/if}}
 

@@ -1,0 +1,27 @@
+.feed-view {
+  background: radial-gradient(55.42% 55.42% at 50% 50%, #B9A4E6 0%, #21194E 95.11%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.feed-view_left-column {
+  flex-basis: 400px;
+  padding: 30px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 50px;
+  min-width: 330px;
+}
+
+.feed-view_right-column {
+  margin: 40px 40px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  flex-grow: 1;
+  column-gap: 40px;
+}

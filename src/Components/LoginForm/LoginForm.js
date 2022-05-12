@@ -1,13 +1,13 @@
 import loginForm from './LoginForm.hbs';
-import {Button} from '../Button/Button';
-import {Input} from '../Input/Input';
-import {Text} from '../Text/Text';
+import {Button, BUTTON_TYPES} from '../Button/Button';
+import {Input, INPUT_TYPES} from '../Input/Input';
+import {Text, TEXT_TYPES} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
-import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
+import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
 
 /**
  * Login form smart component
@@ -17,47 +17,46 @@ export default class LoginForm extends BaseComponent {
      * Create login form component
      */
     constructor() {
-        super({});
+        super();
         this.setEvents({
-            [LOGIN_REGISTER_EVENTS.clearForm]: this.clear,
-            [LOGIN_REGISTER_EVENTS.userValidationFailed]: this.setErrors,
-            [LOGIN_REGISTER_EVENTS.userNotLoggined]: this.setUnloggined,
+            [LOGIN_EVENTS.clearForm]: this.clear,
+            [LOGIN_EVENTS.userValidationFailed]: this.setErrors,
+            [LOGIN_EVENTS.userNotLoggined]: this.setUnloggined,
         });
+        this.initComponents();
     }
 
     /**
      * Create all components on page
      */
     initComponents() {
-        this.components.logo = new Logo({styles: ['logo-BaseView-login']});
+        this.components.logo = new Logo({});
         this.components.emailInput = new Input({
-            type: 'text',
+            inputType: 'text',
             label: LOGIN_VIEW_NAMES.emailTittle,
-            styles: ['login-register-input', 'w-full'],
+            type: INPUT_TYPES.primary,
         });
         this.components.passwordInput = new Input({
-            type: 'password',
+            inputType: 'password',
             label: LOGIN_VIEW_NAMES.passwordTitle,
-            styles: ['login-register-input', 'w-full'],
+            type: INPUT_TYPES.primary,
         });
         this.components.mainError = new Text({
             text: '',
-            styles: ['login-error-text'],
+            type: TEXT_TYPES.error,
         });
         this.components.button = new Button({
             text: LOGIN_VIEW_NAMES.buttonTittle,
-            styles: ['login-register-button'],
+            type: BUTTON_TYPES.submit,
             onClick: this.onButtonClick,
         });
-
-        this.components.registerContainer = new BaseComponent({styles: ['login-form-register-offer-container', 'w-full']});
-        this.components.registerContainer.components.registerOffer = new Text({
+        this.addComponents.Offer = {};
+        this.addComponents.Offer.text = new Text({
             text: LOGIN_VIEW_NAMES.registerOffer,
-            styles: [],
+            type: TEXT_TYPES.secondary,
         });
-        this.components.registerContainer.components.registerLink = new Text({
+        this.addComponents.Offer.link = new Text({
             text: LOGIN_VIEW_NAMES.registerLinkTittle,
-            styles: [],
             href: APP_PATHS.registerPage,
         });
     }
@@ -78,7 +77,7 @@ export default class LoginForm extends BaseComponent {
         ev.preventDefault();
         const email = this.components.emailInput.getValue();
         const password = this.components.passwordInput.getValue();
-        EventBus.emitEvent(LOGIN_REGISTER_EVENTS.actionLogin, {email, password});
+        EventBus.emitEvent(LOGIN_EVENTS.login, {email, password});
     }
 
     /**
@@ -96,6 +95,16 @@ export default class LoginForm extends BaseComponent {
     setUnloggined = () => {
         this.setErrors({email: '', password: '', main: LOGIN_VIEW_NAMES.userLoginFailed});
         this.reRender();
+    }
+
+    /**
+     * Start login form
+     */
+    start() {
+        super.start();
+        this.components.mainError.setText('');
+        this.components.emailInput.setError('');
+        this.components.passwordInput.setError('');
     }
 
     /**
@@ -130,6 +139,7 @@ export default class LoginForm extends BaseComponent {
         if (this.elem) {
             this.elem.removeEventListener('submit', this.formSubmit);
         }
+        this.clear();
         super.unmount();
     }
 

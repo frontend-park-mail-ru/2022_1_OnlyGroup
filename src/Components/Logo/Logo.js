@@ -9,10 +9,9 @@ import {LOGO_CLICK} from '../../Modules/EventBusEvents';
 export class Logo extends BaseComponent {
     /**
      * Create logo component
-     * @param {Array} styles
      */
-    constructor({styles}) {
-        super({styles});
+    constructor() {
+        super();
     }
 
     /**
@@ -26,7 +25,7 @@ export class Logo extends BaseComponent {
     /**
      * @callback Callback for logo click
      */
-    click() {
+    onClick = () => {
         EventBus.emitEvent(LOGO_CLICK);
     }
 

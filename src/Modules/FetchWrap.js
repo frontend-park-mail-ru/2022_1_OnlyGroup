@@ -1,8 +1,8 @@
 import {ApiResult, INTERNAL_ERROR} from './ApiResult';
 
-const PORT = '8080';
-const IP = 'http://127.0.0.1:';
-const API_PREFIX = '';
+export const PORT = '8080';
+export const IP = 'http://127.0.0.1:';
+export const API_PREFIX = '';
 /**
  * Fetch wrap for get put post delete
  */

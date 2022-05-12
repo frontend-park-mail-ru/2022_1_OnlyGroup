@@ -1,5 +1,4 @@
 import idGenerator from '../../Modules/IDGenerator';
-import Base from './Base.hbs';
 import EventBus from '../../Modules/EventBus';
 
 /**
@@ -7,22 +6,20 @@ import EventBus from '../../Modules/EventBus';
  */
 export class BaseComponent {
     id;
-    styles;
+    type;
     events;
     components;
     stateChanged;
 
     /**
      *  Create Base component
-     * @param {Array|undefined} styles
      */
-    constructor({styles}) {
+    constructor() {
         this.id = idGenerator.getId();
-        this.styles = (styles === undefined) ? '' : styles.join(' ');
         this.components = {};
+        this.addComponents = {};
         this.stateChanged = false;
         this.events = {};
-        this.initComponents();
     }
 
     /**
@@ -43,46 +40,106 @@ export class BaseComponent {
      * Prepare for render(this.renderedComponents)
      */
     prepareRender() {
+        this[this.type] = true;
         this.renderedComponents = Object.values(this.components).reduce((prevStr, currElem) => {
+            currElem.prepareRender();
             return prevStr + currElem.render();
         }, '');
+        Object.entries(this.addComponents).forEach(([key, value]) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            this[`rendered${key}`] = Object.values(value).reduce((prevStr, currElem) => {
+                currElem.prepareRender();
+                return prevStr + currElem.render();
+            }, '');
+        });
     }
 
     /**
-     * Start listenning for eventBus events and mount component
+     * Start listenning for eventBus events
      */
     start() {
+        Object.values(this.components).forEach((component) => {
+            component.start();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.start();
+            });
+        });
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.addEventListener(key, value);
         });
-        this.mount();
     }
 
     /**
-     * Stop listenning for eventBus events and unmount component
+     * Pause component
      */
-    stop() {
+    pause() {
+        Object.values(this.components).forEach((component) => {
+            component.pause();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.pause();
+            });
+        });
         Object.entries(this.events).forEach(([key, value]) => {
             EventBus.removeEventListener(key, value);
         });
-        this.unmount();
+    }
+
+    /**
+     * Stop listenning for eventBus events
+     */
+    stop() {
+        Object.values(this.components).forEach((component) => {
+            component.stop();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.stop();
+            });
+        });
+        Object.entries(this.events).forEach(([key, value]) => {
+            EventBus.removeEventListener(key, value);
+        });
     }
 
     /**
      * Rerender component
      */
     reRender() {
-        if (this.stateChanged) {
+        if (this.stateChanged && this.elem) {
             const savedElem = this.elem;
             this.unmount();
+            this.prepareRender();
             savedElem.insertAdjacentHTML('beforebegin', this.render());
             savedElem.parentNode.removeChild(savedElem);
             this.mount();
             this.stateChanged = false;
             return;
         }
-        Object.values(this.components).forEach((component) =>{
+        Object.values(this.components).forEach((component) => {
             component.reRender();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.reRender();
+            });
         });
         this.stateChanged = false;
     }
@@ -92,8 +149,7 @@ export class BaseComponent {
      * @return {string}
      */
     render() {
-        this.prepareRender();
-        return Base(this);
+        return '';
     }
 
     /**
@@ -104,6 +160,14 @@ export class BaseComponent {
         Object.values(this.components).forEach((component) => {
             component.mount();
         });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.mount();
+            });
+        });
     }
 
     /**
@@ -112,6 +176,14 @@ export class BaseComponent {
     unmount() {
         Object.values(this.components).forEach((component) => {
             component.unmount();
+        });
+        Object.values(this.addComponents).forEach((value) => {
+            if (typeof value !== 'object') {
+                return;
+            }
+            Object.values(value).forEach((elem) => {
+                elem.unmount();
+            });
         });
         this.elem = null;
     }

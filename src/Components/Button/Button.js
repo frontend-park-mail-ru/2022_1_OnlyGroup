@@ -1,5 +1,16 @@
 import button from './Button.hbs';
 import {BaseComponent} from '../Base/Base';
+import IDGenerator from '../../Modules/IDGenerator';
+
+export const BUTTON_ACTIVE_TYPES = {
+    red: 'activeRedType',
+    blue: 'activeBlueType',
+};
+
+export const BUTTON_TYPES = {
+    primary: 'primaryType',
+    submit: 'submitType',
+};
 
 /**
  * Button Component
@@ -7,16 +18,45 @@ import {BaseComponent} from '../Base/Base';
 export class Button extends BaseComponent {
     /**
      * Create button component
-     * @param {Array} styles
+     * @param {string|undefined} type
      * @param {string} text
-     * @param {string|null|undefined} icon
      * @param {function|undefined|null} onClick
+     * @param {string|undefined}href
+     * @param {string|undefined} icon
+     * @param {string|undefined} iconActive
+     * @param {boolean} canActivate
+     * @param {string} activeType
      */
-    constructor({styles, text, icon, onClick}) {
-        super({styles});
-        this.icon = (icon === undefined) ? null : icon;
+    constructor({
+        type = BUTTON_TYPES.primary,
+        text,
+        onClick,
+        href,
+        icon,
+        iconActive,
+        canActivate = false,
+        activeType = BUTTON_ACTIVE_TYPES.blue,
+    }) {
+        super();
+        this.active = false;
+        this.href = href;
         this.buttonText = text;
-        this.onClick = (onClick === undefined) ? null : onClick;
+        this.onClick = onClick;
+        this.icon = icon;
+        this.iconActive = iconActive;
+        this.canActivate = canActivate;
+        this.buttonId = IDGenerator.getId();
+
+        this[type] = true;
+        this[activeType] = true;
+    }
+
+    /**
+     * Find button
+     */
+    findElem() {
+        super.findElem();
+        this.buttonElem = document.getElementById(this.buttonId.toString());
     }
 
     /**
@@ -32,8 +72,8 @@ export class Button extends BaseComponent {
      */
     mount() {
         this.findElem();
-        if (this.onClick && this.elem) {
-            this.elem.addEventListener('click', this.onClick);
+        if (this.onClick && this.elem && !this.active) {
+            this.buttonElem.addEventListener('click', this.onClick);
         }
     }
 
@@ -41,10 +81,22 @@ export class Button extends BaseComponent {
      * Unmount button component
      */
     unmount() {
-        if (this.onClick && this.elem) {
-            this.elem.removeEventListener('click', this.onClick);
+        if (this.onClick && this.elem && !this.active) {
+            this.buttonElem.removeEventListener('click', this.onClick);
         }
         super.unmount();
+    }
+
+    /**
+     * Set button enabled
+     * @param {boolean} active
+     */
+    setActive(active) {
+        if (!this.canActivate) {
+            return;
+        }
+        this.active = active;
+        this.stateChanged = true;
     }
 
     /**

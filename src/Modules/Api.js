@@ -6,6 +6,10 @@ const PROFILES_API_URL = 'profiles';
 const LIKES_API_URL = 'likes';
 const PROFILE_SHORT_POSTFIX_API_URL = 'shorts';
 const PROFILE_CANDIDATE_POSTFIX_API_URL = 'candidates';
+export const PHOTO_API_URL = 'photos';
+const PHOTO_PARAMS_POSTFIX_API_URL = 'params';
+const PROFILE_PHOTOS_POSTFIX_API_URL = 'photos';
+const PROFILE_AVATAR_POSTFIX_API_URL = 'photos/avatar';
 
 
 /**
@@ -142,5 +146,38 @@ export class Api {
      */
     static GetAllLikes = async () => {
         return FetchWrap.Get(LIKES_API_URL);
+    }
+
+    /**
+     * Get all user photos
+     * @param {number} userId
+     * @return {Promise<ApiResult>}
+     * @constructor
+     */
+    static GetAllUserPhotos = async ({userId}) => {
+        const requestUrl = `${PROFILES_API_URL}/${userId.toString()}/${PROFILE_PHOTOS_POSTFIX_API_URL}`;
+        return FetchWrap.Get(requestUrl);
+    }
+
+    /**
+     * Get photo params
+     * @param {number} id
+     * @return {Promise<ApiResult>}
+     * @constructor
+     */
+    static GetPhotoParams = async ({id}) => {
+        const requestUrl = `${PHOTO_API_URL}/${id.toString()}/${PHOTO_PARAMS_POSTFIX_API_URL}`;
+        return FetchWrap.Get(requestUrl);
+    }
+
+    /**
+     * Get user avatar
+     * @param {number}userId
+     * @return {Promise<ApiResult>}
+     * @constructor
+     */
+    static GetAvatar = async ({userId}) => {
+        const requestUrl = `${PROFILES_API_URL}/${userId.toString()}/${PROFILE_AVATAR_POSTFIX_API_URL}`;
+        return FetchWrap.Get(requestUrl);
     }
 }
