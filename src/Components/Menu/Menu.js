@@ -28,7 +28,7 @@ export default new class Menu extends BaseComponent {
             href: APP_PATHS.profilePage,
             icon: '/static/images/profileDisable.png',
             iconActive: '/static/images/profileActive.png',
-            isActive: true,
+            canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.blue,
         });
         this.components.messages = new Button({
@@ -36,7 +36,7 @@ export default new class Menu extends BaseComponent {
             href: APP_PATHS.messagesPage,
             icon: '/static/images/MsgDark.png',
             iconActive: '/static/images/MsgLight.png',
-            isActive: true,
+            canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.red,
         });
         this.components.matches = new Button({
@@ -44,7 +44,7 @@ export default new class Menu extends BaseComponent {
             href: APP_PATHS.matchesPage,
             icon: '/static/images/cards.png',
             iconActive: '/static/images/cardsDisable.png',
-            isActive: true,
+            canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.blue,
         });
         this.components.findCandidate = new Button({
@@ -52,7 +52,7 @@ export default new class Menu extends BaseComponent {
             href: APP_PATHS.findCandidatePage,
             icon: '/static/images/RefreshDisable.png',
             iconActive: '/static/images/RefreshActive.png',
-            isActive: true,
+            canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.red,
         });
         this.components.settings = new Button({
@@ -60,14 +60,14 @@ export default new class Menu extends BaseComponent {
             href: APP_PATHS.settingsPage,
             icon: '/static/images/settings.png',
             iconActive: '/static/images/settingsLight.png',
-            isActive: true,
+            canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.blue,
         });
         this.components.exit = new Button({
             text: FEED_VIEW_NAMES.buttonExitTittle,
             onClick: this.exitClick,
             icon: '/static/images/logout.png',
-            isActive: true,
+            canActivate: true,
         });
     }
 

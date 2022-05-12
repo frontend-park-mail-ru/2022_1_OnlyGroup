@@ -1,9 +1,9 @@
 import loginForm from './LoginForm.hbs';
-import {Button} from '../Button/Button';
-import {Input} from '../Input/Input';
-import {Text} from '../Text/Text';
+import {Button, BUTTON_TYPES} from '../Button/Button';
+import {Input, INPUT_TYPES} from '../Input/Input';
+import {Text, TEXT_TYPES} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
-import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
+import {BaseComponent} from '../Base/Base';
 import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
@@ -17,7 +17,7 @@ export default class LoginForm extends BaseComponent {
      * Create login form component
      */
     constructor() {
-        super({});
+        super();
         this.setEvents({
             [LOGIN_EVENTS.clearForm]: this.clear,
             [LOGIN_EVENTS.userValidationFailed]: this.setErrors,
@@ -34,26 +34,26 @@ export default class LoginForm extends BaseComponent {
         this.components.emailInput = new Input({
             inputType: 'text',
             label: LOGIN_VIEW_NAMES.emailTittle,
-            type: COMPONENTS_TYPES.primary,
+            type: INPUT_TYPES.primary,
         });
         this.components.passwordInput = new Input({
             inputType: 'password',
             label: LOGIN_VIEW_NAMES.passwordTitle,
-            type: COMPONENTS_TYPES.primary,
+            type: INPUT_TYPES.primary,
         });
         this.components.mainError = new Text({
             text: '',
-            type: COMPONENTS_TYPES.error,
+            type: TEXT_TYPES.error,
         });
         this.components.button = new Button({
             text: LOGIN_VIEW_NAMES.buttonTittle,
-            type: COMPONENTS_TYPES.submit,
+            type: BUTTON_TYPES.submit,
             onClick: this.onButtonClick,
         });
         this.addComponents.Offer = {};
         this.addComponents.Offer.text = new Text({
             text: LOGIN_VIEW_NAMES.registerOffer,
-            type: COMPONENTS_TYPES.secondary,
+            type: TEXT_TYPES.secondary,
         });
         this.addComponents.Offer.link = new Text({
             text: LOGIN_VIEW_NAMES.registerLinkTittle,

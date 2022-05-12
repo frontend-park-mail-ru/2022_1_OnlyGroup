@@ -7,52 +7,48 @@ export const BUTTON_ACTIVE_TYPES = {
     blue: 'activeBlueType',
 };
 
+export const BUTTON_TYPES = {
+    primary: 'primaryType',
+    submit: 'submitType',
+};
+
 /**
  * Button Component
  */
 export class Button extends BaseComponent {
     /**
      * Create button component
-     * @param {string|undefined} state
+     * @param {string|undefined} type
      * @param {string} text
      * @param {function|undefined|null} onClick
      * @param {string|undefined}href
      * @param {string|undefined} icon
      * @param {string|undefined} iconActive
-     * @param {boolean} isActive
+     * @param {boolean} canActivate
      * @param {string} activeType
      */
     constructor({
-        type,
+        type = BUTTON_TYPES.primary,
         text,
         onClick,
         href,
         icon,
         iconActive,
-        isActive = false,
+        canActivate = false,
         activeType = BUTTON_ACTIVE_TYPES.blue,
     }) {
-        super({type});
+        super();
         this.active = false;
         this.href = href;
         this.buttonText = text;
         this.onClick = onClick;
         this.icon = icon;
         this.iconActive = iconActive;
-        this.activeType = activeType;
-        this.isActive = isActive;
+        this.canActivate = canActivate;
         this.buttonId = IDGenerator.getId();
-    }
 
-    /**
-     * Prepare button render
-     */
-    prepareRender() {
-        super.prepareRender();
-        if (!this.isActive) {
-            return;
-        }
-        this[this.activeType] = true;
+        this[type] = true;
+        this[activeType] = true;
     }
 
     /**
@@ -96,7 +92,7 @@ export class Button extends BaseComponent {
      * @param {boolean} active
      */
     setActive(active) {
-        if (!this.isActive) {
+        if (!this.canActivate) {
             return;
         }
         this.active = active;

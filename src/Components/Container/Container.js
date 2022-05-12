@@ -10,10 +10,9 @@ export const CONTAINER_TYPES = {};
 export class Container extends BaseComponent {
     /**
      * Create container
-     * @param {string|undefined}type
      */
-    constructor({type}) {
-        super({type});
+    constructor() {
+        super();
     }
 
     /**

@@ -1,10 +1,10 @@
 <div class="button" id="{{id}}">
     {{#if href}}
-        {{#unless enabled}}
+        {{#unless active}}
         <a href="{{{href}}}" class="button button-href__no-underlying">
         {{/unless}}
     {{/if}}
-    <button class="button {{#if isActive}}button_active {{#if active}}{{#if
+    <button class="button {{#if canActivate}}button_active {{#if active}}{{#if
             activeRedType}}button_active-red {{/if}}{{#if activeBlueType}}button_active-blue {{/if}}{{/if}}{{else}}{{#if
             primaryType}}button_primary {{/if}}{{#if
             submitType}}button_submit {{/if}}{{/if}}"
@@ -23,6 +23,8 @@
         {{buttonText}}
     </button>
     {{#if href}}
-    </a>
+        {{#unless active}}
+        </a>
+        {{/unless}}
     {{/if}}
 </div>

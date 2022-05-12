@@ -1,8 +1,8 @@
-import {BaseComponent, COMPONENTS_TYPES} from '../Base/Base';
+import {BaseComponent} from '../Base/Base';
 import feedPhoto from './FeedPhoto.hbs';
 import FeedAction, {FEED_ACTION_SOURCES} from '../FeedAction/FeedAction';
-import Photo from '../Photo/Photo';
-import {Text} from '../Text/Text';
+import Photo, {PHOTO_TYPES} from '../Photo/Photo';
+import {Text, TEXT_TYPES} from '../Text/Text';
 import EventBus from '../../Modules/EventBus';
 import {FEED_EVENTS, PHOTO_EVENTS} from '../../Modules/EventBusEvents';
 import {Container} from '_components/Container/Container';
@@ -13,11 +13,10 @@ import {Container} from '_components/Container/Container';
 export default class FeedPhoto extends BaseComponent {
     /**
      * Create new feed photo
-     * @param {string|undefined} type
      * @param {boolean} createActions
      */
-    constructor({type, createActions = false}) {
-        super({type});
+    constructor({createActions = false}) {
+        super();
         this.ready = false;
         this.allPhotos = null;
         this.currentPhoto = null;
@@ -59,7 +58,7 @@ export default class FeedPhoto extends BaseComponent {
     createCurrent() {
         this.addComponents.Current = {};
         this.addComponents.Current.text = new Text({
-            type: COMPONENTS_TYPES.secondary,
+            type: TEXT_TYPES.secondary,
             text: '',
         });
     }
@@ -112,7 +111,7 @@ export default class FeedPhoto extends BaseComponent {
         this.allPhotos = null;
         this.components.photoContainer = new Container({});
         this.components.photoContainer.components.photo = new Photo({
-            type: COMPONENTS_TYPES.primary,
+            type: PHOTO_TYPES.primary,
             loaderEnabled: true,
             // TODO no photos placeholder
             src: 'static/images/logo.png',
@@ -139,7 +138,7 @@ export default class FeedPhoto extends BaseComponent {
             const loadEventName = `${PHOTO_EVENTS.photoGetID}${id.toString()}`;
             const onLoadEventName = `${PHOTO_EVENTS.photoReadyID}${id.toString()}`;
             const newPhoto = new Photo({
-                type: COMPONENTS_TYPES.primary,
+                type: PHOTO_TYPES.primary,
                 loadEvent: loadEventName,
                 onLoadEvent: onLoadEventName,
                 loaderEnabled: true,

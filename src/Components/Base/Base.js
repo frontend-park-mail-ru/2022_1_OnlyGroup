@@ -1,13 +1,6 @@
 import idGenerator from '../../Modules/IDGenerator';
 import EventBus from '../../Modules/EventBus';
 
-export const COMPONENTS_TYPES = {
-    primary: 'primaryType',
-    secondary: 'secondaryType',
-    submit: 'submitType',
-    error: 'errorType',
-};
-
 /**
  * Base component
  */
@@ -20,11 +13,9 @@ export class BaseComponent {
 
     /**
      *  Create Base component
-     *  @param {string|undefined} type
      */
-    constructor({type= COMPONENTS_TYPES.primary}) {
+    constructor() {
         this.id = idGenerator.getId();
-        this.type = type;
         this.components = {};
         this.addComponents = {};
         this.stateChanged = false;
