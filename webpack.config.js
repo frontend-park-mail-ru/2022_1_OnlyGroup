@@ -14,8 +14,8 @@ module.exports = {
     watch: true,
     resolve: {
         alias: {
-            _assets: `${PATHS.src}/static`,
-            _components: `${PATHS.src}/components`,
+            _assets: `${PATHS.src}/Static`,
+            _components: `${PATHS.src}/Components`,
         },
         extensions: ['.js'],
     },
@@ -41,10 +41,6 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
                 exclude: /node_modules/,
             },
-            // {
-            //     test: /\.(svg|png|jpg|jpeg|woff|woff2|eot|ttf)$/,
-            //     use: 'file-loader',
-            // },
             {
                 test: /\.(png|svg|jpeg|jpg|gif|ico)$/i,
                 exclude: /node_modules/,
@@ -56,7 +52,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve('src/index.html'),
             filename: 'index.html',
-            favicon: `${PATHS.src}/static/images/favicon.ico`,
+            favicon: `${PATHS.src}/Static/Images/favicon.ico`,
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
@@ -64,10 +60,10 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 {
-                    from: path.resolve(__dirname, 'src', 'static', 'images'),
-                    to: path.resolve(__dirname, 'dist', 'static', 'images'),
+                    from: path.resolve(__dirname, 'src', 'Static', 'Images'),
+                    to: path.resolve(__dirname, 'dist', 'Static', 'Images'),
                 },
-                {from: `${PATHS.src}/static/images/favicon.ico`, to: 'favicon.ico'},
+                {from: `${PATHS.src}/Static/Images/favicon.ico`, to: 'favicon.ico'},
             ],
         }),
     ],

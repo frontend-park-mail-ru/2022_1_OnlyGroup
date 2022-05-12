@@ -4,7 +4,7 @@ import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
-import {REGISTER_VIEW_NAMES} from '../../consts/viewConsts';
+import {REGISTER_VIEW_NAMES} from '../../Consts/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
 import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
@@ -29,7 +29,7 @@ export default class RegisterForm extends BaseComponent {
      * Init all components
      */
     initComponents() {
-        this.components.logo = new Logo({styles: []});
+        this.components.logo = new Logo({styles: ['auth-form__logo']});
         this.components.emailInput = new Input({
             type: 'text',
             label: REGISTER_VIEW_NAMES.inputs.email.title,
@@ -52,20 +52,19 @@ export default class RegisterForm extends BaseComponent {
             text: '',
             styles: ['auth-form__main-error'],
         });
-        // TODO разобраться
         this.components.button = new Button({
-            text: REGISTER_VIEW_NAMES.buttonTitle,
+            text: REGISTER_VIEW_NAMES.button.title,
             styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
 
         this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
         this.components.registerContainer.components.registerOffer = new Text({
-            text: REGISTER_VIEW_NAMES.loginOffer,
+            text: REGISTER_VIEW_NAMES.altVariant.title,
             styles: ['alt-variant__text'],
         });
         this.components.registerContainer.components.registerLink = new Text({
-            text: REGISTER_VIEW_NAMES.loginLinkTittle,
+            text: REGISTER_VIEW_NAMES.altVariant.linkTitle,
             styles: ['alt-variant__link'],
             href: APP_PATHS.loginPage,
         });

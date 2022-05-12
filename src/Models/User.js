@@ -1,7 +1,7 @@
 import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
 import Validators from '../Modules/Validators';
-import {REGISTER_VIEW_NAMES} from '../consts/viewConsts';
+import {REGISTER_VIEW_NAMES} from '../Consts/ViewConsts';
 import {API_FAILED, LOGIN_REGISTER_EVENTS} from '../Modules/EventBusEvents';
 
 const statusUnathorized = 401;

@@ -1,6 +1,6 @@
-@import "./consts/consts.scss";
-@import "./consts/mixins.scss";
-//@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import "./Consts/Consts.scss";
+@import "./Consts/Mixins.scss";
 @import "./Components/Input/Input.scss";
 @import "./Components/Button/Button.scss";
 @import "./Components/Logo/Logo.scss";
@@ -17,5 +17,5 @@
 }
 
 body {
-  background: radial-gradient(rgba(94, 0, 189, 0.7), rgba(0,0,0, 0.9));
+  background: var(--bg-gradient);
 }

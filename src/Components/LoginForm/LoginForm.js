@@ -4,7 +4,7 @@ import {Input} from '../Input/Input';
 import {Text} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
-import {LOGIN_VIEW_NAMES} from '../../consts/viewConsts';
+import {LOGIN_VIEW_NAMES} from '../../Consts/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
 import {LOGIN_REGISTER_EVENTS} from '../../Modules/EventBusEvents';
@@ -29,7 +29,7 @@ export default class LoginForm extends BaseComponent {
      * Create all components on page
      */
     initComponents() {
-        this.components.logo = new Logo({styles: []});
+        this.components.logo = new Logo({styles: ['auth-form__logo']});
         this.components.emailInput = new Input({
             type: 'text',
             label: LOGIN_VIEW_NAMES.inputs.email.title,
@@ -47,18 +47,18 @@ export default class LoginForm extends BaseComponent {
             styles: ['auth-form__main-error'],
         });
         this.components.button = new Button({
-            text: LOGIN_VIEW_NAMES.buttonTittle,
+            text: LOGIN_VIEW_NAMES.button.title,
             styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
 
         this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
         this.components.registerContainer.components.registerOffer = new Text({
-            text: LOGIN_VIEW_NAMES.registerOffer,
+            text: LOGIN_VIEW_NAMES.altVariant.offer,
             styles: ['alt-variant__text'],
         });
         this.components.registerContainer.components.registerLink = new Text({
-            text: LOGIN_VIEW_NAMES.registerLinkTittle,
+            text: LOGIN_VIEW_NAMES.altVariant.linkTitle,
             styles: ['alt-variant__link'],
             href: APP_PATHS.registerPage,
         });
@@ -96,7 +96,7 @@ export default class LoginForm extends BaseComponent {
      * Set user not loggined
      */
     setUnloggined = () => {
-        this.setErrors({email: '', password: '', main: LOGIN_VIEW_NAMES.userLoginFailed});
+        this.setErrors({email: '', password: '', main: LOGIN_VIEW_NAMES.errors.loginFail});
         this.reRender();
     }
 
@@ -112,7 +112,6 @@ export default class LoginForm extends BaseComponent {
         if (main !== undefined) {
             this.components.mainError.setText(main);
         }
-        // TODO  щас сразу при переходе на логин пишет ошибку, разобраться
         this.reRender();
     }
 

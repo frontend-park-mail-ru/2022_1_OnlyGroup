@@ -1,11 +1,14 @@
 :root {
   --bg-color-semilight: #DADADA;
   --bg-color-light: #fff;
+  --bg-gradient: radial-gradient(rgba(94, 0, 189, 0.7), rgba(0,0,0, 0.9));
 
   --button-dark-color: #9589B9;
+  --button-text-color: #fff;
   --error-color: #CF5151;
   --link-color: #664aa1;
   --link-color-hover: #4a3772;
+  --text-color: black;
 
   --input-border: 1px solid rgba(89, 76, 116, 0.5);
   --input-border-hover: 1px solid rgba(50,37,77, 0.5);
@@ -15,5 +18,8 @@
 
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
+
+  --background-layer: -1;
+  --popup-layer: 1;
 }
 
