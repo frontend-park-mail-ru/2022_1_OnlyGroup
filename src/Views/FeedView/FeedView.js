@@ -33,13 +33,6 @@ export default class FeedView extends BaseView {
         this.statesComponents[MENU_STATES.myProfile] = {};
         this.statesComponents[MENU_STATES.myProfile].feedPhoto = new FeedPhoto({});
         this.statesComponents[MENU_STATES.myProfile].feedInfo = new FeedInfo({});
-
-        // MenuComponent.setState({state: MENU_STATES.findCandidate});
-        // this.components.rightColumn = new BaseComponent({
-        //     state: BASE_COMPONENT_STATES.rightColumn,
-        // });
-        // this.components.rightColumn.components.photo = new FeedPhoto({});
-        // this.components.rightColumn.components.info = new FeedInfo({});
     }
 
     /**
