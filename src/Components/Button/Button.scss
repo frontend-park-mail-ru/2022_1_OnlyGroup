@@ -1,14 +1,15 @@
-.button {
-  font-size: 22px;
-  column-gap: 10px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.btn-container {
+  @include flex-container(row);
 
-  //@include size(100%, 52px);
-  //@include flex-container(row);
-  //align-items: center;
+  &__href_no-underlying {
+    text-decoration: none;
+  }
+}
+
+.button {
+  @include size(100%, 100%);
+  @include flex-container(row);
+  align-items: center;
 
   border: none;
   border-radius: 15px;
@@ -24,48 +25,39 @@
     background: var(--button-bg-gradient-hover);
   }
 
+  &_primary {
+    height: 52px;
+  }
+
+  &_submit {
+    height: 68px;
+  }
+
+  &_active {
+    height: 42px;
+    color: #000000;
+    background: #FFFFFF;
+
+    &-red {
+      color: #fff;
+      background: #DC5252;
+
+      &:hover {
+        background: tomato;
+      }
+    }
+
+    &-blue {
+      color: #fff;
+      background: #9589B9;
+    }
+  }
+
   &__icon {
     @include size(27px, 27px);
     border-radius: 0;
-    margin-right: 8px;
+    margin-right: 8px; // свойства button icon изначальные
+
+    //height: 70%; // то что пришло после мерджа. пока не видел кнопку с иконкой, поэтому хз что оставить
   }
 }
-
-.button_href-no-underlying {
-  text-decoration: none;
-}
-
-.button-icon {
-  height: 70%;
-}
-
-.buttin_primary {
-  width: 100%;
-  height: 52px;
-}
-
-.button_submit {
-  width: 100%;
-  height: 68px;
-}
-
-.button_active {
-  height: 42px;
-  color: #000000;
-  background: #FFFFFF;
-}
-
-.button_active-red {
-  color: #fff;
-  background: #DC5252;
-}
-
-.button_active-blue {
-  color: #fff;
-  background: #9589B9;
-}
-
-.button_active-red:hover {
-  background: tomato;
-}
-

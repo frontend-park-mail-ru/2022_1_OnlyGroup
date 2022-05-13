@@ -9,7 +9,6 @@
 @import "./Components/RegisterForm/RegisterForm.scss";
 @import "./Views/LoginView/LoginView.scss";
 @import "./Views/RegisterView/RegisterView.scss";
-@import "./Components/RegisterForm/RegisterForm";
 @import "./Components/ActiveUser/ActiveUser";
 @import "./Components/FeedPhoto/FeedPhoto";
 @import "./Components/FeedAction/FeedAction";
@@ -17,8 +16,6 @@
 @import "./Components/Photo/Photo";
 @import "./Components/FeedInfo/FeedInfo";
 @import "./Components/Container/Container";
-@import "./Views/LoginView/LoginView";
-@import "./Views/RegisterView/RegisterView";
 @import "./Views/FeedView/FeedView";  ;
 
 * {

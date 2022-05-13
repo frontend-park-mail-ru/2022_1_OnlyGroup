@@ -3,15 +3,21 @@ import {BaseComponent} from '../Base/Base';
 import EventBus from '../../Modules/EventBus';
 import {LOGO_CLICK} from '../../Modules/EventBusEvents';
 
+export const LOGO_PREFIXES = {
+    auth: 'auth-form__',
+}
+
 /**
  * Logo component
  */
 export class Logo extends BaseComponent {
     /**
      * Create logo component
+     * @param {string|undefined}prefix
      */
-    constructor() {
+    constructor({prefix}) {
         super();
+        this.prefix = prefix;
     }
 
     /**

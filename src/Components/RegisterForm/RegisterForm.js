@@ -1,8 +1,8 @@
 import registerForms from '../LoginForm/LoginForm.hbs';
-import {Button, BUTTON_TYPES} from '../Button/Button';
+import {Button, BUTTON_PREFIXES, BUTTON_TYPES} from '../Button/Button';
 import {Input, INPUT_TYPES} from '../Input/Input';
 import {Text, TEXT_TYPES} from '../Text/Text';
-import {Logo} from '../Logo/Logo';
+import {Logo, LOGO_PREFIXES} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {REGISTER_VIEW_NAMES} from '../../Consts/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
@@ -30,9 +30,9 @@ export default class RegisterForm extends BaseComponent {
      * Init all components
      */
     initComponents() {
-        console.log('inintComponents gister form');
-        this.components.logo = new Logo({});
-        // this.components.logo = new Logo({styles: ['auth-form__logo']});
+        this.components.logo = new Logo({
+            prefix: LOGO_PREFIXES.auth,
+        });
         this.components.emailInput = new Input({
             inputType: 'text',
             type: INPUT_TYPES.primary,
@@ -63,6 +63,7 @@ export default class RegisterForm extends BaseComponent {
             // text: REGISTER_VIEW_NAMES.buttonTittle,
             type: BUTTON_TYPES.submit,
             text: REGISTER_VIEW_NAMES.button.title,
+            prefix: BUTTON_PREFIXES.auth,
             // styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
