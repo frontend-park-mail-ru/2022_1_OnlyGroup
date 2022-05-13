@@ -14,7 +14,7 @@ export const BUTTON_TYPES = {
 
 export const BUTTON_PREFIXES = {
     auth: 'auth-form__',
-}
+};
 
 /**
  * Button Component

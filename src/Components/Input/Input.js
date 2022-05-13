@@ -40,7 +40,7 @@ export class Input extends BaseComponent {
         this.label = label;
         this[type] = true;
         this.value = '';
-        this.placeholder = placeholder
+        this.placeholder = placeholder;
         this.inputId = idGenerator.getId();
         this.icon = icon;
         if (icon) {
