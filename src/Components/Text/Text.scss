@@ -1,26 +1,27 @@
 .text {
-    color: var(--text-color);
-    font-style: normal;
+  color: var(--text-color);
+  font-style: normal;
+
+  &_primary {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &_secondary {
+    font-weight: var(--font-weight-thin);
+  }
+
+  &_error {
+    color: var(--error-color);
+    font-weight: var(--font-weight-medium);
+  }
 }
 
-//.link {
-//    color: var(--link-color);
-//    text-decoration: none;
-//
-//    &:hover {
-//        color: var(--link-color-hover);
-//        text-decoration: underline;
-//    }
-//}
-.text_primary {
-    font-weight: 600;
-}
+.link {
+  color: var(--link-color);
+  text-decoration: none;
 
-.text_secondary {
-    font-weight: 400;
-}
-
-.text_error {
-    color: #CF5151;
-    font-weight: 500;
+  &:hover {
+    color: var(--link-color-hover);
+    text-decoration: underline;
+  }
 }

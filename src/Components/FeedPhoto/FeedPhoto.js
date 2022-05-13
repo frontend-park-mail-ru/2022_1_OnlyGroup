@@ -114,7 +114,7 @@ export default class FeedPhoto extends BaseComponent {
             type: PHOTO_TYPES.primary,
             loaderEnabled: true,
             // TODO no photos placeholder
-            src: 'static/images/logo.png',
+            src: 'Static/Images/logo.png',
         });
         this.createActions();
         this.stateChanged = true;

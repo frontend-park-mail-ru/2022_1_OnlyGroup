@@ -1,8 +1,8 @@
 import loginForm from './LoginForm.hbs';
-import {Button, BUTTON_TYPES} from '../Button/Button';
+import {Button, BUTTON_PREFIXES, BUTTON_TYPES} from '../Button/Button';
 import {Input, INPUT_TYPES} from '../Input/Input';
-import {Text, TEXT_TYPES} from '../Text/Text';
-import {Logo} from '../Logo/Logo';
+import {Text, TEXT_PREFIXES, TEXT_TYPES} from '../Text/Text';
+import {Logo, LOGO_PREFIXES} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {LOGIN_VIEW_NAMES} from '../../Consts/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
@@ -30,46 +30,40 @@ export default class LoginForm extends BaseComponent {
      * Create all components on page
      */
     initComponents() {
-        // this.components.logo = new Logo({styles: ['auth-form__logo']});
-        this.components.logo = new Logo({});
+        this.components.logo = new Logo({
+            prefix: LOGO_PREFIXES.auth,
+        });
         this.components.emailInput = new Input({
             inputType: 'text',
+            type: INPUT_TYPES.primary,
             label: LOGIN_VIEW_NAMES.inputs.email.title,
             placeholder: LOGIN_VIEW_NAMES.inputs.email.placeholder,
-            type: INPUT_TYPES.primary,
-            // styles: ['auth-form__input'],
         });
         this.components.passwordInput = new Input({
             inputType: 'password',
+            type: INPUT_TYPES.primary,
             label: LOGIN_VIEW_NAMES.inputs.password.title,
             placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
-            type: INPUT_TYPES.primary,
-            // styles: ['auth-form__input'],
         });
         this.components.mainError = new Text({
             text: '',
             type: TEXT_TYPES.error,
-            // styles: ['auth-form__main-error'],
         });
         this.components.button = new Button({
             text: LOGIN_VIEW_NAMES.button.title,
             type: BUTTON_TYPES.submit,
-            // styles: ['auth-form__button'],
+            prefix: BUTTON_PREFIXES.auth,
             onClick: this.onButtonClick,
         });
         this.addComponents.Offer = {};
         this.addComponents.Offer.text = new Text({
             type: TEXT_TYPES.secondary,
-
-        // this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
-        // this.components.registerContainer.components.registerOffer = new Text({
+            prefix: TEXT_PREFIXES.altVariant,
             text: LOGIN_VIEW_NAMES.altVariant.offer,
-        //     styles: ['alt-variant__text'],
         });
         this.addComponents.Offer.link = new Text({
-        // this.components.registerContainer.components.registerLink = new Text({
             text: LOGIN_VIEW_NAMES.altVariant.linkTitle,
-        //     styles: ['alt-variant__link'],
+            prefix: TEXT_PREFIXES.altVariant,
             href: APP_PATHS.registerPage,
         });
     }

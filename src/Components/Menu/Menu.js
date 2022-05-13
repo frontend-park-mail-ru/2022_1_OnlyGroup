@@ -26,47 +26,47 @@ export default new class Menu extends BaseComponent {
         this.components.myProfile = new Button({
             text: FEED_VIEW_NAMES.buttonMyProfileTittle,
             href: APP_PATHS.profilePage,
-            icon: '/static/images/profileDisable.png',
-            iconActive: '/static/images/profileActive.png',
+            icon: '/Static/Images/profileDisable.png',
+            iconActive: '/Static/Images/profileActive.png',
             canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.blue,
         });
         this.components.messages = new Button({
             text: FEED_VIEW_NAMES.buttonMessagesTittle,
             href: APP_PATHS.messagesPage,
-            icon: '/static/images/MsgDark.png',
-            iconActive: '/static/images/MsgLight.png',
+            icon: '/Static/Images/MsgDark.png',
+            iconActive: '/Static/Images/MsgLight.png',
             canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.red,
         });
         this.components.matches = new Button({
             text: FEED_VIEW_NAMES.buttonMatchesTittle,
             href: APP_PATHS.matchesPage,
-            icon: '/static/images/cards.png',
-            iconActive: '/static/images/cardsDisable.png',
+            icon: '/Static/Images/cards.png',
+            iconActive: '/Static/Images/cardsDisable.png',
             canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.blue,
         });
         this.components.findCandidate = new Button({
             text: FEED_VIEW_NAMES.buttonFindCandidatesTittle,
             href: APP_PATHS.findCandidatePage,
-            icon: '/static/images/RefreshDisable.png',
-            iconActive: '/static/images/RefreshActive.png',
+            icon: '/Static/Images/RefreshDisable.png',
+            iconActive: '/Static/Images/RefreshActive.png',
             canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.red,
         });
         this.components.settings = new Button({
             text: FEED_VIEW_NAMES.buttonSettingsTittle,
             href: APP_PATHS.settingsPage,
-            icon: '/static/images/settings.png',
-            iconActive: '/static/images/settingsLight.png',
+            icon: '/Static/Images/settings.png',
+            iconActive: '/Static/Images/settingsLight.png',
             canActivate: true,
             activeType: BUTTON_ACTIVE_TYPES.blue,
         });
         this.components.exit = new Button({
             text: FEED_VIEW_NAMES.buttonExitTittle,
             onClick: this.exitClick,
-            icon: '/static/images/logout.png',
+            icon: '/Static/Images/logout.png',
             canActivate: true,
         });
     }

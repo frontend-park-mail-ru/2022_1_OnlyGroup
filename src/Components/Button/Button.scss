@@ -35,21 +35,21 @@
 
   &_active {
     height: 42px;
-    color: #000000;
-    background: #FFFFFF;
+    color: var(--active-button-text-color);
+    background: var(--active-button-bg-color);
 
     &-red {
-      color: #fff;
-      background: #DC5252;
+      color: var(--active-button-text-color);
+      background: var(--active-button-red-bg-color);
 
       &:hover {
-        background: tomato;
+        background: var(--active-button-red-bg-color-hover);
       }
     }
 
     &-blue {
-      color: #fff;
-      background: #9589B9;
+      color: var(--active-button-text-color);
+      background: var(--active-button-blue-bg-color);
     }
   }
 

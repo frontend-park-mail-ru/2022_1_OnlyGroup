@@ -5,6 +5,11 @@
 
   --button-dark-color: #9589B9;
   --button-text-color: #fff;
+  --active-button-text-color: #000;
+  --active-button-bg-color: #fff;
+  --active-button-blue-bg-color: #9589B9;
+  --active-button-red-bg-color: #DC5252;
+  --active-button-red-bg-color-hover: tomato;
   --error-color: #CF5151;
   --link-color: #664aa1;
   --link-color-hover: #4a3772;
@@ -16,6 +21,7 @@
   --button-bg-gradient: linear-gradient(45deg, #9F93E3, #8067EF, #6843FD);
   --button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
 
+  --font-weight-thin: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
 

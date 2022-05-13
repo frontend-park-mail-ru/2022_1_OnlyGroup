@@ -37,7 +37,7 @@ export class ActiveUserComponent extends BaseComponent {
             this.components.avatar = new Photo({
                 type: PHOTO_TYPES.secondary,
                 // TODO avatar placeholder
-                src: 'static/images/logo.png',
+                src: 'Static/Images/logo.png',
                 loaderEnabled: true,
             });
         }

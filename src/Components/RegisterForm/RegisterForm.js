@@ -1,7 +1,7 @@
 import registerForms from '../LoginForm/LoginForm.hbs';
 import {Button, BUTTON_PREFIXES, BUTTON_TYPES} from '../Button/Button';
 import {Input, INPUT_TYPES} from '../Input/Input';
-import {Text, TEXT_TYPES} from '../Text/Text';
+import {Text, TEXT_PREFIXES, TEXT_TYPES} from '../Text/Text';
 import {Logo, LOGO_PREFIXES} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {REGISTER_VIEW_NAMES} from '../../Consts/ViewConsts';
@@ -38,50 +38,39 @@ export default class RegisterForm extends BaseComponent {
             type: INPUT_TYPES.primary,
             label: REGISTER_VIEW_NAMES.inputs.email.title,
             placeholder: REGISTER_VIEW_NAMES.inputs.email.placeholder,
-            // styles: ['auth-form__input'],
         });
         this.components.passwordInput = new Input({
             inputType: 'password',
             label: REGISTER_VIEW_NAMES.inputs.password.title,
             type: INPUT_TYPES.primary,
             placeholder: REGISTER_VIEW_NAMES.inputs.password.placeholder,
-            // styles: ['auth-form__input'],
         });
         this.components.passwordRepeatInput = new Input({
             inputType: 'password',
             label: REGISTER_VIEW_NAMES.inputs.passwordVerify.title,
             placeholder: REGISTER_VIEW_NAMES.inputs.passwordVerify.placeholder,
             type: INPUT_TYPES.primary,
-            // styles: ['auth-form__input'],
         });
         this.components.mainError = new Text({
             text: '',
             type: TEXT_TYPES.error,
-            // styles: ['auth-form__main-error'],
         });
         this.components.button = new Button({
-            // text: REGISTER_VIEW_NAMES.buttonTittle,
             type: BUTTON_TYPES.submit,
             text: REGISTER_VIEW_NAMES.button.title,
             prefix: BUTTON_PREFIXES.auth,
-            // styles: ['auth-form__button'],
             onClick: this.onButtonClick,
         });
 
         this.addComponents.Offer = {};
         this.addComponents.Offer.text = new Text({
-            // text: REGISTER_VIEW_NAMES.loginOffer,
             type: TEXT_TYPES.secondary,
-        // this.components.registerContainer = new BaseComponent({styles: ['auth-form__alt-variant', 'alt-variant']});
-        // this.components.registerContainer.components.registerOffer = new Text({
+            prefix: TEXT_PREFIXES.altVariant,
             text: REGISTER_VIEW_NAMES.altVariant.offer,
-        //     styles: ['alt-variant__text'],
         });
         this.addComponents.Offer.link = new Text({
-            // text: REGISTER_VIEW_NAMES.loginLinkTittle,
-        // this.components.registerContainer.components.registerLink = new Text({
             text: REGISTER_VIEW_NAMES.altVariant.linkTitle,
-        //     styles: ['alt-variant__link'],
+            prefix: TEXT_PREFIXES.altVariant,
             href: APP_PATHS.loginPage,
         });
     }
