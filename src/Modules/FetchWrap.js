@@ -1,12 +1,8 @@
 import {ApiResult, INTERNAL_ERROR} from './ApiResult';
 
-export const PORT = '';
-// const IP = 'http://127.0.0.1:';
-export const IP = 'http://onlysocial.ddns.net';
-export const API_PREFIX = 'api/';
-// export const PORT = '8080';
-// export const IP = 'http://127.0.0.1:';
-// export const API_PREFIX = '';
+export const PORT = '8080';
+export const IP = 'http://127.0.0.1:';
+export const API_PREFIX = '';
 
 /**
  * Fetch wrap for get put post delete

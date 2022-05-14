@@ -56,8 +56,6 @@
   &__icon {
     @include size(27px, 27px);
     border-radius: 0;
-    margin-right: 8px; // свойства button icon изначальные
-
-    //height: 70%; // то что пришло после мерджа. пока не видел кнопку с иконкой, поэтому хз что оставить
+    margin-right: 8px;
   }
 }

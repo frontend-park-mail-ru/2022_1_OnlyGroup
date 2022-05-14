@@ -1,4 +1,4 @@
-
+// TODO перенести в consts и переделать именование
 export const FEED_VIEW_NAMES = {
     buttonMyProfileTittle: 'Мой профиль',
     buttonMessagesTittle: 'Сообщения',
