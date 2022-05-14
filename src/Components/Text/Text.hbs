@@ -1,7 +1,6 @@
 {{#if href}}
     <a href="{{{href}}}"
-       class="{{#if prefix}}{{{prefix}}}link{{/if}} link {{#if primaryType}}text_primary {{/if}}
-           {{#if errorType}}text_error {{/if}}"
+       class="link {{#if primaryType}}text_primary {{/if}}{{#if errorType}}text_error{{/if}}"
        id="{{{id}}}">{{textContent}}</a>
 {{else}}
     <p id="{{{id}}}"

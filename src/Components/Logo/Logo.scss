@@ -1,6 +1,7 @@
 .logo {
   @include flex-container(column);
   align-items: center;
+  margin: 5px;
 
   &__image {
     padding-bottom: 20px;

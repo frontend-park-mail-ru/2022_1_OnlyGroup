@@ -7,9 +7,6 @@ export const TEXT_TYPES = {
     error: 'errorType',
 };
 
-export const TEXT_PREFIXES = {
-    altVariant: 'alt-variant__',
-};
 
 /**
  * Text component

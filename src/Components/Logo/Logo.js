@@ -3,10 +3,6 @@ import {BaseComponent} from '../Base/Base';
 import EventBus from '../../Modules/EventBus';
 import {LOGO_CLICK} from '../../Modules/EventBusEvents';
 
-export const LOGO_PREFIXES = {
-    auth: 'auth-form__',
-}
-
 /**
  * Logo component
  */

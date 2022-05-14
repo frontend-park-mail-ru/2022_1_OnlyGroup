@@ -1,8 +1,8 @@
 import registerForms from '../LoginForm/LoginForm.hbs';
-import {Button, BUTTON_PREFIXES, BUTTON_TYPES} from '../Button/Button';
+import {Button, BUTTON_TYPES} from '../Button/Button';
 import {Input, INPUT_TYPES} from '../Input/Input';
-import {Text, TEXT_PREFIXES, TEXT_TYPES} from '../Text/Text';
-import {Logo, LOGO_PREFIXES} from '../Logo/Logo';
+import {Text, TEXT_TYPES} from '../Text/Text';
+import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
 import {REGISTER_VIEW_NAMES} from '../../Consts/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
@@ -30,9 +30,7 @@ export default class RegisterForm extends BaseComponent {
      * Init all components
      */
     initComponents() {
-        this.components.logo = new Logo({
-            prefix: LOGO_PREFIXES.auth,
-        });
+        this.components.logo = new Logo({});
         this.components.emailInput = new Input({
             inputType: 'text',
             type: INPUT_TYPES.primary,
@@ -58,19 +56,16 @@ export default class RegisterForm extends BaseComponent {
         this.components.button = new Button({
             type: BUTTON_TYPES.submit,
             text: REGISTER_VIEW_NAMES.button.title,
-            prefix: BUTTON_PREFIXES.auth,
             onClick: this.onButtonClick,
         });
 
         this.addComponents.Offer = {};
         this.addComponents.Offer.text = new Text({
             type: TEXT_TYPES.secondary,
-            prefix: TEXT_PREFIXES.altVariant,
             text: REGISTER_VIEW_NAMES.altVariant.offer,
         });
         this.addComponents.Offer.link = new Text({
             text: REGISTER_VIEW_NAMES.altVariant.linkTitle,
-            prefix: TEXT_PREFIXES.altVariant,
             href: APP_PATHS.loginPage,
         });
     }

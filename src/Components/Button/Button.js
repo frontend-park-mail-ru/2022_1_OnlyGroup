@@ -12,10 +12,6 @@ export const BUTTON_TYPES = {
     submit: 'submitType',
 };
 
-export const BUTTON_PREFIXES = {
-    auth: 'auth-form__',
-};
-
 /**
  * Button Component
  */

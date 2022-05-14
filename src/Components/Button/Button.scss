@@ -1,5 +1,6 @@
 .btn-container {
   @include flex-container(row);
+  @include size(100%, 68px);
 
   &__href_no-underlying {
     text-decoration: none;

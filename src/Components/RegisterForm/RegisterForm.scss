@@ -9,21 +9,10 @@
   box-sizing: border-box;
   border-radius: 50px;
   background: var(--bg-color-light);
-
-  &__logo {
-    margin-bottom: 20px;
-  }
-  &__alt-variant {
-    gap: 30px;
-  }
-
-  &__button {
-    @include size(100%, 68px);
-    margin-top: 10px;
-  }
 }
 
 .alt-variant {
   @include flex-container(row);
   align-items: center;
+  gap: 30px;
 }
