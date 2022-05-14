@@ -4,50 +4,48 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const StylelintPlugin = require('stylelint-webpack-plugin');
-const version = new Date(Date.now());
 
 const PATHS = {
-    src: path.join(__dirname, './src/'),
-    dist: path.resolve(__dirname, './dist/'),
+    src: path.join(__dirname, './src'),
+    dist: path.resolve(__dirname, './dist'),
 };
 
 module.exports = {
     watch: true,
     resolve: {
         alias: {
-            _assets: path.resolve('src/static'),
-            _components: path.resolve('src/Components'),
-            _views: path.resolve('src/Views'),
+            _assets: `${PATHS.src}/Static`,
+            _components: `${PATHS.src}/Components`,
+            _views: `${PATHS.src}/Views`,
         },
         extensions: ['.js'],
     },
     mode: debug ? 'development' : 'production',
-    entry: path.resolve('./src/app.js'),
+    entry: `${PATHS.src}/app.js`,
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: PATHS.dist,
         publicPath: './',
-        filename: `index_bundle_${version}.js`,
+        filename: `index_bundle_[hash].js`,
+        assetModuleFilename: 'assets/[name][ext]',
+        clean: true,
     },
     module: {
         rules: [
             {
                 test: /\.hbs$/,
                 loader: 'handlebars-loader',
-                exclude: /(node_modules)/,
-                include: [
-                    path.resolve(__dirname, 'src/'),
-                ],
+                exclude: /node_modules/,
+                include: PATHS.src,
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                exclude: /node_modules/,
             },
             {
-                test: /\.(svg|png|jpg|jpeg|woff|woff2|eot|ttf)$/,
-                use: 'file-loader',
+                test: /\.(png|svg|jpeg|jpg|gif|ico)$/i,
+                exclude: /node_modules/,
+                type: 'asset/resource',
             },
         ],
     },
@@ -55,25 +53,24 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve('src/index.html'),
             filename: 'index.html',
+            favicon: `${PATHS.src}/Static/Images/favicon.ico`,
         }),
         new MiniCssExtractPlugin({
-            filename: 'style.css',
+            filename: '[name].[contenthash].css',
         }),
         new CopyPlugin({
             patterns: [
                 {
-                    from: path.resolve(__dirname, 'src', 'static', 'images'),
-                    to: path.resolve(__dirname, 'dist', 'static', 'images'),
+                    from: path.resolve(__dirname, 'src', 'Static', 'Images'),
+                    to: path.resolve(__dirname, 'dist', 'Static', 'Images'),
                 },
+                {from: `${PATHS.src}/Static/Images/favicon.ico`, to: 'favicon.ico'},
             ],
-        }),
-        new webpack.DefinePlugin({
-            DEBUG: debug,
         }),
     ],
     devServer: {
         static: {
-            directory: path.join(__dirname, 'dist'),
+            directory: PATHS.dist,
         },
         compress: false,
         port: 9000,

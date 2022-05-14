@@ -1,4 +1,4 @@
-import {LOGIN_VIEW_NAMES, REGISTER_VIEW_NAMES} from './ViewConsts';
+import {LOGIN_VIEW_NAMES, REGISTER_VIEW_NAMES} from '../Consts/ViewConsts';
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordPatternLowerCase = `[a-z]+`;
@@ -47,16 +47,16 @@ export default class Validators {
         const validationError = {'email': '', 'password': '', 'passwordRepeat': ''};
         if (!this.validateEmail(email)) {
             validationFailed = true;
-            validationError.email = LOGIN_VIEW_NAMES.emailVerificationFailed;
+            validationError.email = LOGIN_VIEW_NAMES.errors.wrongEmail;
         }
         if (!this.validatePassword(password)) {
             validationFailed = true;
-            validationError.password = LOGIN_VIEW_NAMES.passwordVerificationFailed;
+            validationError.password = LOGIN_VIEW_NAMES.errors.passwordRegex;
         }
         passwordRepeat = (passwordRepeat === undefined) ? null : passwordRepeat;
         if (passwordRepeat !== null && (passwordRepeat !== password || passwordRepeat.length === 0)) {
             validationFailed = true;
-            validationError.passwordRepeat = REGISTER_VIEW_NAMES.passwordRepeatVerificationFailed;
+            validationError.passwordRepeat = REGISTER_VIEW_NAMES.errors.passwordMismatch;
         }
         if (validationFailed) {
             return validationError;

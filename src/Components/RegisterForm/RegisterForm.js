@@ -4,7 +4,7 @@ import {Input, INPUT_TYPES} from '../Input/Input';
 import {Text, TEXT_TYPES} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
-import {REGISTER_VIEW_NAMES} from '../../Modules/ViewConsts';
+import {REGISTER_VIEW_NAMES} from '../../Consts/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
 import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
@@ -33,17 +33,20 @@ export default class RegisterForm extends BaseComponent {
         this.components.logo = new Logo({});
         this.components.emailInput = new Input({
             inputType: 'text',
-            label: REGISTER_VIEW_NAMES.emailTittle,
             type: INPUT_TYPES.primary,
+            label: REGISTER_VIEW_NAMES.inputs.email.title,
+            placeholder: REGISTER_VIEW_NAMES.inputs.email.placeholder,
         });
         this.components.passwordInput = new Input({
             inputType: 'password',
-            label: REGISTER_VIEW_NAMES.passwordTitle,
+            label: REGISTER_VIEW_NAMES.inputs.password.title,
             type: INPUT_TYPES.primary,
+            placeholder: REGISTER_VIEW_NAMES.inputs.password.placeholder,
         });
         this.components.passwordRepeatInput = new Input({
             inputType: 'password',
-            label: REGISTER_VIEW_NAMES.passwordRepeatTittle,
+            label: REGISTER_VIEW_NAMES.inputs.passwordVerify.title,
+            placeholder: REGISTER_VIEW_NAMES.inputs.passwordVerify.placeholder,
             type: INPUT_TYPES.primary,
         });
         this.components.mainError = new Text({
@@ -51,18 +54,18 @@ export default class RegisterForm extends BaseComponent {
             type: TEXT_TYPES.error,
         });
         this.components.button = new Button({
-            text: REGISTER_VIEW_NAMES.buttonTittle,
             type: BUTTON_TYPES.submit,
+            text: REGISTER_VIEW_NAMES.button.title,
             onClick: this.onButtonClick,
         });
 
         this.addComponents.Offer = {};
         this.addComponents.Offer.text = new Text({
-            text: REGISTER_VIEW_NAMES.loginOffer,
             type: TEXT_TYPES.secondary,
+            text: REGISTER_VIEW_NAMES.altVariant.offer,
         });
         this.addComponents.Offer.link = new Text({
-            text: REGISTER_VIEW_NAMES.loginLinkTittle,
+            text: REGISTER_VIEW_NAMES.altVariant.linkTitle,
             href: APP_PATHS.loginPage,
         });
     }

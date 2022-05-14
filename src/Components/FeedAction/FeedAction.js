@@ -3,10 +3,10 @@ import feedAction from './FeedAction.hbs';
 import Photo, {PHOTO_TYPES} from '../Photo/Photo';
 
 export const FEED_ACTION_SOURCES = {
-    like: 'static/images/like.png',
-    dislike: 'static/images/dislike.png',
-    left: 'static/images/left.png',
-    right: 'static/images/right.png',
+    like: 'Static/Images/like.png',
+    dislike: 'Static/Images/dislike.png',
+    left: 'Static/Images/left.png',
+    right: 'Static/Images/right.png',
 };
 
 /**

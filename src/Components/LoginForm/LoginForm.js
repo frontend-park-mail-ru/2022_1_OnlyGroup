@@ -4,7 +4,7 @@ import {Input, INPUT_TYPES} from '../Input/Input';
 import {Text, TEXT_TYPES} from '../Text/Text';
 import {Logo} from '../Logo/Logo';
 import {BaseComponent} from '../Base/Base';
-import {LOGIN_VIEW_NAMES} from '../../Modules/ViewConsts';
+import {LOGIN_VIEW_NAMES} from '../../Consts/ViewConsts';
 import {APP_PATHS} from '../../Modules/Router';
 import EventBus from '../../Modules/EventBus';
 import {LOGIN_EVENTS} from '../../Modules/EventBusEvents';
@@ -33,30 +33,32 @@ export default class LoginForm extends BaseComponent {
         this.components.logo = new Logo({});
         this.components.emailInput = new Input({
             inputType: 'text',
-            label: LOGIN_VIEW_NAMES.emailTittle,
             type: INPUT_TYPES.primary,
+            label: LOGIN_VIEW_NAMES.inputs.email.title,
+            placeholder: LOGIN_VIEW_NAMES.inputs.email.placeholder,
         });
         this.components.passwordInput = new Input({
             inputType: 'password',
-            label: LOGIN_VIEW_NAMES.passwordTitle,
             type: INPUT_TYPES.primary,
+            label: LOGIN_VIEW_NAMES.inputs.password.title,
+            placeholder: LOGIN_VIEW_NAMES.inputs.password.placeholder,
         });
         this.components.mainError = new Text({
             text: '',
             type: TEXT_TYPES.error,
         });
         this.components.button = new Button({
-            text: LOGIN_VIEW_NAMES.buttonTittle,
+            text: LOGIN_VIEW_NAMES.button.title,
             type: BUTTON_TYPES.submit,
             onClick: this.onButtonClick,
         });
         this.addComponents.Offer = {};
         this.addComponents.Offer.text = new Text({
-            text: LOGIN_VIEW_NAMES.registerOffer,
             type: TEXT_TYPES.secondary,
+            text: LOGIN_VIEW_NAMES.altVariant.offer,
         });
         this.addComponents.Offer.link = new Text({
-            text: LOGIN_VIEW_NAMES.registerLinkTittle,
+            text: LOGIN_VIEW_NAMES.altVariant.linkTitle,
             href: APP_PATHS.registerPage,
         });
     }
@@ -93,7 +95,7 @@ export default class LoginForm extends BaseComponent {
      * Set user not loggined
      */
     setUnloggined = () => {
-        this.setErrors({email: '', password: '', main: LOGIN_VIEW_NAMES.userLoginFailed});
+        this.setErrors({email: '', password: '', main: LOGIN_VIEW_NAMES.errors.loginFail});
         this.reRender();
     }
 

@@ -22,6 +22,7 @@ export class Button extends BaseComponent {
      * @param {string} text
      * @param {function|undefined|null} onClick
      * @param {string|undefined}href
+     * @param {string|undefined}prefix
      * @param {string|undefined} icon
      * @param {string|undefined} iconActive
      * @param {boolean} canActivate
@@ -32,6 +33,7 @@ export class Button extends BaseComponent {
         text,
         onClick,
         href,
+        prefix,
         icon,
         iconActive,
         canActivate = false,
@@ -40,6 +42,7 @@ export class Button extends BaseComponent {
         super();
         this.active = false;
         this.href = href;
+        this.prefix = prefix;
         this.buttonText = text;
         this.onClick = onClick;
         this.icon = icon;

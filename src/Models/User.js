@@ -1,7 +1,7 @@
 import {Api} from '../Modules/Api.js';
 import EventBus from '../Modules/EventBus.js';
 import Validators from '../Modules/Validators';
-import {REGISTER_VIEW_NAMES} from '../Modules/ViewConsts';
+import {REGISTER_VIEW_NAMES} from '../Consts/ViewConsts';
 import {API_FAILED, FEED_EVENTS, LOGIN_EVENTS} from '../Modules/EventBusEvents';
 import {Photo} from './Photo';
 

@@ -20,7 +20,7 @@
     -moz-appearance: none;
     appearance: none;
     border: 0;
-    background: $bg-color-light;
+    background: var(--bg-color-light);
 }
 
 .message-container {
@@ -31,7 +31,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid $light-bg-color;
+    border-bottom: 1px solid var(--bg-color-semilight);
     padding-left: 20px;
     padding-right: 2px;    
 }
@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-weight: $font-weight-semibold;
+    font-weight: var(--font-weight-semibold);
     @include text-styles(14px, 0px);
     margin-left: 25px;
 }
@@ -55,7 +55,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $button-dark-color;
+    background-color: var(--button-dark-color);
     @include size(24px, 24px);
     border-radius: 50%;
     margin-left: 70px;
@@ -75,5 +75,5 @@ img {
 
 .message-container:hover {
     transition: 0.3s linear;
-    background-color: $light-bg-color;
+    background-color: var(--bg-color-semilight);
 }

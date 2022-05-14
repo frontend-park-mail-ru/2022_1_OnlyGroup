@@ -7,6 +7,7 @@ export const TEXT_TYPES = {
     error: 'errorType',
 };
 
+
 /**
  * Text component
  */
@@ -15,13 +16,15 @@ export class Text extends BaseComponent {
      * Create text component
      * @param {string} text
      * @param {string|undefined} type
+     * @param {string|undefined} prefix
      * @param {string|null|undefined} href
      * @param {function|undefined} onClick
      */
-    constructor({text, type = TEXT_TYPES.primary, href, onClick}) {
+    constructor({text, type = TEXT_TYPES.primary, prefix, href, onClick}) {
         super();
         this.textContent = text;
         this.href = href;
+        this.prefix = prefix;
         this.onClick = onClick;
         this[type] = true;
     }

@@ -1,0 +1,31 @@
+:root {
+  --bg-color-semilight: #DADADA;
+  --bg-color-light: #fff;
+  --bg-gradient: radial-gradient(rgba(94, 0, 189, 0.7), rgba(0,0,0, 0.9));
+
+  --button-dark-color: #9589B9;
+  --button-text-color: #fff;
+  --active-button-text-color: #000;
+  --active-button-bg-color: #fff;
+  --active-button-blue-bg-color: #9589B9;
+  --active-button-red-bg-color: #DC5252;
+  --active-button-red-bg-color-hover: tomato;
+  --error-color: #CF5151;
+  --link-color: #664aa1;
+  --link-color-hover: #4a3772;
+  --text-color: black;
+
+  --input-border: 1px solid rgba(89, 76, 116, 0.5);
+  --input-border-hover: 1px solid rgba(50,37,77, 0.5);
+
+  --button-bg-gradient: linear-gradient(45deg, #9F93E3, #8067EF, #6843FD);
+  --button-bg-gradient-hover: linear-gradient(45deg, #7e6fd6, #6548e9, #542afd);
+
+  --font-weight-thin: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --background-layer: -1;
+  --popup-layer: 1;
+}
+

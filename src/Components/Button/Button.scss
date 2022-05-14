@@ -1,67 +1,62 @@
+.btn-container {
+  @include flex-container(row);
+  @include size(100%, 68px);
+
+  &__href_no-underlying {
+    text-decoration: none;
+  }
+}
+
 .button {
-  font-size: 22px;
-  column-gap: 10px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  @include size(100%, 100%);
+  @include flex-container(row);
   align-items: center;
-  flex-direction: row;
-  border-radius: 15px;
-  cursor: pointer;
-  text-decoration: none;
-  font-weight: 500;
+
   border: none;
-  color: #fff;
-  background: linear-gradient(45deg, #9F93E3, #8067EF, #6843FD);
-}
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  color: var(--button-text-color);
+  padding: 10px 20px;
+  background: var(--button-bg-gradient);
 
-.button_href-no-underlying {
-  text-decoration: none;
-}
 
-.button__icon {
-  width: 27px;
-  height: 27px;
-  border-radius: 0;
-  margin-right: 8px;
-}
+  &:hover {
+    background: var(--button-bg-gradient-hover);
+  }
 
-.button:hover {
-  background: $button-bg-gradient-hover;
-}
+  &_primary {
+    height: 52px;
+  }
 
-.button-icon {
-  height: 70%;
-}
+  &_submit {
+    height: 68px;
+  }
 
-.buttin_primary {
-  width: 100%;
-  height: 52px;
-}
+  &_active {
+    height: 42px;
+    color: var(--active-button-text-color);
+    background: var(--active-button-bg-color);
 
-.button_submit {
-  width: 100%;
-  height: 68px;
-}
+    &-red {
+      color: var(--active-button-text-color);
+      background: var(--active-button-red-bg-color);
 
-.button_active {
-  height: 42px;
-  color: #000000;
-  background: #FFFFFF;
-}
+      &:hover {
+        background: var(--active-button-red-bg-color-hover);
+      }
+    }
 
-.button_active-red {
-  color: #fff;
-  background: #DC5252;
-}
+    &-blue {
+      color: var(--active-button-text-color);
+      background: var(--active-button-blue-bg-color);
+    }
+  }
 
-.button_active-blue {
-  color: #fff;
-  background: #9589B9;
+  &__icon {
+    @include size(27px, 27px);
+    border-radius: 0;
+    margin-right: 8px;
+  }
 }
-
-.button_active-red:hover {
-  background: tomato;
-}
-

@@ -1,23 +1,23 @@
-<div class="button" id="{{id}}">
+<div class="btn-container" id="{{id}}">
     {{#if href}}
         {{#unless active}}
-        <a href="{{{href}}}" class="button button-href__no-underlying">
+        <a href="{{{href}}}" class="button btn-container__href_no-underlying">
         {{/unless}}
     {{/if}}
     <button class="button {{#if canActivate}}button_active {{#if active}}{{#if
-            activeRedType}}button_active-red {{/if}}{{#if activeBlueType}}button_active-blue {{/if}}{{/if}}{{else}}{{#if
-            primaryType}}button_primary {{/if}}{{#if
-            submitType}}button_submit {{/if}}{{/if}}"
+            activeRedType}}button_active-red {{/if}}{{#if
+            activeBlueType}}button_active-blue {{/if}}{{/if}}{{else}}{{#if primaryType}}button_primary {{/if}}{{#if
+            submitType}}button_submit{{/if}}{{/if}}"
             type="submit" id="{{buttonId}}">
         {{#if active}}
             {{#if iconActive}}
-                <img alt="icon" class="button-icon" src="{{{iconActive}}}">
+                <img alt="icon" class="button__icon" src="{{{iconActive}}}">
             {{else if icon}}
-                <img alt="icon" class="button-icon" src="{{{icon}}}">
+                <img alt="icon" class="button__icon" src="{{{icon}}}">
             {{/if}}
         {{else}}
             {{#if icon}}
-                <img alt="icon" class="button-icon" src="{{{icon}}}">
+                <img alt="icon" class="button__icon" src="{{{icon}}}">
             {{/if}}
         {{/if}}
         {{buttonText}}

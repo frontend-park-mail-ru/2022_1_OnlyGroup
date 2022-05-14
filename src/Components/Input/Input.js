@@ -21,6 +21,7 @@ export class Input extends BaseComponent {
      * @param {string} inputType
      * @param {string} labelPos
      * @param {string|null|undefined} label
+     * @param {string|null|undefined} placeholder
      * @param {string|null|undefined} icon
      * @param {function|null|undefined} iconOnClick
      */
@@ -29,6 +30,7 @@ export class Input extends BaseComponent {
         inputType,
         labelPos = INPUT_LABEL_POS.vertical,
         label,
+        placeholder,
         icon,
         iconOnClick,
     }) {
@@ -38,6 +40,7 @@ export class Input extends BaseComponent {
         this.label = label;
         this[type] = true;
         this.value = '';
+        this.placeholder = placeholder;
         this.inputId = idGenerator.getId();
         this.icon = icon;
         if (icon) {

@@ -9,9 +9,11 @@ import {LOGO_CLICK} from '../../Modules/EventBusEvents';
 export class Logo extends BaseComponent {
     /**
      * Create logo component
+     * @param {string|undefined}prefix
      */
-    constructor() {
+    constructor({prefix}) {
         super();
+        this.prefix = prefix;
     }
 
     /**

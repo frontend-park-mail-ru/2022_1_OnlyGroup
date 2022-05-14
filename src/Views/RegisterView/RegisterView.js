@@ -1,7 +1,6 @@
 import registerView from './RegisterView.hbs';
 import RegisterFormComponent from '../../Components/RegisterForm/RegisterForm';
 import BaseView from '../BaseView/BaseView';
-
 /**
  * View class for login page
  */

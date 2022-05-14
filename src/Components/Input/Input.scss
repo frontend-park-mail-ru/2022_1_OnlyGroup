@@ -1,62 +1,64 @@
-.input-component {
-  border: 1px solid #594c74;
-  box-sizing: border-box;
-  border-radius: 15px;
-  width: 100%;
-  height: 100%;
-  font-size: 18px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  opacity: 50%;
-  padding-left: 20px;
-  color: black;
-}
-
-.input-component_primary {
-  height: 52px;
-}
-
 .input-container {
   display: flex;
-  width: 100%;
-}
-
-.input-icon-container {
-  width: inherit;
-  height: inherit;
-}
-
-.input-container_vertical {
-  flex-direction: column;
   justify-content: center;
-  height: fit-content;
+  flex-direction: column;
   width: 100%;
-  align-items: center;
-  row-gap: 10px;
+
+  &_vertical {
+    flex-direction: column;
+    height: fit-content;
+    align-items: center;
+    row-gap: 13px;
+  }
+
+  &_horizontal {
+    flex-direction: row;
+    justify-content: space-around;
+    width: fit-content;
+    align-items: center;
+    column-gap: 15px;
+  }
+
+  &__field {
+    width: inherit;
+    height: inherit;
+  }
+
+  &__label {
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+  }
+
+  &__error {
+    color: var(--error-color);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+  }
 }
 
-.input-container_horizontal {
-  flex-direction: row;
-  justify-content: space-around;
-  width: fit-content;
-  height: 100%;
-  align-items: center;
-  column-gap: 15px;
+.input-field {
+  &__input {
+    width: 100%;
+    height: 52px;
+    border: var(--input-border);
+    box-sizing: border-box;
+    border-radius: 15px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    padding-left: 20px;
+    color: var(--text-color);
+
+    &:focus {
+      outline: var(--input-border-hover);
+    }
+
+    &_error {
+      border-color: var(--error-color);
+    }
+
+    &_primary {
+      height: 52px;
+    }
+  }
 }
-
-.input-container__error {
-  color: #CF5151;
-  font-weight: 500;
-}
-
-.input-container__label {
-  text-align: center;
-  font-weight: 600;
-}
-
-.input-container__error {
-  border-color: tomato;
-}
-
-

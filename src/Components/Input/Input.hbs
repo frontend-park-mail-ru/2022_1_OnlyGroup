@@ -3,12 +3,15 @@
     {{#if label}}
         <span class="input-container__label">{{label}}</span>
     {{/if}}
-    <div class="input-icon-container">
+    <div class="input-container__field input-field">
         <input type="{{{inputType}}}" id="{{{inputId}}}"
-               class="input-component {{#if primaryType}}input-component_primary {{/if}}{{#if
-                       error}}input-component_error {{/if}}" value="{{value}}">
+            {{#if placeholder}}
+               placeholder="{{placeholder}}"
+            {{/if}}
+               class="input-field__input {{#if primaryType}}input-field__input_primary {{/if}}{{#if
+                       error}}input-field__input_error {{/if}}" value="{{value}}">
         {{#if icon}}
-            <button class="input-icon-button" id="{{buttonId}}"><img src="{{icon}}" alt="icon"></button>
+            <button class="input-field__button" id="{{buttonId}}"><img src="{{icon}}" alt="icon"></button>
         {{/if}}
     </div>
     {{#if error}}

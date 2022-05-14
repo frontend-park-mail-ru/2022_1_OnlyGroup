@@ -1,1 +1,18 @@
+.auth-form {
+  @include flex-container(column);
+  align-items: center;
+  row-gap: 20px;
 
+  width: 550px;
+  padding: 30px 50px 50px;
+  margin: 35px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  background: var(--bg-color-light);
+}
+
+.alt-variant {
+  @include flex-container(row);
+  align-items: center;
+  gap: 30px;
+}
